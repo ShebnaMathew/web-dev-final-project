@@ -1,0 +1,43 @@
+.wd-display-inline-block {
+    display: inline-block;
+}
+
+.wd-display-flex {
+    display: flex;
+}
+
+.wd-full-height {
+    height: 100%;
+}
+
+.wd-full-width {
+    width: 100%;
+}
+
+.wd-position-relative {
+    position: relative;
+}
+
+.wd-fg-color-white {
+    color: white;
+}
+
+.wd-bold-font {
+    font-weight: bold;
+}
+
+.wd-font-size-26 {
+    font-size: 26px;
+}
+
+.wd-font-size-20 {
+    font-size: 20px;
+}
+
+.wd-font-size-18 {
+    font-size: 18px;
+}
+
+.wd-font-size-16 {
+    font-size: 16px;
+}

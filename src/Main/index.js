@@ -1,10 +1,11 @@
 import React from "react";
 import {Link, Outlet} from "react-router-dom";
+import './main.css';
 
 const MainScreen = () => {
     return(
         <>
-            <div className="row">
+            <div className="row mb-3">
                 <div>
                     <h4>One day, I'll be a header</h4>
                     <br/>
@@ -15,7 +16,7 @@ const MainScreen = () => {
                 </div>
             </div>
             <div className="row justify-content-center">
-                <div className="col-10">
+                <div className="col-8">
                     <Outlet/>
                 </div>
             </div>
