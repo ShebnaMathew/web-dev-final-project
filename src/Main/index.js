@@ -16,7 +16,7 @@ const MainScreen = () => {
                 </div>
             </div>
             <div className="row justify-content-center">
-                <div className="col-8">
+                <div className="col-12 col-xxl-8 col-xl-9 col-lg-10 col-md-12 col-sm-12">
                     <Outlet/>
                 </div>
             </div>

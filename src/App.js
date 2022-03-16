@@ -11,7 +11,7 @@ import './vendors/fontawesome/css/all.css';
 function App() {
   return (
     <BrowserRouter>
-        <div className="container">
+        <div className="container wd-min-body-width">
             <Routes>
                 <Route path="/" element={<MainScreen/>}>
                     <Route path="/profile" element={<ProfileScreen/>}/>

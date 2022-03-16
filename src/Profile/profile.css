@@ -3,8 +3,17 @@
     width: 100%;
 }
 
+.wd-username-field-dims {
+    width: 225px;
+}
+
+.wd-follow-value-dims {
+    width: 150px;
+}
+
 .wd-profile-picture-dims {
-    width: calc(150px + 3.5rem);
+    width: 150px;
+    height: 150px;
 }
 
 .wd-circle-image {
@@ -14,10 +23,6 @@
 .wd-main-info-dims {
     width: calc(100% - (150px + 1rem));
     height: 100px;
-}
-
-.wd-main-info-padding {
-    padding-left: 5rem;
 }
 
 .wd-main-info-position {
@@ -99,4 +104,132 @@
 .wd-nav-item-width {
     padding-left: 2rem;
     padding-right: 2rem;
+}
+
+.wd-follower-button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    height: 24px;
+    line-height: 1;
+}
+
+.wd-follower-button:hover {
+    color: lightgrey;
+}
+
+@media (min-width: 1200px) {
+
+    .wd-main-outer-padding {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+
+    .wd-description-info-padding {
+        padding-left: 3rem;
+    }
+
+    .wd-main-info-padding {
+        padding-left: 5rem;
+    }
+
+    .wd-display-conditional-block {
+        display: inline-block;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .wd-main-outer-padding {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .wd-description-info-padding {
+        padding-left: 2rem;
+    }
+
+    .wd-main-info-padding {
+        padding-left: 3rem;
+    }
+
+    .wd-display-conditional-block {
+        display: inline-block;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .wd-main-outer-padding {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .wd-description-info-padding {
+        padding-left: 1rem;
+    }
+
+    .wd-main-info-padding {
+        padding-left: 2rem;
+    }
+
+    .wd-display-conditional-block {
+        display: inline-block;
+    }
+
+    .wd-follow-popup-window {
+        width: 450px;
+        height: 500px;
+        position: relative;
+        top: calc(50vh - 250px);
+        left: calc(50vw - 225px);
+        background-color: white;
+        border: grey solid 2px;
+        border-radius: 20px;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .wd-main-outer-padding {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .wd-description-info-padding {
+        padding-left: 0.5rem;
+    }
+
+    .wd-main-info-padding {
+        padding-left: 1rem;
+    }
+
+    .wd-hide {
+        visibility: hidden;
+    }
+
+    .wd-display-conditional-block {
+        display: block;
+    }
+}
+
+@media (max-width: 575px) {
+    .wd-main-outer-padding {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .wd-description-info-padding {
+        padding-left: 0.5rem;
+    }
+
+    .wd-hide {
+        visibility: hidden;
+    }
+
+    .wd-display-conditional-block {
+        display: block;
+    }
 }

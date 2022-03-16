@@ -9,11 +9,12 @@ const LikedCommentItem = () => {
             <div className="wd-post-data-dims ps-3">
                 <div>
                     <a href='/' className="wd-post-href">View Comment</a>
+                    <span> on The Strokes</span>
                 </div>
                 <div>
                     <a href='/' className="wd-post-href">@Poster</a>
                 </div>
-                <p className="wd-liked-comment">
+                <p className="wd-liked-comment mb-0">
                     comment
                     comment
                     comment

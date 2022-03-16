@@ -1,0 +1,145 @@
+.wd-follow-popup {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.wd-follow-popup-remove-button {
+    background: transparent;
+    border: none;
+}
+
+.wd-follow-popup-remove-button:hover {
+    color: grey;
+}
+
+
+.wd-follow-popup-entry {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 60px;
+    color: black;
+    border-top: grey solid 1px;
+    border-bottom: grey solid 1px;
+}
+
+.wd-popup-user-list {
+    height: 430px;
+    overflow-y: scroll;
+    border-bottom: grey solid 1px;
+}
+
+.wd-popup-entry-header {
+    height: 50px;
+    color: black;
+    border-bottom: grey solid 1px;
+}
+
+.wd-popup-entry-header-icon-pos {
+    position: absolute;
+    top: 9px;
+}
+
+.wd-popup-entry-header-title-pos {
+    position: absolute;
+    width: 100px;
+    top: 13px;
+    left: calc(50% - 50px);
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.wd-popup-entry {
+    height: 100px;
+}
+
+
+
+@media (min-width: 1200px) {
+
+    .wd-follow-popup-window {
+        width: 450px;
+        height: 500px;
+        position: relative;
+        top: calc(50vh - 250px);
+        left: calc(50vw - 225px);
+        background-color: white;
+        border: grey solid 2px;
+        border-radius: 20px;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .wd-follow-popup-window {
+        width: 450px;
+        height: 500px;
+        position: relative;
+        top: calc(50vh - 250px);
+        left: calc(50vw - 225px);
+        background-color: white;
+        border: grey solid 2px;
+        border-radius: 20px;
+    }
+}
+
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .wd-follow-popup-window {
+        width: 450px;
+        height: 500px;
+        position: relative;
+        top: calc(50vh - 250px);
+        left: calc(50vw - 225px);
+        background-color: white;
+        border: grey solid 2px;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .wd-follow-popup-window {
+        width: 450px;
+        height: 500px;
+        position: relative;
+        top: calc(50vh - 250px);
+        left: calc(50vw - 225px);
+        background-color: white;
+        border: grey solid 2px;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 575px) {
+    .wd-follow-popup-window {
+        width: 300px;
+        height: 500px;
+        position: absolute;
+        top: calc(50vh - 250px);
+        left: calc(50vw - 150px);
+        background-color: white;
+        border: grey solid 2px;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 475px) {
+    .wd-follow-popup-window {
+        width: 300px;
+        height: 500px;
+        position: absolute;
+        top: calc(50vh - 250px);
+        left: 87.5px;
+        background-color: white;
+        border: grey solid 2px;
+        border-radius: 20px;
+    }
+}

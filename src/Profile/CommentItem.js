@@ -8,9 +8,10 @@ const CommentItem = () => {
             </div>
             <div className="wd-post-data-dims ps-3">
                 <div>
-                    <a href='/' className="wd-post-href">The Strokes</a>
+                    <a href='/' className="wd-post-href">View Comment</a>
+                    <span> on The Strokes</span>
                 </div>
-                <p>
+                <p className="mb-0">
                     Comment text
                     Comment text
                     Comment text

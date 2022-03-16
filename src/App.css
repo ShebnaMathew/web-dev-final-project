@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.wd-min-body-width {
+  min-width: 475px;
+}
