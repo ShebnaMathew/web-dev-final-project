@@ -18,7 +18,10 @@ const ContentPostItem = () => {
                     Album: Is This It
                 </div>
                 <div>
-                    Song: Soma
+                    <i className="fa fa-comment"/>
+                    <span> 11</span>
+                    <i className="fa fa-heart ps-2"/>
+                    <span> 12</span>
                 </div>
             </div>
         </div>

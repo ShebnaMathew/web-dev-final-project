@@ -30,6 +30,10 @@ const ListCommentItem = () => {
                     comment
                     comment
                 </p>
+                <div>
+                    <i className="fa fa-heart"/>
+                    <span> 12</span>
+                </div>
             </div>
         </div>
     );
