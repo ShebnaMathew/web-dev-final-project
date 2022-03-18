@@ -8,18 +8,22 @@ import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
 
 const ProfileScreen = ({
-         setShowEdit = () => console.log("WARNING setShowEdit is not defined")
+         setShowEdit = () => console.log("WARNING setShowEdit is not defined"),
 }) => {
 
-    const profileData = useSelector((state) => state.profile);
+    const userProfile = useSelector((state) => state.userProfile);
+    let profileData = useSelector((state) => state.currentProfile);
+
+    let isCurrentUser = false;
+    const isFollowing = false;
+
+    if (userProfile._id === profileData._id) {
+        isCurrentUser = true;
+    }
 
     const [content, setContent] = useState('comments');
     const [showFollow, setShowFollow] = useState(false);
     const [followTitle, setFollowTitle] = useState("followers")
-
-    const isCurrentUser = true;
-    const isMusician = true;
-    const isFollowing = false;
 
     const renderContent = (content) => {
         switch (content) {
@@ -203,7 +207,7 @@ const ProfileScreen = ({
                 <ul className="nav justify-content-center">
                     {renderNav(content, 'comments', 'Comments')}
                     {renderNav(content, 'likes', 'Likes')}
-                    {isMusician && renderNav(content, 'music', 'Music')}
+                    {profileData.isArtist && renderNav(content, 'music', 'Music')}
                 </ul>
             </div>
             <div className="wd-content-section wd-fg-color-white ps-3 pe-3">

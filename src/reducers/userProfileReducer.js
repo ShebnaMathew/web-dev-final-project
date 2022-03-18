@@ -1,7 +1,12 @@
-import profileData from './data/profile.json';
+import profileData from './data/user-profile.json';
 
-const profileReducer = (state = profileData, action) => {
+const userProfileReducer = (state = profileData, action) => {
     switch(action.type) {
+        case "register-artist":
+            return {
+                ...state,
+                isArtist: true
+            }
         case "save-profile-data":
             return {
                 ...state,
@@ -17,4 +22,4 @@ const profileReducer = (state = profileData, action) => {
 
 };
 
-export default profileReducer;
+export default userProfileReducer;

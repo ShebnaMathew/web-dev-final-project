@@ -1,4 +1,5 @@
 {
+  "_id": 123,
   "username": "defaultUsername",
   "name": "John Smith",
   "dob": "1993-09-09",
@@ -8,5 +9,6 @@
   "bio": "This is a sample bio",
   "followerCount": 123,
   "followingCount": 234,
-  "profilePicture": "/images/blank-profile-picture.png"
+  "profilePicture": "/images/blank-profile-picture.png",
+  "isArtist": true
 }

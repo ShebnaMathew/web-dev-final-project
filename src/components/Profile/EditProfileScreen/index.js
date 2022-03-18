@@ -8,11 +8,9 @@ const EditProfileScreen = ({
     setShowEdit = () => console.log("WARNING setShowEdit is not defined")
 }) => {
 
-    const isMusician = false;
-
     const [showRegisterArtist, setShowRegisterArtist] = useState(false);
 
-    const profileData = useSelector((state) => state.profile);
+    const profileData = useSelector((state) => state.userProfile);
 
     const captureFieldChange = (event, setter) => {
         setter(event.target.value)
@@ -51,7 +49,7 @@ const EditProfileScreen = ({
     }
 
     const renderRegisterButton = () => {
-        if (!isMusician) {
+        if (!profileData.isArtist) {
             return(
                 <div>
                     <button onClick={() => showRegisterPopUp()} className="btn btn-dark wd-artist-register-button">Register as Artist</button>
