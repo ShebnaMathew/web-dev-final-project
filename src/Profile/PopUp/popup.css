@@ -29,7 +29,7 @@
 
 .wd-popup-user-list {
     height: 430px;
-    overflow-y: scroll;
+    overflow-y: auto;
     border-bottom: grey solid 1px;
 }
 

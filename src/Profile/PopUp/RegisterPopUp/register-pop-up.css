@@ -1,0 +1,19 @@
+.wd-register-text-area {
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.wd-register-button {
+    position: relative;
+    left: calc(50% - 50px);
+    width: 100px;
+    background-color: white;
+    border-radius: 10px;
+    border: black solid 2px;
+}
+
+.wd-register-button:hover {
+    background-color: lightgrey;
+}

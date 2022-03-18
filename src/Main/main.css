@@ -6,6 +6,10 @@
     display: flex;
 }
 
+.wd-display-block {
+    display: block;
+}
+
 .wd-full-height {
     height: 100%!important;
 }
@@ -20,6 +24,10 @@
 
 .wd-fg-color-white {
     color: white;
+}
+
+.wd-fg-color-black {
+    color: black;
 }
 
 .wd-bold-font {

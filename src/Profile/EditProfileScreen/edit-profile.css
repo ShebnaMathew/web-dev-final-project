@@ -1,0 +1,129 @@
+.wd-edit-profile-header-button {
+    height: 30px;
+    width: 155px;
+    line-height: 1.1!important;
+    background-color: white!important;
+}
+
+.wd-edit-profile-header-button:hover {
+    background-color: lightgrey!important;
+}
+
+.wd-edit-profile-text-entry {
+    border: #adafae solid 1px;
+    border-radius: 5px;
+}
+
+.wd-edit-profile-text-entry > textarea {
+    background-color: transparent;
+    color: white;
+    border: transparent;
+    resize: none;
+    font-size: 14px;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.wd-edit-profile-text-entry > textarea:focus {
+    outline: transparent;
+}
+.wd-edit-profile-text-entry > input {
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+.wd-edit-profile-text-entry > input:focus {
+    background: transparent;
+    color: white;
+    outline: none;
+    box-shadow: none;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.wd-edit-profile-image-filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0,.25);
+    overflow: hidden;
+}
+
+.wd-edit-border-transparent {
+    border: transparent solid 4px;
+    background-clip: border-box;
+}
+
+.wd-edit-profile-overlay-button {
+    background: transparent;
+    border: none;
+    color: white;
+}
+
+.wd-edit-profile-overlay-button:hover {
+    outline: none;
+    color: lightgrey;
+}
+
+.wd-edit-profile-picture-button {
+    position: absolute;
+    top: calc(50% - 10px);
+    left: calc(50% - 13px);
+}
+
+.wd-edit-profile-picture-overlay-position {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.wd-artist-register-button {
+    position: relative;
+    width: 160px;
+    height: 30px;
+    line-height: 1;
+    left: calc(50% - 80px);
+    background-color: white;
+}
+
+@media (min-width: 768px) {
+    .wd-edit-profile-button-position {
+        position: relative;
+        top: calc(50% - 35px);
+        left: calc(50% - 170px);
+    }
+
+    .wd-edit-profile-button-display {
+        display: inline-block;
+    }
+
+    .wd-edit-profile-username-position {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .wd-edit-profile-button-position {
+        position: relative;
+        top: 20px;
+        left: 0;
+    }
+
+    .wd-edit-profile-button-display {
+        margin: 10px;
+        display: block;
+    }
+
+    .wd-edit-profile-username-position {
+        text-align: left;
+        margin-left: 10px;
+        line-height: 1.0;
+    }
+}
