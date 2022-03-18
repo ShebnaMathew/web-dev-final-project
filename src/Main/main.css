@@ -49,3 +49,13 @@
 .wd-font-size-16 {
     font-size: 16px;
 }
+
+.wd-circle-image {
+    border-radius: 50%;
+}
+
+.wd-content-section {
+    border-radius: 10px;
+    background-color: grey;
+}
+

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import ProfileScreen from "./ProfileScreen";
 import EditProfileScreen from "./EditProfileScreen";
-import './profile.css';
+import './profile-main.css';
 
 const Profile = () => {
 

@@ -1,5 +1,4 @@
 import React from "react";
-import FollowPopupListItem from "./FollowPopUp/FollowPopUpListItem";
 import './popup.css';
 
 const PopUp = ({

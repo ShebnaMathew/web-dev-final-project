@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import CommentList from "./CommentList";
-import LikedList from "./LikedList";
-import MusicList from "./MusicList";
-import PopUp from "../PopUp/PopUp";
+import CommentList from "../../Lists/CommentList";
+import LikedList from "../../Lists/LikedList";
+import MusicList from "../../Lists/MusicList";
+import PopUp from "../../PopUp/PopUp";
 import {useSelector} from "react-redux";
-import FollowPopUpList from "../PopUp/FollowPopUp";
+import FollowPopUpList from "../../PopUp/FollowPopUp";
+import './profile.css';
 
 const ProfileScreen = ({
          setShowEdit = () => console.log("WARNING setShowEdit is not defined")
@@ -34,7 +35,7 @@ const ProfileScreen = ({
     const renderNav = (currentContent, sectionContent, label) => {
         if (currentContent === sectionContent) {
             return(
-                <li className="nav-item wd-nav-item-width">
+                <li className="nav-item wd-nav-item-padding">
                     <button onClick={() => setContent(sectionContent)}
                             className="wd-fg-color-white wd-nav-link-button wd-active-link">
                         {label}
@@ -43,7 +44,7 @@ const ProfileScreen = ({
             );
         } else {
             return(
-                <li className="nav-item wd-nav-item-width">
+                <li className="nav-item wd-nav-item-padding">
                     <button onClick={() => setContent(sectionContent)}
                             className="wd-fg-color-white wd-nav-link-button">
                         {label}

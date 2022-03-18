@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import './edit-profile.css';
 import {useDispatch, useSelector} from "react-redux";
-import PopUp from "../PopUp/PopUp";
-import RegisterPopUp from "../PopUp/RegisterPopUp";
+import PopUp from "../../PopUp/PopUp";
+import RegisterPopUp from "../../PopUp/RegisterPopUp";
 
 const EditProfileScreen = ({
     setShowEdit = () => console.log("WARNING setShowEdit is not defined")

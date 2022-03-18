@@ -1,6 +1,7 @@
 import React from "react";
+import './post-items.css';
 
-const LikedCommentItem = () => {
+const ListCommentItem = () => {
     return(
         <div className="pt-2 pb-2 wd-display-flex">
             <div className="wd-display-inline-block">
@@ -33,4 +34,4 @@ const LikedCommentItem = () => {
         </div>
     );
 }
-export default LikedCommentItem;
+export default ListCommentItem;

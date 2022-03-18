@@ -1,5 +1,5 @@
 import React from "react";
-import ContentPostItem from "./ContentPostItem";
+import ContentPostItem from "../PostItems/ContentPostItem";
 
 const MusicList = () => {
     return (

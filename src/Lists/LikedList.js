@@ -1,11 +1,11 @@
 import React from "react";
-import LikedCommentItem from "./LikedCommentItem";
-import ContentPostItem from "./ContentPostItem";
+import ContentPostItem from "../PostItems/ContentPostItem";
+import ListCommentItem from "../PostItems/ListCommentItem";
 
 const LikedList = () => {
     return(
         <>
-            <LikedCommentItem/>
+            <ListCommentItem/>
             <ContentPostItem/>
         </>
     )
