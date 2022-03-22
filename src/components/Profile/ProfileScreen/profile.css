@@ -6,11 +6,6 @@
     width: 150px;
 }
 
-.wd-main-info-position {
-    position: relative;
-    top: calc(50% - 50px);
-}
-
 .wd-username-button-position {
     position: relative;
     top: -3px;
@@ -59,4 +54,20 @@
 
 .wd-follower-button:hover {
     color: lightgrey;
+}
+
+@media (min-width: 768px) {
+
+    .wd-main-info-position {
+        position: relative;
+        top: calc(50% - 50px);
+    }
+}
+
+@media (max-width: 767px) {
+
+    .wd-main-info-position {
+        position: relative;
+        top: calc(50% - 65px);
+    }
 }
