@@ -18,7 +18,6 @@ const aggregateSearchResults = searchResults => {
     if (searchResults.playlists) {
         results = [...results, ...searchResults.playlists.items]
     }
-    console.log(results);
     return results;
 }
 

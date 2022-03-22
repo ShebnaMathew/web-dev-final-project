@@ -21,9 +21,9 @@ const renderPrimary = item => {
 const renderSecondary = item => {
     switch(item.type) {
         case "album":
-            return item.album_type + ": " + item.name;
+            return item.album_type.slice(0, 1).toUpperCase() + item.album_type.slice(1, item.album_type.length) + ": " + item.name;
         case "artist":
-            return "";
+            return <br/>;
         case "track":
             return "Track: " + item.name;
         case "playlist":

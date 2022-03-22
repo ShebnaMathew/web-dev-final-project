@@ -13,7 +13,12 @@ import userProfileReducer from "./reducers/userProfileReducer";
 import currentProfileReducer from "./reducers/currentProfileReducer";
 import searchReducer from "./reducers/searchReducer";
 
-const reducer = combineReducers({userProfile: userProfileReducer, currentProfile: currentProfileReducer, searchResults: searchReducer})
+const reducer = combineReducers(
+{
+    userProfile: userProfileReducer,
+    currentProfile: currentProfileReducer,
+    searchResults: searchReducer
+})
 const store = createStore(reducer);
 
 function App() {

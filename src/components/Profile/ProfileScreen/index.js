@@ -28,11 +28,11 @@ const ProfileScreen = ({
     const renderContent = (content) => {
         switch (content) {
             case 'likes':
-                return (<LikedList/>);
+                return (<LikedList likes={profileData.likes}/>);
             case 'music':
-                return (<MusicList/>);
+                return (<MusicList music={profileData.music}/>);
             default:
-                return (<CommentList/>)
+                return (<CommentList comments={profileData.comments}/>)
         }
     }
 
