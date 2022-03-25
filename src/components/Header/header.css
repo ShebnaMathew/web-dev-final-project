@@ -1,0 +1,35 @@
+.wd-header-center {
+    margin-left: 25%;
+    width: 30%;
+}
+
+.wd-header-bg-dark {
+    background-color: #060606;
+}
+
+.wd-header-fontAwesome {
+    font-family: 'Helvetica', FontAwesome, sans-serif;
+  }
+
+.wd-header-search-border {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-color: #adafae;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.wd-header-color {
+    color: white;
+}
+
+.wd-header-color:focus {
+    color: white;
+    background-color: inherit;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import {Link, Outlet} from "react-router-dom";
 import './main.css';
 import {useDispatch, useSelector} from "react-redux";
+import Header from "../Header";
 
 const MainScreen = () => {
 
@@ -258,10 +259,9 @@ const MainScreen = () => {
 
     return(
         <>
-            <div className="row mb-3">
+            
+            <div className="row mb-3 mt-5 pt-3">
                 <div>
-                    <h4>One day, I'll be a header</h4>
-                    <br/>
                     <Link onClick={() => setCurrentToUser()} to="/profile">User Profile</Link>
                     <span> | </span>
                     <Link onClick={() => setExternalUser()} to={`/profile/${sampleProfile._id}`}>External Profile</Link>
