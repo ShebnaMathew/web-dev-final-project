@@ -1,4 +1,4 @@
-import profileData from './data/user-profile.json';
+const profileData = {};
 
 const userProfileReducer = (state = profileData, action) => {
     switch(action.type) {
@@ -16,6 +16,10 @@ const userProfileReducer = (state = profileData, action) => {
                 dob: action.dob,
                 email: action.email
             }
+        case "set-user-profile-data":
+            return {
+                ...action.userProfile
+            };
         default:
             return (state);
     }

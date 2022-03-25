@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CommentList from "../../Lists/CommentList";
 import LikedList from "../../Lists/LikedList";
 import MusicList from "../../Lists/MusicList";
@@ -8,7 +8,7 @@ import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
 
 const ProfileScreen = ({
-         setShowEdit = () => console.log("WARNING setShowEdit is not defined"),
+         setShowEdit = () => console.log("WARNING setShowEdit is not defined")
 }) => {
 
     const userProfile = useSelector((state) => state.userProfile);
@@ -146,12 +146,18 @@ const ProfileScreen = ({
     }
 
     const formatDOB = (date) => {
+        if (date === undefined) {
+            return '';
+        }
         const dateVals = date.split("-");
         const month = determineMonth(dateVals[1]);
         return `${month} ${dateVals[2]}, ${dateVals[0]}`
     }
 
     const formatJoinedDate = (date) => {
+        if (date === undefined) {
+            return '';
+        }
         const dateVals = date.split("-");
         const month = determineMonth(dateVals[1]);
         return `${month} ${dateVals[0]}`

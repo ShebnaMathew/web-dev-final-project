@@ -1,4 +1,4 @@
-import userProfile from './data/user-profile.json';
+const userProfile = {};
 
 const currentProfileReducer = (state = userProfile, action) => {
     switch(action.type) {
