@@ -25,29 +25,20 @@ const ProfileScreen = ({
         })
     }
 
-    // get profile of logged in user
-    const getLoggedInUserProfile = async () => {
-        const userProfile = await getUserProfile();
-        dispatch({
-            type: "set-user-profile-data",
-            userProfile: userProfile
-        });
-    }
     // fetch from session
     const { _id } = useParams();
     useEffect(() => getCurrentProfile(_id), [_id]);
-    useEffect(() => getLoggedInUserProfile(), [_id])
 
-    // get data from local reducers
-    const userProfile = useSelector((state) => state.userProfile);
-    let profileData = useSelector((state) => state.currentProfile);
-
+    // if _id is undefined, is root profile
     let isCurrentUser = false;
-    const isFollowing = false;
-
-    if (userProfile._id === profileData._id) {
+    if (_id === undefined) {
         isCurrentUser = true;
     }
+
+    // get data from local reducers
+    let profileData = useSelector((state) => state.currentProfile);
+
+    const isFollowing = false;
 
     const [content, setContent] = useState('comments');
     const [showFollow, setShowFollow] = useState(false);

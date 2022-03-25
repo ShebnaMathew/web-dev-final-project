@@ -1,9 +1,24 @@
 import React from "react";
 import {Link, Outlet} from "react-router-dom";
 import './main.css';
+import {getUserProfile} from "../../api/backend/connector";
+import {useDispatch} from "react-redux";
 
 
 const MainScreen = () => {
+
+    const dispatch = useDispatch();
+
+    // get profile of logged in user
+    const getLoggedInUserProfile = async () => {
+        const userProfile = await getUserProfile();
+        dispatch({
+            type: "set-user-profile-data",
+            userProfile: userProfile
+        });
+    }
+
+    getLoggedInUserProfile()
 
     return(
         <>
