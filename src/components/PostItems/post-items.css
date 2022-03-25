@@ -1,0 +1,27 @@
+.wd-post-image-dims {
+    height: 100px;
+    width: 100px;
+}
+
+.wd-post-data-dims {
+    width: calc(100% - 100px - 2rem);
+}
+
+.wd-post-href {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.wd-post-href:hover {
+    color: lightgrey;
+}
+
+.wd-liked-comment {
+    height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
