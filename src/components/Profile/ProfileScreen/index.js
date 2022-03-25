@@ -3,14 +3,42 @@ import CommentList from "../../Lists/CommentList";
 import LikedList from "../../Lists/LikedList";
 import MusicList from "../../Lists/MusicList";
 import PopUp from "../../PopUp/PopUp";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
+import {getProfile, getUserProfile} from "../../../api/backend/connector";
+import {useParams} from "react-router-dom";
 
 const ProfileScreen = ({
          setShowEdit = () => console.log("WARNING setShowEdit is not defined")
 }) => {
 
+    // get data from api
+    const dispatch = useDispatch();
+
+    // define getting current profile being viewed
+    const getCurrentProfile = async (id) => {
+        const currentProfile = await getProfile(id);
+        dispatch({
+            type: "update-current-user",
+            currentUser: currentProfile
+        })
+    }
+
+    // get profile of logged in user
+    const getLoggedInUserProfile = async () => {
+        const userProfile = await getUserProfile();
+        dispatch({
+            type: "set-user-profile-data",
+            userProfile: userProfile
+        });
+    }
+    // fetch from session
+    const { _id } = useParams();
+    useEffect(() => getCurrentProfile(_id), [_id]);
+    useEffect(() => getLoggedInUserProfile(), [_id])
+
+    // get data from local reducers
     const userProfile = useSelector((state) => state.userProfile);
     let profileData = useSelector((state) => state.currentProfile);
 

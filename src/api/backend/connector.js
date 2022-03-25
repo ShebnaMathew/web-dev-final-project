@@ -8,9 +8,15 @@ const getUserProfile = async () => {
 }
 
 const getProfile = async (id) => {
+    if (id === undefined) {
+        return await getUserProfile();
+    }
     const profile = await axios.get(backendHost + '/profile/' + id);
     return profile.data;
 }
 
-export {getUserProfile, getProfile};
+export {
+    getUserProfile,
+    getProfile
+};
 
