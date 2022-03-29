@@ -12,11 +12,15 @@ const Header = () => {
 
     const handleKeypress = async e => {
         if (e.charCode === 13) {
-            const results = await search(searchString);
+            let results = {};
+            if (searchString !== '') {
+                results = await search(searchString);
+            }
             dispatch({
                 type: "update-search-results",
                 results: results
             })
+            setSearchString('');
             navigate('/search/' + e.target.value);
         }
     };
@@ -26,7 +30,14 @@ const Header = () => {
             <div className="container-fluid">
                 <a href="#" className="navbar-brand" onClick={() => navigate('/')}>I'm the header</a>
                 <div className="d-flex wd-header-center">
-                    <input onChange={(event) => setSearchString(event.target.value)} onKeyPress={(e) => handleKeypress(e)} className="form-control wd-header-bg-dark wd-header-search-border wd-header-color wd-header-fontAwesome" type="search" placeholder="&#xf002; Search Music" aria-label="Search"/>
+                    <input onChange={(event) => setSearchString(event.target.value)}
+                           onKeyPress={(e) => handleKeypress(e)}
+                           className="form-control wd-header-bg-dark wd-header-search-border wd-header-color wd-header-fontAwesome"
+                           type="search"
+                           placeholder="&#xf002; Search Music"
+                           aria-label="Search"
+                           value={searchString}
+                    />
                 </div>
                 <div className="d-flex ms-auto">
                     <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/login')}>Login</button>
