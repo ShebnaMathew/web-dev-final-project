@@ -1,12 +1,9 @@
 import axios from 'axios';
 
-axios.defaults.withCredentials = true;
-
 const backendHost = "http://localhost:4000"
 
 const getUserProfile = async () => {
     const userProfile = await axios.get(backendHost + '/profile');
-    console.log(userProfile)
     return userProfile.data;
 }
 

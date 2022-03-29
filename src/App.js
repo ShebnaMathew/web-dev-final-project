@@ -18,6 +18,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import NewsFeed from "./components/NewsFeed";
+import {authorize} from "./api/spotify/connector";
 
 const reducer = combineReducers(
 {
@@ -26,6 +27,8 @@ const reducer = combineReducers(
     searchResults: searchReducer
 })
 const store = createStore(reducer);
+
+authorize();
 
 function App() {
   return (
