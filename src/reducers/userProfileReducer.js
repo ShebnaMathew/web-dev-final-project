@@ -1,3 +1,5 @@
+import {updateUserProfile} from "../api/backend/connector";
+
 const profileData = {};
 
 const userProfileReducer = (state = profileData, action) => {
@@ -10,11 +12,7 @@ const userProfileReducer = (state = profileData, action) => {
         case "save-profile-data":
             return {
                 ...state,
-                name: action.name,
-                bio: action.bio,
-                website: action.website,
-                dob: action.dob,
-                email: action.email
+                ...action.data
             }
         case "set-user-profile-data":
             return {

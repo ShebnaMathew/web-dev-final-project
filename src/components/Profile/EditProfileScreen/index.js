@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import './edit-profile.css';
+import '../profile-main.css';
 import {useDispatch, useSelector} from "react-redux";
 import PopUp from "../../PopUp/PopUp";
 import RegisterPopUp from "../../PopUp/RegisterPopUp";
+import {updateUserProfile} from "../../../api/backend/connector";
+import {Link} from "react-router-dom";
 
-const EditProfileScreen = ({
-    setShowEdit = () => console.log("WARNING setShowEdit is not defined")
-}) => {
+const EditProfileScreen = () => {
 
     const [showRegisterArtist, setShowRegisterArtist] = useState(false);
 
@@ -24,16 +25,19 @@ const EditProfileScreen = ({
 
     const dispatch = useDispatch();
 
-    const saveProfileData = () => {
-        dispatch({
-            type: "save-profile-data",
+    const saveProfileData = async () => {
+        const newProfileData = {
             name: name,
             bio: bio,
             website: website,
             dob: dob,
             email: email
+        }
+        await updateUserProfile(newProfileData)
+        dispatch({
+            type: "save-profile-data",
+            data: newProfileData
         })
-        setShowEdit(false);
     }
 
     const showRegisterPopUp = () => {
@@ -74,12 +78,12 @@ const EditProfileScreen = ({
                 <div className="wd-display-inline-block wd-position-relative wd-full-height wd-main-info-dims">
                     <div className="wd-display-conditional-block wd-edit-profile-button-position">
                         <div className="wd-edit-profile-username-position wd-edit wd-fg-color-white wd-font-size-26 wd-bold-font">{profileData.username}</div>
-                        <button onClick={() => saveProfileData()} className="btn btn-dark wd-edit-profile-header-button wd-edit-profile-button-display me-4">
+                        <Link to="/profile" onClick={() => saveProfileData()} className="btn btn-dark wd-edit-profile-header-button wd-edit-profile-button-display me-4">
                             Save Changes
-                        </button>
-                        <button onClick={() => setShowEdit(false)} className="btn btn-dark wd-edit-profile-header-button wd-edit-profile-button-display">
+                        </Link>
+                        <Link to="/profile" className="btn btn-dark wd-edit-profile-header-button wd-edit-profile-button-display">
                             Discard Changes
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

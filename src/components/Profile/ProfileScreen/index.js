@@ -6,12 +6,11 @@ import PopUp from "../../PopUp/PopUp";
 import {useDispatch, useSelector} from "react-redux";
 import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
-import {getProfile, getUserProfile} from "../../../api/backend/connector";
-import {useParams} from "react-router-dom";
+import '../profile-main.css';
+import {getProfile} from "../../../api/backend/connector";
+import {Link, useParams} from "react-router-dom";
 
-const ProfileScreen = ({
-         setShowEdit = () => console.log("WARNING setShowEdit is not defined")
-}) => {
+const ProfileScreen = () => {
 
     // get data from api
     const dispatch = useDispatch();
@@ -119,7 +118,7 @@ const ProfileScreen = ({
 
     const renderMainInfoButton = () => {
         if (isCurrentUser) {
-            return (<button onClick={() => setShowEdit(true)} className="btn btn-dark wd-username-button">Edit Profile</button>)
+            return (<Link to="/editProfile" className="btn btn-dark wd-username-button">Edit Profile</Link>)
         }
         else if (isFollowing) {
             return (
