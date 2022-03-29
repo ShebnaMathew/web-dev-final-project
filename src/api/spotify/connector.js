@@ -27,7 +27,7 @@ export const authorize = async () => {
 }
 
 export const search = async (searchString) => {
-    const fullUrl = searchEndpoint + "?type=artist,album,playlist,track&limit=50&q=" + searchString;
+    const fullUrl = searchEndpoint + "?type=artist,album,playlist,track,show,episode&market=US&limit=50&q=" + searchString;
 
     let config = {
         headers: {
@@ -37,5 +37,6 @@ export const search = async (searchString) => {
     }
 
     const response = await axios.get(fullUrl, config);
+    console.log(response.data)
     return response.data;
 }

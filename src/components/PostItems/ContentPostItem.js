@@ -15,6 +15,10 @@ const renderPrimary = item => {
             return "Artist: " + item.name;
         case "playlist":
             return "Owner: " + item.owner.display_name;
+        case "show":
+            return "Show: " + item.name;
+        case "episode":
+            return "Episode: " + item.name;
     }
 }
 
@@ -23,11 +27,14 @@ const renderSecondary = item => {
         case "album":
             return item.album_type.slice(0, 1).toUpperCase() + item.album_type.slice(1, item.album_type.length) + ": " + item.name;
         case "artist":
+        case "show":
             return <br/>;
         case "track":
             return "Track: " + item.name;
         case "playlist":
             return "Playlist: " + item.name;
+        case "episode":
+            return item.description;
     }
 }
 
@@ -96,7 +103,7 @@ const ContentPostItem = ({
                 <div>
                     {renderPrimary(item)}
                 </div>
-                <div>
+                <div className="wd-liked-comment">
                     {renderSecondary(item)}
                 </div>
                 <div>
