@@ -9,6 +9,7 @@
   "bio": "This is a sample bio",
   "followerCount": 123,
   "followingCount": 234,
+  "following": [{"first": "Enoch", "last": "Lakin"},{"first": "Guiseppe", "last": "Blanda"},{"first": "Jayme", "last": "Rohan"},{"first": "Broderick", "last": "DuBuque"},{"first": "Imani", "last": "Reichel"},{"first": "Jordane", "last": "Metz"},{"first": "Ciara", "last": "Bins"},{"first": "Lyda", "last": "Dibbert"},{"first": "Estel", "last": "Simonis"},{"first": "Augusta", "last": "Kautzer"}],
   "profilePicture": "/images/blank-profile-picture.png",
   "isArtist": true,
   "comments": [
