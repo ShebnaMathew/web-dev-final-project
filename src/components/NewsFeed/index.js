@@ -1,6 +1,9 @@
+import Post from "./Post";
+import recentPosts from "./recents-DUMMY.json";
+
 const NewsFeed = () => {
     return(
-        <h1>News feed</h1>
+        <Post posts={recentPosts}/>
     )
 }
 
