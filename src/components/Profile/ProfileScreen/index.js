@@ -76,11 +76,11 @@ const ProfileScreen = () => {
         if (showFollow) {
             if (followTitle === "followers") {
                 return (
-                    <PopUp title="Followers" setShow={setShowFollow} Content={FollowPopUpList}/>
+                    <PopUp title="Followers" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow}}/>
                 );
             } else if (followTitle === "following") {
                 return (
-                    <PopUp title="Following" setShow={setShowFollow} Content={FollowPopUpList}/>
+                    <PopUp title="Following" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow}}/>
                 );
             }
         }
