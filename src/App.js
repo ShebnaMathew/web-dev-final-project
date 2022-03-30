@@ -18,7 +18,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import NewsFeed from "./components/NewsFeed";
-import {authorize} from "./api/spotify/connector";
+import {authorize} from "./services/spotify/spotify-service";
 
 const reducer = combineReducers(
 {

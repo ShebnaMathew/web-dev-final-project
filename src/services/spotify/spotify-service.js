@@ -20,14 +20,15 @@ export const authorize = async () => {
     const response = await axios.post(tokenEndpoint, body, config);
     bearerToken = response.data.access_token;
     const ttl = response.data.expires_in;
-    console.log("SETTING BEARER TOKEN")
 
+    // use ttl to set when this token should be refreshed
+    // call authorize recursively until the application is terminated
     setTimeout(authorize,(ttl - 5) * 1000);
 
 }
 
 export const search = async (searchString) => {
-    const fullUrl = searchEndpoint + "?type=artist,album,playlist,track,show,episode&market=US&limit=50&q=" + searchString;
+    const fullUrl = searchEndpoint + "?type=artist,album,playlist,track,show,episode&market=US&limit=20&q=" + searchString;
 
     let config = {
         headers: {

@@ -1,62 +1,81 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './edit-profile.css';
 import '../profile-main.css';
 import {useDispatch, useSelector} from "react-redux";
 import PopUp from "../../PopUp/PopUp";
-import RegisterPopUp from "../../PopUp/RegisterPopUp";
-import {updateUserProfile} from "../../../api/backend/connector";
+import RegisterArtistPopUp from "../../PopUp/RegisterPopUp/RegisterArtistPopUp";
 import {Link} from "react-router-dom";
+import {getLoggedInUserProfile, saveProfileData} from "../../../actions/profile-actions";
+import RegisterAdminPopUp from "../../PopUp/RegisterPopUp/RegisterAdminPopUp";
 
 const EditProfileScreen = () => {
 
-    const [showRegisterArtist, setShowRegisterArtist] = useState(false);
+    const dispatch = useDispatch();
 
-    const profileData = useSelector((state) => state.userProfile);
+    const [showRegisterArtist, setShowRegisterArtist] = useState(false);
+    const [showRegisterAdmin, setShowRegisterAdmin] = useState(false);
+
+    let profileData = useSelector((state) => state.userProfile);
+
+    const [name, setName] = useState(profileData.name ? profileData.name : "");
+    const [bio, setBio] = useState(profileData.bio ? profileData.bio : "");
+    const [website, setWebsite] = useState(profileData.website ? profileData.website : "");
+    const [dob, setDob] = useState(profileData.dob ? profileData.dob : "");
+    const [email, setEmail] = useState(profileData.email ? profileData.email : "");
+
+    useEffect(() => {
+        setName(profileData.name);
+        setBio(profileData.bio);
+        setWebsite(profileData.website);
+        setDob(profileData.dob);
+        setEmail(profileData.email);
+    })
+
+
 
     const captureFieldChange = (event, setter) => {
         setter(event.target.value)
     }
 
-    const [name, setName] = useState(profileData.name);
-    const [bio, setBio] = useState(profileData.bio);
-    const [website, setWebsite] = useState(profileData.website);
-    const [dob, setDob] = useState(profileData.dob);
-    const [email, setEmail] = useState(profileData.email);
-
-    const dispatch = useDispatch();
-
-    const saveProfileData = async () => {
-        const newProfileData = {
-            name: name,
-            bio: bio,
-            website: website,
-            dob: dob,
-            email: email
-        }
-        await updateUserProfile(newProfileData)
-        dispatch({
-            type: "save-profile-data",
-            data: newProfileData
-        })
-    }
-
-    const showRegisterPopUp = () => {
+    const showRegisterArtistPopUp = () => {
         setShowRegisterArtist(true);
     }
 
-    const renderRegisterPopUp = () => {
+    const renderRegisterArtistPopUp = () => {
         if (showRegisterArtist) {
             return (
-                <PopUp title="Register" setShow={setShowRegisterArtist} Content={RegisterPopUp} contentParams={{setShowRegisterArtist: setShowRegisterArtist}}/>
+                <PopUp title="Register" setShow={setShowRegisterArtist} Content={RegisterArtistPopUp} contentParams={{setShowRegisterArtist: setShowRegisterArtist}}/>
             )
         }
     }
 
-    const renderRegisterButton = () => {
+    const renderRegisterArtistButton = () => {
         if (!profileData.isArtist) {
             return(
+                <div className="pb-2">
+                    <button onClick={() => showRegisterArtistPopUp()} className="btn btn-dark wd-edit-profile-register-button">Register as Artist</button>
+                </div>
+            );
+        }
+    }
+
+    const showRegisterAdminPopUp = () => {
+        setShowRegisterAdmin(true);
+    }
+
+    const renderRegisterAdminPopUp = () => {
+        if (showRegisterAdmin) {
+            return (
+                <PopUp title="Register" setShow={setShowRegisterAdmin} Content={RegisterAdminPopUp} contentParams={{setShowRegisterAdmin: setShowRegisterAdmin}}/>
+            )
+        }
+    }
+
+    const renderRegisterAdminButton = () => {
+        if (!profileData.isAdmin) {
+            return(
                 <div>
-                    <button onClick={() => showRegisterPopUp()} className="btn btn-dark wd-artist-register-button">Register as Artist</button>
+                    <button onClick={() => showRegisterAdminPopUp()} className="btn btn-dark wd-edit-profile-register-button">Register as Admin</button>
                 </div>
             );
         }
@@ -64,7 +83,8 @@ const EditProfileScreen = () => {
 
     return(
         <>
-            {renderRegisterPopUp()}
+            {renderRegisterArtistPopUp()}
+            {renderRegisterAdminPopUp()}
             <div className="wd-profile-header-info-dims wd-position-relative wd-display-flex wd-main-outer-padding pt-2">
                 <div className=" wd-display-inline-block pe-2 wd-position-relative">
                     <img className="img-fluid wd-profile-picture-dims wd-circle-image" src={profileData.profilePicture} alt=""/>
@@ -78,7 +98,15 @@ const EditProfileScreen = () => {
                 <div className="wd-display-inline-block wd-position-relative wd-full-height wd-main-info-dims">
                     <div className="wd-display-conditional-block wd-edit-profile-button-position">
                         <div className="wd-edit-profile-username-position wd-edit wd-fg-color-white wd-font-size-26 wd-bold-font">{profileData.username}</div>
-                        <Link to="/profile" onClick={() => saveProfileData()} className="btn btn-dark wd-edit-profile-header-button wd-edit-profile-button-display me-4">
+                        <Link to="/profile"
+                              onClick={() => saveProfileData(dispatch, {
+                                  name: name,
+                                  bio: bio,
+                                  website: website,
+                                  dob: dob,
+                                  email: email
+                              })}
+                              className="btn btn-dark wd-edit-profile-header-button wd-edit-profile-button-display me-4">
                             Save Changes
                         </Link>
                         <Link to="/profile" className="btn btn-dark wd-edit-profile-header-button wd-edit-profile-button-display">
@@ -93,7 +121,7 @@ const EditProfileScreen = () => {
                     <textarea id="name"
                               onChange={(event) => captureFieldChange(event, setName)}
                               rows={1}
-                              defaultValue={name}
+                              defaultValue={name ? name : ""}
                     />
                 </div>
                 <br/>
@@ -102,7 +130,7 @@ const EditProfileScreen = () => {
                     <textarea id="bio"
                               onChange={(event) => captureFieldChange(event, setBio)}
                               rows={3}
-                              defaultValue={bio}
+                              defaultValue={bio ? bio : ""}
                     />
                 </div>
                 <br/>
@@ -111,7 +139,7 @@ const EditProfileScreen = () => {
                     <textarea id="website"
                               onChange={(event) => captureFieldChange(event, setWebsite)}
                               rows={1}
-                              defaultValue={website}
+                              defaultValue={website ? website : ""}
                     />
                 </div>
                 <br/>
@@ -120,7 +148,7 @@ const EditProfileScreen = () => {
                     <textarea id="email"
                               onChange={(event) => captureFieldChange(event, setEmail)}
                               rows={1}
-                              defaultValue={email}
+                              defaultValue={email ? email : ""}
                     />
                 </div>
                 <br/>
@@ -129,12 +157,13 @@ const EditProfileScreen = () => {
                     <input id="dob"
                            type="date"
                            className="form-control ps-0 pe-0"
-                           value={dob}
+                           value={dob ? dob : ""}
                            onChange={(event) => captureFieldChange(event, setDob)}
                     />
                 </div>
             </div>
-            {renderRegisterButton()}
+            {renderRegisterArtistButton()}
+            {renderRegisterAdminButton()}
         </>
     )
 }

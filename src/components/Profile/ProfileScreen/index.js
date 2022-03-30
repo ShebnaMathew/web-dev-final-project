@@ -7,26 +7,17 @@ import {useDispatch, useSelector} from "react-redux";
 import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
 import '../profile-main.css';
-import {getProfile} from "../../../api/backend/connector";
 import {Link, useParams} from "react-router-dom";
+import {getCurrentProfile} from "../../../actions/profile-actions";
 
 const ProfileScreen = () => {
 
     // get data from api
     const dispatch = useDispatch();
 
-    // define getting current profile being viewed
-    const getCurrentProfile = async (id) => {
-        const currentProfile = await getProfile(id);
-        dispatch({
-            type: "update-current-user",
-            currentUser: currentProfile
-        })
-    }
-
     // fetch from session
     const { _id } = useParams();
-    useEffect(() => getCurrentProfile(_id), [_id]);
+    useEffect(() => getCurrentProfile(dispatch, _id), [_id]);
 
     // if _id is undefined, is root profile
     let isCurrentUser = false;

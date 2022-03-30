@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {search} from "../../api/spotify/connector";
+import {search} from "../../services/spotify/spotify-service";
 import {useDispatch} from "react-redux";
 
 const Header = () => {

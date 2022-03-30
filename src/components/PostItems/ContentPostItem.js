@@ -16,7 +16,7 @@ const renderPrimary = item => {
         case "playlist":
             return "Owner: " + item.owner.display_name;
         case "show":
-            return "Show: " + item.name;
+            return "Podcast: " + item.name;
         case "episode":
             return "Episode: " + item.name;
     }

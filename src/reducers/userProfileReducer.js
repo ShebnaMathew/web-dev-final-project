@@ -1,4 +1,4 @@
-import {updateUserProfile} from "../api/backend/connector";
+import {updateUserProfile} from "../services/backend/backend-service";
 
 const profileData = {};
 
@@ -8,6 +8,11 @@ const userProfileReducer = (state = profileData, action) => {
             return {
                 ...state,
                 isArtist: true
+            }
+        case "register-admin":
+            return {
+                ...state,
+                isAdmin: true
             }
         case "save-profile-data":
             return {
