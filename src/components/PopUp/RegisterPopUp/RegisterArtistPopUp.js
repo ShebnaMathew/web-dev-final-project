@@ -1,6 +1,7 @@
 import React from "react";
 import './register-pop-up.css';
 import {useDispatch} from "react-redux";
+import {saveProfileData} from "../../../actions/profile-actions";
 
 const RegisterArtistPopUp = (
     contentParams = {
@@ -10,10 +11,8 @@ const RegisterArtistPopUp = (
 
     const dispatch = useDispatch();
 
-    const registerArtist =() => {
-        dispatch({
-            type: "register-artist"
-        })
+    const registerArtist = async () => {
+        await saveProfileData(dispatch, { isArtist: true })
         contentParams.setShowRegisterArtist(false);
     }
 

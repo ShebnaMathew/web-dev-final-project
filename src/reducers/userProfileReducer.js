@@ -4,16 +4,6 @@ const profileData = {};
 
 const userProfileReducer = (state = profileData, action) => {
     switch(action.type) {
-        case "register-artist":
-            return {
-                ...state,
-                isArtist: true
-            }
-        case "register-admin":
-            return {
-                ...state,
-                isAdmin: true
-            }
         case "save-profile-data":
             return {
                 ...state,

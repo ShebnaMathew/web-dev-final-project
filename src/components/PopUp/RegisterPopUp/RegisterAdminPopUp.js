@@ -1,6 +1,7 @@
 import React from "react";
 import './register-pop-up.css';
 import {useDispatch} from "react-redux";
+import {saveProfileData} from "../../../actions/profile-actions";
 
 const RegisterAdminPopUp = (
     contentParams = {
@@ -10,10 +11,8 @@ const RegisterAdminPopUp = (
 
     const dispatch = useDispatch();
 
-    const registerAdmin =() => {
-        dispatch({
-            type: "register-admin"
-        })
+    const registerAdmin = async () => {
+        await saveProfileData(dispatch, { isAdmin: true })
         contentParams.setShowRegisterAdmin(false);
     }
 
