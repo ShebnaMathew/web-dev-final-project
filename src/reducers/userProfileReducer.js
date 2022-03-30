@@ -1,8 +1,4 @@
-import {updateUserProfile} from "../services/backend/backend-service";
-
-const profileData = {};
-
-const userProfileReducer = (state = profileData, action) => {
+const userProfileReducer = (state = {}, action) => {
     switch(action.type) {
         case "save-profile-data":
             return {

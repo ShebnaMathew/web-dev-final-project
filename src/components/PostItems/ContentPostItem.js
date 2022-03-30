@@ -45,7 +45,7 @@ const renderImage = item => {
     else if (item.type === "track" && item.album && item.album.images && item.album.images.length > 0){
         return item.album.images[0].url;
     } else {
-        return '/images/is-this-it.png';
+        return '/images/unavailable-image.jpg';
     }
 }
 
