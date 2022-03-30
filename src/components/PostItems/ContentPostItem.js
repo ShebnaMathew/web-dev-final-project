@@ -94,7 +94,7 @@ const ContentPostItem = ({
     return (
         <div className="pt-2 pb-2 wd-display-flex">
             <div className="wd-display-inline-block">
-                <img src={renderImage(item)} alt="" className="img-fluid wd-post-image-dims wd-circle-image"/>
+                <img src={renderImage(item)} alt="" className="img wd-post-image-dims wd-circle-image"/>
             </div>
             <div className="wd-post-data-dims ps-3">
                 <div>
