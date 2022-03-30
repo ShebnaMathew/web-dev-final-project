@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {search} from "../../services/spotify/spotify-service";
 import {useDispatch} from "react-redux";
+import {searchAction} from "../../actions/search-actions";
 
 const Header = () => {
 
@@ -12,14 +13,7 @@ const Header = () => {
 
     const handleKeypress = async e => {
         if (e.charCode === 13) {
-            let results = {};
-            if (searchString !== '') {
-                results = await search(searchString);
-            }
-            dispatch({
-                type: "update-search-results",
-                results: results
-            })
+            await searchAction(dispatch, searchString);
             setSearchString('');
             navigate('/search/' + e.target.value);
         }

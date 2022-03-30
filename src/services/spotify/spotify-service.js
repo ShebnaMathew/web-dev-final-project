@@ -43,6 +43,20 @@ export const search = async (searchString) => {
     return response.data;
 }
 
+export const getNewMusic = async () => {
+    const fullUrl = searchEndpoint + "?type=artist,album,playlist,track,show,episode&market=US&limit=20&q=tag:new";
+
+    let config = {
+        headers: {
+            'Authorization': 'Bearer ' + bearerToken,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }
+
+    const response = await axios.get(fullUrl, config);
+    return response.data;
+}
+
 export const getArtist = async (artistId, artistName) => {
     const artistTag = 'artist/'
     const start = artistId.indexOf(artistTag) + artistTag.length;

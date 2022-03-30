@@ -19,12 +19,14 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import NewsFeed from "./components/NewsFeed";
 import {authorize} from "./services/spotify/spotify-service";
+import newsReducer from "./reducers/newsReducer";
 
 const reducer = combineReducers(
 {
     userProfile: userProfileReducer,
     currentProfile: currentProfileReducer,
-    searchResults: searchReducer
+    searchResults: searchReducer,
+    newsResults: newsReducer
 })
 const store = createStore(reducer);
 
