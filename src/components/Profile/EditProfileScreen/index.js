@@ -29,9 +29,7 @@ const EditProfileScreen = () => {
         setWebsite(profileData.website);
         setDob(profileData.dob);
         setEmail(profileData.email);
-    })
-
-
+    }, [])
 
     const captureFieldChange = (event, setter) => {
         setter(event.target.value)

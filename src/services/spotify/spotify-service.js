@@ -60,7 +60,12 @@ export const getNewMusic = async () => {
 export const getArtist = async (artistId, artistName) => {
     const artistTag = 'artist/'
     const start = artistId.indexOf(artistTag) + artistTag.length;
-    const end = artistId.slice(start).indexOf("/")
+    let end = artistId.slice(start).indexOf("/")
+
+    if (end < 0) {
+        end = artistId.length;
+    }
+
     const id = artistId.slice(start, start + end);
 
     const fullUrl = artistEndpoint + "/" + id;
