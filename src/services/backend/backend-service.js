@@ -19,9 +19,17 @@ const getProfile = async (id) => {
     return profile.data;
 }
 
+const registerAdmin = async (key) => {
+    let error = false;
+    await axios.post(backendHost + '/profile/register', {key: key}).catch(err => error = true)
+
+    return !error;
+}
+
 export {
     getUserProfile,
     getProfile,
-    updateUserProfile
+    updateUserProfile,
+    registerAdmin
 };
 

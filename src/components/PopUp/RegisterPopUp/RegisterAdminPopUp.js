@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import './register-pop-up.css';
 import {useDispatch} from "react-redux";
 import {saveProfileData} from "../../../actions/profile-actions";
+import {registerAdmin} from "../../../services/backend/backend-service";
 
 const RegisterAdminPopUp = (
     contentParams = {
@@ -9,11 +10,36 @@ const RegisterAdminPopUp = (
     }
 ) => {
 
+    const [key, setKey] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+
     const dispatch = useDispatch();
 
-    const registerAdmin = async () => {
-        await saveProfileData(dispatch, { isAdmin: true })
-        contentParams.setShowRegisterAdmin(false);
+    const register = async () => {
+        const result = await registerAdmin(key)
+        if (result) {
+            await saveProfileData(dispatch, { isAdmin: true })
+            setSuccessMessage('Success!');
+        } else {
+            setErrorMessage('Unable to register as admin')
+        }
+    }
+
+    const renderMessage = () => {
+        if (successMessage !== '') {
+            return (
+                <p className="wd-success-message pt-2">
+                    {successMessage}
+                </p>
+            )
+        } else if (errorMessage !== '') {
+            return (
+                <p className="wd-error-message pt-2">
+                    {errorMessage}
+                </p>
+            )
+        }
     }
 
     return(
@@ -24,9 +50,10 @@ const RegisterAdminPopUp = (
             </p>
             <div>
                 <label htmlFor="url-box" className="wd-display-block">Admin Access Key:</label>
-                <textarea rows={1} className="wd-register-text-area" id="url-box" placeholder="Paste Admin Access Key here"/>
+                <textarea rows={1} onChange={(event) => setKey(event.target.value)} className="wd-register-text-area" id="url-box" placeholder="Paste Admin Access Key here"/>
             </div>
-            <button className="wd-register-button mt-3" onClick={() => registerAdmin()}>Register</button>
+            <button className="wd-register-button mt-3" onClick={() => register()}>Register</button>
+            {renderMessage()}
         </div>
     );
 }
