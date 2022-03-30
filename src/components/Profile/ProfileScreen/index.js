@@ -201,7 +201,10 @@ const ProfileScreen = () => {
                         </div>
                     </div>
                     <div>
-                        <span className="wd-fg-color-white wd-font-size-20 wd-hide">{profileData.website}</span>
+                        <a href={"https://" + profileData.website} rel="noreferrer" target="_blank" className="wd-fg-color-white wd-font-size-20 wd-hide wd-website-link">
+                            <i className="fa fa-link me-2"/>
+                            {profileData.website}
+                        </a>
                     </div>
                 </div>
             </div>
