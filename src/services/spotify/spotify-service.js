@@ -4,6 +4,7 @@ const SPOTIFY_CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const SPOTIFY_CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
 const tokenEndpoint = 'https://accounts.spotify.com/api/token'
 const searchEndpoint = 'https://api.spotify.com/v1/search'
+const artistEndpoint = 'https://api.spotify.com/v1/artists'
 
 let bearerToken = "";
 
@@ -40,4 +41,34 @@ export const search = async (searchString) => {
     const response = await axios.get(fullUrl, config);
     console.log(response.data)
     return response.data;
+}
+
+export const getArtist = async (artistId, artistName) => {
+    const artistTag = 'artist/'
+    const start = artistId.indexOf(artistTag) + artistTag.length;
+    const end = artistId.slice(start).indexOf("/")
+    const id = artistId.slice(start, start + end);
+
+    const fullUrl = artistEndpoint + "/" + id;
+
+    let config = {
+        headers: {
+            'Authorization': 'Bearer ' + bearerToken,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }
+
+    let error = false;
+    const response = await axios.get(fullUrl, config).catch(err => error = true);
+
+    if (error) {
+        return false;
+    }
+
+    console.log(response)
+
+    const returnedName = response.data.name;
+
+    return artistName === returnedName;
+
 }
