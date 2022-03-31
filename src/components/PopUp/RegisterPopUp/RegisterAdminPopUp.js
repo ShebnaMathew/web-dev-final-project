@@ -1,14 +1,10 @@
 import React, {useState} from "react";
 import './register-pop-up.css';
 import {useDispatch} from "react-redux";
-import {saveProfileData} from "../../../actions/profile-actions";
+import {saveProfileDataAction} from "../../../actions/profile-actions";
 import {registerAdmin} from "../../../services/backend/backend-service";
 
-const RegisterAdminPopUp = (
-    contentParams = {
-        setShowRegisterAdmin: () => console.log("WARNING setShowRegisterAdmin is undefined")
-    }
-) => {
+const RegisterAdminPopUp = ({ _id, setIsAdmin }) => {
 
     const [key, setKey] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -19,7 +15,8 @@ const RegisterAdminPopUp = (
     const register = async () => {
         const result = await registerAdmin(key)
         if (result) {
-            await saveProfileData(dispatch, { isAdmin: true })
+            await saveProfileDataAction(dispatch, { isAdmin: true }, _id);
+            setIsAdmin(true);
             setSuccessMessage('Success!');
         } else {
             setErrorMessage('Unable to register as admin')

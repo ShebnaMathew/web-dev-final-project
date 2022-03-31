@@ -11,8 +11,7 @@ import Profile from "./components/Profile/ProfileScreen";
 import EditProfile from "./components/Profile/EditProfileScreen";
 import {Provider} from 'react-redux';
 import {createStore, combineReducers} from "redux";
-import userProfileReducer from "./reducers/userProfileReducer";
-import currentProfileReducer from "./reducers/currentProfileReducer";
+import profileReducer from "./reducers/profileReducer";
 import searchReducer from "./reducers/searchReducer";
 import Header from "./components/Header";
 import Login from "./components/Login";
@@ -20,11 +19,12 @@ import SignUp from "./components/SignUp";
 import NewsFeed from "./components/NewsFeed";
 import {authorize} from "./services/spotify/spotify-service";
 import newsReducer from "./reducers/newsReducer";
+import userReducer from "./reducers/userReducer";
 
 const reducer = combineReducers(
 {
-    userProfile: userProfileReducer,
-    currentProfile: currentProfileReducer,
+    profile: profileReducer,
+    user: userReducer,
     searchResults: searchReducer,
     newsResults: newsReducer
 })

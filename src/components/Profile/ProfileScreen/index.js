@@ -8,7 +8,7 @@ import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
 import '../profile-main.css';
 import {Link, useParams} from "react-router-dom";
-import {getCurrentProfile} from "../../../actions/profile-actions";
+import {getProfileAction} from "../../../actions/profile-actions";
 
 const ProfileScreen = () => {
 
@@ -16,17 +16,19 @@ const ProfileScreen = () => {
     const dispatch = useDispatch();
 
     // fetch from session
-    const { _id } = useParams();
-    useEffect(() => getCurrentProfile(dispatch, _id), [_id]);
+    let { _id } = useParams();
+    const user = useSelector((state) => state.user);
 
     // if _id is undefined, is root profile
     let isCurrentUser = false;
     if (_id === undefined) {
+        _id = user._id;
         isCurrentUser = true;
     }
 
-    // get data from local reducers
-    let profileData = useSelector((state) => state.currentProfile);
+    useEffect(() => getProfileAction(dispatch, _id), [_id]);
+
+    const profileData = useSelector((state) => state.profile);
 
     const isFollowing = false;
 

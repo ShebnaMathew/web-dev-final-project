@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-const FollowPopupListItem = (setShowFollow, id) => {
+const FollowPopupListItem = ({setShowFollow, id}) => {
     return (
         <div className="wd-follow-popup-entry ps-3">
             <img className="img-fluid wd-full-height wd-circle-image" src="/images/blank-profile-picture.png" alt=""/>

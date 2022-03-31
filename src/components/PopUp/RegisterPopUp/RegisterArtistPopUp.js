@@ -1,14 +1,10 @@
 import React, {useState} from "react";
 import './register-pop-up.css';
 import {useDispatch} from "react-redux";
-import {saveProfileData} from "../../../actions/profile-actions";
+import {saveProfileDataAction} from "../../../actions/profile-actions";
 import {getArtist} from "../../../services/spotify/spotify-service";
 
-const RegisterArtistPopUp = (
-    contentParams = {
-        setShowRegisterArtist: () => console.log("WARNING setShowRegisterArtist is undefined")
-    }
-) => {
+const RegisterArtistPopUp = ({ _id, setIsArtist }) => {
 
     const [artistId, setArtistId] = useState('');
     const [artistName, setArtistName] = useState('');
@@ -20,8 +16,8 @@ const RegisterArtistPopUp = (
     const registerArtist = async () => {
         const result = await getArtist(artistId, artistName);
         if (result) {
-            await saveProfileData(dispatch, { isArtist: true })
-            setErrorMessage('');
+            await saveProfileDataAction(dispatch, { isArtist: true }, _id);
+            setIsArtist(true);
             setSuccessMessage("Success!")
         } else {
             setErrorMessage('Unable to register artist "' + artistName + '"');

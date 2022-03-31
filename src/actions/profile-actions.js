@@ -1,27 +1,27 @@
 // get profile of logged in user
-import {getProfile, getUserProfile, updateUserProfile} from "../services/backend/backend-service";
+import {getProfile, login, updateUserProfile} from "../services/backend/backend-service";
 
-export const getLoggedInUserProfile = async (dispatch) => {
-    const userProfile = await getUserProfile();
+export const loginAction = async (dispatch, username, password) => {
+    const userData = await login(username, password);
     dispatch({
-        type: "set-user-profile-data",
-        userProfile: userProfile
-    });
-}
-
-export const saveProfileData = async (dispatch, newProfileData) => {
-    await updateUserProfile(newProfileData)
-    dispatch({
-        type: "save-profile-data",
-        data: newProfileData
+        type: "set-user",
+        data: userData
     })
 }
 
-// define getting current profile being viewed
-export const getCurrentProfile = async (dispatch, id) => {
-    const currentProfile = await getProfile(id);
+export const getProfileAction = async (dispatch, id) => {
+    const profile = await getProfile(id);
+    console.log('setting profile')
     dispatch({
-        type: "update-current-user",
-        currentUser: currentProfile
+        type: "set-profile-data",
+        userProfile: profile
+    });
+}
+
+export const saveProfileDataAction = async (dispatch, newProfileData, id) => {
+    await updateUserProfile(newProfileData, id)
+    dispatch({
+        type: "save-profile-data",
+        data: newProfileData
     })
 }

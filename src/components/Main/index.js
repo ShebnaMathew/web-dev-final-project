@@ -2,18 +2,17 @@ import React from "react";
 import {Link, Outlet} from "react-router-dom";
 import './main.css';
 import {useDispatch} from "react-redux";
-import {getLoggedInUserProfile} from "../../actions/profile-actions";
+import {loginAction} from "../../actions/profile-actions";
 
 
 const MainScreen = () => {
 
     const dispatch = useDispatch();
 
-    getLoggedInUserProfile(dispatch)
+    loginAction(dispatch, "username", "password");
 
     return(
         <>
-            
             <div className="row mb-3 mt-5 pt-3">
                 <div>
                     {/*dispatch on id per click*/}
