@@ -1,25 +1,36 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CommentList from "../../Lists/CommentList";
 import LikedList from "../../Lists/LikedList";
 import MusicList from "../../Lists/MusicList";
 import PopUp from "../../PopUp/PopUp";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
+import '../profile-main.css';
+import {Link, useParams} from "react-router-dom";
+import {getProfileAction} from "../../../actions/profile-actions";
 
-const ProfileScreen = ({
-         setShowEdit = () => console.log("WARNING setShowEdit is not defined"),
-}) => {
+const ProfileScreen = () => {
 
-    const userProfile = useSelector((state) => state.userProfile);
-    let profileData = useSelector((state) => state.currentProfile);
+    // get data from api
+    const dispatch = useDispatch();
 
+    // fetch from session
+    let { _id } = useParams();
+    const user = useSelector((state) => state.user);
+
+    // if _id is undefined, is root profile
     let isCurrentUser = false;
-    const isFollowing = false;
-
-    if (userProfile._id === profileData._id) {
+    if (_id === undefined) {
+        _id = user._id;
         isCurrentUser = true;
     }
+
+    useEffect(() => getProfileAction(dispatch, _id), [_id]);
+
+    const profileData = useSelector((state) => state.profile);
+
+    const isFollowing = false;
 
     const [content, setContent] = useState('comments');
     const [showFollow, setShowFollow] = useState(false);
@@ -67,11 +78,11 @@ const ProfileScreen = ({
         if (showFollow) {
             if (followTitle === "followers") {
                 return (
-                    <PopUp title="Followers" setShow={setShowFollow} Content={FollowPopUpList}/>
+                    <PopUp title="Followers" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow}}/>
                 );
             } else if (followTitle === "following") {
                 return (
-                    <PopUp title="Following" setShow={setShowFollow} Content={FollowPopUpList}/>
+                    <PopUp title="Following" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow}}/>
                 );
             }
         }
@@ -100,7 +111,7 @@ const ProfileScreen = ({
 
     const renderMainInfoButton = () => {
         if (isCurrentUser) {
-            return (<button onClick={() => setShowEdit(true)} className="btn btn-dark wd-username-button">Edit Profile</button>)
+            return (<Link to="/editProfile" className="btn btn-dark wd-username-button">Edit Profile</Link>)
         }
         else if (isFollowing) {
             return (
@@ -146,12 +157,18 @@ const ProfileScreen = ({
     }
 
     const formatDOB = (date) => {
+        if (date === undefined) {
+            return '';
+        }
         const dateVals = date.split("-");
         const month = determineMonth(dateVals[1]);
         return `${month} ${dateVals[2]}, ${dateVals[0]}`
     }
 
     const formatJoinedDate = (date) => {
+        if (date === undefined) {
+            return '';
+        }
         const dateVals = date.split("-");
         const month = determineMonth(dateVals[1]);
         return `${month} ${dateVals[0]}`
@@ -186,7 +203,10 @@ const ProfileScreen = ({
                         </div>
                     </div>
                     <div>
-                        <span className="wd-fg-color-white wd-font-size-20 wd-hide">{profileData.website}</span>
+                        <a href={"https://" + profileData.website} rel="noreferrer" target="_blank" className="wd-fg-color-white wd-font-size-20 wd-hide wd-website-link">
+                            <i className="fa fa-link me-2"/>
+                            {profileData.website}
+                        </a>
                     </div>
                 </div>
             </div>

@@ -83,9 +83,9 @@
     left: 0;
 }
 
-.wd-artist-register-button {
+.wd-edit-profile-register-button {
     position: relative;
-    width: 160px;
+    width: 180px;
     height: 30px;
     line-height: 1;
     left: calc(50% - 80px);

@@ -1,6 +1,6 @@
-const searchReducer = (state = {}, action) => {
+const newsReducer = (state = {}, action) => {
     switch(action.type) {
-        case "update-search-results":
+        case "update-news":
             return action.results;
         default:
             return (state);
@@ -8,4 +8,4 @@ const searchReducer = (state = {}, action) => {
 
 };
 
-export default searchReducer;
+export default newsReducer;

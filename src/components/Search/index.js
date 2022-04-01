@@ -4,23 +4,7 @@ import '../Profile/profile-main.css';
 import './search.css';
 import {useSelector} from "react-redux";
 import { useParams } from "react-router-dom";
-
-const aggregateSearchResults = searchResults => {
-    let results = [];
-    if (searchResults.albums) {
-        results = [...results, ...searchResults.albums.items]
-    }
-    if (searchResults.artists) {
-        results = [...results, ...searchResults.artists.items]
-    }
-    if (searchResults.tracks) {
-        results = [...results, ...searchResults.tracks.items]
-    }
-    if (searchResults.playlists) {
-        results = [...results, ...searchResults.playlists.items]
-    }
-    return results;
-}
+import {aggregateSearchResults} from "../../util/AggregateUtil";
 
 const SearchScreen = () => {
 

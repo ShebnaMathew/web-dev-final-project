@@ -7,24 +7,30 @@ import './vendors/bootstrap/bootstrap.min.css';
 import './vendors/fontawesome/css/all.css';
 import './App.css';
 import './components/Header/header.css';
-import Profile from "./components/Profile";
+import Profile from "./components/Profile/ProfileScreen";
+import EditProfile from "./components/Profile/EditProfileScreen";
 import {Provider} from 'react-redux';
 import {createStore, combineReducers} from "redux";
-import userProfileReducer from "./reducers/userProfileReducer";
-import currentProfileReducer from "./reducers/currentProfileReducer";
+import profileReducer from "./reducers/profileReducer";
 import searchReducer from "./reducers/searchReducer";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import NewsFeed from "./components/NewsFeed";
+import {authorize} from "./services/spotify/spotify-service";
+import newsReducer from "./reducers/newsReducer";
+import userReducer from "./reducers/userReducer";
 
 const reducer = combineReducers(
 {
-    userProfile: userProfileReducer,
-    currentProfile: currentProfileReducer,
-    searchResults: searchReducer
+    profile: profileReducer,
+    user: userReducer,
+    searchResults: searchReducer,
+    newsResults: newsReducer
 })
 const store = createStore(reducer);
+
+authorize();
 
 function App() {
   return (
@@ -37,6 +43,7 @@ function App() {
                         <Route path="/" element={<NewsFeed/>}/>
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/profile/:_id" element={<Profile/>}/>
+                        <Route path="/editProfile" element={<EditProfile/>}/>
                         <Route path="/search" element={<SearchScreen/>}/> {/* can show a blank no results page once things are set up - or just remove this path?*/}
                         <Route path="/search/:query" element={<SearchScreen/>}/> {/* show results for a specific query*/}
                         <Route path="/login" element={<Login/>}/>
