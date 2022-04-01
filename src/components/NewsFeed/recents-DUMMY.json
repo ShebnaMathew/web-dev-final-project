@@ -1,4 +1,5 @@
 [{
+  "idx": 0,
   "content-type": "music",
   "album_type": "album",
   "artists": [
@@ -36,6 +37,8 @@
     }
   ],
   "name": "The New Abnormal",
+  "release_date": "2020-04-10",
+  "total_tracks": 9,
   "likes": [],
   "comments": [{
     "name": "Jane Doe",
@@ -43,6 +46,42 @@
   },{
     "name": "John Doe",
     "comment": "Awesome, really really good."
+  },
+  {
+    "name": "Jane Doe",
+    "comment": "Awesome, really good."
+  },{
+    "name": "John Doe",
+    "comment": "Awesome, really really good."
+  },
+  {
+    "name": "Jane Doe",
+    "comment": "Awesome, really good."
+  },{
+    "name": "John Doe",
+    "comment": "Awesome, really really good."
+  },
+  {
+    "name": "Jane Doe",
+    "comment": "Awesome, really good."
+  },{
+    "name": "John Doe",
+    "comment": "Awesome, really really good."
+  },
+  {
+    "name": "Jane Doe",
+    "comment": "Awesome, really good."
+  },
+  {
+    "name": "Jane Doe",
+    "comment": "Awesome, really good."
+  },{
+    "name": "John Doe",
+    "comment": "Awesome, really really good."
+  },
+  {
+    "name": "Jane Doe",
+    "comment": "Awesome, really good."
   }
 ],
   "reacts": {
@@ -51,6 +90,7 @@
   }
 },
 {
+  "idx": 1,
   "content-type": "music",
   "album_type": "single",
   "artists": [
@@ -89,7 +129,6 @@
   ],
   "name": "Hard To Explain/New York City Cops",
   "release_date": "2002-04-30",
-  "release_date_precision": "day",
   "total_tracks": 4,
   "type": "album",
   "uri": "spotify:album:5mRPvdITWYckQAX35a4gRe",
@@ -101,6 +140,7 @@
   }
 },
 {
+  "idx": 2,
   "content-type": "music",
   "album_type": "album",
   "artists": [
@@ -138,6 +178,8 @@
     }
   ],
   "name": "The New Abnormal",
+  "release_date": "2020-04-10",
+  "total_tracks": 9,
   "likes": [],
   "comments": [{
     "name": "Jane Doe",
@@ -152,6 +194,7 @@
   }
 },
 {
+  "idx": 3,
   "content-type": "music",
   "album_type": "single",
   "artists": [
@@ -195,12 +238,35 @@
   "type": "album",
   "uri": "spotify:album:5mRPvdITWYckQAX35a4gRe",
   "likes": [],
-  "comments": [],
+  "comments": [
+    {
+      "name": "Jane Doe",
+      "comment": "Awesome, really good."
+    },{
+      "name": "John Doe",
+      "comment": "Awesome, really really good."
+    },
+    {
+      "name": "Jane Doe",
+      "comment": "Awesome, really good."
+    },
+    {
+      "name": "Jane Doe",
+      "comment": "Awesome, really good."
+    },{
+      "name": "John Doe",
+      "comment": "Awesome, really really good."
+    },
+    {
+      "name": "Jane Doe",
+      "comment": "Awesome, really good."
+    }],
   "reacts": {
     "like": 32,
     "comment": 34
   }
 },{
+  "idx": 4,
   "content-type": "music",
   "album_type": "album",
   "artists": [
@@ -238,6 +304,8 @@
     }
   ],
   "name": "The New Abnormal",
+  "release_date": "2020-04-10",
+  "total_tracks": 9,
   "likes": [],
   "comments": [{
     "name": "Jane Doe",
@@ -252,6 +320,7 @@
   }
 },
 {
+  "idx": 5,
   "content-type": "music",
   "album_type": "single",
   "artists": [
@@ -307,6 +376,7 @@
     "comment": 34
   }
 },{
+  "idx": 6,
   "content-type": "music",
   "album_type": "album",
   "artists": [
@@ -344,6 +414,8 @@
     }
   ],
   "name": "The New Abnormal",
+  "release_date": "2020-04-10",
+  "total_tracks": 9,
   "likes": [],
   "comments": [],
   "reacts": {
@@ -352,6 +424,7 @@
   }
 },
 {
+  "idx": 7,
   "content-type": "music",
   "album_type": "single",
   "artists": [
@@ -401,6 +474,7 @@
     "comment": 34
   }
 },{
+  "idx": 8,
   "content-type": "music",
   "album_type": "album",
   "artists": [
@@ -438,6 +512,8 @@
     }
   ],
   "name": "The New Abnormal",
+  "release_date": "2020-04-10",
+  "total_tracks": 9,
   "likes": [],
   "comments": [],
   "reacts": {
@@ -446,6 +522,7 @@
   }
 },
 {
+  "idx": 9,
   "content-type": "music",
   "album_type": "single",
   "artists": [
@@ -495,6 +572,7 @@
     "comment": 34
   }
 },{
+  "idx": 10,
   "content-type": "music",
   "album_type": "album",
   "artists": [
@@ -532,6 +610,8 @@
     }
   ],
   "name": "The New Abnormal",
+  "release_date": "2020-04-10",
+  "total_tracks": 9,
   "likes": [],
   "comments": [],
   "reacts": {
@@ -540,6 +620,7 @@
   }
 },
 {
+  "idx": 11,
   "content-type": "music",
   "album_type": "single",
   "artists": [
@@ -589,6 +670,7 @@
     "comment": 34
   }
 },{
+  "idx": 12,
   "content-type": "music",
   "album_type": "album",
   "artists": [
@@ -626,6 +708,8 @@
     }
   ],
   "name": "The New Abnormal",
+  "release_date": "2020-04-10",
+  "total_tracks": 9,
   "likes": [],
   "comments": [],
   "reacts": {
@@ -634,6 +718,7 @@
   }
 },
 {
+  "idx": 13,
   "content-type": "music",
   "album_type": "single",
   "artists": [
