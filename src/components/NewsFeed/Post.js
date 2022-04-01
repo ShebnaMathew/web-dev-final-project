@@ -35,13 +35,13 @@ const Post = (props) => {
                         <hr/>
                         <h6>
                             <span className="me-2"><i class="far fa-heart"></i></span>
-                            <span className="me-4">{post.reacts.like}</span>
+                            <span className="me-4">{post.reacts && post.reacts.like ? post.reacts.like : 0}</span>
                             <span className="me-2"><i class="far fa-comment"></i></span>
-                            <span className="me-4">{post.reacts.comment}</span>
+                            <span className="me-4">{post.reacts && post.reacts.comment ? post.reacts.comment : 0}</span>
                          </h6>
                         <hr/>
                         <div class="wd-post-max-height wd-post-overflow">
-                            {post.comments.map((c) => {
+                            {post.comments && post.comments.map((c) => {
                                 return <p class="card-text">
                                         <span className="wd-newsfeed-bold-text me-2">{c.name}</span>
                                         <span>{c.comment}</span>
