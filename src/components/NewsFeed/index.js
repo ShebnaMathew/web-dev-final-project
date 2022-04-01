@@ -2,8 +2,9 @@ import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
 import {searchNewMusicAction} from "../../actions/search-actions";
 import {aggregateSearchResults} from "../../util/AggregateUtil";
-import ContentPostItem from "../PostItems/ContentPostItem";
-
+import { useState } from "react";
+import Post from "./Post";
+import PostList from "./PostList";
 
 const NewsFeed = () => {
 
@@ -15,18 +16,17 @@ const NewsFeed = () => {
         searchNewMusicAction(dispatch);
     }, [])
 
-    const aggregatedResults = aggregateSearchResults(news);
+    const recentPosts = aggregateSearchResults(news);
+
+    const [showPost, setShowPost] = useState(false);
+    const [post, setPost] = useState('');
+
+    console.log("showPost: ", showPost);
+    console.log("post Id: ", post);
+    console.log("posstss: ", recentPosts);
 
     return(
-        <>
-            <h1>New Music</h1>
-
-            <div className="wd-content-section wd-fg-color-white ps-3 pe-3">
-                {
-                    aggregatedResults.map(item => <ContentPostItem key={item.id} item={item}/>)
-                }
-            </div>
-        </>
+        (!showPost) ? <PostList posts={recentPosts} setShowPost={setShowPost} setPost={setPost}/>: <Post post={post} posts={[...recentPosts]} setShowPost={setShowPost} setPost={setPost}/>
     )
 }
 
