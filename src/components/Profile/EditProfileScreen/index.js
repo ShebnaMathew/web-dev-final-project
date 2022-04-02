@@ -92,7 +92,7 @@ const EditProfileScreen = () => {
                         </button>
                     </div>
                 </div>
-                <div className="wd-display-inline-block wd-main-info-padding wd-position-relative wd-full-height wd-main-info-dims">
+                <div className="wd-display-inline-block wd-edit-info-padding wd-position-relative wd-full-height wd-main-info-dims">
                     <div className="wd-display-conditional-block wd-edit-profile-button-position">
                         <div className="wd-edit-profile-username-position wd-edit wd-fg-color-white wd-font-size-26 wd-bold-font">{profile.username ? profile.username : ""}</div>
                         <Link to="/profile"

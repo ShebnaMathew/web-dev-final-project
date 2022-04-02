@@ -229,6 +229,12 @@ const ProfileScreen = () => {
                         <span className="ps-2 wd-font-size-16">Joined {formatJoinedDate(profileData.joined)}</span>
                     </div>
                     {renderPrivateInfo()}
+                    {profileData.isAdmin &&
+                        <div>
+                            <i className="fa fa-user-cog wd-font-size-16"/>
+                            <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Admin</span>
+                        </div>
+                    }
                 </div>
             </div>
             <div className="wd-block-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2 mt-3">
@@ -237,6 +243,12 @@ const ProfileScreen = () => {
                     <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Joined {formatJoinedDate(profileData.joined)}</span>
                 </div>
                 {renderPrivateInfo()}
+                {profileData.isAdmin &&
+                    <div>
+                        <i className="fa fa-user-cog wd-font-size-16"/>
+                        <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Admin</span>
+                    </div>
+                }
             </div>
             <div className="wd-fg-color-white wd-profile-header-info-max-width wd-center-main-info-wide wd-bottom-border-grey wd-description-info-padding pt-3 pb-3">
                 <div>
