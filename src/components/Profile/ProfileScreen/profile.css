@@ -64,13 +64,17 @@
     color: lightgrey;
 }
 
-.wd-main-info-dims-profile {
-    width: 500px;
-    height: 100px;
+.wd-profile-header-info-max-width {
+    max-width: 1116px;
 }
 
 .wd-support-info-dims {
     width: 300px;
+}
+
+.wd-hide-text-overflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 @media (min-width: 1400px) {
@@ -78,6 +82,11 @@
         position: relative;
         left: 148px;
         width: 1000px
+    }
+
+    .wd-center-main-info-wide {
+        position: relative;
+        left: 90px;
     }
 }
 
@@ -92,6 +101,38 @@
 @media (max-width: 1099px) {
     .wd-center-content {
         width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .wd-inline-show-status {
+        display: inline-block;
+    }
+
+    .wd-block-show-status {
+        display: none;
+    }
+
+    .wd-main-info-dims-profile {
+        width: calc(100% - 458px);
+        height: 100px;
+    }
+}
+
+@media (max-width: 991px) {
+
+    .wd-inline-show-status {
+        display: none;
+    }
+
+    .wd-block-show-status {
+        display: block;
+        width: 100%;
+    }
+
+    .wd-main-info-dims-profile {
+        width: calc(100% - 158px);
+        height: 100px;
     }
 }
 

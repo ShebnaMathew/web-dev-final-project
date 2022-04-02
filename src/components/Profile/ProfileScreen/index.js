@@ -107,15 +107,15 @@ const ProfileScreen = () => {
                 <>
                     <div className="pe-3">
                         <i className="far fa-id-card wd-font-size-16"/>
-                        <span className="ps-2 wd-font-size-16">{profileData.name}</span>
+                        <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">{profileData.name}</span>
                     </div>
                     <div className="pe-3">
                         <i className="fa fa-birthday-cake wd-font-size-16"/>
-                        <span className="ps-2 wd-font-size-16">Born {formatDOB(profileData.dob)}</span>
+                        <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Born {formatDOB(profileData.dob)}</span>
                     </div>
                     <div>
                         <i className="fa fa-at wd-font-size-16"/>
-                        <span className="ps-2 wd-font-size-16">{profileData.email}</span>
+                        <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">{profileData.email}</span>
                     </div>
                 </>
             );
@@ -190,7 +190,7 @@ const ProfileScreen = () => {
     return(
         <div>
             {renderFollow()}
-            <div className="wd-profile-header-info-dims wd-position-relative wd-display-flex wd-main-outer-padding pt-2">
+            <div className="wd-profile-header-info-dims wd-profile-header-info-max-width wd-center-main-info-wide wd-position-relative wd-display-flex wd-main-outer-padding pt-2">
                 <div className=" wd-display-inline-block pe-2">
                     <img className="img wd-profile-picture-dims wd-circle-image" src={profileData.profilePicture} alt=""/>
                 </div>
@@ -222,7 +222,8 @@ const ProfileScreen = () => {
                         </a>
                     </div>
                 </div>
-                <div className="wd-display-inline-block wd-fg-color-white wd-main-info-position wd-support-info-dims wd-content-section ps-2 pt-2">
+                <div
+                    className="wd-inline-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2">
                     <div className="pe-3">
                         <i className="far fa-calendar wd-font-size-16"/>
                         <span className="ps-2 wd-font-size-16">Joined {formatJoinedDate(profileData.joined)}</span>
@@ -230,7 +231,14 @@ const ProfileScreen = () => {
                     {renderPrivateInfo()}
                 </div>
             </div>
-            <div className="wd-fg-color-white wd-bottom-border-grey wd-description-info-padding pt-3 pb-3">
+            <div className="wd-block-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2 mt-3">
+                <div className="pe-3">
+                    <i className="far fa-calendar wd-font-size-16"/>
+                    <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Joined {formatJoinedDate(profileData.joined)}</span>
+                </div>
+                {renderPrivateInfo()}
+            </div>
+            <div className="wd-fg-color-white wd-profile-header-info-max-width wd-center-main-info-wide wd-bottom-border-grey wd-description-info-padding pt-3 pb-3">
                 <div>
                     <div className="wd-bold-font wd-font-size-20">Bio</div>
                     <p className="wd-font-size-18 mb-0">{profileData.bio}</p>
