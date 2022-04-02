@@ -97,6 +97,10 @@
     height: 100px;
 }
 
+.wd-edit-profile-max-width {
+    max-width: 696px;
+}
+
 @media (min-width: 768px) {
     .wd-edit-profile-button-position {
         position: relative;
@@ -130,5 +134,33 @@
         text-align: left;
         margin-left: 10px;
         line-height: 1.0;
+    }
+
+    .wd-main-info-padding {
+        padding-left: 2rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    .wd-center-edit-profile {
+        position: relative;
+        left: 225px;
+        width: 696px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .wd-center-edit-profile {
+        position: relative;
+        left: 225px;
+        width: 696px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .wd-center-edit-profile {
+        position: relative;
+        left: 132px;
+        width: 696px;
     }
 }

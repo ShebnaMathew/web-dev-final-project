@@ -79,10 +79,10 @@ const EditProfileScreen = () => {
     }
 
     return(
-        <>
+        <div className="wd-edit-profile-max-width wd-center-edit-profile">
             {renderRegisterArtistPopUp()}
             {renderRegisterAdminPopUp()}
-            <div className="wd-profile-header-info-dims wd-position-relative wd-display-flex wd-main-outer-padding pt-2">
+            <div className="wd-profile-header-info-dims wd-position-relative wd-display-flex pt-2">
                 <div className=" wd-display-inline-block pe-2 wd-position-relative">
                     <img className="img-fluid wd-profile-picture-dims wd-circle-image" src={profile.profilePicture ? profile.profilePicture : "/images/blank-profile-picture.png"} alt=""/>
                     <div className="wd-profile-picture-dims wd-edit-profile-picture-overlay-position">
@@ -92,7 +92,7 @@ const EditProfileScreen = () => {
                         </button>
                     </div>
                 </div>
-                <div className="wd-display-inline-block wd-position-relative wd-full-height wd-main-info-dims">
+                <div className="wd-display-inline-block wd-main-info-padding wd-position-relative wd-full-height wd-main-info-dims">
                     <div className="wd-display-conditional-block wd-edit-profile-button-position">
                         <div className="wd-edit-profile-username-position wd-edit wd-fg-color-white wd-font-size-26 wd-bold-font">{profile.username ? profile.username : ""}</div>
                         <Link to="/profile"
@@ -108,7 +108,7 @@ const EditProfileScreen = () => {
                     </div>
                 </div>
             </div>
-            <div className=" mt-3 mb-3 wd-main-outer-padding">
+            <div className="mt-3 mb-3">
                 <div className="wd-edit-profile-text-entry ps-2 pe-2 pt-1 pb-1">
                     <label htmlFor="name" className="wd-font-12">Name</label>
                     <textarea id="name"
@@ -157,7 +157,7 @@ const EditProfileScreen = () => {
             </div>
             {renderRegisterArtistButton()}
             {renderRegisterAdminButton()}
-        </>
+        </div>
     )
 }
 export default EditProfileScreen;
