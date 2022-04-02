@@ -26,6 +26,8 @@ const EditProfileScreen = () => {
     const getUserProfile = async () => {
         profileData = await getProfile(user._id);
         setProfile(profileData);
+        setIsArtist(profileData.isArtist);
+        setIsAdmin(profileData.isAdmin);
     }
 
     // force wait on render for edit profile
@@ -52,7 +54,7 @@ const EditProfileScreen = () => {
     }
 
     const renderRegisterArtistButton = () => {
-        if (profileData.isArtist ? !profileData.isArtist : isArtist) {
+        if (!isArtist) {
             return(
                 <div className="pb-2">
                     <button onClick={() => showRegisterArtistPopUp()} className="btn btn-secondary wd-edit-profile-register-button">Register as Artist</button>
@@ -79,7 +81,7 @@ const EditProfileScreen = () => {
     }
 
     const renderRegisterAdminButton = () => {
-        if (profileData.isAdmin ? !profileData.isAdmin : isAdmin) {
+        if (!isAdmin) {
             return(
                 <div>
                     <button onClick={() => showRegisterAdminPopUp()} className="btn btn-secondary wd-edit-profile-register-button">Register as Admin</button>

@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {search} from "../../services/spotify/spotify-service";
 import {useDispatch} from "react-redux";
 import {searchAction} from "../../actions/search-actions";
 
