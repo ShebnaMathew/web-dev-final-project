@@ -64,6 +64,37 @@
     color: lightgrey;
 }
 
+.wd-main-info-dims-profile {
+    width: 500px;
+    height: 100px;
+}
+
+.wd-support-info-dims {
+    width: 300px;
+}
+
+@media (min-width: 1400px) {
+    .wd-center-content {
+        position: relative;
+        left: 148px;
+        width: 1000px
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .wd-center-content {
+        position: relative;
+        left: 58px;
+        width: 1000px
+    }
+}
+
+@media (max-width: 1099px) {
+    .wd-center-content {
+        width: 100%;
+    }
+}
+
 @media (min-width: 768px) {
 
     .wd-main-info-position {

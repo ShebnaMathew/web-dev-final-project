@@ -45,7 +45,7 @@ const ProfileScreen = () => {
         switch (content) {
             case 'likes':
                 return (
-                    <div className="wd-content-section wd-fg-color-white ps-3 pe-3">
+                    <div className="wd-content-section wd-center-content wd-fg-color-white ps-3 pe-3">
                         <LikedList likes={profileData.likes}/>
                     </div>
                 );
@@ -53,7 +53,7 @@ const ProfileScreen = () => {
                 return (!showPost ? <PostList posts={profileData.music} setShowPost={setShowPost} setPost={setPost}/>: <Post post={post} posts={[...profileData.music]} setShowPost={setShowPost} setPost={setPost}/>);
             default:
                 return (
-                    <div className="wd-content-section wd-fg-color-white ps-3 pe-3">
+                    <div className="wd-content-section wd-center-content wd-fg-color-white ps-3 pe-3">
                         <CommentList comments={profileData.comments}/>
                     </div>
                 );
@@ -105,15 +105,15 @@ const ProfileScreen = () => {
         if(isCurrentUser) {
             return (
                 <>
-                    <div className="wd-display-conditional-block pe-3">
+                    <div className="pe-3">
                         <i className="far fa-id-card wd-font-size-16"/>
                         <span className="ps-2 wd-font-size-16">{profileData.name}</span>
                     </div>
-                    <div className="wd-display-conditional-block pe-3">
+                    <div className="pe-3">
                         <i className="fa fa-birthday-cake wd-font-size-16"/>
                         <span className="ps-2 wd-font-size-16">Born {formatDOB(profileData.dob)}</span>
                     </div>
-                    <div className="wd-display-conditional-block">
+                    <div>
                         <i className="fa fa-at wd-font-size-16"/>
                         <span className="ps-2 wd-font-size-16">{profileData.email}</span>
                     </div>
@@ -192,9 +192,9 @@ const ProfileScreen = () => {
             {renderFollow()}
             <div className="wd-profile-header-info-dims wd-position-relative wd-display-flex wd-main-outer-padding pt-2">
                 <div className=" wd-display-inline-block pe-2">
-                    <img className="img-fluid wd-profile-picture-dims wd-circle-image" src={profileData.profilePicture} alt=""/>
+                    <img className="img wd-profile-picture-dims wd-circle-image" src={profileData.profilePicture} alt=""/>
                 </div>
-                <div className="wd-display-inline-block wd-full-height wd-main-info-dims wd-main-info-padding wd-main-info-position">
+                <div className="wd-display-inline-block wd-full-height wd-main-info-dims-profile wd-main-info-padding wd-main-info-position">
                     <div className="wd-position-relative">
                         <div className="wd-display-conditional-block wd-username-field-dims wd-fg-color-white wd-font-size-26 wd-bold-font">{profileData.username}</div>
                         <div className="wd-display-conditional-block wd-username-button-position">
@@ -222,15 +222,15 @@ const ProfileScreen = () => {
                         </a>
                     </div>
                 </div>
-            </div>
-            <div className="wd-fg-color-white wd-bottom-border-grey wd-description-info-padding pt-3 pb-3">
-                <div>
-                    <div className="wd-display-conditional-block pe-3">
+                <div className="wd-display-inline-block wd-fg-color-white wd-main-info-position wd-support-info-dims wd-content-section ps-2 pt-2">
+                    <div className="pe-3">
                         <i className="far fa-calendar wd-font-size-16"/>
                         <span className="ps-2 wd-font-size-16">Joined {formatJoinedDate(profileData.joined)}</span>
                     </div>
                     {renderPrivateInfo()}
                 </div>
+            </div>
+            <div className="wd-fg-color-white wd-bottom-border-grey wd-description-info-padding pt-3 pb-3">
                 <div>
                     <div className="wd-bold-font wd-font-size-20">Bio</div>
                     <p className="wd-font-size-18 mb-0">{profileData.bio}</p>
