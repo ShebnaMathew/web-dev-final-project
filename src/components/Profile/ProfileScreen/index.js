@@ -9,6 +9,8 @@ import './profile.css';
 import '../profile-main.css';
 import {Link, useParams} from "react-router-dom";
 import {getProfileAction} from "../../../actions/profile-actions";
+import PostList from "../../NewsFeed/PostList";
+import Post from "../../NewsFeed/Post";
 
 const ProfileScreen = () => {
 
@@ -36,14 +38,25 @@ const ProfileScreen = () => {
     const [showFollow, setShowFollow] = useState(false);
     const [followTitle, setFollowTitle] = useState("followers")
 
+    const [showPost, setShowPost] = useState(false);
+    const [post, setPost] = useState('');
+
     const renderContent = (content) => {
         switch (content) {
             case 'likes':
-                return (<LikedList likes={profileData.likes}/>);
+                return (
+                    <div className="wd-content-section wd-fg-color-white ps-3 pe-3">
+                        <LikedList likes={profileData.likes}/>
+                    </div>
+                );
             case 'music':
-                return (<MusicList music={profileData.music}/>);
+                return (!showPost ? <PostList posts={profileData.music} setShowPost={setShowPost} setPost={setPost}/>: <Post post={post} posts={[...profileData.music]} setShowPost={setShowPost} setPost={setPost}/>);
             default:
-                return (<CommentList comments={profileData.comments}/>)
+                return (
+                    <div className="wd-content-section wd-fg-color-white ps-3 pe-3">
+                        <CommentList comments={profileData.comments}/>
+                    </div>
+                );
         }
     }
 
@@ -230,9 +243,7 @@ const ProfileScreen = () => {
                     {profileData.isArtist && renderNav(content, 'music', 'Music')}
                 </ul>
             </div>
-            <div className="wd-content-section wd-fg-color-white ps-3 pe-3">
-                {renderContent(content)}
-            </div>
+            {renderContent(content)}
         </div>
     );
 }

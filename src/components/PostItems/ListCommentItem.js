@@ -16,7 +16,7 @@ const ListCommentItem = (comment) => {
                 <div>
                     <a href='/' className="wd-post-href">@{commentContent.username}</a>
                 </div>
-                <p className="wd-liked-comment mb-0">
+                <p className="mb-0">
                     {commentContent.comment}
                 </p>
                 <div>

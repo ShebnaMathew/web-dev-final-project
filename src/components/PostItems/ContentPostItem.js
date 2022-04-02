@@ -103,7 +103,7 @@ const ContentPostItem = ({
                 <div>
                     {renderPrimary(item)}
                 </div>
-                <div className="wd-liked-comment">
+                <div>
                     {renderSecondary(item)}
                 </div>
                 <div>
