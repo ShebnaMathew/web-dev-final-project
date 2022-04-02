@@ -5,10 +5,33 @@ import './newsfeed.css';
 
 const PostList = (props) => {
 
-
     return(
         <StackGrid columnWidth={350}>
             {props.posts.map((post) => {
+
+                let artistName = "";
+                switch (post.type) {
+                    case "album":
+                    case "track":
+                        artistName = post.artists[0].name;
+                        break;
+                    case "artist":
+                    case "episode":
+                        artistName = "";
+                        break;
+                    case "playlist":
+                        artistName = post.owner.display_name;
+                        break;
+                    case "show":
+                        artistName = post.publisher;
+                }
+
+                let image = ""
+                if (post.images && post.images.length > 0) {
+                    image = post.images[0].url;
+                } else {
+                    image = "/images/unavailable-image.jpg"
+                }
 
                 return (
                     <div class="card mb-3 me-3 wd-cursor" onClick={() => {
@@ -18,9 +41,9 @@ const PostList = (props) => {
                     }
                     }>
                         
-                        <img src={post.images[1].url} class="card-img-top" alt="..."/> 
+                        <img src={image} class="card-img-top" alt="..."/>
                         <div class="card-body">
-                            <h6>{post.name} - {post.artists[0].name}</h6>
+                            <h6>{post.name} - {artistName}</h6>
                             <p className="mt-3">
                                 <span className="me-2"><i class="far fa-heart"></i></span>
                                 <span className="me-4">{post.reacts && post.reacts.like ? post.reacts.like : 0}</span>

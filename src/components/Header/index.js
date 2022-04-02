@@ -14,8 +14,8 @@ const Header = () => {
     const handleKeypress = async e => {
         if (e.charCode === 13) {
             await searchAction(dispatch, searchString);
+            navigate('/search/' + searchString);
             setSearchString('');
-            navigate('/search/' + e.target.value);
         }
     };
 
