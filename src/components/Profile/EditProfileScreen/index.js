@@ -38,16 +38,21 @@ const EditProfileScreen = () => {
         setShowRegisterArtist(true);
     }
 
+    const setIsArtistWithBool = (boolVal) => {
+        profile.isArtist = boolVal;
+        setIsArtist(boolVal);
+    }
+
     const renderRegisterArtistPopUp = () => {
         if (showRegisterArtist) {
             return (
-                <PopUp title="Register" setShow={setShowRegisterArtist} Content={RegisterArtistPopUp} contentParams={{ _id: user._id, setIsArtist: setIsArtist}}/>
+                <PopUp title="Register" setShow={setShowRegisterArtist} Content={RegisterArtistPopUp} contentParams={{ _id: profile._id, setIsArtist: setIsArtistWithBool}}/>
             )
         }
     }
 
     const renderRegisterArtistButton = () => {
-        if (!isArtist) {
+        if (profileData.isArtist ? !profileData.isArtist : isArtist) {
             return(
                 <div className="pb-2">
                     <button onClick={() => showRegisterArtistPopUp()} className="btn btn-secondary wd-edit-profile-register-button">Register as Artist</button>
@@ -60,16 +65,21 @@ const EditProfileScreen = () => {
         setShowRegisterAdmin(true);
     }
 
+    const setIsAdminWithBool = (boolVal) => {
+        profile.isAdmin = boolVal;
+        setIsAdmin(boolVal);
+    }
+
     const renderRegisterAdminPopUp = () => {
         if (showRegisterAdmin) {
             return (
-                <PopUp title="Register" setShow={setShowRegisterAdmin} Content={RegisterAdminPopUp} contentParams={{_id: user._id, setIsAdmin: setIsAdmin}}/>
+                <PopUp title="Register" setShow={setShowRegisterAdmin} Content={RegisterAdminPopUp} contentParams={{_id: profile._id, setIsAdmin: setIsAdminWithBool}}/>
             )
         }
     }
 
     const renderRegisterAdminButton = () => {
-        if (!isAdmin) {
+        if (profileData.isAdmin ? !profileData.isAdmin : isAdmin) {
             return(
                 <div>
                     <button onClick={() => showRegisterAdminPopUp()} className="btn btn-secondary wd-edit-profile-register-button">Register as Admin</button>
@@ -98,7 +108,7 @@ const EditProfileScreen = () => {
                         <Link to="/profile"
                               onClick={() => saveProfileDataAction(dispatch, {
                                   ...profile
-                              })}
+                              }, profile._id)}
                               className="btn btn-secondary wd-edit-profile-header-button wd-edit-profile-button-display me-4">
                             Save Changes
                         </Link>
