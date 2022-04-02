@@ -2,11 +2,6 @@
     height: 30px;
     width: 155px;
     line-height: 1.1!important;
-    background-color: white!important;
-}
-
-.wd-edit-profile-header-button:hover {
-    background-color: lightgrey!important;
 }
 
 .wd-edit-profile-text-entry {
@@ -89,7 +84,6 @@
     height: 30px;
     line-height: 1;
     left: calc(50% - 80px);
-    background-color: white;
 }
 
 .wd-main-info-dims {

@@ -14,11 +14,6 @@
 .wd-username-button {
     height: 30px;
     line-height: 1.1!important;
-    background-color: white!important;
-}
-
-.wd-username-button:hover {
-    background-color: lightgrey!important;
 }
 
 .wd-nav-link-button {

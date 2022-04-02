@@ -124,15 +124,15 @@ const ProfileScreen = () => {
 
     const renderMainInfoButton = () => {
         if (isCurrentUser) {
-            return (<Link to="/editProfile" className="btn btn-dark wd-username-button">Edit Profile</Link>)
+            return (<Link to="/editProfile" className="btn btn-secondary wd-username-button">Edit Profile</Link>)
         }
         else if (isFollowing) {
             return (
-                <button className="btn btn-dark wd-username-button">Unfollow</button>
+                <button className="btn btn-secondary wd-username-button">Unfollow</button>
             );
         } else {
             return (
-                <button className="btn btn-dark wd-username-button">Follow</button>
+                <button className="btn btn-secondary wd-username-button">Follow</button>
             );
         }
     }

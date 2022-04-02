@@ -50,7 +50,7 @@ const EditProfileScreen = () => {
         if (!isArtist) {
             return(
                 <div className="pb-2">
-                    <button onClick={() => showRegisterArtistPopUp()} className="btn btn-dark wd-edit-profile-register-button">Register as Artist</button>
+                    <button onClick={() => showRegisterArtistPopUp()} className="btn btn-secondary wd-edit-profile-register-button">Register as Artist</button>
                 </div>
             );
         }
@@ -72,7 +72,7 @@ const EditProfileScreen = () => {
         if (!isAdmin) {
             return(
                 <div>
-                    <button onClick={() => showRegisterAdminPopUp()} className="btn btn-dark wd-edit-profile-register-button">Register as Admin</button>
+                    <button onClick={() => showRegisterAdminPopUp()} className="btn btn-secondary wd-edit-profile-register-button">Register as Admin</button>
                 </div>
             );
         }
@@ -99,10 +99,10 @@ const EditProfileScreen = () => {
                               onClick={() => saveProfileDataAction(dispatch, {
                                   ...profile
                               })}
-                              className="btn btn-dark wd-edit-profile-header-button wd-edit-profile-button-display me-4">
+                              className="btn btn-secondary wd-edit-profile-header-button wd-edit-profile-button-display me-4">
                             Save Changes
                         </Link>
-                        <Link to="/profile" className="btn btn-dark wd-edit-profile-header-button wd-edit-profile-button-display">
+                        <Link to="/profile" className="btn btn-secondary wd-edit-profile-header-button wd-edit-profile-button-display">
                             Discard Changes
                         </Link>
                     </div>
