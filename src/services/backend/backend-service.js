@@ -9,7 +9,7 @@ const backendHost = "http://localhost:4000"
 
 const login = async (username, password) => {
     const body = {username: username, password: password}
-    const response = await api.post(backendHost + '/login', body);
+    const response = await api.post(backendHost + '/profile/login', body);
     return response.data;
 }
 
@@ -24,7 +24,7 @@ const getProfile = async (id) => {
 
 const registerAdmin = async (key) => {
     let error = false;
-    await api.post(backendHost + '/profile/register', {key: key}).catch(err => error = true)
+    await api.post(backendHost + '/profile/admin', {key: key}).catch(err => error = true)
 
     return !error;
 }

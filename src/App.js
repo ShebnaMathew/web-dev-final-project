@@ -44,7 +44,7 @@ function App() {
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/profile/:_id" element={<Profile/>}/>
                         <Route path="/editProfile" element={<EditProfile/>}/>
-                        <Route path="/search" element={<SearchScreen/>}/> {/* can show a blank no results page once things are set up - or just remove this path?*/}
+                        {/*<Route path="/search" element={<SearchScreen/>}/> /!* can show a blank no results page once things are set up - or just remove this path?*!/*/}
                         <Route path="/search/:query" element={<SearchScreen/>}/> {/* show results for a specific query*/}
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<SignUp/>}/>
