@@ -7,6 +7,19 @@ const api = axios.create({
 
 const backendHost = "http://localhost:4000"
 
+const getUser = async () => {
+    const response = await api.get(backendHost + '/profile');
+    return response.data;
+}
+
+const createUser = async (userData) => {
+    const response = await api.post(backendHost + '/profile', userData);
+    return {
+        status: response.status,
+        profileData: response.body
+    };
+}
+
 const login = async (username, password) => {
     const body = {username: username, password: password}
     const response = await api.post(backendHost + '/profile/login', body);
@@ -30,6 +43,8 @@ const registerAdmin = async (key) => {
 }
 
 export {
+    getUser,
+    createUser,
     login,
     getProfile,
     updateUserProfile,

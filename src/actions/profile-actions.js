@@ -1,10 +1,28 @@
 // get profile of logged in user
-import {getProfile, login, updateUserProfile} from "../services/backend/backend-service";
+import {createUser, getProfile, login, updateUserProfile, getUser} from "../services/backend/backend-service";
+
+export const SET_USER = "set-user";
+export const SET_PROFILE_DATA = "set-profile-data";
+export const SAVE_PROFILE_DATA = "save-profile-data";
+
+export const getCurrentUserAction = async (dispatch) => {
+    const userData = await getUser();
+    dispatch({
+        type: SET_USER,
+        data: userData
+    })
+}
+
+export const createProfileAction = async (dispatch, userData) => {
+    const response = await createUser(userData);
+    await getCurrentUserAction(dispatch);
+    return response;
+}
 
 export const loginAction = async (dispatch, username, password) => {
     const userData = await login(username, password);
     dispatch({
-        type: "set-user",
+        type: SET_USER,
         data: userData
     })
 }
@@ -13,7 +31,7 @@ export const getProfileAction = async (dispatch, id) => {
     const profile = await getProfile(id);
     console.log('setting profile')
     dispatch({
-        type: "set-profile-data",
+        type: SET_PROFILE_DATA,
         userProfile: profile
     });
 }
@@ -21,7 +39,7 @@ export const getProfileAction = async (dispatch, id) => {
 export const saveProfileDataAction = async (dispatch, newProfileData, id) => {
     await updateUserProfile(newProfileData, id)
     dispatch({
-        type: "save-profile-data",
+        type: SAVE_PROFILE_DATA,
         data: newProfileData
     })
 }

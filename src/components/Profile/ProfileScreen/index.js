@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import CommentList from "../../Lists/CommentList";
 import LikedList from "../../Lists/LikedList";
-import MusicList from "../../Lists/MusicList";
 import PopUp from "../../PopUp/PopUp";
 import {useDispatch, useSelector} from "react-redux";
 import FollowPopUpList from "../../PopUp/FollowPopUp";
@@ -20,6 +19,7 @@ const ProfileScreen = () => {
     // fetch from session
     let { _id } = useParams();
     const user = useSelector((state) => state.user);
+    console.log(user)
 
     // if _id is undefined, is root profile
     let isCurrentUser = false;
@@ -219,6 +219,9 @@ const ProfileScreen = () => {
                     <img className="img wd-profile-picture-dims wd-circle-image" src={profileData.profilePicture} alt=""/>
                 </div>
                 <div className="wd-display-inline-block wd-full-height wd-main-info-dims-profile wd-main-info-padding wd-main-info-position">
+                    {!profileData.website &&
+                        <div className="wd-missing-website-margin"/>
+                    }
                     <div className="wd-position-relative">
                         <div className="wd-display-conditional-block wd-username-field-dims wd-fg-color-white wd-font-size-26 wd-bold-font">{profileData.username}</div>
                         <div className="wd-display-conditional-block wd-username-button-position">
@@ -240,10 +243,13 @@ const ProfileScreen = () => {
                         </div>
                     </div>
                     <div>
-                        <a href={"https://" + profileData.website} rel="noreferrer" target="_blank" className="wd-fg-color-white wd-font-size-20 wd-hide wd-website-link">
-                            <i className="fa fa-link me-2"/>
-                            {profileData.website}
-                        </a>
+                        {profileData.website &&
+                            <a href={"https://" + profileData.website} rel="noreferrer" target="_blank" className="wd-fg-color-white wd-font-size-20 wd-hide wd-website-link">
+                                <i className="fa fa-link me-2"/>
+                                {profileData.website}
+                            </a>
+                        }
+
                     </div>
                 </div>
                 <div className="wd-inline-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-1 pb-2">
@@ -254,10 +260,12 @@ const ProfileScreen = () => {
                 {renderUserInfo()}
             </div>
             <div className="wd-fg-color-white wd-profile-header-info-max-width wd-center-main-info-wide wd-bottom-border-grey wd-description-info-padding pt-3 pb-3">
-                <div>
-                    <div className="wd-bold-font wd-font-size-20">Bio</div>
-                    <p className="wd-font-size-18 mb-0">{profileData.bio}</p>
-                </div>
+                {profileData.bio &&
+                    <div>
+                        <div className="wd-bold-font wd-font-size-20">Bio</div>
+                        <p className="wd-font-size-18 mb-0">{profileData.bio}</p>
+                    </div>
+                }
             </div>
             <div className="mt-3">
                 <ul className="nav justify-content-center">

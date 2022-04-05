@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {searchAction} from "../../actions/search-actions";
 
 const Header = () => {
 
     const [searchString, setSearchString] = useState('');
+
+    const user = useSelector((state) => state.user)
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -17,6 +19,10 @@ const Header = () => {
             setSearchString('');
         }
     };
+
+    const logout = () => {
+        console.log("I'll log people out, one day")
+    }
 
     return(
         <nav className="navbar navbar-dark bg-dark fixed-top">
@@ -32,10 +38,19 @@ const Header = () => {
                            value={searchString}
                     />
                 </div>
-                <div className="d-flex ms-auto">
-                    <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/login')}>Login</button>
-                    <button className="btn btn-secondary" type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
-                </div>
+                {!user &&
+                    <div className="d-flex ms-auto">
+                        <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/login')}>Login</button>
+                        <button className="btn btn-secondary" type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
+                    </div>
+                }
+                {user &&
+                    <div className="d-flex ms-auto">
+                        <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/profile')}>Profile</button>
+                        <button className="btn btn-secondary" type="submit" onClick={() => logout()}>Log Out</button>
+                    </div>
+                }
+
             </div>
         </nav>
     )

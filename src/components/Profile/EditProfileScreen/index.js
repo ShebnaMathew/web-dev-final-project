@@ -30,6 +30,8 @@ const EditProfileScreen = () => {
         setIsAdmin(profileData.isAdmin);
     }
 
+    console.log(profile)
+
     // force wait on render for edit profile
     // prevents users from attempting to access and edit profile that does not belong to them
     if (!profile._id) {

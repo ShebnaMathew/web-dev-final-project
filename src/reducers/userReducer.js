@@ -1,6 +1,8 @@
+import {SET_USER} from "../actions/profile-actions";
+
 const userReducer = (state = {}, action) => {
     switch(action.type) {
-        case "set-user":
+        case SET_USER:
             return {
                 ...state,
                 ...action.data
