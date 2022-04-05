@@ -4,6 +4,7 @@ import {createUser, getProfile, login, updateUserProfile, getUser, logout} from 
 export const SET_USER = "set-user";
 export const SET_PROFILE_DATA = "set-profile-data";
 export const SAVE_PROFILE_DATA = "save-profile-data";
+export const RESET_USER = "reset-user";
 
 export const getCurrentUserAction = async (dispatch) => {
     const userData = await getUser();
@@ -16,11 +17,11 @@ export const getCurrentUserAction = async (dispatch) => {
 
 export const createProfileAction = async (dispatch, userData) => {
     const response = await createUser(userData);
-    if (response.status !== 200) {
+    if (response !== 200) {
         return response.status;
     }
     await getCurrentUserAction(dispatch);
-    return response.status;
+    return response;
 }
 
 export const loginAction = async (dispatch, email, password) => {
@@ -34,9 +35,9 @@ export const loginAction = async (dispatch, email, password) => {
 
 export const logoutAction = async (dispatch) => {
     await logout();
+    console.log('setting user to null')
     dispatch({
-        type: SET_USER,
-        data: {}
+        type: RESET_USER
     })
 }
 

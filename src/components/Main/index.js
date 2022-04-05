@@ -12,17 +12,7 @@ const MainScreen = () => {
 
     return(
         <>
-            <div className="row mb-3 mt-5 pt-3">
-                <div>
-                    {/*dispatch on id per click*/}
-                    <Link to="/profile">User Profile</Link>
-                    <span> | </span>
-                    <Link to={'/profile/124'}>External Profile</Link>
-                    <span> | </span>
-                    <Link to="/search">Search</Link>
-                    <br/>
-                </div>
-            </div>
+            <div className="wd-header-buffer"/>
             <Outlet/>
         </>
     )
