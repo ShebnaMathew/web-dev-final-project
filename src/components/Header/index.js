@@ -9,21 +9,18 @@ const Header = () => {
     const [searchString, setSearchString] = useState('');
 
     const user = useSelector((state) => state.user)
-    console.log(user)
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleKeypress = async e => {
         if (e.charCode === 13) {
-            await searchAction(dispatch, searchString);
             navigate('/search/' + searchString);
             setSearchString('');
         }
     };
 
     const logout = async () => {
-        console.log("logging out")
         await logoutAction(dispatch);
         navigate('/');
     }
@@ -31,7 +28,7 @@ const Header = () => {
     return(
         <nav className="navbar navbar-dark bg-dark fixed-top">
             <div className="container-fluid">
-                <a href="#" className="navbar-brand" onClick={() => navigate('/')}>I'm the header</a>
+                <a href="#" className="navbar-brand wd-bold-italtics" onClick={() => navigate('/')}>Commentify</a>
                 <div className="d-flex wd-header-center">
                     <input onChange={(event) => setSearchString(event.target.value)}
                            onKeyPress={(e) => handleKeypress(e)}

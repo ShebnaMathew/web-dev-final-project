@@ -19,7 +19,6 @@ const ProfileScreen = () => {
     // fetch from session
     let { _id } = useParams();
     const user = useSelector((state) => state.user);
-    console.log(user)
 
     // if _id is undefined, is root profile
     let isCurrentUser = false;

@@ -28,7 +28,7 @@
 }
 
 .wd-post-overflow {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .wd-post-max-height {

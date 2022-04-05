@@ -8,7 +8,6 @@ export const RESET_USER = "reset-user";
 
 export const getCurrentUserAction = async (dispatch) => {
     const userData = await getUser();
-    console.log(userData)
     dispatch({
         type: SET_USER,
         data: userData
@@ -35,7 +34,6 @@ export const loginAction = async (dispatch, email, password) => {
 
 export const logoutAction = async (dispatch) => {
     await logout();
-    console.log('setting user to null')
     dispatch({
         type: RESET_USER
     })
@@ -43,7 +41,6 @@ export const logoutAction = async (dispatch) => {
 
 export const getProfileAction = async (dispatch, id) => {
     const profile = await getProfile(id);
-    console.log('setting profile')
     dispatch({
         type: SET_PROFILE_DATA,
         userProfile: profile

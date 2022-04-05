@@ -14,7 +14,7 @@ const NewsFeed = () => {
 
     useEffect(() => {
         searchNewMusicAction(dispatch);
-    }, [])
+    }, [dispatch])
 
     const recentPosts = aggregateSearchResults(news);
 

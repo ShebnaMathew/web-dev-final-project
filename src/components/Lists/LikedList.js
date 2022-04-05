@@ -6,7 +6,7 @@ const LikedList = (likes = {likes:[]}) => {
     const likeContent = likes.likes;
     return(
         <>
-            {
+            { (likeContent !== undefined && likeContent.length > 0) &&
                 likeContent.map((content) => {
                     if (content.contentType === "comment") {
                         return <ListCommentItem key={content.id} comment={content}/>
@@ -14,6 +14,10 @@ const LikedList = (likes = {likes:[]}) => {
                         return <ContentPostItem key={content.id} item={content}/>
                     }
                 })
+            }
+            {
+                (likeContent !== undefined && likeContent.length === 0) &&
+                <div className="wd-empty-list">No likes... yet!!</div>
             }
         </>
     )
