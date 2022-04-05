@@ -39,7 +39,6 @@ export const search = async (searchString) => {
     }
 
     const response = await axios.get(fullUrl, config);
-    console.log(response.data)
     return response.data;
 }
 

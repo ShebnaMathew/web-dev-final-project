@@ -7,6 +7,7 @@ export const searchAction = async (dispatch, searchString) => {
     }
     dispatch({
         type: "update-search-results",
+        query: searchString,
         results: results
     })
 }

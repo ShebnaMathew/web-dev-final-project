@@ -41,7 +41,7 @@ const PostList = (props) => {
                     }
                     }>
                         
-                        <img src={image} className="card-img-top" alt="..."/>
+                        <img src={image} className="card-img-top wd-image-size" alt="..."/>
                         <div className="card-body">
                             <h6>{post.name} - {artistName}</h6>
                             <p className="mt-3">
