@@ -14,16 +14,17 @@ const getUser = async () => {
 
 const createUser = async (userData) => {
     const response = await api.post(backendHost + '/profile', userData);
-    return {
-        status: response.status,
-        profileData: response.body
-    };
+    return response.status;
 }
 
-const login = async (username, password) => {
-    const body = {username: username, password: password}
+const login = async (email, password) => {
+    const body = {email: email, password: password}
     const response = await api.post(backendHost + '/profile/login', body);
-    return response.data;
+    return response.status;
+}
+
+const logout = async () => {
+    await api.post(backendHost + '/profile/logout');
 }
 
 const updateUserProfile = async (updatedProfileInfo, id) => {
@@ -46,6 +47,7 @@ export {
     getUser,
     createUser,
     login,
+    logout,
     getProfile,
     updateUserProfile,
     registerAdmin

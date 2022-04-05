@@ -2,12 +2,14 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {searchAction} from "../../actions/search-actions";
+import {logoutAction} from "../../actions/profile-actions";
 
 const Header = () => {
 
     const [searchString, setSearchString] = useState('');
 
     const user = useSelector((state) => state.user)
+    console.log(user)
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -20,8 +22,10 @@ const Header = () => {
         }
     };
 
-    const logout = () => {
-        console.log("I'll log people out, one day")
+    const logout = async () => {
+        console.log("logging out")
+        await logoutAction(dispatch);
+        navigate('/');
     }
 
     return(
@@ -38,13 +42,13 @@ const Header = () => {
                            value={searchString}
                     />
                 </div>
-                {!user &&
+                {!user || !user._id &&
                     <div className="d-flex ms-auto">
                         <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/login')}>Login</button>
                         <button className="btn btn-secondary" type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
                     </div>
                 }
-                {user &&
+                {(user && user._id) &&
                     <div className="d-flex ms-auto">
                         <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/profile')}>Profile</button>
                         <button className="btn btn-secondary" type="submit" onClick={() => logout()}>Log Out</button>
