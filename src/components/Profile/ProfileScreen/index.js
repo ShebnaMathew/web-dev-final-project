@@ -137,6 +137,30 @@ const ProfileScreen = () => {
         }
     }
 
+    const renderUserInfo = () => {
+        return (
+            <>
+                <div className="pe-3">
+                    <i className="far fa-calendar wd-font-size-16"/>
+                    <span className="ps-2 wd-font-size-16">Joined {formatJoinedDate(profileData.joined)}</span>
+                </div>
+                {renderPrivateInfo()}
+                {profileData.isAdmin &&
+                    <div>
+                        <i className="fa fa-user-cog wd-font-size-16"/>
+                        <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Admin</span>
+                    </div>
+                }
+                {profileData.isArtist &&
+                    <div>
+                        <i className="fa fa-guitar wd-font-size-16"/>
+                        <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Verified Artist</span>
+                    </div>
+                }
+            </>
+        );
+    }
+
     const determineMonth = (month) => {
         const numericMonth = parseInt(month);
         switch (numericMonth) {
@@ -222,33 +246,12 @@ const ProfileScreen = () => {
                         </a>
                     </div>
                 </div>
-                <div
-                    className="wd-inline-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2">
-                    <div className="pe-3">
-                        <i className="far fa-calendar wd-font-size-16"/>
-                        <span className="ps-2 wd-font-size-16">Joined {formatJoinedDate(profileData.joined)}</span>
-                    </div>
-                    {renderPrivateInfo()}
-                    {profileData.isAdmin &&
-                        <div>
-                            <i className="fa fa-user-cog wd-font-size-16"/>
-                            <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Admin</span>
-                        </div>
-                    }
+                <div className="wd-inline-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-1 pb-2">
+                    {renderUserInfo()}
                 </div>
             </div>
             <div className="wd-block-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2 mt-3">
-                <div className="pe-3">
-                    <i className="far fa-calendar wd-font-size-16"/>
-                    <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Joined {formatJoinedDate(profileData.joined)}</span>
-                </div>
-                {renderPrivateInfo()}
-                {profileData.isAdmin &&
-                    <div>
-                        <i className="fa fa-user-cog wd-font-size-16"/>
-                        <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Admin</span>
-                    </div>
-                }
+                {renderUserInfo()}
             </div>
             <div className="wd-fg-color-white wd-profile-header-info-max-width wd-center-main-info-wide wd-bottom-border-grey wd-description-info-padding pt-3 pb-3">
                 <div>
