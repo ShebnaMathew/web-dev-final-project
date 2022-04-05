@@ -6,27 +6,29 @@ import PostList from "../NewsFeed/PostList";
 import Post from "../NewsFeed/Post";
 import {useParams} from "react-router-dom";
 import {search} from "../../services/spotify/spotify-service";
+import {searchAction} from "../../actions/search-actions";
+import {useDispatch, useSelector} from "react-redux";
 
 const SearchScreen = () => {
 
     const params = useParams()
-    const [results, setResults] = useState({})
+    const dispatch = useDispatch();
+
+    const results = useSelector((state) => state.searchResults);
+
     const [showPost, setShowPost] = useState(false);
     const [post, setPost] = useState('');
     const [ready, setReady] = useState(false);
 
     const query = params.query;
-
+    
     const aggregatedResults = aggregateSearchResults(results);
 
     useEffect(async () => {
         setReady(false);
-        const res = await search(query);
-        setResults(res)
-        setReady(true)
-    }, [query])
-
-
+        await searchAction(dispatch, query);
+        setReady(true);
+    }, [query, dispatch])
 
     return(
         <>
