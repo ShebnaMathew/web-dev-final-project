@@ -5,7 +5,6 @@ import {aggregateSearchResults} from "../../util/AggregateUtil";
 import PostList from "../NewsFeed/PostList";
 import Post from "../NewsFeed/Post";
 import {useParams} from "react-router-dom";
-import {search} from "../../services/spotify/spotify-service";
 import {searchAction} from "../../actions/search-actions";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -21,7 +20,7 @@ const SearchScreen = () => {
     const [ready, setReady] = useState(false);
 
     const query = params.query;
-    
+
     const aggregatedResults = aggregateSearchResults(results);
 
     useEffect(async () => {
