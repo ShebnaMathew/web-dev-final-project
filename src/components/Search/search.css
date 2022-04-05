@@ -3,3 +3,9 @@
     font-weight: bold;
     font-size: 32px;
 }
+
+.wd-spinner-pos {
+    position: relative;
+    top: 50px;
+    left: calc(50% - 25px);
+}

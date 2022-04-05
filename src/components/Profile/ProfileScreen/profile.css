@@ -137,6 +137,10 @@
         position: relative;
         top: calc(50% - 50px);
     }
+
+    .wd-missing-website-margin {
+        margin-top: 1rem;
+    }
 }
 
 @media (max-width: 767px) {

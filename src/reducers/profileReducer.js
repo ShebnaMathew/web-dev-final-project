@@ -1,11 +1,13 @@
+import {SAVE_PROFILE_DATA, SET_PROFILE_DATA} from "../actions/profile-actions";
+
 const profileReducer = (state = {}, action) => {
     switch(action.type) {
-        case "save-profile-data":
+        case SAVE_PROFILE_DATA:
             return {
                 ...state,
                 ...action.data
             }
-        case "set-profile-data":
+        case SET_PROFILE_DATA:
             return {
                 ...action.userProfile
             };

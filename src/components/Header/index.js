@@ -1,27 +1,33 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {searchAction} from "../../actions/search-actions";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutAction} from "../../actions/profile-actions";
 
 const Header = () => {
 
     const [searchString, setSearchString] = useState('');
+
+    const user = useSelector((state) => state.user)
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleKeypress = async e => {
         if (e.charCode === 13) {
-            await searchAction(dispatch, searchString);
             navigate('/search/' + searchString);
             setSearchString('');
         }
     };
 
+    const logout = async () => {
+        await logoutAction(dispatch);
+        navigate('/');
+    }
+
     return(
         <nav className="navbar navbar-dark bg-dark fixed-top">
             <div className="container-fluid">
-                <a href="#" className="navbar-brand" onClick={() => navigate('/')}>I'm the header</a>
+                <a href="#" className="navbar-brand wd-bold-italtics" onClick={() => navigate('/')}>Commentify</a>
                 <div className="d-flex wd-header-center">
                     <input onChange={(event) => setSearchString(event.target.value)}
                            onKeyPress={(e) => handleKeypress(e)}
@@ -32,10 +38,19 @@ const Header = () => {
                            value={searchString}
                     />
                 </div>
-                <div className="d-flex ms-auto">
-                    <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/login')}>Login</button>
-                    <button className="btn btn-secondary" type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
-                </div>
+                {!user || !user._id &&
+                    <div className="d-flex ms-auto">
+                        <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/login')}>Login</button>
+                        <button className="btn btn-secondary" type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
+                    </div>
+                }
+                {(user && user._id) &&
+                    <div className="d-flex ms-auto">
+                        <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/profile')}>Profile</button>
+                        <button className="btn btn-secondary" type="submit" onClick={() => logout()}>Log Out</button>
+                    </div>
+                }
+
             </div>
         </nav>
     )
