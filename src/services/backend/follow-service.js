@@ -7,12 +7,22 @@ const api = axios.create({
 
 const backendHost = "http://localhost:4000"
 
-const addFollow = async (follower, followee) => {
-    await api.post(backendHost + '/profile/' + followee + '/follow/' + follower);
+const addFollow = async (follower_id, follower_name, followee_id, followee_name) => {
+    await api.post(backendHost + '/profile/follow', {
+        follower_id,
+        follower_name,
+        followee_id,
+        followee_name
+    });
 }
 
-const removeFollow = async (follower, followee) => {
-    await api.delete(backendHost + '/profile/' + followee + '/follow/' + follower);
+const removeFollow = async (follower_id, followee_id) => {
+    await api.delete(backendHost + '/profile/follow', {
+        data: {
+            follower_id,
+            followee_id
+        }
+    });
 }
 
 const getFollowers = async (userId) => {

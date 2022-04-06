@@ -2,24 +2,21 @@ import React from "react";
 import FollowPopupListItem from "./FollowPopUpListItem";
 
 const FollowPopUpList = ({
-    setShowFollow
+    setShowFollow,
+    followers,
+    following,
 }) => {
     return(
         <>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
-            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            { followers ?
+                followers.map(follow => {
+                    return <FollowPopupListItem setShowFollow={setShowFollow} name={follow.follower_name} id={follow.follower_id}/>
+                })
+                :
+                following.map(follow => {
+                    return <FollowPopupListItem setShowFollow={setShowFollow} name={follow.followee_name} id={follow.followee_id}/>
+                })
+            }
         </>
     )
 }

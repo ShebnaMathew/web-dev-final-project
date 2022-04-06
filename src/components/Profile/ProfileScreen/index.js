@@ -28,7 +28,6 @@ const ProfileScreen = () => {
         isCurrentUser = true;
     }
 
-
     useEffect(() => {
         if (_id !== undefined) {
             getProfileAction(dispatch, _id)
@@ -105,11 +104,11 @@ const ProfileScreen = () => {
         if (showFollow) {
             if (followTitle === "followers") {
                 return (
-                    <PopUp title="Followers" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow}}/>
+                    <PopUp title="Followers" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow, followers: profileData.followers}}/>
                 );
             } else if (followTitle === "following") {
                 return (
-                    <PopUp title="Following" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow}}/>
+                    <PopUp title="Following" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow, following: profileData.following}}/>
                 );
             }
         }
@@ -137,7 +136,7 @@ const ProfileScreen = () => {
     }
 
     const addFollow = async () => {
-        await addFollowAction(dispatch, user._id, profileData._id);
+        await addFollowAction(dispatch, user._id, user.username, profileData._id, profileData.username);
         setIsFollowing(true);
     }
 
