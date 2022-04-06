@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {loginAction} from "../../actions/profile-actions";
 
-const Login = () => {
+const Login = (props) => {
 
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -14,6 +14,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    
 
     const login = async () => {
         const response = await loginAction(dispatch, username, password)
@@ -27,10 +28,11 @@ const Login = () => {
     }
 
     return (
-            <div className="col bg-dark text-black fontFamily p-5 pt-2 pb-3">
+        <div className="row justify-content-md-center mt-4 ms-5">
+            <div className="col-4 bg-dark text-black fontFamily p-5 pt-2 pb-3 wd-round-corners">
                 <div>
                     <div className="d-flex justify-content-center">
-                        <img width="150px" height="150px" src="/images/music_logo.png"/>
+                        <img width="150px" height="150px" src="/images/headphones-logo.png"/>
                     </div>
                     <h1 className="d-flex justify-content-center text-black">Login</h1>
                 </div>
@@ -62,8 +64,19 @@ const Login = () => {
                         </span>
                     </div>
                     <button type="button" onClick={() => login()} className="btn w-100 btn-success btn-lg mt-2 ">Login</button>
-
+                    <span className="d-flex justify-content-center mt-3">
+                        Don't have an account?
+                        <Link className="text-black" to="/signup">
+                            <span className="ms-2 text-black">Sign up</span>
+                        </Link>
+                    </span>
+                    <span className="d-flex justify-content-center mt-3">
+                        <Link className="text-black" to="/">
+                            <span className="ms-2 text-black">Continue without signing in</span>
+                        </Link>
+                    </span>
                 </div>
+            </div>
             </div>
     )
 }

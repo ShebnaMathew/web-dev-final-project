@@ -1,12 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import PostList from "./PostList";
-
 
 const Post = (props) => {
     const post = props.post;
-    console.log("post idx: ", post.idx)
-    console.log("posts: ", props.posts)
-    console.log("posts slice: ", props.posts.splice(post.idx+1,3))
+
+    // console.log("post idx: ", post.idx)
+    // console.log("posts: ", props.posts)
+    // console.log("posts slice: ", props.posts.splice(post.idx+1,3))
 
     const morePosts = props.posts.sort(() => .5 - Math.random()).slice(0, 3)
 
@@ -14,7 +13,7 @@ const Post = (props) => {
         <>
         <div className="row mb-5 mt-5">
             <div className="col-1">
-                <button className="btn btn-light wd-round-btn wd-shadow" onClick={() => {
+                <button className="btn btn-dark wd-round-btn" onClick={() => {
                         props.setPost('');
                         props.setShowPost(false);
                     }}><i class="fas fa-angle-left"/></button>
