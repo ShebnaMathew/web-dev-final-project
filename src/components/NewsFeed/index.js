@@ -1,10 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {searchNewMusicAction} from "../../actions/search-actions";
 import {aggregateSearchResults} from "../../util/AggregateUtil";
-import { useState } from "react";
 import Post from "./Post";
 import PostList from "./PostList";
+import './newsfeed.css';
 
 const NewsFeed = () => {
 
@@ -21,9 +21,9 @@ const NewsFeed = () => {
     const [showPost, setShowPost] = useState(false);
     const [post, setPost] = useState('');
 
-    console.log("showPost: ", showPost);
-    console.log("post Id: ", post);
-    console.log("posstss: ", recentPosts);
+    // console.log("showPost: ", showPost);
+    // console.log("post Id: ", post);
+    // console.log("posstss: ", recentPosts);
 
     return(
         (!showPost) ? <PostList posts={recentPosts} setShowPost={setShowPost} setPost={setPost}/>: <Post post={post} posts={[...recentPosts]} setShowPost={setShowPost} setPost={setPost}/>

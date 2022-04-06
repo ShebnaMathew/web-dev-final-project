@@ -34,7 +34,22 @@
     text-align: center;
 }
 
-.wd-bold-italtics {
-    font-style: italic;
+.wd-bold {
     font-weight: bold;
+}
+
+.wd-font-size {
+    font-size: x-large;
+}
+
+.wd-font-family {
+    font-family: 'Geneva', 'Verdana', 'Trebuchet MS', sans-serif;
+}
+
+.wd-blur {
+    filter: blur(2px);
+}
+
+.wd-pointer-events-none {
+    pointer-events: none;
 }

@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react"; 
+import React from "react"; 
 import StackGrid from "react-stack-grid";
-import './newsfeed.css';
-//import { Collapse } from bootstrap;
 
 const PostList = (props) => {
 
