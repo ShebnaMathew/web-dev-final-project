@@ -7,32 +7,12 @@ const api = axios.create({
 
 const backendHost = "http://localhost:4000"
 
-const addFollower = async (follower, followee) => {
-    await api.post(backendHost + '/profile/follower', {
-        follower,
-        followee
-    });
+const addFollow = async (follower, followee) => {
+    await api.post(backendHost + '/profile/' + followee + '/follow/' + follower);
 }
 
-const removeFollower = async (follower, followee) => {
-    await api.delete(backendHost + '/profile/follower', {
-        follower,
-        followee
-    });
-}
-
-const addFollowee = async (follower, followee) => {
-    await api.post(backendHost + '/profile/followee', {
-        follower,
-        followee
-    });
-}
-
-const removeFollowee = async (follower, followee) => {
-    await api.delete(backendHost + '/profile/followee', {
-        follower,
-        followee
-    });
+const removeFollow = async (follower, followee) => {
+    await api.delete(backendHost + '/profile/' + followee + '/follow/' + follower);
 }
 
 const getFollowers = async (userId) => {
@@ -44,10 +24,8 @@ const getFollowing = async (userId) => {
 }
 
 export {
-    addFollower,
-    removeFollower,
-    addFollowee,
-    removeFollowee,
+    addFollow,
+    removeFollow,
     getFollowers,
     getFollowing
 };

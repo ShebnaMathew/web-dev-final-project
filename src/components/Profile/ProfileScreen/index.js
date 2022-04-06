@@ -7,9 +7,10 @@ import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
 import '../profile-main.css';
 import {Link, useParams} from "react-router-dom";
-import {getProfileAction, saveProfileDataAction} from "../../../actions/profile-actions";
+import {getProfileAction} from "../../../actions/profile-actions";
 import PostList from "../../NewsFeed/PostList";
 import Post from "../../NewsFeed/Post";
+import {addFollowAction, removeFollowAction} from "../../../actions/follow-actions";
 
 const ProfileScreen = () => {
 
@@ -36,8 +37,17 @@ const ProfileScreen = () => {
 
     const profileData = useSelector((state) => state.profile);
 
-    const isFollowing = false;
+    let currFollow = false;
+    if (!isCurrentUser && profileData.followers) {
+        for(const f of profileData.followers) {
+            if (f.follower_id === user._id) {
+                currFollow = true;
+                break;
+            }
+        }
+    }
 
+    const [isFollowing, setIsFollowing] = useState(currFollow);
     const [content, setContent] = useState('comments');
     const [showFollow, setShowFollow] = useState(false);
     const [followTitle, setFollowTitle] = useState("followers")
@@ -126,26 +136,29 @@ const ProfileScreen = () => {
         }
     }
 
+    const addFollow = async () => {
+        await addFollowAction(dispatch, user._id, profileData._id);
+        setIsFollowing(true);
+    }
+
+    const removeFollow = async () => {
+        await removeFollowAction(dispatch, user._id, profileData._id);
+        setIsFollowing(false);
+    }
+
     const renderMainInfoButton = () => {
         if (isCurrentUser) {
             return (<Link to="/editProfile" className="btn btn-secondary wd-username-button">Edit Profile</Link>)
         }
         else if (isFollowing) {
             return (
-                <button className="btn btn-secondary wd-username-button">Unfollow</button>
+                <button onClick={() => removeFollow()} className="btn btn-secondary wd-username-button">Unfollow</button>
             );
         } else {
             return (
-                <button className="btn btn-secondary wd-username-button">Follow</button>
+                <button onClick={() => addFollow()} className="btn btn-secondary wd-username-button">Follow</button>
             );
         }
-    }
-
-    const addFollow = async () => {
-
-    }
-
-    const removeFollow = async () => {
     }
 
     const renderUserInfo = () => {
@@ -242,13 +255,13 @@ const ProfileScreen = () => {
                     <div>
                         <div className="wd-display-conditional-block wd-follow-value-dims wd-fg-color-white wd-font-size-20 pe-3">
                             <button onClick={() => setFollowPopupVals('followers')} className="wd-follower-button ps-0 pe-0">
-                                <span className="wd-bold-font pe-2">{profileData.followerCount ? profileData.followerCount : 0}</span>
+                                <span className="wd-bold-font pe-2">{profileData.followers ? profileData.followers.length : 0}</span>
                                 <span>Followers</span>
                             </button>
                         </div>
                         <div className="wd-display-conditional-block wd-follow-value-dims wd-fg-color-white wd-font-size-20">
                             <button onClick={() => setFollowPopupVals('following')} className="wd-follower-button ps-0 pe-0">
-                                <span className="wd-bold-font pe-2">{profileData.followingCount ? profileData.followingCount : 0}</span>
+                                <span className="wd-bold-font pe-2">{profileData.following ? profileData.following.length : 0}</span>
                                 <span>Following</span>
                             </button>
                         </div>
@@ -260,7 +273,6 @@ const ProfileScreen = () => {
                                 {profileData.website}
                             </a>
                         }
-
                     </div>
                 </div>
                 <div className="wd-inline-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2">
