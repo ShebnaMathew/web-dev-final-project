@@ -4,6 +4,7 @@ import './list.css';
 
 const CommentList = (comments = { comments: [] }) => {
     const commentContents = comments.comments;
+    console.log(commentContents)
     return (
         <>
             {

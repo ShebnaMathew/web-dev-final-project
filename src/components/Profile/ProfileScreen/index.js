@@ -7,7 +7,7 @@ import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
 import '../profile-main.css';
 import {Link, useParams} from "react-router-dom";
-import {getProfileAction} from "../../../actions/profile-actions";
+import {getProfileAction, saveProfileDataAction} from "../../../actions/profile-actions";
 import PostList from "../../NewsFeed/PostList";
 import Post from "../../NewsFeed/Post";
 
@@ -27,7 +27,12 @@ const ProfileScreen = () => {
         isCurrentUser = true;
     }
 
-    useEffect(() => getProfileAction(dispatch, _id), [_id]);
+
+    useEffect(() => {
+        if (_id !== undefined) {
+            getProfileAction(dispatch, _id)
+        }
+    }, [_id]);
 
     const profileData = useSelector((state) => state.profile);
 
@@ -136,6 +141,13 @@ const ProfileScreen = () => {
         }
     }
 
+    const addFollow = async () => {
+
+    }
+
+    const removeFollow = async () => {
+    }
+
     const renderUserInfo = () => {
         return (
             <>
@@ -215,7 +227,7 @@ const ProfileScreen = () => {
             {renderFollow()}
             <div className="wd-profile-header-info-dims wd-profile-header-info-max-width wd-center-main-info-wide wd-position-relative wd-display-flex wd-main-outer-padding pt-2">
                 <div className=" wd-display-inline-block pe-2">
-                    <img className="img wd-profile-picture-dims wd-circle-image" src={profileData.profilePicture} alt=""/>
+                    <img className="img wd-profile-picture-dims wd-circle-image" src={profileData.profilePicture ? profileData.profilePicture : "/images/blank-profile-picture.png"} alt=""/>
                 </div>
                 <div className="wd-display-inline-block wd-full-height wd-main-info-dims-profile wd-main-info-padding wd-main-info-position">
                     {!profileData.website &&
@@ -230,13 +242,13 @@ const ProfileScreen = () => {
                     <div>
                         <div className="wd-display-conditional-block wd-follow-value-dims wd-fg-color-white wd-font-size-20 pe-3">
                             <button onClick={() => setFollowPopupVals('followers')} className="wd-follower-button ps-0 pe-0">
-                                <span className="wd-bold-font pe-2">{profileData.followerCount}</span>
+                                <span className="wd-bold-font pe-2">{profileData.followerCount ? profileData.followerCount : 0}</span>
                                 <span>Followers</span>
                             </button>
                         </div>
                         <div className="wd-display-conditional-block wd-follow-value-dims wd-fg-color-white wd-font-size-20">
                             <button onClick={() => setFollowPopupVals('following')} className="wd-follower-button ps-0 pe-0">
-                                <span className="wd-bold-font pe-2">{profileData.followingCount}</span>
+                                <span className="wd-bold-font pe-2">{profileData.followingCount ? profileData.followingCount : 0}</span>
                                 <span>Following</span>
                             </button>
                         </div>

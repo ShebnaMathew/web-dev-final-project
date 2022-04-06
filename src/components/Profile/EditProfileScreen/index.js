@@ -7,7 +7,7 @@ import RegisterArtistPopUp from "../../PopUp/RegisterPopUp/RegisterArtistPopUp";
 import {Link} from "react-router-dom";
 import {saveProfileDataAction} from "../../../actions/profile-actions";
 import RegisterAdminPopUp from "../../PopUp/RegisterPopUp/RegisterAdminPopUp";
-import {getProfile} from "../../../services/backend/backend-service";
+import {getProfile} from "../../../services/backend/profile-service";
 
 const EditProfileScreen = () => {
 
