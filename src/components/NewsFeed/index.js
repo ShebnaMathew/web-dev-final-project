@@ -1,9 +1,22 @@
+import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect} from "react";
+import {searchNewMusicAction} from "../../actions/search-actions";
+import {aggregateSearchResults} from "../../util/AggregateUtil";
 import { useState } from "react";
 import Post from "./Post";
 import PostList from "./PostList";
-import recentPosts from "./recents-DUMMY.json";
 
 const NewsFeed = () => {
+
+    const news = useSelector((state) => state.newsResults);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        searchNewMusicAction(dispatch);
+    }, [dispatch])
+
+    const recentPosts = aggregateSearchResults(news);
 
     const [showPost, setShowPost] = useState(false);
     const [post, setPost] = useState('');

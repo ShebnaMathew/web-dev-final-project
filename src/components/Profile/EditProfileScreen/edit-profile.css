@@ -2,11 +2,6 @@
     height: 30px;
     width: 155px;
     line-height: 1.1!important;
-    background-color: white!important;
-}
-
-.wd-edit-profile-header-button:hover {
-    background-color: lightgrey!important;
 }
 
 .wd-edit-profile-text-entry {
@@ -41,7 +36,7 @@
     box-shadow: none;
 }
 
-::-webkit-calendar-picker-indicator {
+#dob::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
 
@@ -83,13 +78,21 @@
     left: 0;
 }
 
-.wd-artist-register-button {
+.wd-edit-profile-register-button {
     position: relative;
-    width: 160px;
+    width: 180px;
     height: 30px;
     line-height: 1;
     left: calc(50% - 80px);
-    background-color: white;
+}
+
+.wd-main-info-dims {
+    width: calc(100% - (150px + 1rem));
+    height: 100px;
+}
+
+.wd-edit-profile-max-width {
+    max-width: 696px;
 }
 
 @media (min-width: 768px) {
@@ -125,5 +128,33 @@
         text-align: left;
         margin-left: 10px;
         line-height: 1.0;
+    }
+
+    .wd-edit-info-padding {
+        padding-left: 2rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    .wd-center-edit-profile {
+        position: relative;
+        left: 225px;
+        width: 696px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .wd-center-edit-profile {
+        position: relative;
+        left: 225px;
+        width: 696px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .wd-center-edit-profile {
+        position: relative;
+        left: 132px;
+        width: 696px;
     }
 }

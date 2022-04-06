@@ -1,42 +1,43 @@
-import React from "react";
-import ContentPostItem from "../PostItems/ContentPostItem";
+import React, {useEffect, useState} from "react";
 import '../Profile/profile-main.css';
 import './search.css';
-import {useSelector} from "react-redux";
-import { useParams } from "react-router-dom";
-
-const aggregateSearchResults = searchResults => {
-    let results = [];
-    if (searchResults.albums) {
-        results = [...results, ...searchResults.albums.items]
-    }
-    if (searchResults.artists) {
-        results = [...results, ...searchResults.artists.items]
-    }
-    if (searchResults.tracks) {
-        results = [...results, ...searchResults.tracks.items]
-    }
-    if (searchResults.playlists) {
-        results = [...results, ...searchResults.playlists.items]
-    }
-    return results;
-}
+import {aggregateSearchResults} from "../../util/AggregateUtil";
+import PostList from "../NewsFeed/PostList";
+import Post from "../NewsFeed/Post";
+import {useParams} from "react-router-dom";
+import {searchAction} from "../../actions/search-actions";
+import {useDispatch, useSelector} from "react-redux";
 
 const SearchScreen = () => {
 
-    const searchResults = useSelector((state) => state.searchResults);
-    const aggregatedResults = aggregateSearchResults(searchResults);
-    const {query} = useParams(); // query to be used to filter results
+    const params = useParams()
+    const dispatch = useDispatch();
+
+    const results = useSelector((state) => state.searchResults);
+
+    const [showPost, setShowPost] = useState(false);
+    const [post, setPost] = useState('');
+    const [ready, setReady] = useState(false);
+
+    const query = params.query;
+
+    const aggregatedResults = aggregateSearchResults(results);
+
+    useEffect(async () => {
+        setReady(false);
+        await searchAction(dispatch, query);
+        setReady(true);
+    }, [query, dispatch])
 
     return(
         <>
-            <div className="wd-results-header">Results for '{query}'</div>
-            <div className="wd-content-section wd-fg-color-white ps-3 pe-3">
-                {
-                    aggregatedResults.map(item => <ContentPostItem key={item.id} item={item}/>)
-                }
-            </div>
-        </>
+            {ready &&
+                (!showPost ? <PostList posts={aggregatedResults} setShowPost={setShowPost} setPost={setPost}/>: <Post post={post} posts={[...aggregatedResults]} setShowPost={setShowPost} setPost={setPost}/>)
+            }
+            {!ready &&
+                <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>
+            }
+            </>
     );
 }
 export default SearchScreen;

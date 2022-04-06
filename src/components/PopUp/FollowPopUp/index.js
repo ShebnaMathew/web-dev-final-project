@@ -1,25 +1,25 @@
 import React from "react";
 import FollowPopupListItem from "./FollowPopUpListItem";
 
-const FollowPopUpList = () => {
+const FollowPopUpList = ({
+    setShowFollow
+}) => {
     return(
         <>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
-            <FollowPopupListItem/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
+            <FollowPopupListItem setShowFollow={setShowFollow} id={124}/>
         </>
     )
 }

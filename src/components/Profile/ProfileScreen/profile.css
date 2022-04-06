@@ -14,11 +14,6 @@
 .wd-username-button {
     height: 30px;
     line-height: 1.1!important;
-    background-color: white!important;
-}
-
-.wd-username-button:hover {
-    background-color: lightgrey!important;
 }
 
 .wd-nav-link-button {
@@ -56,11 +51,95 @@
     color: lightgrey;
 }
 
+.wd-website-link {
+    text-decoration: none;
+}
+
+.wd-website-link:hover {
+    color: lightgrey;
+}
+
+.wd-profile-header-info-max-width {
+    max-width: 1116px;
+}
+
+.wd-support-info-dims {
+    width: 300px;
+}
+
+.wd-hide-text-overflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@media (min-width: 1400px) {
+    .wd-center-content {
+        position: relative;
+        left: 148px;
+        width: 1000px
+    }
+
+    .wd-center-main-info-wide {
+        position: relative;
+        left: 90px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .wd-center-content {
+        position: relative;
+        left: 58px;
+        width: 1000px
+    }
+}
+
+@media (max-width: 1099px) {
+    .wd-center-content {
+        width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .wd-inline-show-status {
+        display: inline-block;
+    }
+
+    .wd-block-show-status {
+        display: none;
+    }
+
+    .wd-main-info-dims-profile {
+        width: calc(100% - 458px);
+        height: 100px;
+    }
+}
+
+@media (max-width: 991px) {
+
+    .wd-inline-show-status {
+        display: none;
+    }
+
+    .wd-block-show-status {
+        display: block;
+        width: 100%;
+    }
+
+    .wd-main-info-dims-profile {
+        width: calc(100% - 158px);
+        height: 100px;
+    }
+}
+
 @media (min-width: 768px) {
 
     .wd-main-info-position {
         position: relative;
         top: calc(50% - 50px);
+    }
+
+    .wd-missing-website-margin {
+        margin-top: 1rem;
     }
 }
 

@@ -17,3 +17,17 @@
 .wd-register-button:hover {
     background-color: lightgrey;
 }
+
+.wd-error-message {
+    width: 100%;
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+.wd-success-message {
+    width: 100%;
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}

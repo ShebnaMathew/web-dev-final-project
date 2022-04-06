@@ -33,3 +33,8 @@
 ::-webkit-input-placeholder {
     text-align: center;
 }
+
+.wd-bold-italtics {
+    font-style: italic;
+    font-weight: bold;
+}

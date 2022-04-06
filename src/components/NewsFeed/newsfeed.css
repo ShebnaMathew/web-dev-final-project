@@ -28,9 +28,14 @@
 }
 
 .wd-post-overflow {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .wd-post-max-height {
     height: 170px;
+}
+
+.wd-image-size {
+    width: 332px;
+    height: 332px;
 }

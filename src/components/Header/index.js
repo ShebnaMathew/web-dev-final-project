@@ -1,28 +1,56 @@
-import React from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutAction} from "../../actions/profile-actions";
 
 const Header = () => {
 
-    const navigate = useNavigate();
+    const [searchString, setSearchString] = useState('');
 
-    const handleKeypress = e => {
-        if (e.charCode === 13) 
-        {  
-            navigate('/search/'+e.target.value);
+    const user = useSelector((state) => state.user)
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleKeypress = async e => {
+        if (e.charCode === 13) {
+            navigate('/search/' + searchString);
+            setSearchString('');
         }
     };
+
+    const logout = async () => {
+        await logoutAction(dispatch);
+        navigate('/');
+    }
 
     return(
         <nav className="navbar navbar-dark bg-dark fixed-top">
             <div className="container-fluid">
-                <a href="#" className="navbar-brand" onClick={() => navigate('/')}>I'm the header</a>
+                <a href="#" className="navbar-brand wd-bold-italtics" onClick={() => navigate('/')}>Commentify</a>
                 <div className="d-flex wd-header-center">
-                    <input onKeyPress={(e) => handleKeypress(e)} className="form-control wd-header-bg-dark wd-header-search-border wd-header-color wd-header-fontAwesome" type="search" placeholder="&#xf002; Search Music" aria-label="Search"/>
+                    <input onChange={(event) => setSearchString(event.target.value)}
+                           onKeyPress={(e) => handleKeypress(e)}
+                           className="form-control wd-header-bg-dark wd-header-search-border wd-header-color wd-header-fontAwesome"
+                           type="search"
+                           placeholder="&#xf002; Search Music"
+                           aria-label="Search"
+                           value={searchString}
+                    />
                 </div>
-                <div className="d-flex ms-auto">
-                    <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/login')}>Login</button>
-                    <button className="btn btn-secondary" type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
-                </div>
+                {!user || !user._id &&
+                    <div className="d-flex ms-auto">
+                        <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/login')}>Login</button>
+                        <button className="btn btn-secondary" type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
+                    </div>
+                }
+                {(user && user._id) &&
+                    <div className="d-flex ms-auto">
+                        <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/profile')}>Profile</button>
+                        <button className="btn btn-secondary" type="submit" onClick={() => logout()}>Log Out</button>
+                    </div>
+                }
+
             </div>
         </nav>
     )

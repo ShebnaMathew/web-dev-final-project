@@ -15,6 +15,10 @@ const renderPrimary = item => {
             return "Artist: " + item.name;
         case "playlist":
             return "Owner: " + item.owner.display_name;
+        case "show":
+            return "Podcast: " + item.name;
+        case "episode":
+            return "Episode: " + item.name;
     }
 }
 
@@ -23,11 +27,14 @@ const renderSecondary = item => {
         case "album":
             return item.album_type.slice(0, 1).toUpperCase() + item.album_type.slice(1, item.album_type.length) + ": " + item.name;
         case "artist":
+        case "show":
             return <br/>;
         case "track":
             return "Track: " + item.name;
         case "playlist":
             return "Playlist: " + item.name;
+        case "episode":
+            return item.description;
     }
 }
 
@@ -38,7 +45,7 @@ const renderImage = item => {
     else if (item.type === "track" && item.album && item.album.images && item.album.images.length > 0){
         return item.album.images[0].url;
     } else {
-        return '/images/is-this-it.png';
+        return '/images/unavailable-image.jpg';
     }
 }
 
@@ -87,7 +94,7 @@ const ContentPostItem = ({
     return (
         <div className="pt-2 pb-2 wd-display-flex">
             <div className="wd-display-inline-block">
-                <img src={renderImage(item)} alt="" className="img-fluid wd-post-image-dims wd-circle-image"/>
+                <img src={renderImage(item)} alt="" className="img wd-post-image-dims wd-circle-image"/>
             </div>
             <div className="wd-post-data-dims ps-3">
                 <div>
