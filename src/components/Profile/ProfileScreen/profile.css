@@ -70,6 +70,9 @@
 .wd-hide-text-overflow {
     white-space: nowrap;
     text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden;
+    line-height: 1.1;
 }
 
 @media (min-width: 1400px) {

@@ -109,15 +109,15 @@ const ProfileScreen = () => {
         if(isCurrentUser) {
             return (
                 <>
-                    <div className="pe-3">
+                    <div className="pe-3 wd-display-inline-block wd-hide-text-overflow">
                         <i className="far fa-id-card wd-font-size-16"/>
-                        <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">{profileData.name}</span>
+                        <span className="ps-2 wd-font-size-16">{profileData.name}</span>
                     </div>
-                    <div className="pe-3">
+                    <div className="pe-3 wd-display-inline-block wd-hide-text-overflow">
                         <i className="fa fa-birthday-cake wd-font-size-16"/>
                         <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Born {formatDOB(profileData.dob)}</span>
                     </div>
-                    <div>
+                    <div className="pe-3 wd-display-inline-block wd-hide-text-overflow">
                         <i className="fa fa-at wd-font-size-16"/>
                         <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">{profileData.email}</span>
                     </div>
@@ -151,7 +151,7 @@ const ProfileScreen = () => {
     const renderUserInfo = () => {
         return (
             <>
-                <div className="pe-3">
+                <div className="pe-3 wd-display-inline-block wd-hide-text-overflow">
                     <i className="far fa-calendar wd-font-size-16"/>
                     <span className="ps-2 wd-font-size-16">Joined {formatJoinedDate(profileData.joined)}</span>
                 </div>
@@ -263,7 +263,7 @@ const ProfileScreen = () => {
 
                     </div>
                 </div>
-                <div className="wd-inline-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-1 pb-2">
+                <div className="wd-inline-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2">
                     {renderUserInfo()}
                 </div>
             </div>
