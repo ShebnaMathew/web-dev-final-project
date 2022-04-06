@@ -8,3 +8,11 @@ input {
     width: 100%;
     text-align: center;
 }
+
+.wd-z-index {
+    z-index: 1031 !important;
+}
+
+.wd-background {
+    backdrop-filter: blur(2px) !important;
+}
