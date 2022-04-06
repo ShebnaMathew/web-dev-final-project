@@ -69,10 +69,11 @@ const SignUp = () => {
     }
 
     return (
-        <div className="col bg-dark text-black fontFamily p-5 pt-2 pb-3">
+        <div className="row justify-content-md-center mt-4 ms-5">
+        <div className="col-5 bg-dark text-black fontFamily p-5 pt-2 pb-3 wd-round-corners">
             <div>
                 <div className="d-flex justify-content-center">
-                    <img width="150px" height="150px" src="/images/music_logo.png"/>
+                    <img width="150px" height="150px" src="/images/headphones-logo.png"/>
                 </div>
                 <h1 className="d-flex justify-content-center text-black">Sign up</h1>
             </div>
@@ -124,11 +125,17 @@ const SignUp = () => {
                 <button onClick={() => registerUser()} className="btn w-100 btn-success btn-lg mt-2">Sign up</button>
                 <span className="d-flex justify-content-center mt-3">
                     Have an account?
-                    <Link className="text-decoration-none text-black" to="/login">
+                    <Link className="text-black" to="/login">
                         <span className="ms-2 text-black">Log in.</span>
                 </Link>
                 </span>
+                <span className="d-flex justify-content-center mt-3">
+                        <Link className="text-black" to="/">
+                            <span className="ms-2 text-black">Continue without signing up</span>
+                        </Link>
+                </span>
             </div>
+        </div>
         </div>
     )
 }
