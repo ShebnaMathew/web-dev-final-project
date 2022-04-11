@@ -6,7 +6,7 @@ import {logoutAction} from "../../actions/profile-actions";
 const Header = () => {
 
     const [searchString, setSearchString] = useState('');
-    const [blur, setBlur] = useState('');
+    const [blur, setBlur] = useState(''); // lol
 
     const user = useSelector((state) => state.user)
 

@@ -1,36 +1,54 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
+import { searchNewMusicAction } from "../../actions/search-actions";
+import { aggregateSearchResults } from "../../util/AggregateUtil";
+import Album from "../DetailsScreen/Media/Album";
+import { getArtistId, getArtistName, getImage, getNumberOfTracksOrEpisodes, getReleaseDate } from "../../util/GetPostDetails";
 import PostList from "./PostList";
 
 const Post = (props) => {
-    const post = props.post;
 
-    // console.log("post idx: ", post.idx)
-    // console.log("posts: ", props.posts)
-    // console.log("posts slice: ", props.posts.splice(post.idx+1,3))
+    const params = useParams();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const morePosts = props.posts.sort(() => .5 - Math.random()).slice(0, 3)
+    const recentPosts = location.state.posts;
+    const allPosts = location.state.all_posts;
+    const post = recentPosts.filter((p) => p.id === location.state.post_id)[0];
+
+    const artistName = getArtistName(post);
+    const artistId = getArtistId(post);
+    const image = getImage(post);
+    const releaseDate = getReleaseDate(post);
+    const totalTracksOrEpisodes = getNumberOfTracksOrEpisodes(post);
+    
+    const morePosts = allPosts.sort(() => .5 - Math.random()).slice(0, 3)
 
     return(
         <>
-        <div className="row mb-5 mt-5">
+        <div className="row mb-5 mt-5 mx-5">
             <div className="col-1">
-                <button className="btn btn-dark wd-round-btn" onClick={() => {
-                        props.setPost('');
-                        props.setShowPost(false);
-                    }}><i class="fas fa-angle-left"/></button>
+                <button className="btn btn-dark wd-round-btn" onClick={() => navigate('/')}><i class="fas fa-angle-left"/></button>
             </div>
             <div className="col-10 card wd-shadow">
                 <div className="row">
                     <div className="col-5">
-                    <a href={post.artists[0].external_urls.spotify} target="_blank"> 
-                        <img src={post.images[0].url} className="img-fluid rounded-start my-3" alt="..."/>
+                    <a href={post.external_urls.spotify} target="_blank">
+                        <img src={image} className="img-fluid rounded-start my-3" alt="..."/>
                     </a>
                     </div>
                     <div className="col-7">
                     <div className="card-body">
-                        <h4 className="card-title">{post.name}</h4>
-                        <h5 className="card-title">{post.artists[0].name}</h5>
-                        <p className="card-text mt-4">Released on  {post.release_date}</p>
-                        <p className="card-text">{post.total_tracks} tracks</p>
+                        <div><a className="card-title h4 wd-post-text-decoration" onClick={() => {
+                            (post.type === "artist") ? navigate(`/profile/${post.id}`) :
+                            navigate('/details',{state: {post: post, search: null, newsfeed: location.pathname, newsfeedProps: {state: {post_id: post.id, posts: recentPosts, all_posts: allPosts}}}});
+                        }}>{post.name}</a></div>
+                        <div><a className="card-title h6 wd-post-text-decoration" onClick={() => {
+                            (post.type === "artist") && navigate(`/profile/${post.id}`)
+                        }}>{artistName}</a></div>
+                        {releaseDate && <p className="card-text mt-4">Released on  {releaseDate}</p>}
+                        {(post.type === 'album' || post.type === 'show') && <p className="card-text">{totalTracksOrEpisodes} {(post.type === 'album') ? ((totalTracksOrEpisodes === 1) ? 'track': 'tracks'):'episodes'}</p>}
                         <hr/>
                         <h6>
                             <span className="me-2"><i class="far fa-heart"/></span>
@@ -47,14 +65,19 @@ const Post = (props) => {
                                     </p>
                             })}
                         </div>
+                        <hr/>
+                        <div class="input-group">
+                            <input type="text" class="form-control wd-detail-comment-btn wd-detail-comment" placeholder="Add a comment" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                            <button class="btn btn-outline-secondary wd-detail-button-action" type="button" id="button-addon2">Comment</button>
+                        </div>
                         <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
                     </div>
                     </div>
                 </div>
             </div>
         </div>
-        <h6 className="row mb-2 mt-2 justify-content-center">More posts</h6>
-        <PostList posts={morePosts} setShowPost={props.setShowPost} setPost={props.setPost}/>
+        <h6 className="row mb-2 mt-2 justify-content-center card-text">More posts</h6>
+        <PostList posts={morePosts} allPosts={allPosts}/>
         </>
     )
 

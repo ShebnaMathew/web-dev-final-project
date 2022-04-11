@@ -43,7 +43,7 @@ export const search = async (searchString) => {
 }
 
 export const getNewMusic = async () => {
-    const fullUrl = searchEndpoint + "?type=artist,album,playlist,track,show,episode&market=US&limit=20&q=tag:new";
+    const fullUrl = searchEndpoint + "?type=artist,album,playlist,track,show,episode&market=US&limit=48&q=tag:new";
 
     let config = {
         headers: {
