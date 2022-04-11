@@ -6,6 +6,7 @@
 .wd-detail-text-deco-none {
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
 }
 
 .wd-detail-text-deco-none:hover {

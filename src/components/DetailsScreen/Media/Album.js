@@ -60,7 +60,7 @@ const Album = (props) => {
                     <div class="row justify-content-md-center mb-5">
                         <div className="row justify-content-center mt-3">{post.album_type.charAt(0).toUpperCase() + post.album_type.substring(1)}</div>
                         <p className="row justify-content-center mt-1"><a href={post.external_urls.spotify} target="_blank" className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{post.name}</a></p>
-                        <a href="#" className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={() => navigate(`/profile/${post.artists[0].id}`)}>{post.artists[0].name}</a>
+                        <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={() => navigate(`/profile/${post.artists[0].id}`)}>{post.artists[0].name}</a>
                         <div className="row justify-content-center mt-1">Release date: {post.release_date}</div>
                         <div className="row justify-content-center mt-1">Total tracks: {post.total_tracks}</div>
                     </div>

@@ -49,17 +49,11 @@ function App() {
                     <Route path="/" element={<MainScreen/>}>
                         <Route index element={<NewsFeed/>}/>
                         <Route path="/post" element={<Post/>}/>
-                        <Route path="/post/:_id" element={<Post/>}/>
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/profile/:_id" element={<Profile/>}/>
                         <Route path="/editProfile" element={<EditProfile/>}/>
                         <Route path="/search/:query" element={<SearchScreen/>}/>
                         <Route path="/details" element={<DetailsScreen/>}/>
-                        <Route path="/album/:_id" element={<Album/>}/>
-                        <Route path="/show/:_id" element={<Show/>}/>
-                        <Route path="/episode/:_id" element={<Episode/>}/>
-                        <Route path="/track/_:d" element={<Track/>}/>
-                        <Route path="/playlist/_:d" element={<Playlist/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<SignUp/>}/>
                     </Route>

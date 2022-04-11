@@ -1,15 +1,9 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
-import { searchNewMusicAction } from "../../actions/search-actions";
-import { aggregateSearchResults } from "../../util/AggregateUtil";
-import Album from "../DetailsScreen/Media/Album";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getArtistId, getArtistName, getImage, getNumberOfTracksOrEpisodes, getReleaseDate } from "../../util/GetPostDetails";
 import PostList from "./PostList";
 
-const Post = (props) => {
+const Post = () => {
 
-    const params = useParams();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -45,7 +39,7 @@ const Post = (props) => {
                             navigate('/details',{state: {post: post, search: null, newsfeed: location.pathname, newsfeedProps: {state: {post_id: post.id, posts: recentPosts, all_posts: allPosts}}}});
                         }}>{post.name}</a></div>
                         <div><a className="card-title h6 wd-post-text-decoration" onClick={() => {
-                            (post.type === "artist") && navigate(`/profile/${post.id}`)
+                            (artistId) && navigate(`/profile/${post.id}`)
                         }}>{artistName}</a></div>
                         {releaseDate && <p className="card-text mt-4">Released on  {releaseDate}</p>}
                         {(post.type === 'album' || post.type === 'show') && <p className="card-text">{totalTracksOrEpisodes} {(post.type === 'album') ? ((totalTracksOrEpisodes === 1) ? 'track': 'tracks'):'episodes'}</p>}

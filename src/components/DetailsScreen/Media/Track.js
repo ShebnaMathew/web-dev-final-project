@@ -1,15 +1,13 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CommentsTabList from "../Lists/CommentsTabList";
 
 const Track = (props) => {
-    //const post = props.post;
-
-    const params = useParams();
+    
     const navigate = useNavigate();
+    const location = useLocation();
 
-
-    const post = (params.state) ? params.state.post: props.post;
-    const search = (params.state) ? params.state.search: props.search;
+    const post = props.post;
+    const search = props.search;
 
     const handleKeypress = async e => {
         if (e.charCode === 13) {
@@ -36,8 +34,10 @@ const Track = (props) => {
                     <div class="row justify-content-md-center mb-5">
                         <div className="row justify-content-center mt-3">Track</div>
                         <p className="row justify-content-center mt-1"><a href={post.external_urls.spotify} target="_blank" className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{post.name}</a></p>
-                        <a href="#" className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={() => navigate(`/album/${post.album.id}`)}>Album: {post.album.name}</a>
-                        <a href="#" className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={() => navigate(`/profile/${post.artists[0].id}`)}>{post.artists[0].name}</a>
+                        <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={
+                            () => navigate('/details',{state: {post: post, search: location.pathname, newsfeed: null, newsfeedProps: null}})}>
+                                Album: {post.album.name}</a> {/** the post in the state should be the album post, need to get that from the api */}
+                        <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={() => navigate(`/profile/${post.artists[0].id}`)}>{post.artists[0].name}</a>
                         <div className="row justify-content-center mt-1">Release date: {post.album.release_date}</div>
                         <div className="row justify-content-center mt-1">Duration: {Math.floor(post.duration_ms / 60000)}m {Math.floor(post.duration_ms / 1000 - (Math.floor(post.duration_ms / 60000)) * 60)}s</div>
                         <div className="row justify-content-center mt-1">Popularity Score: {post.popularity}</div>
