@@ -17,6 +17,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import NewsFeed from "./components/NewsFeed";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 import {authorize} from "./services/spotify/spotify-service";
 import newsReducer from "./reducers/newsReducer";
 import userReducer from "./reducers/userReducer";
@@ -48,6 +49,7 @@ function App() {
                         <Route path="/search/:query" element={<SearchScreen/>}/> {/* show results for a specific query*/}
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<SignUp/>}/>
+                        <Route path="/privacyPolicy" element={<PrivacyPolicy/>}/>
                     </Route>
                 </Routes>
             </div>
