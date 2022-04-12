@@ -63,9 +63,7 @@
     max-width: 1116px;
 }
 
-.wd-support-info-dims {
-    width: 300px;
-}
+
 
 .wd-hide-text-overflow {
     white-space: nowrap;
@@ -73,6 +71,18 @@
     width: 100%;
     overflow: hidden;
     line-height: 1.1;
+}
+
+@media (min-width: 1200px) {
+    .wd-support-info-dims {
+        width: 375px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .wd-support-info-dims {
+        width: 300px;
+    }
 }
 
 @media (min-width: 1400px) {
@@ -86,6 +96,7 @@
         position: relative;
         left: 90px;
     }
+
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
@@ -94,12 +105,14 @@
         left: 58px;
         width: 1000px
     }
+
 }
 
 @media (max-width: 1099px) {
     .wd-center-content {
         width: 100%;
     }
+    
 }
 
 @media (min-width: 992px) {
