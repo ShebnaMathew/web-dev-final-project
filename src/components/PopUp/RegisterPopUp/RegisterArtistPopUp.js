@@ -29,8 +29,10 @@ const RegisterArtistPopUp = ({ _id, setIsArtist }) => {
 
         const result = await getArtist(id);
         if (result.name === artistName) {
-            await saveProfileDataAction(dispatch, { isArtist: true }, _id);
-
+            await saveProfileDataAction(dispatch, {
+                isArtist: true,
+                artistId: id
+            }, _id);
 
             const results = await search(artistName);
             const albums = results.albums.items;
