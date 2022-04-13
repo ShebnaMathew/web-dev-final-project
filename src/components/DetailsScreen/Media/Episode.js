@@ -1,18 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import CommentsTabList from "../Lists/CommentsTabList";
 
-const Episode = (props) => {
-    const post = props.post;
+const Episode = () => {
+
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const handleKeypress = async e => {
-        if (e.charCode === 13) {
-            // e.target.value
-            // add comment in _MONGO
-        }
-    };
+    const show = useSelector((state) => state.searchResults.current_show);
 
-    // _API: get album tracks
+    const post = location.state.post;
+    
     // _MONGO: get likes and comments for this album
 
     return(
@@ -20,7 +18,7 @@ const Episode = (props) => {
         <div class="container wd-detail-max-width">
             <div class="row justify-content-center m-0">
                 <div className="col col-lg-1 justify-content-center mt-3">
-                    <button className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0" onClick={() => navigate(props.search)}>
+                    <button className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0" onClick={() => navigate(location.state.back)}>
                         <i class="fas fa-angle-left"/>
                     </button>
                 </div>
@@ -31,6 +29,9 @@ const Episode = (props) => {
                     <div class="row justify-content-md-center mb-5">
                         <div className="row justify-content-center mt-3">Episode</div>
                         <p className="row justify-content-center mt-1"><a href={post.external_urls.spotify} target="_blank" className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{post.name}</a></p>
+                        <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={
+                            () => navigate(`/show/${show.id}`,{state: {post: show, back: location.state.back}})}>
+                                Show: {show.name}</a>
                         <div className="row justify-content-center mt-1">Release date: {post.release_date}</div>
                         <p className="row justify-content-center mt-1">{post.description}</p>
                     </div>

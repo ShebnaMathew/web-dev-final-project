@@ -17,13 +17,15 @@ const SearchList = (props) => {
                     let image = getImage(post);
 
                     return (
-                        
-                        <div class="card mb-3 wd-cursor mt-2 wd-search-min-width me-3" onClick={() => {
-                            (post.type === "artist") ? navigate(`/profile/${post.id}`) :
-                            navigate('/details',{state: {post: post, search: location.pathname}});
-                            window.scrollTo(0, 0);
-                        }}>
-                            
+                            <div class="card mb-3 wd-cursor mt-2 wd-search-min-width me-3" onClick={() => {
+                                (post.type === "artist") && navigate(`/profile/${post.id}`);
+                                (post.type === "album") && navigate(`/album/${post.id}`, {state: {back: location.pathname, post: post}});
+                                (post.type === "track") && navigate(`/track/${post.id}`, {state: {back: location.pathname, post: post}});
+                                (post.type === "playlist") && navigate(`/playlist/${post.id}`, {state: {back: location.pathname, post: post}});
+                                (post.type === "show") && navigate(`/show/${post.id}`, {state: {back: location.pathname, post: post}});
+                                (post.type === "episode") && navigate(`/episode/${post.id}`, {state: {back: location.pathname, post: post}});
+
+                            }}>
                             <img src={image} className="card-img-top wd-image-size" alt="..."/>
                             <div className="card-body">
                                 <h6>{post.name}{artistName && " - "+artistName}</h6>

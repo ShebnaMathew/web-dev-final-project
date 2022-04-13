@@ -1,57 +1,42 @@
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate} from "react-router-dom";
+import { getTrackAction, getTracks, setCurrentAlbum } from "../../../actions/search-actions";
 import CommentsTabList from "../Lists/CommentsTabList";
-import TrackEpisodeList from "../Lists/TrackEpisodeList";
+import TrackList from "../Lists/TrackList";
 
-const Album = (props) => {
+const Album = () => {
 
-    // use params to render through newsfeed, get the album deets from api
-    
-    //const post = props.post;
-    const params = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const location = useLocation();
 
-    console.log("hereeeeeee")
     const [showTracks, setShowTracks] = useState(true);
     const [showComments, setShowComments] = useState(false);
+    const results = useSelector((state) => state.searchResults.current_album_tracks);
 
-    const post = props.post;
-    console.log("post: ", post)
-    console.log("type: ", post.type)
-    const search = props.search;
-    console.log("search: ", search)
-    const newsfeed = props.newsfeed;
-    console.log("newsfeed: ", newsfeed)
-    const newsfeedProps = props.newsfeedProps;
+    const post = location.state.post;
 
-    
-    
-    
-    
-    console.log("newsfeed props: ", newsfeedProps)
+    useEffect(() => {
+        getTracks(dispatch, post.id);
+        setCurrentAlbum(dispatch, post);
+    }, [])
 
-    // if we want
-    const handleKeypress = async e => {
-        if (e.charCode === 13) {
-            // e.target.value
-            // add this comment to _MONGO/reducer
-        }
-    };
-
-    // _API: get album tracks
+    useEffect(() => {
+        getTrackAction(dispatch, results);
+    }, [results])
+    
     // _MONGO: get likes and comments for this album
 
     return(
         <>
         <div class="container wd-detail-max-width">
             <div class="row justify-content-center m-0">
+        
                 <div className="col col-lg-1 justify-content-center mt-3">
-                <button className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0" onClick={() => {
-                    if (search) navigate(search) 
-                    else navigate(newsfeed, newsfeedProps);
-                    }}>
-                    <i class="fas fa-angle-left"/>
-                </button>
+                    <button className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0" onClick={() => navigate(location.state.back)}>
+                        <i class="fas fa-angle-left"/>
+                    </button>
                 </div>
                 <div class="col col-lg-7 wd-background-banner">
                     <div class="row justify-content-md-center mt-5">
@@ -66,30 +51,29 @@ const Album = (props) => {
                     </div>
                 </div>
                 <div className="col col-lg-4 wd-detail-right-max wd-detail-parent wd-zero-margin">
-                <p className="mt-4">
-                    <span className="">
-                        {/* get likes from db */}
-                        <i class="far fa-heart me-2"/><b>324234</b><span> likes</span> 
-                    </span>
-                </p>
-                <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item">
-                        <button class="nav-link" onClick={() => {
-                            setShowTracks(true);
-                            setShowComments(false);
-                        }}>Tracks</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link" onClick={() => {
-                            setShowComments(true);
-                            setShowTracks(false);
-                        }}>Comments</button>
-                    </li>
-                </ul>
-                {/* dummy data rn -> to-do navigate to each track detail screen */}
-                {showTracks && <TrackEpisodeList/>}
-                {/* dummy data -> todo go to profile for each user once we got the data */}
-                {showComments && <CommentsTabList/>}
+                    <p className="mt-4">
+                        <span className="">
+                            {/* get likes from db */}
+                            <i class="far fa-heart me-2"/><b>324234</b><span> likes</span> 
+                        </span>
+                    </p>
+                    <ul class="nav nav-tabs nav-fill">
+                        <li class="nav-item">
+                            <button class="nav-link" onClick={() => {
+                                setShowTracks(true);
+                                setShowComments(false);
+                            }}>Tracks</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" onClick={() => {
+                                setShowComments(true);
+                                setShowTracks(false);
+                            }}>Comments</button>
+                        </li>
+                    </ul>
+                    {showTracks && <TrackList back={location.state.back}/>}
+                    {/* dummy data -> todo go to profile for each user once we have the data */}
+                    {showComments && <CommentsTabList/>}
                 </div>
             </div>
         </div>

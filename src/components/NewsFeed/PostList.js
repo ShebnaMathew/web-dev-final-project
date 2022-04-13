@@ -1,23 +1,31 @@
 import React from "react"; 
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {  useNavigate } from "react-router-dom";
 import StackGrid from "react-stack-grid";
+import { setPostsToRender } from "../../actions/search-actions";
 import { getArtistName, getImage } from "../../util/GetPostDetails";
 
-const PostList = (props) => {
+const PostList = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
+    const posts = useSelector((state) => state.searchResults.posts_to_render);
+    const allPosts = useSelector((state) => state.searchResults.all_posts);
+    const morePosts = allPosts.sort(() => .5 - Math.random()).slice(0, 3)
+    
     return(
         <div className="container">
             <StackGrid columnWidth={350}>
-                {props.posts.map((post) => {
+                {posts.map((post) => {
 
                     let artistName = getArtistName(post);
                     let image = getImage(post);
 
                     return (
                         <div class="card mb-3 me-3 wd-cursor mt-5" onClick={() => {
-                            navigate(`/post`,{state: {post_id: post.id, posts: props.posts, all_posts: props.allPosts}});
+                            setPostsToRender(dispatch, morePosts);
+                            navigate(`/post/${post.id}`,{state: {post: post, back: '/'}});
                             window.scrollTo(0, 0);
                         }}>
                             <img src={image} className="card-img-top wd-image-size" alt="..."/>

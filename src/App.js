@@ -48,12 +48,20 @@ function App() {
                 <Routes>
                     <Route path="/" element={<MainScreen/>}>
                         <Route index element={<NewsFeed/>}/>
+                        <Route path="/:post_id" element={<NewsFeed/>}/>
                         <Route path="/post" element={<Post/>}/>
+                        <Route path="/post/:postId" element={<Post/>}/>
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/profile/:_id" element={<Profile/>}/>
                         <Route path="/editProfile" element={<EditProfile/>}/>
                         <Route path="/search/:query" element={<SearchScreen/>}/>
                         <Route path="/details" element={<DetailsScreen/>}/>
+                        <Route path="/details/:postId" element={<DetailsScreen/>}/>
+                        <Route path="/album/:postId" element={<Album/>}/>
+                        <Route path="/track/:postId" element={<Track/>}/>
+                        <Route path="/playlist/:postId" element={<Playlist/>}/>
+                        <Route path="/show/:postId" element={<Show/>}/>
+                        <Route path="/episode/:postId" element={<Episode/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<SignUp/>}/>
                     </Route>

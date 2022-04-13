@@ -1,4 +1,6 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { setPostsToRender } from "../../actions/search-actions";
 import { getArtistId, getArtistName, getImage, getNumberOfTracksOrEpisodes, getReleaseDate } from "../../util/GetPostDetails";
 import PostList from "./PostList";
 
@@ -6,24 +8,26 @@ const Post = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
 
-    const recentPosts = location.state.posts;
-    const allPosts = location.state.all_posts;
-    const post = recentPosts.filter((p) => p.id === location.state.post_id)[0];
+    const allPosts = useSelector((state) => state.searchResults.all_posts);
+
+    const post = location.state.post;
 
     const artistName = getArtistName(post);
     const artistId = getArtistId(post);
     const image = getImage(post);
     const releaseDate = getReleaseDate(post);
     const totalTracksOrEpisodes = getNumberOfTracksOrEpisodes(post);
-    
-    const morePosts = allPosts.sort(() => .5 - Math.random()).slice(0, 3)
 
     return(
         <>
         <div className="row mb-5 mt-5 mx-5">
             <div className="col-1">
-                <button className="btn btn-dark wd-round-btn" onClick={() => navigate('/')}><i class="fas fa-angle-left"/></button>
+                <button className="btn btn-dark wd-round-btn" onClick={() => {
+                    setPostsToRender(dispatch, allPosts);
+                    navigate('/');
+                    }}><i class="fas fa-angle-left"/></button>
             </div>
             <div className="col-10 card wd-shadow">
                 <div className="row">
@@ -35,8 +39,13 @@ const Post = () => {
                     <div className="col-7">
                     <div className="card-body">
                         <div><a className="card-title h4 wd-post-text-decoration" onClick={() => {
-                            (post.type === "artist") ? navigate(`/profile/${post.id}`) :
-                            navigate('/details',{state: {post: post, search: null, newsfeed: location.pathname, newsfeedProps: {state: {post_id: post.id, posts: recentPosts, all_posts: allPosts}}}});
+                            (post.type === "artist") && navigate(`/profile/${post.id}`);
+                            (post.type === "album") && navigate(`/album/${post.id}`, {state: {back: '/', post: post}});
+                            (post.type === "track") && navigate(`/track/${post.id}`, {state: {back: '/', post: post}});
+                            (post.type === "playlist") && navigate(`/playlist/${post.id}`, {state: {back: '/', post: post}});
+                            (post.type === "show") && navigate(`/show/${post.id}`, {state: {back: '/', post: post}});
+                            (post.type === "episode") && navigate(`/episode/${post.id}`, {state: {back: '/', post: post}});
+
                         }}>{post.name}</a></div>
                         <div><a className="card-title h6 wd-post-text-decoration" onClick={() => {
                             (artistId) && navigate(`/profile/${post.id}`)
@@ -71,10 +80,9 @@ const Post = () => {
             </div>
         </div>
         <h6 className="row mb-2 mt-2 justify-content-center card-text">More posts</h6>
-        <PostList posts={morePosts} allPosts={allPosts}/>
-        </>
+        <PostList/>
+    </>
     )
-
 }
 
 export default Post;

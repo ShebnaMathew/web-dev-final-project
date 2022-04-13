@@ -1,30 +1,38 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getEpisodeAction, getEpisodes, setCurrentShow } from "../../../actions/search-actions";
 import CommentsTabList from "../Lists/CommentsTabList";
-import TrackEpisodeList from "../Lists/TrackEpisodeList";
+import EpisodeList from "../Lists/EpisodeList";
 
-const Show = (props) => {
-    const post = props.post;
+const Show = () => {
+    
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const location = useLocation();
 
     const [showEpisodes, setShowEpisodes] = useState(true);
     const [showComments, setShowComments] = useState(false);
+    const results = useSelector((state) => state.searchResults.current_show_episodes);
 
-    const handleKeypress = async e => {
-        if (e.charCode === 13) {
-            // e.target.value
-            // add comment in _MONGO
-        }
-    };
+    const post = location.state.post;
 
-    // _API: get show episodes
+    useEffect(() => {
+        getEpisodes(dispatch, post.id, post.total_episodes);
+        setCurrentShow(dispatch, post);
+    }, [])
+
+    useEffect(() => {
+        getEpisodeAction(dispatch, results);
+    }, [results])
+
     // _MONGO: get likes and comments for this show
 
     return(
         <div class="container wd-detail-max-width">
             <div class="row justify-content-center m-0">
                 <div className="col col-lg-1 justify-content-center mt-3">
-                <button className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0" onClick={() => navigate(props.search)}>
+                <button className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0" onClick={() => navigate(location.state.back)}>
                     <i class="fas fa-angle-left"/>
                 </button>
                 </div>
@@ -59,7 +67,7 @@ const Show = (props) => {
                         }}>Comments</button>
                     </li>
                 </ul>
-                {showEpisodes && <TrackEpisodeList/>}
+                {showEpisodes && <EpisodeList back={location.state.back}/>}
                 {showComments && <CommentsTabList/>}
                 </div>
             </div>

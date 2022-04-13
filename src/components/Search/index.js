@@ -10,7 +10,7 @@ const SearchScreen = () => {
 
     const params = useParams()
     const dispatch = useDispatch();
-    const results = useSelector((state) => state.searchResults);
+    const results = useSelector((state) => state.searchResults.results);
 
     const [ready, setReady] = useState(false);
 

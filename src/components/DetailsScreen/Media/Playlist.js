@@ -1,30 +1,39 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getPlaylistTrackAction, getTracksForPlaylist, setCurrentPlaylist } from "../../../actions/search-actions";
 import CommentsTabList from "../Lists/CommentsTabList";
-import TrackEpisodeList from "../Lists/TrackEpisodeList";
+import PlaylistTrackList from "../Lists/PlaylistTrackList";
 
-const Playlist = (props) => {
-    const post = props.post;
+const Playlist = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const location = useLocation();
 
     const [showTracks, setShowTracks] = useState(true);
     const [showComments, setShowComments] = useState(false);
+    const results = useSelector((state) => state.searchResults.current_playlist_tracks);
 
-    const handleKeypress = async e => {
-        if (e.charCode === 13) {
-            // e.target.value
-            // add comment in _MONGO
-        }
-    };
+    const complete = useSelector((state) => state.searchResults);
 
-    // _API: get album tracks
+    const post = location.state.post;
+    
+    useEffect(() => {
+        getTracksForPlaylist(dispatch, post.id);
+        setCurrentPlaylist(dispatch, post);
+    },[])
+
+    useEffect(() => {
+        getPlaylistTrackAction(dispatch, results);
+    }, [results])
+
     // _MONGO: get likes and comments for this album
 
     return(
         <div class="container wd-detail-max-width">
             <div class="row justify-content-center m-0">
                 <div className="col col-lg-1 justify-content-center mt-3">
-                <button className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0" onClick={() => navigate(props.search)}>
+                <button className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0" onClick={() => navigate(location.state.back)}>
                     <i class="fas fa-angle-left"/>
                 </button>
                 </div>
@@ -60,7 +69,7 @@ const Playlist = (props) => {
                         }}>Comments</button>
                     </li>
                 </ul>
-                {showTracks && <TrackEpisodeList/>}
+                {showTracks && <PlaylistTrackList back={location.state.back}/>}
                 {showComments && <CommentsTabList/>}
                 </div>
             </div>
