@@ -30,15 +30,15 @@ const Album = () => {
 
     return(
         <>
-        <div class="container wd-detail-max-width">
-            <div class="row justify-content-center m-0">
+        <div class="container wd-details-container wd-detail-max-width">
+            <div class="row justify-content-center m-0 wd-details-container-children">
         
                 <div className="col col-lg-1 justify-content-center mt-3">
                     <button className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0" onClick={() => navigate(location.state.back)}>
                         <i class="fas fa-angle-left"/>
                     </button>
                 </div>
-                <div class="col col-lg-7 wd-background-banner">
+                <div class="col col-lg-7 wd-background-banner wd-details-container-children">
                     <div class="row justify-content-md-center mt-5">
                         <img src={post.images[0].url} class="m-3 wd-detail-box-shadow wd-detail-img-height" alt="..."/>
                     </div>
@@ -50,7 +50,7 @@ const Album = () => {
                         <div className="row justify-content-center mt-1">Total tracks: {post.total_tracks}</div>
                     </div>
                 </div>
-                <div className="col col-lg-4 wd-detail-right-max wd-detail-parent wd-zero-margin">
+                <div className="col col-lg-4 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                     <p className="mt-4">
                         <span className="">
                             {/* get likes from db */}

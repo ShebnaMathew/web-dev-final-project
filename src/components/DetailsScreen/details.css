@@ -56,6 +56,21 @@
     overflow-y: scroll;
 }
 
+.wd-details-comment-block {
+    position: relative;
+}
+
+.wd-details-comment-position {
+    position:absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.wd-details-comment-position-top {
+    position:absolute;
+    top:0;
+}
+
 .wd-detail-max-width {
     width: 100%;
     margin-right: 0%;
@@ -123,4 +138,23 @@
 .wd-detail-button:active {
     background-color: inherit;
     border: 0px solid transparent;
+}
+
+.wd-details-container {
+  display: grid;
+  grid-template-columns:none;
+  grid-gap:10px;
+  border: none;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.wd-details-container-children {
+    box-sizing: border-box;
+}
+
+.wd-details-container-children-overflow {
+    overflow:auto;
+  height:0;
+  min-height:100%;
 }
