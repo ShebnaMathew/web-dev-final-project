@@ -11,15 +11,9 @@ const SearchScreen = () => {
     const params = useParams()
     const dispatch = useDispatch();
     const results = useSelector((state) => state.searchResults.results);
-
     const [ready, setReady] = useState(false);
 
     const query = params.query;
-
-    //const aggregatedResults = aggregateSearchResults(results);
-    //console.log("search results: ", aggregatedResults)
-
-    //console.log("albums results: ", results.albums)
 
     useEffect(async () => {
         setReady(false);
