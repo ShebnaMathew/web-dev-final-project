@@ -13,9 +13,7 @@ const Playlist = () => {
     const [showTracks, setShowTracks] = useState(true);
     const [showComments, setShowComments] = useState(false);
     const results = useSelector((state) => state.searchResults.current_playlist_tracks);
-
-    const complete = useSelector((state) => state.searchResults);
-
+    
     const post = location.state.post;
     
     useEffect(() => {
