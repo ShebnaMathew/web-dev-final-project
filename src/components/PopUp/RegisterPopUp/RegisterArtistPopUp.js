@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import './register-pop-up.css';
 import {useDispatch} from "react-redux";
 import {saveProfileDataAction} from "../../../actions/profile-actions";
-import {getArtist} from "../../../services/spotify/spotify-service";
+import {getAlbum, getArtist, search} from "../../../services/spotify/spotify-service";
+import {createPost} from "../../../services/backend/post-service";
 
 const RegisterArtistPopUp = ({ _id, setIsArtist }) => {
 
@@ -14,9 +15,44 @@ const RegisterArtistPopUp = ({ _id, setIsArtist }) => {
     const dispatch = useDispatch();
 
     const registerArtist = async () => {
-        const result = await getArtist(artistId, artistName);
-        if (result) {
+
+        // pull id
+        const artistTag = 'artist/'
+        const start = artistId.indexOf(artistTag) + artistTag.length;
+        let end = artistId.slice(start).indexOf("/")
+
+        if (end < 0) {
+            end = artistId.length;
+        }
+
+        const id = artistId.slice(start, start + end);
+
+        const result = await getArtist(id);
+        if (result.name === artistName) {
             await saveProfileDataAction(dispatch, { isArtist: true }, _id);
+
+
+            const results = await search(artistName);
+            const albums = results.albums.items;
+
+            const userAlbums = []
+            for (const a of albums) {
+                const result = await getAlbum(a.id);
+                console.log(result)
+                userAlbums.push({
+                    post_id: a.id,
+                    image_url: (a.images && a.images.length > 0) ? a.images[0].url : "",
+                    name: a.name,
+                    artist_name: (a.artists && a.artists.length > 0) ? a.artists[0].name : "",
+                    release_date: a.release_date,
+                    total_tracks: a.total_tracks
+                });
+            }
+
+            for (const a of userAlbums) {
+                await createPost(a);
+            }
+
             setIsArtist(true);
             setSuccessMessage("Success!")
         } else {
