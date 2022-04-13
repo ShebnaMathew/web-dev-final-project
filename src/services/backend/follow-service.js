@@ -5,7 +5,7 @@ const api = axios.create({
     origin: "localhost:3000"
 })
 
-const backendHost = "http://localhost:4000"
+const backendHost = "http://localhost:4000";
 
 const addFollow = async (follower_id, followee_id) => {
     await api.post(backendHost + '/profile/follow', {

@@ -1,3 +1,6 @@
+import {addComment, deleteComment} from "../../../services/backend/comment-service";
+import {likeContent, unlikeContent} from "../../../services/backend/like-service";
+
 const CommentsTabList = () => {
 
     // dummy list - get actual comments from db and render with map

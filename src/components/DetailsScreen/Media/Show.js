@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getEpisodeAction, getEpisodes, setCurrentShow } from "../../../actions/search-actions";
 import CommentsTabList from "../Lists/CommentsTabList";
 import EpisodeList from "../Lists/EpisodeList";
+import {createPost, getPost} from "../../../services/backend/post-service";
+
 
 const Show = () => {
     
