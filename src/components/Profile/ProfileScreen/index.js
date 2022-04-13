@@ -11,6 +11,7 @@ import {getProfileAction} from "../../../actions/profile-actions";
 import PostList from "../../NewsFeed/PostList";
 import Post from "../../NewsFeed/Post";
 import {addFollowAction, removeFollowAction} from "../../../actions/follow-actions";
+import {getProfile} from "../../../services/backend/profile-service";
 
 const ProfileScreen = () => {
 
@@ -36,23 +37,27 @@ const ProfileScreen = () => {
 
     const profileData = useSelector((state) => state.profile);
 
-    let currFollow = false;
-    if (!isCurrentUser && profileData.followers) {
-        for(const f of profileData.followers) {
-            if (f.follower_id === user._id) {
-                currFollow = true;
-                break;
-            }
-        }
-    }
-
-    const [isFollowing, setIsFollowing] = useState(currFollow);
+    const [isFollowing, setIsFollowing] = useState(false);
     const [content, setContent] = useState('comments');
     const [showFollow, setShowFollow] = useState(false);
     const [followTitle, setFollowTitle] = useState("followers")
 
     const [showPost, setShowPost] = useState(false);
     const [post, setPost] = useState('');
+
+
+    useEffect(() => {
+        if (!isCurrentUser && profileData.followers) {
+            for(const f of profileData.followers) {
+                if (f._id === user._id) {
+                    setIsFollowing(true)
+                    break;
+                }
+            }
+        }
+    }, [])
+
+    console.log(profileData)
 
     const renderContent = (content) => {
         switch (content) {
@@ -136,7 +141,8 @@ const ProfileScreen = () => {
     }
 
     const addFollow = async () => {
-        await addFollowAction(dispatch, user._id, user.username, profileData._id, profileData.username);
+        const userData = await getProfile(user._id);
+        await addFollowAction(dispatch, user._id, profileData._id, userData.username, userData.profilePicture);
         setIsFollowing(true);
     }
 

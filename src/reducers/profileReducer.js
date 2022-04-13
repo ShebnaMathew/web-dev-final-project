@@ -9,17 +9,16 @@ const profileReducer = (state = {}, action) => {
                 followers: [
                     ...state.followers,
                     {
-                        follower_id: action.follower_id,
-                        follower_name: action.follower_name,
-                        followee_id: action.followee_id,
-                        followee_name: action.followee_name
+                        _id: action.follower_id,
+                        username: action.username,
+                        profilePicture: action.profilePicture
                     }
                 ]
             };
         case REMOVE_FOLLOW:
             return {
                 ...state,
-                followers: state.followers.filter(f => f.follower_id !== action.follower_id)
+                followers: state.followers.filter(f => f._id !== action.follower_id)
             };
         case SAVE_PROFILE_DATA:
             return {
