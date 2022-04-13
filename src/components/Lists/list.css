@@ -1,7 +1,13 @@
 .wd-empty-list {
     text-align: center;
-    font-size: 32px;
-    color: white;
+    font-size: 20px;
+    color: rgb(255,255,255,0.75);
     font-weight: bold;
     font-style: italic;
+    height: 200px;
+}
+
+.wd-empty-list-content-pos {
+    position: relative;
+    top: 55px;
 }

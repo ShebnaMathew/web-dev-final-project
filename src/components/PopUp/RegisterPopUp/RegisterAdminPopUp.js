@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import './register-pop-up.css';
 import {useDispatch} from "react-redux";
 import {saveProfileDataAction} from "../../../actions/profile-actions";
-import {registerAdmin} from "../../../services/backend/backend-service";
+import {registerAdmin} from "../../../services/backend/profile-service";
 
 const RegisterAdminPopUp = ({ _id, setIsAdmin }) => {
 

@@ -1,0 +1,25 @@
+.wd-background {
+    backdrop-filter: blur(2px) !important;
+}
+
+h5, h1 {
+    color: black;
+    font-weight: bold;
+}
+
+.wd-privacy-links {
+    color: #0027be;
+    text-decoration: none;
+}
+
+.thead {
+    background-color: #77b300;
+}
+
+tbody {
+    background-color: white;
+}
+
+p {
+    padding-bottom: 2px;
+}

@@ -10,6 +10,8 @@ import {Link, useParams} from "react-router-dom";
 import {getProfileAction} from "../../../actions/profile-actions";
 import PostList from "../../NewsFeed/PostList";
 import Post from "../../NewsFeed/Post";
+import {addFollowAction, removeFollowAction} from "../../../actions/follow-actions";
+import {getProfile} from "../../../services/backend/profile-service";
 
 const ProfileScreen = () => {
 
@@ -27,18 +29,35 @@ const ProfileScreen = () => {
         isCurrentUser = true;
     }
 
-    useEffect(() => getProfileAction(dispatch, _id), [_id]);
+    useEffect(() => {
+        if (_id !== undefined) {
+            getProfileAction(dispatch, _id)
+        }
+    }, [_id]);
 
     const profileData = useSelector((state) => state.profile);
 
-    const isFollowing = false;
-
+    const [isFollowing, setIsFollowing] = useState(false);
     const [content, setContent] = useState('comments');
     const [showFollow, setShowFollow] = useState(false);
     const [followTitle, setFollowTitle] = useState("followers")
 
     const [showPost, setShowPost] = useState(false);
     const [post, setPost] = useState('');
+
+
+    useEffect(() => {
+        if (!isCurrentUser && profileData.followers) {
+            for(const f of profileData.followers) {
+                if (f._id === user._id) {
+                    setIsFollowing(true)
+                    break;
+                }
+            }
+        }
+    }, [])
+
+    console.log(profileData)
 
     const renderContent = (content) => {
         switch (content) {
@@ -90,11 +109,11 @@ const ProfileScreen = () => {
         if (showFollow) {
             if (followTitle === "followers") {
                 return (
-                    <PopUp title="Followers" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow}}/>
+                    <PopUp title="Followers" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow, followers: profileData.followers}}/>
                 );
             } else if (followTitle === "following") {
                 return (
-                    <PopUp title="Following" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow}}/>
+                    <PopUp title="Following" setShow={setShowFollow} Content={FollowPopUpList} contentParams={{setShowFollow: setShowFollow, following: profileData.following}}/>
                 );
             }
         }
@@ -104,15 +123,15 @@ const ProfileScreen = () => {
         if(isCurrentUser) {
             return (
                 <>
-                    <div className="pe-3">
+                    <div className="pe-3 wd-display-inline-block wd-hide-text-overflow">
                         <i className="far fa-id-card wd-font-size-16"/>
-                        <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">{profileData.name}</span>
+                        <span className="ps-2 wd-font-size-16">{profileData.name}</span>
                     </div>
-                    <div className="pe-3">
+                    <div className="pe-3 wd-display-inline-block wd-hide-text-overflow">
                         <i className="fa fa-birthday-cake wd-font-size-16"/>
                         <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Born {formatDOB(profileData.dob)}</span>
                     </div>
-                    <div>
+                    <div className="pe-3 wd-display-inline-block wd-hide-text-overflow">
                         <i className="fa fa-at wd-font-size-16"/>
                         <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">{profileData.email}</span>
                     </div>
@@ -121,17 +140,28 @@ const ProfileScreen = () => {
         }
     }
 
+    const addFollow = async () => {
+        const userData = await getProfile(user._id);
+        await addFollowAction(dispatch, user._id, profileData._id, userData.username, userData.profilePicture);
+        setIsFollowing(true);
+    }
+
+    const removeFollow = async () => {
+        await removeFollowAction(dispatch, user._id, profileData._id);
+        setIsFollowing(false);
+    }
+
     const renderMainInfoButton = () => {
         if (isCurrentUser) {
             return (<Link to="/editProfile" className="btn btn-secondary wd-username-button">Edit Profile</Link>)
         }
         else if (isFollowing) {
             return (
-                <button className="btn btn-secondary wd-username-button">Unfollow</button>
+                <button onClick={() => removeFollow()} className="btn btn-secondary wd-username-button">Unfollow</button>
             );
         } else {
             return (
-                <button className="btn btn-secondary wd-username-button">Follow</button>
+                <button onClick={() => addFollow()} className="btn btn-secondary wd-username-button">Follow</button>
             );
         }
     }
@@ -139,7 +169,7 @@ const ProfileScreen = () => {
     const renderUserInfo = () => {
         return (
             <>
-                <div className="pe-3">
+                <div className="pe-3 wd-display-inline-block wd-hide-text-overflow">
                     <i className="far fa-calendar wd-font-size-16"/>
                     <span className="ps-2 wd-font-size-16">Joined {formatJoinedDate(profileData.joined)}</span>
                 </div>
@@ -215,7 +245,7 @@ const ProfileScreen = () => {
             {renderFollow()}
             <div className="wd-profile-header-info-dims wd-profile-header-info-max-width wd-center-main-info-wide wd-position-relative wd-display-flex wd-main-outer-padding pt-2">
                 <div className=" wd-display-inline-block pe-2">
-                    <img className="img wd-profile-picture-dims wd-circle-image" src={profileData.profilePicture} alt=""/>
+                    <img className="img wd-profile-picture-dims wd-circle-image" src={profileData.profilePicture ? profileData.profilePicture : "/images/blank-profile-picture.png"} alt=""/>
                 </div>
                 <div className="wd-display-inline-block wd-full-height wd-main-info-dims-profile wd-main-info-padding wd-main-info-position">
                     {!profileData.website &&
@@ -230,13 +260,13 @@ const ProfileScreen = () => {
                     <div>
                         <div className="wd-display-conditional-block wd-follow-value-dims wd-fg-color-white wd-font-size-20 pe-3">
                             <button onClick={() => setFollowPopupVals('followers')} className="wd-follower-button ps-0 pe-0">
-                                <span className="wd-bold-font pe-2">{profileData.followerCount}</span>
+                                <span className="wd-bold-font pe-2">{profileData.followers ? profileData.followers.length : 0}</span>
                                 <span>Followers</span>
                             </button>
                         </div>
                         <div className="wd-display-conditional-block wd-follow-value-dims wd-fg-color-white wd-font-size-20">
                             <button onClick={() => setFollowPopupVals('following')} className="wd-follower-button ps-0 pe-0">
-                                <span className="wd-bold-font pe-2">{profileData.followingCount}</span>
+                                <span className="wd-bold-font pe-2">{profileData.following ? profileData.following.length : 0}</span>
                                 <span>Following</span>
                             </button>
                         </div>
@@ -248,10 +278,9 @@ const ProfileScreen = () => {
                                 {profileData.website}
                             </a>
                         }
-
                     </div>
                 </div>
-                <div className="wd-inline-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-1 pb-2">
+                <div className="wd-inline-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2">
                     {renderUserInfo()}
                 </div>
             </div>

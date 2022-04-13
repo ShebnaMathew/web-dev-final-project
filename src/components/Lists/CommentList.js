@@ -4,6 +4,7 @@ import './list.css';
 
 const CommentList = (comments = { comments: [] }) => {
     const commentContents = comments.comments;
+    console.log(commentContents)
     return (
         <>
             {
@@ -12,7 +13,12 @@ const CommentList = (comments = { comments: [] }) => {
             }
             {
                 (commentContents !== undefined && commentContents.length === 0) &&
-                <div className="wd-empty-list">No comments... yet!!</div>
+                <div className="wd-empty-list">
+                    <div className="wd-empty-list-content-pos">
+                        <i className="fa fa-2x fa-dizzy"/>
+                        <div>There's nothing here...</div>
+                    </div>
+                </div>
             }
         </>
     )
