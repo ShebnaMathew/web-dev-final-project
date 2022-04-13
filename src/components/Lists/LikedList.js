@@ -17,7 +17,12 @@ const LikedList = (likes = {likes:[]}) => {
             }
             {
                 (likeContent !== undefined && likeContent.length === 0) &&
-                <div className="wd-empty-list">No likes... yet!!</div>
+                <div className="wd-empty-list">
+                    <div className="wd-empty-list-content-pos">
+                        <i className="fa fa-2x fa-dizzy"/>
+                        <div>There's nothing here...</div>
+                    </div>
+                </div>
             }
         </>
     )

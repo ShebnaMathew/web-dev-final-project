@@ -1,5 +1,5 @@
 // get profile of logged in user
-import {createUser, getProfile, login, updateUserProfile, getUser, logout} from "../services/backend/backend-service";
+import {createUser, getProfile, login, updateUserProfile, getUser, logout} from "../services/backend/profile-service";
 
 export const SET_USER = "set-user";
 export const SET_PROFILE_DATA = "set-profile-data";

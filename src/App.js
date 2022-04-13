@@ -1,5 +1,5 @@
 import {BrowserRouter,Routes,Route} from "react-router-dom";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import MainScreen from "./components/Main";
 import SearchScreen from "./components/Search";
 import './vendors/bootstrap/css/bootstrap.min.css';
@@ -9,7 +9,7 @@ import './App.css';
 import './components/Header/header.css';
 import Profile from "./components/Profile/ProfileScreen";
 import EditProfile from "./components/Profile/EditProfileScreen";
-import {Provider} from 'react-redux';
+import {Provider, useSelector} from 'react-redux';
 import {createStore, combineReducers} from "redux";
 import profileReducer from "./reducers/profileReducer";
 import searchReducer from "./reducers/searchReducer";
@@ -30,8 +30,6 @@ const reducer = combineReducers(
     newsResults: newsReducer
 })
 const store = createStore(reducer);
-
-authorize();
 
 function App() {
   return (

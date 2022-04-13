@@ -83,7 +83,7 @@
     width: 180px;
     height: 30px;
     line-height: 1;
-    left: calc(50% - 80px);
+    left: calc(50% - 85px);
 }
 
 .wd-main-info-dims {
@@ -93,6 +93,13 @@
 
 .wd-edit-profile-max-width {
     max-width: 696px;
+}
+
+.wd-edit-profile-error-message {
+    width: 100%;
+    text-align: center;
+    color: red;
+    font-weight: bold;
 }
 
 @media (min-width: 768px) {

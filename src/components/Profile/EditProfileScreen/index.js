@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import './edit-profile.css';
 import '../profile-main.css';
 import {useDispatch, useSelector} from "react-redux";
@@ -7,7 +7,7 @@ import RegisterArtistPopUp from "../../PopUp/RegisterPopUp/RegisterArtistPopUp";
 import {Link} from "react-router-dom";
 import {saveProfileDataAction} from "../../../actions/profile-actions";
 import RegisterAdminPopUp from "../../PopUp/RegisterPopUp/RegisterAdminPopUp";
-import {getProfile} from "../../../services/backend/backend-service";
+import {getProfile} from "../../../services/backend/profile-service";
 
 const EditProfileScreen = () => {
 
@@ -15,6 +15,9 @@ const EditProfileScreen = () => {
     const [showRegisterAdmin, setShowRegisterAdmin] = useState(false);
     const [isArtist, setIsArtist] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [error, setError] = useState("");
+
+    const imageRef = useRef();
 
     const [profile, setProfile] = useState({})
 
@@ -29,8 +32,6 @@ const EditProfileScreen = () => {
         setIsArtist(profileData.isArtist);
         setIsAdmin(profileData.isAdmin);
     }
-
-    console.log(profile)
 
     // force wait on render for edit profile
     // prevents users from attempting to access and edit profile that does not belong to them
@@ -92,6 +93,32 @@ const EditProfileScreen = () => {
         }
     }
 
+    const convertImageToString = async (event) => {
+        const file = event.target.files[0];
+
+        const image = new Image();
+        image.src = URL.createObjectURL(file);
+        image.onload = () => {
+            if (image.width !== image.height) {
+                setError("Image must be a square");
+                return;
+            }
+
+            setError("");
+
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                const base64String = reader.result
+                setProfile({
+                    ...profile,
+                    profilePicture: base64String
+                })
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
     return(
         <div className="wd-edit-profile-max-width wd-center-edit-profile">
             {renderRegisterArtistPopUp()}
@@ -101,9 +128,21 @@ const EditProfileScreen = () => {
                     <img className="img-fluid wd-profile-picture-dims wd-circle-image" src={profile.profilePicture ? profile.profilePicture : "/images/blank-profile-picture.png"} alt=""/>
                     <div className="wd-profile-picture-dims wd-edit-profile-picture-overlay-position">
                         <div className="wd-edit-profile-image-filter wd-circle-image wd-edit-border-transparent"/>
-                        <button className="wd-edit-profile-overlay-button wd-edit-profile-picture-button">
-                            <i className="fa fa-camera"/>
-                        </button>
+                        <input
+                            type="file"
+                            accept="image/png, image/jpeg, image/jpg"
+                            style={{ display: 'none' }}
+                            id="image-upload"
+                            ref={imageRef}
+                            onChange={(event) => convertImageToString(event)}
+                        />
+                        <label htmlFor="image-upload">
+                            <button
+                                onClick={() => imageRef.current.click()}
+                                className="wd-edit-profile-overlay-button wd-edit-profile-picture-button">
+                                <i className="fa fa-camera"/>
+                            </button>
+                        </label>
                     </div>
                 </div>
                 <div className="wd-display-inline-block wd-edit-info-padding wd-position-relative wd-full-height wd-main-info-dims">
@@ -171,6 +210,9 @@ const EditProfileScreen = () => {
             </div>
             {renderRegisterArtistButton()}
             {renderRegisterAdminButton()}
+            <div className="wd-edit-profile-error-message pt-3">
+                {error ? "Error: " + error : ""}
+            </div>
         </div>
     )
 }
