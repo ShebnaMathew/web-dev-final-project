@@ -1,10 +1,16 @@
 import axios from "axios";
 
 const SPOTIFY_CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-const SPOTIFY_CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
+const SPOTIFY_CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
+
 const tokenEndpoint = 'https://accounts.spotify.com/api/token'
 const searchEndpoint = 'https://api.spotify.com/v1/search'
 const artistEndpoint = 'https://api.spotify.com/v1/artists'
+const albumEndpoint = 'https://api.spotify.com/v1/albums'
+const trackEndpoint = 'https://api.spotify.com/v1/tracks'
+const showEndpoint = 'https://api.spotify.com/v1/shows'
+const episodeEndpoint = 'https://api.spotify.com/v1/episodes'
+const playlistEndpoint = 'https://api.spotify.com/v1/playlists'
 
 let bearerToken = "";
 
@@ -28,6 +34,17 @@ export const authorize = async () => {
 
 }
 
+const getResponse = async (url) => {
+    let config = {
+        headers: {
+            'Authorization': 'Bearer ' + bearerToken,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }
+    const response = await axios.get(url, config);
+    return response.data;
+}
+
 export const search = async (searchString) => {
     const fullUrl = searchEndpoint + "?type=artist,album,playlist,track,show,episode&market=US&limit=20&q=" + searchString;
 
@@ -43,7 +60,7 @@ export const search = async (searchString) => {
 }
 
 export const getNewMusic = async () => {
-    const fullUrl = searchEndpoint + "?type=artist,album,playlist,track,show,episode&market=US&limit=20&q=tag:new";
+    const fullUrl = searchEndpoint + "?type=artist,album,playlist,track,show,episode&market=US&limit=48&q=tag:new";
 
     let config = {
         headers: {
@@ -90,3 +107,44 @@ export const getArtist = async (artistId, artistName) => {
     return artistName === returnedName;
 
 }
+
+export const getAlbumTracks = (albumId) => {
+    const fullUrl = `${albumEndpoint}/${albumId}/tracks`;
+    return getResponse(fullUrl);
+}
+
+export const getTrack = (trackId) => {
+    const fullUrl = `${trackEndpoint}/${trackId}`;
+    return getResponse(fullUrl);
+}
+
+export const getAlbum = (albumId) => {
+    const fullUrl = `${albumEndpoint}/${albumId}`;
+    return getResponse(fullUrl);
+}
+
+export const getPlaylistTracks = (playlistId) => {
+    const fullUrl = `${playlistEndpoint}/${playlistId}/tracks?market=US`;
+    return getResponse(fullUrl);
+}
+
+export const getPlaylist = (playlistId) => {
+    const fullUrl = `${playlistEndpoint}/${playlistId}`;
+    return getResponse(fullUrl);
+}
+
+export const getShowEpisodes = (showId, offset) => {
+    const fullUrl = `${showEndpoint}/${showId}/episodes?market=US&limit=50&offset=${offset}`;
+    return getResponse(fullUrl);
+}
+
+export const getEpisode = (episodeId) => {
+    const fullUrl = `${episodeEndpoint}/${episodeId}?market=US`;
+    return getResponse(fullUrl);
+}
+
+export const getShow = (showId) => {
+    const fullUrl = `${showEndpoint}/${showId}?market=US`;
+    return getResponse(fullUrl);
+}
+

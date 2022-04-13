@@ -1,0 +1,160 @@
+.wd-detail-img-height {
+    max-height: 400px;
+    max-width: 400px;
+}
+
+.wd-detail-text-deco-none {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.wd-detail-text-deco-none:hover {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.wd-detail-bold-font {
+    font-weight: 900;
+    font-size: xx-large;
+}
+
+.wd-detail-sub-bold-font {
+    font-weight: 600;
+    font-size: large;
+}
+
+.wd-detail-bg-black {
+    background-color: inherit;
+}
+
+.wd-background-banner {
+    background-image: linear-gradient(to left, rgb(71, 83, 79), #060606);
+}
+
+.wd-background-banner-show {
+    background-image: linear-gradient(to left, #4c355b, #060606);
+}
+
+.wd-background-banner-playlist {
+    background-image: linear-gradient(to left, #7e5a33, #060606);
+}
+
+.wd-background-banner-episode {
+    background-image: linear-gradient(to left, #9c4a69, #060606);
+}
+
+.wd-background-banner-track {
+    background-image: linear-gradient(to left, #4a739c, #060606);
+}
+
+.wd-detail-box-shadow {
+    box-shadow: 1px 1px 10px 2px rgb(205, 197, 197);
+}
+
+.wd-detail-comment-overflow {
+    overflow-y: scroll;
+}
+
+.wd-details-comment-block {
+    position: relative;
+}
+
+.wd-details-comment-position {
+    position:absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.wd-details-comment-position-top {
+    position:absolute;
+    top:0;
+}
+
+.wd-detail-max-width {
+    width: 100%;
+    margin-right: 0%;
+    padding-right: 0%;
+}
+
+.wd-zero-margin {
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+}
+
+.wd-detail-parent {
+    max-height: 590px;
+}
+
+.wd-detail-self {
+    max-height: 500px;
+}
+
+.wd-list-no-border {
+    border-width: 0 0 0px !important;
+}
+
+.wd-details-width-height {
+    width: 50px;
+    height: 50px;
+}
+
+.wd-detail-comment {
+    border-top: 1px solid grey;
+    background-color: inherit;
+}
+
+.wd-detail-comment::placeholder {
+    text-align: start;
+}
+
+.wd-detail-comment:focus {
+    background-color: inherit;
+    border: 0px solid transparent;
+    border-color: transparent;
+}
+
+.wd-detail-button-action {
+    border: none;
+    color: rgb(129, 193, 34);
+    font-weight: bolder;
+}
+
+.wd-detail-comment-btn {
+    border: none;
+}
+
+.wd-detail-button {
+    background-color: inherit;
+    border: none;
+}
+
+.wd-detail-button:hover {
+    background-color: inherit;
+    color: greenyellow;
+    font-weight: bolder;
+}
+
+.wd-detail-button:active {
+    background-color: inherit;
+    border: 0px solid transparent;
+}
+
+.wd-details-container {
+  display: grid;
+  grid-template-columns:none;
+  grid-gap:10px;
+  border: none;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.wd-details-container-children {
+    box-sizing: border-box;
+}
+
+.wd-details-container-children-overflow {
+    overflow:auto;
+  height:0;
+  min-height:100%;
+}

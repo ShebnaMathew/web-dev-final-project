@@ -1,7 +1,21 @@
-import {getNewMusic, search} from "../services/spotify/spotify-service";
+import {getNewMusic, search, getAlbumTracks, getTrack, getAlbum, getShowEpisodes, getEpisode, 
+    getShow, getPlaylist, getPlaylistTracks} from "../services/spotify/spotify-service";
 
 export const UPDATE_NEWS = "update-news";
 export const UPDATE_SEARCH = "update-search";
+export const GET_ALBUM_TRACKS = "get-album-tracks";
+export const GET_TRACK = "get-track";
+export const GET_ALBUM = "get-album";
+export const SET_ALBUM = "set-album";
+export const GET_PLAYLIST_TRACKS = "get-playlist-tracks";
+export const GET_PLAYLIST = "get-playlist";
+export const GET_SHOW_EPISODES = "get-show-episodes";
+export const GET_EPISODE = "get-episode";
+export const GET_SHOW = "get-show";
+export const SET_SHOW = "set-show";
+export const SET_PLAYLIST = "set-playlist";
+export const GET_POSTS_TO_RENDER = "get-posts-to-render";
+export const GET_ALL_POSTS = "get-all-posts";
 
 export const searchNewMusicAction = async (dispatch) => {
     const results = await getNewMusic();
@@ -16,5 +30,132 @@ export const searchAction = async (dispatch, searchString) => {
     dispatch({
         type: UPDATE_SEARCH,
         results: results
+    })
+}
+
+export const getTracks = async (dispatch, albumId) => {
+    const results = await getAlbumTracks(albumId);
+    dispatch({
+        type: GET_ALBUM_TRACKS,
+        results: results
+    })
+}
+
+export const getTrackAction = async (dispatch, tracks) => {
+    let trackList = {}
+    for (const t of tracks) {
+        const results = await getTrack(t.id);
+        trackList[t.id] = results;
+    }
+    dispatch({
+        type: GET_TRACK,
+        results: trackList
+    })
+}
+
+export const getAlbumAction = async (dispatch, albumId) => {
+    const results = await getAlbum(albumId);
+    dispatch({
+        type: GET_ALBUM,
+        results: results
+    })
+}
+
+export const setCurrentAlbum = (dispatch, album) => {
+    dispatch({
+        type: SET_ALBUM,
+        results: album
+    })
+}
+
+export const setCurrentPlaylist = (dispatch, playlist) => {
+    dispatch({
+        type: SET_PLAYLIST,
+        results: playlist
+    })
+}
+
+export const getTracksForPlaylist = async (dispatch, playlistId) => {
+    const results = await getPlaylistTracks(playlistId);
+    console.log("tired: ", results)
+    dispatch({
+        type: GET_PLAYLIST_TRACKS,
+        results: results
+    })
+}
+
+export const getPlaylistTrackAction = async (dispatch, tracks) => {
+    let trackList = {}
+    for (const t of tracks) {
+        
+        const results = await getTrack(t.track.id);
+        trackList[t.track.id] = results;
+    }
+    dispatch({
+        type: GET_TRACK,
+        results: trackList
+    })
+}
+
+export const getPlaylistAction = async (dispatch, playlistId) => {
+    const results = await getPlaylist(playlistId);
+    dispatch({
+        type: GET_PLAYLIST,
+        results: results
+    })
+}
+
+export const getEpisodes = async (dispatch, showId, total) => {
+    let results = []
+    let i = 0;
+    while ( i < total) {
+        const temp = await getShowEpisodes(showId, i);
+        results = [...results, ...temp.items];
+        i = i + 50;
+    }
+    dispatch({
+        type: GET_SHOW_EPISODES,
+        results: results
+    })
+}
+
+export const getEpisodeAction = async (dispatch, episodes) => {
+    let episodeList = {}
+    for (const e of episodes) {
+        const results = await getEpisode(e.id);
+        episodeList[e.id] = results;
+    }
+    dispatch({
+        type: GET_EPISODE,
+        results: episodeList
+    })
+}
+
+export const getShowAction = async (dispatch, showId) => {
+    const results = await getShow(showId);
+    dispatch({
+        type: GET_SHOW,
+        results: results
+    })
+}
+
+export const setCurrentShow = (dispatch, show) => {
+    dispatch({
+        type: SET_SHOW,
+        results: show
+    })
+}
+
+export const setPostsToRender = (dispatch, posts) => {
+    dispatch({
+        type: GET_POSTS_TO_RENDER,
+        results: posts
+    })
+}
+
+export const setAllPosts = (dispatch, posts) => {
+    dispatch({
+        type: GET_ALL_POSTS,
+        results: posts
     })
 }

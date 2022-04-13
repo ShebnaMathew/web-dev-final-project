@@ -31,10 +31,15 @@
 }
 
 .wd-post-max-height {
-    height: 170px;
+    height: 125px;
 }
 
 .wd-image-size {
     width: 332px;
     height: 332px;
+}
+
+.wd-post-text-decoration {
+    text-decoration: none;
+    cursor:pointer;
 }

@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react";
-import {Link, Outlet} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {Outlet} from "react-router-dom";
 import './main.css';
 import {useDispatch} from "react-redux";
-import {getCurrentUserAction, loginAction} from "../../actions/profile-actions";
+import {getCurrentUserAction} from "../../actions/profile-actions";
+import { searchNewMusicAction} from "../../actions/search-actions";
 import {authorize} from "../../services/spotify/spotify-service";
 
 const MainScreen = () => {
@@ -15,8 +16,12 @@ const MainScreen = () => {
     }, [])
 
     const dispatch = useDispatch();
-
+    
     getCurrentUserAction(dispatch);
+
+    useEffect(() => {
+        searchNewMusicAction(dispatch);
+    }, [])
 
     return(
         <>
