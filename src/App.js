@@ -17,6 +17,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import NewsFeed from "./components/NewsFeed";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 import {authorize} from "./services/spotify/spotify-service";
 import newsReducer from "./reducers/newsReducer";
 import userReducer from "./reducers/userReducer";
@@ -31,28 +32,27 @@ const reducer = combineReducers(
 const store = createStore(reducer);
 
 function App() {
-
-    return (
-        <BrowserRouter>
-            <Provider store={store}>
-                <Header/>
-                <div className="container wd-min-body-width">
-                    <Routes>
-                        <Route path="/" element={<MainScreen/>}>
-                            <Route path="/" element={<NewsFeed/>}/>
-                            <Route path="/profile" element={<Profile/>}/>
-                            <Route path="/profile/:_id" element={<Profile/>}/>
-                            <Route path="/editProfile" element={<EditProfile/>}/>
-                            {/*<Route path="/search" element={<SearchScreen/>}/> /!* can show a blank no results page once things are set up - or just remove this path?*!/*/}
-                            <Route path="/search/:query"
-                                   element={<SearchScreen/>}/> {/* show results for a specific query*/}
-                            <Route path="/login" element={<Login/>}/>
-                            <Route path="/signup" element={<SignUp/>}/>
-                        </Route>
-                    </Routes>
-                </div>
-            </Provider>
-        </BrowserRouter>
+  return (
+    <BrowserRouter>
+        <Provider store={store}>
+            <Header/>
+            <div className="container wd-min-body-width">
+                <Routes>
+                    <Route path="/" element={<MainScreen/>}>
+                        <Route path="/" element={<NewsFeed/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
+                        <Route path="/profile/:_id" element={<Profile/>}/>
+                        <Route path="/editProfile" element={<EditProfile/>}/>
+                        {/*<Route path="/search" element={<SearchScreen/>}/> /!* can show a blank no results page once things are set up - or just remove this path?*!/*/}
+                        <Route path="/search/:query" element={<SearchScreen/>}/> {/* show results for a specific query*/}
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/signup" element={<SignUp/>}/>
+                        <Route path="/privacyPolicy" element={<PrivacyPolicy/>}/>
+                    </Route>
+                </Routes>
+            </div>
+        </Provider>
+    </BrowserRouter>
   );
 }
 
