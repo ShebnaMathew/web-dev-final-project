@@ -55,9 +55,8 @@ const ProfileScreen = () => {
                 }
             }
         }
-    }, [])
+    }, [profileData])
 
-    console.log(profileData)
 
     const renderContent = (content) => {
         switch (content) {
