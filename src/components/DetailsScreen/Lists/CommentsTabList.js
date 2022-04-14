@@ -1,5 +1,5 @@
-import {addComment, deleteComment} from "../../../services/backend/comment-service";
-import {likeContent, unlikeContent} from "../../../services/backend/like-service";
+import {addComment, deleteComment, getComments} from "../../../services/backend/comment-service";
+import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
 
 const CommentsTabList = () => {
 
