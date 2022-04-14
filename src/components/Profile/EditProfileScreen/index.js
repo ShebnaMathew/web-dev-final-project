@@ -120,10 +120,11 @@ const EditProfileScreen = () => {
     }
 
     return(
+        <div className="row justify-content-center pt-3">
         <div className="wd-edit-profile-max-width wd-center-edit-profile">
             {renderRegisterArtistPopUp()}
             {renderRegisterAdminPopUp()}
-            <div className="wd-profile-header-info-dims wd-position-relative wd-display-flex pt-2">
+            <div className="wd-profile-header-info-dims wd-position-relative wd-display-flex pt-2 ps-5">
                 <div className=" wd-display-inline-block pe-2 wd-position-relative">
                     <img className="img-fluid wd-profile-picture-dims wd-circle-image" src={profile.profilePicture ? profile.profilePicture : "/images/blank-profile-picture.png"} alt=""/>
                     <div className="wd-profile-picture-dims wd-edit-profile-picture-overlay-position">
@@ -213,6 +214,7 @@ const EditProfileScreen = () => {
             <div className="wd-edit-profile-error-message pt-3">
                 {error ? "Error: " + error : ""}
             </div>
+        </div>
         </div>
     )
 }
