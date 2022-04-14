@@ -35,7 +35,7 @@ const Header = () => {
         <nav className={`navbar navbar-dark bg-dark fixed-top ${blur}`}>
             <div className="container-fluid">
                 <a href='#' className={`navbar-brand wd-bold wd-font-family wd-font-size ${(blur) ? 'wd-pointer-events-none': ''}`} onClick={() => navigate('/')}>
-                <img src="/images/headphones2.png" alt="" width="30" height="30" class="d-inline-block align-text-top"/>
+                <img src="/images/headphones2.png" alt="" width="30" height="30" className="d-inline-block align-text-top"/>
                     ommentify</a>
                 <div className="d-flex wd-header-center">
                     <input onChange={(event) => setSearchString(event.target.value)}

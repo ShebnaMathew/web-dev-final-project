@@ -92,11 +92,6 @@
         width: 1000px
     }
 
-    .wd-center-main-info-wide {
-        position: relative;
-        left: 90px;
-    }
-
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
@@ -164,5 +159,29 @@
     .wd-main-info-position {
         position: relative;
         top: calc(50% - 65px);
+    }
+}
+
+@media (min-width: 1200px) {
+    .wd-profile-content-width {
+        width: 1116px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .wd-profile-content-width {
+        width: 950px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .wd-profile-content-width {
+        width: 700px
+    }
+}
+
+@media (max-width: 767px) {
+    .wd-profile-content-width {
+        width: 600px
     }
 }
