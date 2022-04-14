@@ -207,15 +207,15 @@ const ProfileScreen = () => {
                 </div>
                 {renderPrivateInfo()}
                 {profileData.isAdmin &&
-                    <div>
+                    <div className="pe-3 wd-display-inline-block wd-hide-text-overflow">
                         <i className="fa fa-user-cog wd-font-size-16"/>
                         <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Admin</span>
                     </div>
                 }
                 {profileData.isArtist &&
-                    <div>
+                    <div className="pe-3 wd-display-inline-block wd-hide-text-overflow">
                         <i className="fa fa-guitar wd-font-size-16"/>
-                        <span className="ps-2 wd-font-size-16 wd-hide-text-overflow">Verified Artist</span>
+                        <Link to={`/artist/${profileData.artistId}`} className="ps-2 wd-font-size-16 wd-hide-text-overflow wd-artist-link-override">{profileData.artistName}</Link>
                     </div>
                 }
             </>

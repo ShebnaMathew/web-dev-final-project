@@ -63,14 +63,21 @@
     max-width: 1116px;
 }
 
-
-
 .wd-hide-text-overflow {
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 100%;
     overflow: hidden;
-    line-height: 1.1;
+    line-height: 1.0;
+}
+
+.wd-artist-link-override {
+    color: white;
+    text-decoration: none;
+}
+
+.wd-artist-link-override:hover {
+    color: lightgrey;
 }
 
 @media (min-width: 1200px) {
