@@ -75,22 +75,7 @@ export const getNewMusic = async () => {
 
 export const getArtist = async (artistId) => {
     const fullUrl = artistEndpoint + "/" + artistId;
-
-    let config = {
-        headers: {
-            'Authorization': 'Bearer ' + bearerToken,
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }
-
-    let error = false;
-    const response = await axios.get(fullUrl, config).catch(err => error = true);
-
-    if (error) {
-        return {};
-    }
-
-    return response.data;
+    return getResponse(fullUrl);
 }
 
 export const getAlbumTracks = (albumId) => {
