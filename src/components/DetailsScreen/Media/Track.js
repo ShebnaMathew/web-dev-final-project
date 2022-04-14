@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import CommentsTabList from "../Lists/CommentsTabList";
 import {createPost, getPost} from "../../../services/backend/post-service";
-
+import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
 
 const Track = () => {
     

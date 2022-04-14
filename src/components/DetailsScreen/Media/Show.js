@@ -5,7 +5,7 @@ import { getEpisodeAction, getEpisodes, setCurrentShow } from "../../../actions/
 import CommentsTabList from "../Lists/CommentsTabList";
 import EpisodeList from "../Lists/EpisodeList";
 import {createPost, getPost} from "../../../services/backend/post-service";
-
+import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
 
 const Show = () => {
     

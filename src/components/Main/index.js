@@ -9,24 +9,20 @@ import {authorize} from "../../services/spotify/spotify-service";
 const MainScreen = () => {
 
     const [token, setToken] = useState(false);
+    const [user, setUser] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(async () => {
         await authorize();
         setToken(true);
-    }, [])
-
-    const dispatch = useDispatch();
-    
-    getCurrentUserAction(dispatch);
-
-    useEffect(() => {
-        searchNewMusicAction(dispatch);
+        await getCurrentUserAction(dispatch);
+        setUser(true);
     }, [])
 
     return(
         <>
             <div className="wd-header-buffer"/>
-            {token && <Outlet/>}
+            {(token && user) && <Outlet/>}
         </>
     )
 }

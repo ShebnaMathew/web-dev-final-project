@@ -73,39 +73,9 @@ export const getNewMusic = async () => {
     return response.data;
 }
 
-export const getArtist = async (artistId, artistName) => {
-    const artistTag = 'artist/'
-    const start = artistId.indexOf(artistTag) + artistTag.length;
-    let end = artistId.slice(start).indexOf("/")
-
-    if (end < 0) {
-        end = artistId.length;
-    }
-
-    const id = artistId.slice(start, start + end);
-
-    const fullUrl = artistEndpoint + "/" + id;
-
-    let config = {
-        headers: {
-            'Authorization': 'Bearer ' + bearerToken,
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }
-
-    let error = false;
-    const response = await axios.get(fullUrl, config).catch(err => error = true);
-
-    if (error) {
-        return false;
-    }
-
-    console.log(response)
-
-    const returnedName = response.data.name;
-
-    return artistName === returnedName;
-
+export const getArtist = async (artistId) => {
+    const fullUrl = artistEndpoint + "/" + artistId;
+    return getResponse(fullUrl);
 }
 
 export const getAlbumTracks = (albumId) => {
@@ -118,9 +88,9 @@ export const getTrack = (trackId) => {
     return getResponse(fullUrl);
 }
 
-export const getAlbum = (albumId) => {
+export const getAlbum = async (albumId) => {
     const fullUrl = `${albumEndpoint}/${albumId}`;
-    return getResponse(fullUrl);
+    return await getResponse(fullUrl);
 }
 
 export const getPlaylistTracks = (playlistId) => {

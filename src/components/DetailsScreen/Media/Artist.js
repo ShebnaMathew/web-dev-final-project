@@ -1,5 +1,5 @@
 import {createPost, getPost} from "../../../services/backend/post-service";
-
+import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
 
 
 // PROBABLY DONT NEED THIS ONE

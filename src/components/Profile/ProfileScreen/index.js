@@ -9,9 +9,9 @@ import '../profile-main.css';
 import {Link, useParams} from "react-router-dom";
 import {getProfileAction} from "../../../actions/profile-actions";
 import PostList from "../../NewsFeed/PostList";
-import Post from "../../NewsFeed/Post";
 import {addFollowAction, removeFollowAction} from "../../../actions/follow-actions";
 import {getProfile} from "../../../services/backend/profile-service";
+import {getArtist, search} from "../../../services/spotify/spotify-service";
 
 const ProfileScreen = () => {
 
@@ -42,9 +42,9 @@ const ProfileScreen = () => {
     const [showFollow, setShowFollow] = useState(false);
     const [followTitle, setFollowTitle] = useState("followers")
 
+    const [music, setMusic] = useState([]);
     const [showPost, setShowPost] = useState(false);
     const [post, setPost] = useState('');
-
 
     useEffect(() => {
         if (!isCurrentUser && profileData.followers) {
@@ -58,22 +58,55 @@ const ProfileScreen = () => {
     }, [profileData])
 
 
+    const renderNothingHere = () => {
+        return (
+            <div className="wd-empty-list">
+                <div className="wd-empty-list-content-pos">
+                    <i className="fa fa-2x fa-dizzy"/>
+                    <div>There's nothing here...</div>
+                </div>
+            </div>
+        );
+    }
+
+    // const artist = await getArtist(profileData.artistId)
+    // const results = await search(artist.name);
+    // const albums = results.albums.items;
+
+
     const renderContent = (content) => {
         switch (content) {
             case 'likes':
-                return (
-                    <div className="wd-content-section wd-center-content wd-fg-color-white ps-3 pe-3">
-                        <LikedList likes={profileData.likes}/>
-                    </div>
-                );
+                if (profileData.likes && profileData.likes.length > 0) {
+                    return (
+                        <div className="wd-content-section wd-center-content wd-fg-color-white ps-3 pe-3">
+                            <PostList posts={profileData.likes}/>
+                        </div>
+                    )
+                } else {
+                    return renderNothingHere();
+                }
             case 'music':
-                return (!showPost ? <PostList posts={profileData.music} setShowPost={setShowPost} setPost={setPost}/>: <Post post={post} posts={[...profileData.music]} setShowPost={setShowPost} setPost={setPost}/>);
+                if (music.length > 0) {
+                    return <PostList posts={music}/>
+                } else {
+                    getArtist(profileData.artistId).then(async (artist) => {
+                        const results = await search(artist.name);
+                        const albums = results.albums.items;
+                        setMusic(albums)
+                    })
+                    return <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>
+                }
             default:
-                return (
-                    <div className="wd-content-section wd-center-content wd-fg-color-white ps-3 pe-3">
-                        <CommentList comments={profileData.comments}/>
-                    </div>
-                );
+                if (profileData.comments && profileData.comments.length > 0) {
+                    return (
+                        <div className="wd-content-section wd-center-content wd-fg-color-white ps-3 pe-3">
+                            <CommentList comments={profileData.comments}/>
+                        </div>
+                    )
+                } else {
+                    return renderNothingHere();
+                }
         }
     }
 

@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import './register-pop-up.css';
 import {useDispatch} from "react-redux";
 import {saveProfileDataAction} from "../../../actions/profile-actions";
-import {getArtist} from "../../../services/spotify/spotify-service";
+import {getAlbum, getArtist, search} from "../../../services/spotify/spotify-service";
+import {createPost} from "../../../services/backend/post-service";
 
 const RegisterArtistPopUp = ({ _id, setIsArtist }) => {
 
@@ -14,9 +15,24 @@ const RegisterArtistPopUp = ({ _id, setIsArtist }) => {
     const dispatch = useDispatch();
 
     const registerArtist = async () => {
-        const result = await getArtist(artistId, artistName);
-        if (result) {
-            await saveProfileDataAction(dispatch, { isArtist: true }, _id);
+
+        // pull id
+        const artistTag = 'artist/'
+        const start = artistId.indexOf(artistTag) + artistTag.length;
+        let end = artistId.slice(start).indexOf("/")
+
+        if (end < 0) {
+            end = artistId.length;
+        }
+
+        const id = artistId.slice(start, start + end);
+
+        const result = await getArtist(id);
+        if (result.name === artistName) {
+            await saveProfileDataAction(dispatch, {
+                isArtist: true,
+                artistId: id
+            }, _id);
             setIsArtist(true);
             setSuccessMessage("Success!")
         } else {
