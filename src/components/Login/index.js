@@ -53,16 +53,6 @@ const Login = (props) => {
                             <input type="password" onChange={(event) => setPassword(event.target.value)} className="form-control" placeholder="Enter Password" id="pw"/>
                         </div>
                     </div>
-                    <Link classname="text-decoration-none text-black" to="#">
-                        <span className="text-decoration-none text-black">Forgot password?</span>
-                    </Link>
-
-                    <div className="mt-2">
-                        <span>
-                            <input type="checkbox" checked="checked" name="remember"/>
-                            Remember me
-                        </span>
-                    </div>
                     <button type="button" onClick={() => login()} className="btn w-100 btn-success btn-lg mt-2 ">Login</button>
                     <span className="d-flex justify-content-center mt-3">
                         Don't have an account?

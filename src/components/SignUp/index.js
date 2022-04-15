@@ -6,8 +6,6 @@ import {useDispatch} from "react-redux";
 
 const SignUp = () => {
 
-    console.log('rendering page')
-
     const [email, setEmail] = useState('');
     const [emailVerify, setEmailVerify] = useState('');
     const [password, setPassword] = useState('');
