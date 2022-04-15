@@ -58,7 +58,6 @@ const SignUp = () => {
                                     password: password
                                 })
 
-        console.log(response)
         if (response !== 200) {
             setError(true);
         } else {

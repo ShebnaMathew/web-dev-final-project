@@ -162,6 +162,13 @@ const EditProfileScreen = () => {
                     </div>
                 </div>
             </div>
+            {
+                error &&
+                <div className="wd-edit-profile-error-message pt-3">
+                    Error: {error}
+                </div>
+            }
+
             <div className="mt-3 mb-3">
                 <div className="wd-edit-profile-text-entry ps-2 pe-2 pt-1 pb-1">
                     <label htmlFor="name" className="wd-font-12">Name</label>
@@ -211,9 +218,6 @@ const EditProfileScreen = () => {
             </div>
             {renderRegisterArtistButton()}
             {renderRegisterAdminButton()}
-            <div className="wd-edit-profile-error-message pt-3">
-                {error ? "Error: " + error : ""}
-            </div>
         </div>
         </div>
     )
