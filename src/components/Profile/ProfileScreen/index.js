@@ -31,11 +31,7 @@ const ProfileScreen = () => {
     const [ready, setReady] = useState(false);
 
     useEffect(async () => {
-        if (_id !== undefined) {
-            await getProfileAction(dispatch, _id)
-            setReady(true);
-            return;
-        }
+        await getProfileAction(dispatch, _id)
         setReady(true);
     }, [_id]);
 
@@ -75,11 +71,6 @@ const ProfileScreen = () => {
             </div>
         );
     }
-
-    // const artist = await getArtist(profileData.artistId)
-    // const results = await search(artist.name);
-    // const albums = results.albums.items;
-
 
     const renderContent = (content) => {
         switch (content) {
