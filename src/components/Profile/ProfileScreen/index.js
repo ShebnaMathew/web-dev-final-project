@@ -28,10 +28,15 @@ const ProfileScreen = () => {
         isCurrentUser = true;
     }
 
-    useEffect(() => {
+    const [ready, setReady] = useState(false);
+
+    useEffect(async () => {
         if (_id !== undefined) {
-            getProfileAction(dispatch, _id)
+            await getProfileAction(dispatch, _id)
+            setReady(true);
+            return;
         }
+        setReady(true);
     }, [_id]);
 
     const profileData = useSelector((state) => state.profile);
@@ -44,10 +49,10 @@ const ProfileScreen = () => {
     const [music, setMusic] = useState([]);
 
     useEffect(() => {
-        console.log('checking follow')
-        console.log(user._id)
-        console.log(profileData.followers)
-        console.log(profileData.followers.length)
+        if (!ready) {
+            return;
+        }
+
         if (!isCurrentUser && profileData.followers.length > 0) {
             for(const f of profileData.followers) {
                 if (f._id === user._id) {
@@ -195,7 +200,10 @@ const ProfileScreen = () => {
             );
         } else {
             return (
-                <button onClick={() => addFollow()} className="btn btn-secondary wd-username-button">Follow</button>
+                <button onClick={() => addFollow()}
+                        disabled={user._id === undefined}
+                        className="btn btn-secondary wd-username-button"
+                >Follow</button>
             );
         }
     }
@@ -275,74 +283,94 @@ const ProfileScreen = () => {
     }
 
     return(
-        <div className="row justify-content-center pt-3">
-            <div className="wd-profile-content-width">
-                {renderFollow()}
-                <div className="wd-profile-header-info-dims wd-profile-header-info-max-width wd-position-relative wd-display-flex wd-main-outer-padding pt-2">
-                    <div className=" wd-display-inline-block pe-2">
-                        <img className="img wd-profile-picture-dims wd-circle-image" src={profileData.profilePicture ? profileData.profilePicture : "/images/blank-profile-picture.png"} alt=""/>
-                    </div>
-                    <div className="wd-display-inline-block wd-full-height wd-main-info-dims-profile wd-main-info-padding wd-main-info-position">
-                        {!profileData.website &&
-                            <div className="wd-missing-website-margin"/>
-                        }
-                        <div className="wd-position-relative">
-                            <div className="wd-display-conditional-block wd-username-field-dims wd-fg-color-white wd-font-size-26 wd-bold-font">{profileData.username}</div>
-                            <div className="wd-display-conditional-block wd-username-button-position">
-                                {renderMainInfoButton()}
+        <>
+            {!ready && <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>}
+            {ready &&
+                <div className="row justify-content-center pt-3">
+                    <div className="wd-profile-content-width">
+                        {renderFollow()}
+                        <div
+                            className="wd-profile-header-info-dims wd-profile-header-info-max-width wd-position-relative wd-display-flex wd-main-outer-padding pt-2">
+                            <div className=" wd-display-inline-block pe-2">
+                                <img className="img wd-profile-picture-dims wd-circle-image"
+                                     src={profileData.profilePicture ? profileData.profilePicture : "/images/blank-profile-picture.png"}
+                                     alt=""/>
+                            </div>
+                            <div
+                                className="wd-display-inline-block wd-full-height wd-main-info-dims-profile wd-main-info-padding wd-main-info-position">
+                                {!profileData.website &&
+                                <div className="wd-missing-website-margin"/>
+                                }
+                                <div className="wd-position-relative">
+                                    <div
+                                        className="wd-display-conditional-block wd-username-field-dims wd-fg-color-white wd-font-size-26 wd-bold-font">{profileData.username}</div>
+                                    <div title={user._id === undefined ? "Login or Sign Up to follow this user" : ""} className="wd-display-conditional-block wd-username-button-position">
+                                        {renderMainInfoButton()}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        className="wd-display-conditional-block wd-follow-value-dims wd-fg-color-white wd-font-size-20 pe-3">
+                                        <button onClick={() => setFollowPopupVals('followers')}
+                                                className="wd-follower-button ps-0 pe-0">
+                                            <span
+                                                className="wd-bold-font pe-2">{profileData.followers ? profileData.followers.length : 0}</span>
+                                            <span>Followers</span>
+                                        </button>
+                                    </div>
+                                    <div
+                                        className="wd-display-conditional-block wd-follow-value-dims wd-fg-color-white wd-font-size-20">
+                                        <button onClick={() => setFollowPopupVals('following')}
+                                                className="wd-follower-button ps-0 pe-0">
+                                            <span
+                                                className="wd-bold-font pe-2">{profileData.following ? profileData.following.length : 0}</span>
+                                            <span>Following</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    {profileData.website &&
+                                    <a href={"https://" + profileData.website} rel="noreferrer" target="_blank"
+                                       className="wd-fg-color-white wd-font-size-20 wd-hide wd-website-link">
+                                        <i className="fa fa-link me-2"/>
+                                        {profileData.website}
+                                    </a>
+                                    }
+                                </div>
+                            </div>
+                            <div
+                                className="wd-inline-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2">
+                                {renderUserInfo()}
                             </div>
                         </div>
-                        <div>
-                            <div className="wd-display-conditional-block wd-follow-value-dims wd-fg-color-white wd-font-size-20 pe-3">
-                                <button onClick={() => setFollowPopupVals('followers')} className="wd-follower-button ps-0 pe-0">
-                                    <span className="wd-bold-font pe-2">{profileData.followers ? profileData.followers.length : 0}</span>
-                                    <span>Followers</span>
-                                </button>
-                            </div>
-                            <div className="wd-display-conditional-block wd-follow-value-dims wd-fg-color-white wd-font-size-20">
-                                <button onClick={() => setFollowPopupVals('following')} className="wd-follower-button ps-0 pe-0">
-                                    <span className="wd-bold-font pe-2">{profileData.following ? profileData.following.length : 0}</span>
-                                    <span>Following</span>
-                                </button>
-                            </div>
+                        <div
+                            className="wd-block-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2 mt-3">
+                            {renderUserInfo()}
                         </div>
-                        <div>
-                            {profileData.website &&
-                                <a href={"https://" + profileData.website} rel="noreferrer" target="_blank" className="wd-fg-color-white wd-font-size-20 wd-hide wd-website-link">
-                                    <i className="fa fa-link me-2"/>
-                                    {profileData.website}
-                                </a>
+                        <div
+                            className="wd-fg-color-white wd-profile-header-info-max-width wd-bottom-border-grey wd-description-info-padding pt-3 pb-3">
+                            {profileData.bio &&
+                            <div>
+                                <div className="wd-bold-font wd-font-size-20">Bio</div>
+                                <p className="wd-font-size-18 mb-0">{profileData.bio}</p>
+                            </div>
                             }
                         </div>
-                    </div>
-                    <div className="wd-inline-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2">
-                        {renderUserInfo()}
-                    </div>
-                </div>
-                <div className="wd-block-show-status wd-fg-color-white wd-support-info-dims wd-content-section ps-3 pt-2 pb-2 mt-3">
-                    {renderUserInfo()}
-                </div>
-                <div className="wd-fg-color-white wd-profile-header-info-max-width wd-bottom-border-grey wd-description-info-padding pt-3 pb-3">
-                    {profileData.bio &&
-                        <div>
-                            <div className="wd-bold-font wd-font-size-20">Bio</div>
-                            <p className="wd-font-size-18 mb-0">{profileData.bio}</p>
+                        <div className="mt-3 wd-profile-header-info-max-width">
+                            <ul className="nav justify-content-center">
+                                {renderNav(content, 'comments', 'Comments')}
+                                {renderNav(content, 'likes', 'Likes')}
+                                {profileData.isArtist && renderNav(content, 'music', 'Music')}
+                            </ul>
                         </div>
-                    }
-                </div>
-                <div className="mt-3 wd-profile-header-info-max-width">
-                    <ul className="nav justify-content-center">
-                        {renderNav(content, 'comments', 'Comments')}
-                        {renderNav(content, 'likes', 'Likes')}
-                        {profileData.isArtist && renderNav(content, 'music', 'Music')}
-                    </ul>
-                </div>
 
-            </div>
-            <div>
-                {renderContent(content)}
-            </div>
-        </div>
+                    </div>
+                    <div>
+                        {renderContent(content)}
+                    </div>
+                </div>
+            }
+        </>
     );
 }
 export default ProfileScreen;
