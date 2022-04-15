@@ -58,7 +58,8 @@ const SignUp = () => {
                                     password: password
                                 })
 
-        if (response !== 200) {
+        if (response.data && response.data.status === "fail") {
+            setErrorMessage(response.data.message)
             setError(true);
         } else {
             navigate('/', {replace: true})

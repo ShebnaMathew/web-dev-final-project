@@ -42,17 +42,20 @@ const ProfileScreen = () => {
     const [followTitle, setFollowTitle] = useState("followers")
 
     const [music, setMusic] = useState([]);
-    const [showPost, setShowPost] = useState(false);
-    const [post, setPost] = useState('');
 
     useEffect(() => {
-        if (!isCurrentUser && profileData.followers) {
+        console.log('checking follow')
+        console.log(user._id)
+        console.log(profileData.followers)
+        console.log(profileData.followers.length)
+        if (!isCurrentUser && profileData.followers.length > 0) {
             for(const f of profileData.followers) {
                 if (f._id === user._id) {
                     setIsFollowing(true)
-                    break;
+                    return;
                 }
             }
+            setIsFollowing(false)
         }
     }, [profileData])
 
