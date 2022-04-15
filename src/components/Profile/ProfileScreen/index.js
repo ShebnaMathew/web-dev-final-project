@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import CommentList from "../../Lists/CommentList";
-import LikedList from "../../Lists/LikedList";
 import PopUp from "../../PopUp/PopUp";
 import {useDispatch, useSelector} from "react-redux";
 import FollowPopUpList from "../../PopUp/FollowPopUp";
