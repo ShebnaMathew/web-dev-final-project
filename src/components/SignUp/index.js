@@ -4,6 +4,11 @@ import "./signup.css";
 import {createProfileAction} from "../../actions/profile-actions";
 import {useDispatch} from "react-redux";
 
+const uppercaseBank = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const lowercaseBank = "abcdefghijklmnopqrstuvwxyz";
+const numberBank = "1234567890";
+const punctuationBank = "!?.,:;\'\"@#$%^&*()[]{}\\|";
+
 const SignUp = () => {
 
     const [email, setEmail] = useState('');
@@ -26,14 +31,48 @@ const SignUp = () => {
             setErrorMessage('Email cannot be blank');
             return;
         }
-        if (password === '') {
+
+        // check password
+        let uppercase = false;
+        let lowercase = false;
+        let specialchar = false;
+        let number = false;
+        let length = password.length >= 8;
+
+        for (let i = 0; i < password.length; ++i) {
+            const currChar = password.charAt(i);
+            if (uppercaseBank.includes(currChar)) {
+                uppercase = true;
+            } else if (lowercaseBank.includes(currChar)) {
+                lowercase = true;
+            } else if (numberBank.includes(currChar)) {
+                number = true;
+            } else if (punctuationBank.includes(currChar)) {
+                specialchar = true;
+            }
+        }
+
+        if (!(uppercase && lowercase && specialchar && number && length)) {
             setError(true);
-            setErrorMessage('Password cannot be blank');
+            setErrorMessage(
+                'Password must meet the following criteria:\n\n' +
+                '- At least 8 characters in length\n' +
+                '- At least one lowercase letter\n' +
+                '- At least one uppercase letter\n' +
+                '- At least one special symbol\n' +
+                '- At least one number'
+            );
             return;
         }
         if (username === '') {
             setError(true);
             setErrorMessage('Username cannot be blank')
+            return;
+        }
+        if (username.length > 16) {
+            setError(true)
+            setErrorMessage('Username cannot be more than 16 characters')
+            return;
         }
         if (name === '') {
             setError(true);
@@ -77,7 +116,11 @@ const SignUp = () => {
             </div>
             {error &&
                 <div className="wd-error">
-                    Error: {errorMessage}
+                    {
+                        errorMessage.includes('\n') ? errorMessage.split('\n').map(l => {
+                            return (<div>{l}</div>)
+                        }) : errorMessage
+                    }
                 </div>
             }
             <div className="justify-content-center mt-3 form-inline" role="form">

@@ -20,7 +20,7 @@ const Login = (props) => {
         const response = await loginAction(dispatch, username, password)
         console.log(response)
         if (response !== 200) {
-            setErrorMessage("Unable to login")
+            setErrorMessage("Incorrect email/password")
             setError(true);
         } else {
             navigate('/', {replace: true})
