@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const api = axios.create({
     withCredentials: true,
-    origin: "localhost:3000"
+    origin: process.env.ORIGIN_URL || "localhost:3000"
 })
 
-const backendHost = "http://localhost:4000";
+const backendHost = process.env.BACKEND_URL || "http://localhost:4000";
 
 const likeContent = async (like_data) => {
     const response = await api.post(backendHost + '/content/like', like_data);
