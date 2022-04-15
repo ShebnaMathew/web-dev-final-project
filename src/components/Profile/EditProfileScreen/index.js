@@ -151,15 +151,28 @@ const EditProfileScreen = () => {
                     <div className="wd-display-conditional-block wd-edit-profile-button-position">
                         <div className="wd-edit-profile-username-position wd-edit wd-fg-color-white wd-font-size-26 wd-bold-font">{profile.username ? profile.username : ""}</div>
                         <button onClick={async () => {
-                                  const response = await saveProfileDataAction(dispatch, {
-                                                      ...profile
-                                                  }, profile._id)
-                                  if (response.data && response.data.status === "fail") {
-                                      setError(response.data.message);
-                                  } else {
-                                      navigate('/profile');
-                                  }
-                              }}
+                            if (profile.name.length === 0) {
+                                setError("Name cannot be blank")
+                                return;
+                            }
+                            if (profile.email.length === 0) {
+                                setError("Email cannot be blank");
+                                return;
+                            }
+                            if (profile.dob.length === 0) {
+                                setError("Date of Birth cannot be blank");
+                                return;
+                            }
+
+                            const response = await saveProfileDataAction(dispatch, {
+                                                ...profile
+                                            }, profile._id)
+                            if (response.data && response.data.status === "fail") {
+                                setError(response.data.message);
+                            } else {
+                                navigate('/profile');
+                            }
+                        }}
                               className="btn btn-secondary wd-edit-profile-header-button wd-edit-profile-button-display me-4">
                             Save Changes
                         </button>
