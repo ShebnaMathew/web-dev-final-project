@@ -16,8 +16,8 @@ export const getCurrentUserAction = async (dispatch) => {
 
 export const createProfileAction = async (dispatch, userData) => {
     const response = await createUser(userData);
-    if (response !== 200) {
-        return response.status;
+    if (response.data && response.data.status === "fail") {
+        return response;
     }
     await getCurrentUserAction(dispatch);
     return response;
@@ -48,9 +48,13 @@ export const getProfileAction = async (dispatch, id) => {
 }
 
 export const saveProfileDataAction = async (dispatch, newProfileData, id) => {
-    await updateUserProfile(newProfileData, id)
+    const response = await updateUserProfile(newProfileData, id)
+    if (response.data && response.data.status === "fail") {
+        return response;
+    }
     dispatch({
         type: SAVE_PROFILE_DATA,
         data: newProfileData
     })
+    return response;
 }

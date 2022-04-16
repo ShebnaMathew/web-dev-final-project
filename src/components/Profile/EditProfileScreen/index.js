@@ -4,7 +4,7 @@ import '../profile-main.css';
 import {useDispatch, useSelector} from "react-redux";
 import PopUp from "../../PopUp/PopUp";
 import RegisterArtistPopUp from "../../PopUp/RegisterPopUp/RegisterArtistPopUp";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {saveProfileDataAction} from "../../../actions/profile-actions";
 import RegisterAdminPopUp from "../../PopUp/RegisterPopUp/RegisterAdminPopUp";
 import {getProfile} from "../../../services/backend/profile-service";
@@ -16,10 +16,11 @@ const EditProfileScreen = () => {
     const [isArtist, setIsArtist] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [error, setError] = useState("");
+    const [profile, setProfile] = useState({})
 
     const imageRef = useRef();
 
-    const [profile, setProfile] = useState({})
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
@@ -120,10 +121,11 @@ const EditProfileScreen = () => {
     }
 
     return(
+        <div className="row justify-content-center pt-3">
         <div className="wd-edit-profile-max-width wd-center-edit-profile">
             {renderRegisterArtistPopUp()}
             {renderRegisterAdminPopUp()}
-            <div className="wd-profile-header-info-dims wd-position-relative wd-display-flex pt-2">
+            <div className="wd-profile-header-info-dims wd-position-relative wd-display-flex pt-2 ps-5">
                 <div className=" wd-display-inline-block pe-2 wd-position-relative">
                     <img className="img-fluid wd-profile-picture-dims wd-circle-image" src={profile.profilePicture ? profile.profilePicture : "/images/blank-profile-picture.png"} alt=""/>
                     <div className="wd-profile-picture-dims wd-edit-profile-picture-overlay-position">
@@ -148,19 +150,45 @@ const EditProfileScreen = () => {
                 <div className="wd-display-inline-block wd-edit-info-padding wd-position-relative wd-full-height wd-main-info-dims">
                     <div className="wd-display-conditional-block wd-edit-profile-button-position">
                         <div className="wd-edit-profile-username-position wd-edit wd-fg-color-white wd-font-size-26 wd-bold-font">{profile.username ? profile.username : ""}</div>
-                        <Link to="/profile"
-                              onClick={() => saveProfileDataAction(dispatch, {
-                                  ...profile
-                              }, profile._id)}
+                        <button onClick={async () => {
+                            if (profile.name.length === 0) {
+                                setError("Name cannot be blank")
+                                return;
+                            }
+                            if (profile.email.length === 0) {
+                                setError("Email cannot be blank");
+                                return;
+                            }
+                            if (profile.dob.length === 0) {
+                                setError("Date of Birth cannot be blank");
+                                return;
+                            }
+
+                            const response = await saveProfileDataAction(dispatch, {
+                                                ...profile
+                                            }, profile._id)
+                            if (response.data && response.data.status === "fail") {
+                                setError(response.data.message);
+                            } else {
+                                navigate('/profile');
+                            }
+                        }}
                               className="btn btn-secondary wd-edit-profile-header-button wd-edit-profile-button-display me-4">
                             Save Changes
-                        </Link>
+                        </button>
                         <Link to="/profile" className="btn btn-secondary wd-edit-profile-header-button wd-edit-profile-button-display">
                             Discard Changes
                         </Link>
                     </div>
                 </div>
             </div>
+            {
+                error &&
+                <div className="wd-edit-profile-error-message pt-3">
+                    Error: {error}
+                </div>
+            }
+
             <div className="mt-3 mb-3">
                 <div className="wd-edit-profile-text-entry ps-2 pe-2 pt-1 pb-1">
                     <label htmlFor="name" className="wd-font-12">Name</label>
@@ -210,9 +238,7 @@ const EditProfileScreen = () => {
             </div>
             {renderRegisterArtistButton()}
             {renderRegisterAdminButton()}
-            <div className="wd-edit-profile-error-message pt-3">
-                {error ? "Error: " + error : ""}
-            </div>
+        </div>
         </div>
     )
 }
