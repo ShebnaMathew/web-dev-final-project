@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const api = axios.create({
     withCredentials: true,
-    origin: "localhost:3000"
+    origin: process.env.ORIGIN_URL || "localhost:3000"
 })
 
-const backendHost = "http://localhost:4000"
+const backendHost = process.env.BACKEND_URL || "http://localhost:4000";
 
 const getUser = async () => {
     const response = await api.get(backendHost + '/profile');
@@ -13,8 +13,7 @@ const getUser = async () => {
 }
 
 const createUser = async (userData) => {
-    const response = await api.post(backendHost + '/profile', userData);
-    return response.status;
+    return await api.post(backendHost + '/profile', userData).catch(err => console.log(err));
 }
 
 const login = async (email, password) => {
@@ -28,7 +27,7 @@ const logout = async () => {
 }
 
 const updateUserProfile = async (updatedProfileInfo, id) => {
-    await api.put(backendHost + '/profile/' + id, updatedProfileInfo);
+    return await api.put(backendHost + '/profile/' + id, updatedProfileInfo);
 }
 
 const getProfile = async (id) => {
