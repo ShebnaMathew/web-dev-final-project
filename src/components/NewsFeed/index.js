@@ -46,7 +46,7 @@ const NewsFeed = () => {
                         let image = getImage(post);
 
                         return (
-                            <div class="card mb-3 me-3 wd-cursor mt-5" onClick={() => {
+                            <div key={post.id} className="card mb-3 me-3 wd-cursor mt-5" onClick={() => {
                                 setPostsToRender(dispatch, morePosts);
                                 navigate(`/post/${post.id}`, {state: {post: post, back: '/'}});
                                 window.scrollTo(0, 0);

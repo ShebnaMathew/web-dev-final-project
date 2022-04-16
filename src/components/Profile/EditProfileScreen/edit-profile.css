@@ -142,26 +142,16 @@
     }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 767px) {
     .wd-center-edit-profile {
         position: relative;
-        left: 225px;
         width: 696px;
     }
 }
 
-@media (min-width: 1200px) and (max-width: 1399px) {
+@media (max-width: 766px) {
     .wd-center-edit-profile {
         position: relative;
-        left: 225px;
-        width: 696px;
-    }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-    .wd-center-edit-profile {
-        position: relative;
-        left: 132px;
-        width: 696px;
+        max-width: 600px;
     }
 }
