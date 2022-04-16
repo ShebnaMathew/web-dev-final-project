@@ -1,17 +1,35 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import CommentsTabList from "../Lists/CommentsTabList";
 import {createPost, getPost} from "../../../services/backend/post-service";
 import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
+import { getShowAction, getSingleEpisode } from "../../../actions/search-actions";
+import { useEffect, useState } from "react";
 
 const Episode = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
 
+    let post = location.state.post;
+
+    // const episode = useSelector((state) => state.searchResults.current_episode);
     const show = useSelector((state) => state.searchResults.current_show);
+    //const [show, setUpdatedShow] = useState({});
 
-    const post = location.state.post;
+    
+    // useEffect(() => {
+    //     getSingleEpisode(dispatch, post.id);
+    // },[])
+
+
+
+    // console.log("post: ", post)
+    console.log("episode: ", post)
+    console.log("show: ", show)
+
+    //post = episode;
     
     // _MONGO: get likes and comments for this album
 

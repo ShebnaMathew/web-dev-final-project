@@ -44,7 +44,7 @@ const Playlist = () => {
                     <div class="row justify-content-md-center mb-5">
                         <div className="row justify-content-center mt-3">Playlist</div>
                         <p className="row text-center mt-1"><a href={post.external_urls.spotify} target="_blank" className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{post.name}</a></p>
-                        <a href="#" className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={() => navigate(`/profile/${post.owner.id}`)}>Owner: {post.owner.display_name}</a>
+                        <p className="row justify-content-center mt-1 wd-detail-sub-bold-font">Owner: {post.owner.display_name}</p>
                         {post.description !== "" && <div className="row justify-content-center mt-1">{post.description}</div>}
                         <div className="row justify-content-center mt-1">Total tracks: {post.tracks.total}</div>
                     </div>

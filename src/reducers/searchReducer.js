@@ -1,5 +1,5 @@
 import {UPDATE_SEARCH, GET_ALBUM_TRACKS, GET_TRACK, GET_ALBUM, SET_ALBUM, GET_SHOW_EPISODES, 
-    GET_EPISODE, SET_SHOW, GET_SHOW, GET_PLAYLIST_TRACKS, SET_PLAYLIST, GET_POSTS_TO_RENDER, GET_ALL_POSTS} from "../actions/search-actions";
+    GET_EPISODE, SET_SHOW, GET_SHOW, GET_PLAYLIST_TRACKS, SET_PLAYLIST, GET_POSTS_TO_RENDER, GET_ALL_POSTS, GET_ARTIST, GET_SINGLE_EPISODE} from "../actions/search-actions";
 import results from "./data/current-events.json";
 
 const searchReducer = (state = results, action) => {
@@ -22,6 +22,8 @@ const searchReducer = (state = results, action) => {
             return {...state, current_show_episodes: action.results};
         case GET_EPISODE:
             return {...state, current_episodes: action.results};
+        case GET_SINGLE_EPISODE:
+            return {...state, current_episode: action.results};
         case SET_SHOW:
             return {...state, current_show: action.results};
         case GET_SHOW:
@@ -30,6 +32,8 @@ const searchReducer = (state = results, action) => {
             return {...state, posts_to_render: action.results};
         case GET_ALL_POSTS:
             return {...state, all_posts: action.results};
+        case GET_ARTIST:
+            return {...state, current_artist: action.results};
         default:
             return (state);
     }

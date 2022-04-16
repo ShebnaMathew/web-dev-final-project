@@ -2,7 +2,6 @@ import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {aggregateSearchResults} from "../../util/AggregateUtil";
 import { shuffle } from "../../util/ShuffleUtil";
-import PostList from "./PostList";
 import StackGrid from "react-stack-grid";
 import './newsfeed.css';
 import {searchNewMusicAction, setAllPosts, setPostsToRender} from "../../actions/search-actions";
@@ -27,6 +26,10 @@ const NewsFeed = () => {
         // await getContentAction(dispatch, user._id)
         await searchNewMusicAction(dispatch);
         setReady(true)
+    }, [])
+
+    useEffect(() => {
+        setAllPosts(dispatch, posts);
     }, [])
 
     return(

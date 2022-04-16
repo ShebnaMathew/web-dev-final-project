@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate} from "react-router-dom";
-import { getTrackAction, getTracks, setCurrentAlbum } from "../../../actions/search-actions";
+import { getArtistAction, getTrackAction, getTracks, setCurrentAlbum } from "../../../actions/search-actions";
 import CommentsTabList from "../Lists/CommentsTabList";
 import TrackList from "../Lists/TrackList";
 import {createPost, getPost} from "../../../services/backend/post-service";
@@ -17,7 +17,8 @@ const Album = () => {
     const [showTracks, setShowTracks] = useState(true);
     const [showComments, setShowComments] = useState(false);
     const results = useSelector((state) => state.searchResults.current_album_tracks);
-
+    const artist = useSelector((state) => state.searchResults.current_artist);
+    
     const post = location.state.post;
 
     useEffect(() => {
@@ -28,6 +29,10 @@ const Album = () => {
     useEffect(() => {
         getTrackAction(dispatch, results);
     }, [results])
+
+    useEffect(() => {
+        getArtistAction(dispatch, post.artists[0].id);
+    },[post.artists[0].id])
     
     // _MONGO: get likes and comments for this album
 
@@ -48,7 +53,7 @@ const Album = () => {
                     <div class="row justify-content-md-center mb-5">
                         <div className="row justify-content-center mt-3">{post.album_type.charAt(0).toUpperCase() + post.album_type.substring(1)}</div>
                         <p className="row justify-content-center mt-1"><a href={post.external_urls.spotify} target="_blank" className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{post.name}</a></p>
-                        <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={() => navigate(`/profile/${post.artists[0].id}`)}>{post.artists[0].name}</a>
+                        <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={() => navigate(`/artist/${post.artists[0].id}`, {state: {post: artist, back: location.state.back}})}>{post.artists[0].name}</a>
                         <div className="row justify-content-center mt-1">Release date: {post.release_date}</div>
                         <div className="row justify-content-center mt-1">Total tracks: {post.total_tracks}</div>
                     </div>
