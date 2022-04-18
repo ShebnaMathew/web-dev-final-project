@@ -86,7 +86,7 @@ const ProfileScreen = () => {
                 }
             case 'music':
                 if (music.length > 0) {
-                    return <PostList posts={music}/>
+                    return <PostList music={music}/>
                 } else {
                     getArtist(profileData.artistId).then(async (artist) => {
                         const results = await search(artist.name);

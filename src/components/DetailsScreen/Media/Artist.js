@@ -4,6 +4,8 @@ import {createPost, getPost} from "../../../services/backend/post-service";
 import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
 import React, {useEffect, useState} from "react";
 import {getArtistAction} from "../../../actions/search-actions";
+import PostList from "../../NewsFeed/PostList";
+import {getArtist, search} from "../../../services/spotify/spotify-service";
 
 
 const Artist = () => {
@@ -16,9 +18,8 @@ const Artist = () => {
 
     const artist = useSelector((state) => state.searchResults.current_artist);
 
-    console.log(artist);
-
     const [pageReady, setPageReady] = useState(false);
+    const [music, setMusic] = useState([])
 
     useEffect(async () => {
         if (!pageReady) {
@@ -31,6 +32,27 @@ const Artist = () => {
 
     // check if we have a profile for this artist -> placeholder : 'artistPresent'
     let artistPresent = true; // for testing
+
+    const renderAlbums = () => {
+        if (music.length > 0) {
+            return(
+                <div>
+                    <h4 className="pt-4 ps-5">Albums from {artist.name}</h4>
+                    <PostList music={music}/>
+                </div>
+            )
+        } else {
+            getArtist(id).then(async (artist) => {
+                const results = await search(artist.name);
+                let albums = results.albums.items;
+                if (albums.length > 3) {
+                    albums = albums.slice(0, 3);
+                }
+                setMusic(albums)
+            })
+            return <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>
+        }
+    }
 
     return(
         <>
@@ -84,6 +106,7 @@ const Artist = () => {
                         </div>
                     </div>
                 </div>
+                {renderAlbums()}
             </div>
         }
         </>

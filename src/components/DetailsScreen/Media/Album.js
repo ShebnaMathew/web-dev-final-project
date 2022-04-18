@@ -26,7 +26,6 @@ const Album = () => {
     const [showTracks, setShowTracks] = useState(true);
     const [showComments, setShowComments] = useState(false);
     const album = useSelector((state) => state.searchResults.current_album);
-    const tracks = useSelector((state) => state.searchResults.current_album_tracks);
     const artist = useSelector((state) => state.searchResults.current_artist);
 
     const [albumReady, setAlbumReady] = useState(false);
@@ -38,7 +37,6 @@ const Album = () => {
         if (!albumReady) {
             await getAlbumAction(dispatch, id);
             setAlbumReady(true);
-            console.log('set album ready')
         }
     }, [])
 
@@ -47,7 +45,6 @@ const Album = () => {
             await getTracks(dispatch, album.id);
             await getArtistAction(dispatch, album.artists[0].id);
             setPageReady(true);
-            console.log('set page ready')
         }
     }, [albumReady])
 
