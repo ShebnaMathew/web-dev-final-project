@@ -11,15 +11,9 @@ const SearchScreen = () => {
     const params = useParams()
     const dispatch = useDispatch();
     const results = useSelector((state) => state.searchResults.results);
-
     const [ready, setReady] = useState(false);
 
     const query = params.query;
-
-    //const aggregatedResults = aggregateSearchResults(results);
-    //console.log("search results: ", aggregatedResults)
-
-    //console.log("albums results: ", results.albums)
 
     useEffect(async () => {
         setReady(false);
@@ -29,6 +23,7 @@ const SearchScreen = () => {
 
     return(
         <>
+            <h4 className="mt-4 ms-2 wd-fg-grey">Results for "{query}"</h4>
             {ready && results.albums.items.length > 0 &&
                 <SearchList posts={results.albums.items} media="Albums"/>
             }

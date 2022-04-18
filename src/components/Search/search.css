@@ -18,3 +18,7 @@
 .wd-search-min-width {
     min-width: min-content !important;
 }
+
+.wd-fg-grey {
+    color: grey;
+}

@@ -7,7 +7,7 @@ const TrackList = (props) => {
     
     const album_tracks = useSelector((state) => state.searchResults.current_album_tracks);
     const results = useSelector((state) => state.searchResults.current_tracks);
-
+    console.log("track results: ", results)
     return(
         <div className="row justify-content-md-center">
             <div class="list-group list-group-flush my-3 wd-detail-parent wd-detail-comment-overflow pe-0"> 
