@@ -27,6 +27,7 @@ const Show = () => {
     console.log("results in the show component: ", results)
     useEffect(() => {
         getEpisodeAction(dispatch, results);
+        // takes a little bit to run
     }, [results])
 
 

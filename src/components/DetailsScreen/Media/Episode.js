@@ -14,7 +14,7 @@ const Episode = () => {
 
     let post = location.state.post;
 
-    // going to episode directly -> post doesn't have a 'show' key - so this component won't render
+    // going to episode directly -> post doesn't have a 'show' key - so this component won't render for post.show
     // the current show reducer state will hold the last show that was visited, which may not be the show for an episode that's selected directly from the search
     const episode = useSelector((state) => state.searchResults.current_episode);
     const show = useSelector((state) => state.searchResults.current_show);
@@ -62,8 +62,8 @@ const Episode = () => {
                         <div className="row justify-content-center mt-3">Episode</div>
                         <p className="row text-center mt-1"><a href={post.external_urls.spotify} target="_blank" className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{post.name}</a></p>
                         <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={
-                            () => navigate(`/show/${post.show.id}`,{state: {post: show, back: location.state.back}})}>
-                                Show: {post.show.name}</a>
+                            () => navigate(`/show/${show.id}`,{state: {post: show, back: location.state.back}})}>
+                                Show: {show.name}</a>
                         <div className="row justify-content-center mt-1">Release date: {post.release_date}</div>
                         <p className="row justify-content-center mt-1">{post.description}</p>
                     </div>
