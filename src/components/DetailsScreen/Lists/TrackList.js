@@ -12,7 +12,7 @@ const TrackList = (props) => {
         <div className="row justify-content-md-center">
             <div class="list-group list-group-flush my-3 wd-detail-parent wd-detail-comment-overflow pe-0"> 
                 {album_tracks.map((t) => <a onClick={() => 
-                        navigate(`/track/${t.id}`,{state: {post: results[t.id], back: props.back}})
+                        navigate(`/track/${t.id}`,{state: { back: props.back}})
                 } class="list-group-item list-group-item-action wd-detail-bg-black wd-list-no-border">{t.name}</a>)}
             </div>
         </div>

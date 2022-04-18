@@ -18,6 +18,7 @@ export const GET_POSTS_TO_RENDER = "get-posts-to-render";
 export const GET_ALL_POSTS = "get-all-posts";
 export const GET_ARTIST = "get-artist";
 export const GET_SINGLE_EPISODE = "get-single-episode";
+export const GET_SINGLE_TRACK = "get-single-track";
 
 export const searchNewMusicAction = async (dispatch) => {
     const results = await getNewMusic();
@@ -60,6 +61,14 @@ export const getTrackAction = async (dispatch, tracks) => {
     dispatch({
         type: GET_TRACK,
         results: trackList
+    })
+}
+
+export const getSingleTrackAction = async (dispatch, trackId) => {
+    const result = await getTrack(trackId);
+    dispatch({
+        type: GET_SINGLE_TRACK,
+        results: result
     })
 }
 
