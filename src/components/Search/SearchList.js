@@ -21,12 +21,12 @@ const SearchList = (props) => {
 
                     return (
                             <div class="card mb-3 wd-cursor mt-2 wd-search-min-width me-3" onClick={() => {
-                                (post.type === "artist") && navigate(`/artist/${post.id}`, {state: {back: location.pathname, post: post}});
-                                (post.type === "album") && navigate(`/album/${post.id}`, {state: {back: location.pathname, post: post}});
-                                (post.type === "track") && navigate(`/track/${post.id}`, {state: {back: location.pathname, post: post}});
-                                (post.type === "playlist") && navigate(`/playlist/${post.id}`, {state: {back: location.pathname, post: post}});
-                                (post.type === "show") && navigate(`/show/${post.id}`, {state: {back: location.pathname, post: post}});
-                                (post.type === "episode") && navigate(`/episode/${post.id}`, {state: {back: location.pathname, post: post}});
+                                (post.type === "artist") && navigate(`/artist/${post.id}`, {state: {back: location.pathname}});
+                                (post.type === "album") && navigate(`/album/${post.id}`, {state: {back: location.pathname}});
+                                (post.type === "track") && navigate(`/track/${post.id}`, {state: {back: location.pathname}});
+                                (post.type === "playlist") && navigate(`/playlist/${post.id}`, {state: {back: location.pathname}});
+                                (post.type === "show") && navigate(`/show/${post.id}`, {state: {back: location.pathname}});
+                                (post.type === "episode") && navigate(`/episode/${post.id}`, {state: {back: location.pathname}});
                             }}>
                             <img src={image} className="card-img-top wd-image-size" alt="..."/>
                             <div className="card-body">
