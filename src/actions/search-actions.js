@@ -87,10 +87,11 @@ export const setCurrentAlbum = (dispatch, album) => {
     })
 }
 
-export const setCurrentPlaylist = (dispatch, playlist) => {
+export const getCurrentPlaylist = async (dispatch, playlist_id) => {
+    const results = await getPlaylist(playlist_id)
     dispatch({
         type: SET_PLAYLIST,
-        results: playlist
+        results: results
     })
 }
 

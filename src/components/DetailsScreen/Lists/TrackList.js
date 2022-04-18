@@ -6,7 +6,6 @@ const TrackList = (props) => {
     const navigate = useNavigate();
     
     const album_tracks = useSelector((state) => state.searchResults.current_album_tracks);
-    const results = useSelector((state) => state.searchResults.current_tracks);
     console.log("track results: ", album_tracks)
     return(
         <div className="row justify-content-md-center">

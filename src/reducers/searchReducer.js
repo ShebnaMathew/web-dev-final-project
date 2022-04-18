@@ -1,5 +1,22 @@
-import {UPDATE_SEARCH, GET_ALBUM_TRACKS, GET_TRACK, GET_ALBUM, SET_ALBUM, GET_SHOW_EPISODES, 
-    GET_EPISODE, SET_SHOW, GET_SHOW, GET_PLAYLIST_TRACKS, SET_PLAYLIST, GET_POSTS_TO_RENDER, GET_ALL_POSTS, GET_ARTIST, GET_SINGLE_EPISODE, GET_SINGLE_TRACK} from "../actions/search-actions";
+import {
+    UPDATE_SEARCH,
+    GET_ALBUM_TRACKS,
+    GET_TRACK,
+    GET_ALBUM,
+    SET_ALBUM,
+    GET_SHOW_EPISODES,
+    GET_EPISODE,
+    SET_SHOW,
+    GET_SHOW,
+    GET_PLAYLIST_TRACKS,
+    SET_PLAYLIST,
+    GET_POSTS_TO_RENDER,
+    GET_ALL_POSTS,
+    GET_ARTIST,
+    GET_SINGLE_EPISODE,
+    GET_SINGLE_TRACK,
+    GET_PLAYLIST
+} from "../actions/search-actions";
 import results from "./data/current-events.json";
 
 const searchReducer = (state = results, action) => {
@@ -14,7 +31,7 @@ const searchReducer = (state = results, action) => {
             return {...state, current_album: action.results};
         case GET_ALBUM:
             return {...state, current_album: action.results};
-        case SET_PLAYLIST:
+        case GET_PLAYLIST:
             return {...state, current_playlist: action.results};
         case GET_PLAYLIST_TRACKS:
             return {...state, current_playlist_tracks: action.results.items};
