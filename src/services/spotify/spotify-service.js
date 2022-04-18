@@ -73,7 +73,7 @@ export const getNewMusic = async () => {
     return response.data;
 }
 
-export const getArtist = async (artistId) => {
+export const getArtist = (artistId) => {
     const fullUrl = artistEndpoint + "/" + artistId;
     return getResponse(fullUrl);
 }

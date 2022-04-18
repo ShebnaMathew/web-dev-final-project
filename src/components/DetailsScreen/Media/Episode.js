@@ -1,17 +1,47 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import CommentsTabList from "../Lists/CommentsTabList";
 import {createPost, getPost} from "../../../services/backend/post-service";
 import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
+import { getShowAction, getSingleEpisode } from "../../../actions/search-actions";
+import { useEffect, useState } from "react";
 
 const Episode = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
 
+    let post = location.state.post;
+
+    // going to episode directly -> post doesn't have a 'show' key - so this component won't render for post.show
+    // the current show reducer state will hold the last show that was visited, which may not be the show for an episode that's selected directly from the search
+    const episode = useSelector((state) => state.searchResults.current_episode);
     const show = useSelector((state) => state.searchResults.current_show);
+    //const [show, setUpdatedShow] = useState({});
 
-    const post = location.state.post;
+    console.log("WHAT DOES IT MEAAAAAAAAN")
+    // useEffect(() => {
+    //     if(!post.show) {
+    //         getSingleEpisode(dispatch, post.id);
+            
+    //     }
+    // },[])
+
+    // useEffect(() => {
+    //     if(!post.show) {
+    //         post = episode
+    //         getShowAction(dispatch,episode.show.id);
+    //     }
+    // }, [episode])
+
+
+
+    console.log("epi post: ", post)
+    // console.log("epi episode: ", episode)
+    // console.log("epi show: ", show)
+
+    //post = episode;
     
     // _MONGO: get likes and comments for this album
 

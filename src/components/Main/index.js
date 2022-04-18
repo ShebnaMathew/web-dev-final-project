@@ -3,7 +3,6 @@ import {Outlet} from "react-router-dom";
 import './main.css';
 import {useDispatch} from "react-redux";
 import {getCurrentUserAction} from "../../actions/profile-actions";
-import { searchNewMusicAction} from "../../actions/search-actions";
 import {authorize} from "../../services/spotify/spotify-service";
 
 const MainScreen = () => {

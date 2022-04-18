@@ -1,5 +1,5 @@
 import {getNewMusic, search, getAlbumTracks, getTrack, getAlbum, getShowEpisodes, getEpisode, 
-    getShow, getPlaylist, getPlaylistTracks} from "../services/spotify/spotify-service";
+    getShow, getPlaylist, getPlaylistTracks, getArtist} from "../services/spotify/spotify-service";
 
 export const UPDATE_NEWS = "update-news";
 export const UPDATE_SEARCH = "update-search";
@@ -16,6 +16,8 @@ export const SET_SHOW = "set-show";
 export const SET_PLAYLIST = "set-playlist";
 export const GET_POSTS_TO_RENDER = "get-posts-to-render";
 export const GET_ALL_POSTS = "get-all-posts";
+export const GET_ARTIST = "get-artist";
+export const GET_SINGLE_EPISODE = "get-single-episode";
 
 export const searchNewMusicAction = async (dispatch) => {
     const results = await getNewMusic();
@@ -29,6 +31,14 @@ export const searchAction = async (dispatch, searchString) => {
     const results = await search(searchString)
     dispatch({
         type: UPDATE_SEARCH,
+        results: results
+    })
+}
+
+export const getArtistAction = async (dispatch, artistId) => {
+    const results = await getArtist(artistId);
+    dispatch({
+        type: GET_ARTIST,
         results: results
     })
 }
@@ -77,7 +87,6 @@ export const setCurrentPlaylist = (dispatch, playlist) => {
 
 export const getTracksForPlaylist = async (dispatch, playlistId) => {
     const results = await getPlaylistTracks(playlistId);
-    console.log("tired: ", results)
     dispatch({
         type: GET_PLAYLIST_TRACKS,
         results: results
@@ -87,10 +96,10 @@ export const getTracksForPlaylist = async (dispatch, playlistId) => {
 export const getPlaylistTrackAction = async (dispatch, tracks) => {
     let trackList = {}
     for (const t of tracks) {
-        
         const results = await getTrack(t.track.id);
         trackList[t.track.id] = results;
     }
+    console.log("mil raha hai ya nahi: ", trackList)
     dispatch({
         type: GET_TRACK,
         results: trackList
@@ -125,9 +134,18 @@ export const getEpisodeAction = async (dispatch, episodes) => {
         const results = await getEpisode(e.id);
         episodeList[e.id] = results;
     }
+    console.log("episodeList in action: ",episodeList)
     dispatch({
         type: GET_EPISODE,
         results: episodeList
+    })
+}
+
+export const getSingleEpisode = async (dispatch, episodeId) => {
+    const results = await getEpisode(episodeId);
+    dispatch({
+        type: GET_SINGLE_EPISODE,
+        results
     })
 }
 

@@ -23,6 +23,7 @@ const SearchScreen = () => {
 
     return(
         <>
+            <h4 className="mt-4 ms-2 wd-fg-grey">Results for "{query}"</h4>
             {ready && results.albums.items.length > 0 &&
                 <SearchList posts={results.albums.items} media="Albums"/>
             }

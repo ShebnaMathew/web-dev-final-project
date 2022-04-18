@@ -5,10 +5,19 @@ import StackGrid from "react-stack-grid";
 import { setPostsToRender } from "../../actions/search-actions";
 import { getArtistName, getImage } from "../../util/GetPostDetails";
 
-const PostList = ({posts}) => {
+const PostList = ({music}) => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
+
+    let posts = useSelector((state) => state.searchResults.posts_to_render);
+    const allPosts = useSelector((state) => state.searchResults.all_posts);
+    const morePosts = allPosts.sort(() => .5 - Math.random()).slice(0, 3);
+     
+    if (location.pathname.startsWith('/profile')) {
+        posts = music;
+    }
 
     return(
         <div className="container">
@@ -20,7 +29,13 @@ const PostList = ({posts}) => {
 
                     return (
                         <div class="card mb-3 me-3 wd-cursor mt-5" onClick={() => {
-                            navigate(`/album/${post.id}`, {state: {back: location.pathname, post: post}});
+
+                            if (location.pathname.startsWith('/post')) {
+                                setPostsToRender(dispatch, morePosts);
+                                navigate(`/post/${post.id}`,{state: {post: post, back: '/'}});
+                            } else if (location.pathname.startsWith('/profile')) {
+                                navigate(`/album/${post.id}`, {state: {back: location.pathname, post: post}});
+                            }
                         }}>
                             <img src={image} className="card-img-top wd-image-size" alt="..."/>
                             <div className="card-body">
