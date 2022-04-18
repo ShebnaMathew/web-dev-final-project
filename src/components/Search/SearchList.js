@@ -10,8 +10,6 @@ const SearchList = (props) => {
     const location = useLocation();
     const dispatch = useDispatch();
 
-    const episode = useSelector((state) => state.searchResults.current_episode);
-
     return(
         <div class="container-fluid py-2 mt-3 mb-0">
             <h5 class="wd-font-family">{props.media} <i class="fa-solid fa-chevron-right"></i></h5>
@@ -28,11 +26,7 @@ const SearchList = (props) => {
                                 (post.type === "track") && navigate(`/track/${post.id}`, {state: {back: location.pathname, post: post}});
                                 (post.type === "playlist") && navigate(`/playlist/${post.id}`, {state: {back: location.pathname, post: post}});
                                 (post.type === "show") && navigate(`/show/${post.id}`, {state: {back: location.pathname, post: post}});
-                                if (post.type === "episode") {
-                                    getSingleEpisode(dispatch, post.id);
-                                    navigate(`/episode/${post.id}`, {state: {back: location.pathname, post: episode}});
-                                }
-
+                                (post.type === "episode") && navigate(`/episode/${post.id}`, {state: {back: location.pathname, post: post}});
                             }}>
                             <img src={image} className="card-img-top wd-image-size" alt="..."/>
                             <div className="card-body">

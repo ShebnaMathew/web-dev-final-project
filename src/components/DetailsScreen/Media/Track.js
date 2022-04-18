@@ -4,7 +4,7 @@ import CommentsTabList from "../Lists/CommentsTabList";
 import {createPost, getPost} from "../../../services/backend/post-service";
 import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
 import { useEffect } from "react";
-import { getArtistAction } from "../../../actions/search-actions";
+import { getAlbumAction, getArtistAction } from "../../../actions/search-actions";
 
 const Track = () => {
     
@@ -13,15 +13,16 @@ const Track = () => {
     const dispatch = useDispatch();
 
     const post = location.state.post;
-
+    console.log("post: ", post)
     const album = useSelector((state) => state.searchResults.current_album);
     const artist = useSelector((state) => state.searchResults.current_artist);
 
-    //console.log("post: ", post)
     useEffect(() => {
         getArtistAction(dispatch, post.artists[0].id);
+        getAlbumAction(dispatch, post.album.id);
     },[post.artists[0].id])
     
+
 
     // _MONGO: get likes and comments for this album
 

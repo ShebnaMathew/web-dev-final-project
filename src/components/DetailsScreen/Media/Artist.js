@@ -33,9 +33,9 @@ const Artist = () => {
                         <div className="row justify-content-center mt-5">Artist</div>
                         <p className="row justify-content-center text-center mt-1"><a href={post.external_urls.spotify} target="_blank" className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{post.name}</a></p>
                         {/* if they have a profile, we go to it */}
-                        {(artistPresent) && <a className="text-center justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={
+                        {(artistPresent) && <div className="text-center justify-content-center mt-1 wd-detail-sub-bold-font" onClick={
                             () => navigate(`/profile/${post.id}`,{state: {back: location.state.back}})}>
-                                <b className="text-center">Artist Profile</b><br/>{post.name}</a>}
+                                <b className="text-center">Artist Profile</b><br/><a className="wd-detail-text-deco-none" onClick={() => navigate(`/profile/${post.id}`,{state: {back: location.state.back}})}>{post.name}</a></div>}
                         {(post.genres.length > 0) && 
                         <div className="text-center justify-content-center mt-1">
                             <b className="text-center">Genres</b><br/>{post.genres.join(", ")}

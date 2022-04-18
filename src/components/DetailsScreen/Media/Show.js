@@ -24,11 +24,11 @@ const Show = () => {
         setCurrentShow(dispatch, post);
     }, [])
 
+    console.log("results in the show component: ", results)
     useEffect(() => {
         getEpisodeAction(dispatch, results);
     }, [results])
 
-    // _MONGO: get likes and comments for this show
 
     return(
         <div class="container wd-details-container wd-detail-max-width">

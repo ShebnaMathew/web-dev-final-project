@@ -134,6 +134,7 @@ export const getEpisodeAction = async (dispatch, episodes) => {
         const results = await getEpisode(e.id);
         episodeList[e.id] = results;
     }
+    console.log("episodeList in action: ",episodeList)
     dispatch({
         type: GET_EPISODE,
         results: episodeList
