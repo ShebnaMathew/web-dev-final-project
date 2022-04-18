@@ -98,7 +98,7 @@ const ProfileScreen = () => {
             default:
                 if (profileData.comments && profileData.comments.length > 0) {
                     return (
-                        <div className="wd-content-section wd-center-content wd-fg-color-white ps-3 pe-3">
+                        <div className="wd-content-section wd-fg-color-white ps-3 pe-3">
                             <CommentList comments={profileData.comments}/>
                         </div>
                     )
@@ -356,7 +356,7 @@ const ProfileScreen = () => {
                         </div>
 
                     </div>
-                    <div>
+                    <div className={`${content === "comments" ? "wd-profile-content-width" : ""}`}>
                         {renderContent(content)}
                     </div>
                 </div>
