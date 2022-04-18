@@ -1,17 +1,28 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import CommentsTabList from "../Lists/CommentsTabList";
 import {createPost, getPost} from "../../../services/backend/post-service";
 import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
+import { useEffect } from "react";
+import { getAlbumAction, getArtistAction } from "../../../actions/search-actions";
 
 const Track = () => {
     
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
 
-    const album = useSelector((state) => state.searchResults.current_album);
-    
     const post = location.state.post;
+    console.log("post: ", post)
+    const album = useSelector((state) => state.searchResults.current_album);
+    const artist = useSelector((state) => state.searchResults.current_artist);
+
+    useEffect(() => {
+        getArtistAction(dispatch, post.artists[0].id);
+        getAlbumAction(dispatch, post.album.id);
+    },[post.artists[0].id])
+    
+
 
     // _MONGO: get likes and comments for this album
 
@@ -33,7 +44,7 @@ const Track = () => {
                         <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={
                             () => navigate(`/album/${post.album.id}`,{state: {post: album, back: location.state.back}})}>
                                 Album: {post.album.name}</a>
-                        <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={() => navigate(`/profile/${post.artists[0].id}`)}>{post.artists[0].name}</a>
+                        <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font" onClick={() => navigate(`/artist/${post.artists[0].id}`, {state: {post: artist, back:location.state.back}})}>{post.artists[0].name}</a>
                         <div className="row justify-content-center mt-1">Release date: {post.album.release_date}</div>
                         <div className="row justify-content-center mt-1">Duration: {Math.floor(post.duration_ms / 60000)}m {Math.floor(post.duration_ms / 1000 - (Math.floor(post.duration_ms / 60000)) * 60)}s</div>
                         <div className="row justify-content-center mt-1">Popularity Score: {post.popularity}</div>

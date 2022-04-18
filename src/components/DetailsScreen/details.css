@@ -3,6 +3,11 @@
     max-width: 400px;
 }
 
+.wd-detail-img-height-artist {
+    max-height: 600px;
+    max-width: 600px;
+}
+
 .wd-detail-text-deco-none {
     text-decoration: none;
     color: inherit;
@@ -46,6 +51,14 @@
 
 .wd-background-banner-track {
     background-image: linear-gradient(to left, #4a739c, #060606);
+}
+
+.wd-background-banner-artist {
+    background-image: linear-gradient(to left, #965353, #060606);
+}
+
+.wd-background-banner-artist-reverse {
+    background-image: linear-gradient(to left, #060606, #965353);
 }
 
 .wd-detail-box-shadow {
@@ -158,3 +171,8 @@
   height:0;
   min-height:100%;
 }
+
+.wd-parent-height {
+    height: 100%;
+}
+

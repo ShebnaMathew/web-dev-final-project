@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { setPostsToRender } from "../../actions/search-actions";
+import { getArtistAction, setPostsToRender } from "../../actions/search-actions";
 import { getArtistId, getArtistName, getImage, getNumberOfTracksOrEpisodes, getReleaseDate } from "../../util/GetPostDetails";
 import PostList from "./PostList";
 
@@ -11,6 +12,7 @@ const Post = () => {
     const dispatch = useDispatch();
 
     const allPosts = useSelector((state) => state.searchResults.all_posts);
+    const artist = useSelector((state) => state.searchResults.current_artist);
 
     const post = location.state.post;
 
@@ -19,6 +21,10 @@ const Post = () => {
     const image = getImage(post);
     const releaseDate = getReleaseDate(post);
     const totalTracksOrEpisodes = getNumberOfTracksOrEpisodes(post);
+
+    useEffect(() => {
+        getArtistAction(dispatch, artistId);
+    },[artistId])
 
     return(
         <>
@@ -39,7 +45,7 @@ const Post = () => {
                     <div className="col-7">
                     <div className="card-body">
                         <div><a className="card-title h4 wd-post-text-decoration" onClick={() => {
-                            (post.type === "artist") && navigate(`/profile/${post.id}`);
+                            (post.type === "artist") && navigate(`/artist/${post.id}`, {state: {back: '/', post: post}});
                             (post.type === "album") && navigate(`/album/${post.id}`, {state: {back: '/', post: post}});
                             (post.type === "track") && navigate(`/track/${post.id}`, {state: {back: '/', post: post}});
                             (post.type === "playlist") && navigate(`/playlist/${post.id}`, {state: {back: '/', post: post}});
@@ -48,7 +54,7 @@ const Post = () => {
 
                         }}>{post.name}</a></div>
                         <div><a className="card-title h6 wd-post-text-decoration" onClick={() => {
-                            (artistId) && navigate(`/profile/${post.id}`)
+                            (artistId) && navigate(`/artist/${artistId}`, {state: {back: '/', post: artist}})
                         }}>{artistName}</a></div>
                         {releaseDate && <p className="card-text mt-4">Released on  {releaseDate}</p>}
                         {(post.type === 'album' || post.type === 'show') && <p className="card-text">{totalTracksOrEpisodes} {(post.type === 'album') ? ((totalTracksOrEpisodes === 1) ? 'track': 'tracks'):'episodes'}</p>}

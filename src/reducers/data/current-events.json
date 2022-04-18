@@ -7,7 +7,9 @@
   "current_playlist": {},
   "current_show_episodes": [],
   "current_episodes": {},
+  "current_episode": {},
   "current_show": {},
   "posts_to_render": {},
-  "all_posts": {}
+  "all_posts": {},
+  "current_artist": {}
 }
