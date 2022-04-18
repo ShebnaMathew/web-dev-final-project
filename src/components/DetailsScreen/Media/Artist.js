@@ -25,7 +25,7 @@ const Artist = () => {
             await getArtistAction(dispatch, id);
             setPageReady(true);
         }
-    })
+    }, [])
 
     // _MONGO: get likes and comments for this album
 
@@ -37,6 +37,7 @@ const Artist = () => {
         {!pageReady &&
             <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>
         }
+
         {pageReady &&
             <div class="container wd-details-container wd-detail-max-width">
                 <div class="row justify-content-center m-0 wd-details-container-children">
