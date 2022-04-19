@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
 import '../profile-main.css';
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {getProfileAction} from "../../../actions/profile-actions";
 import PostList from "../../NewsFeed/PostList";
 import {addFollowAction, removeFollowAction} from "../../../actions/follow-actions";
@@ -16,6 +16,7 @@ const ProfileScreen = () => {
 
     // get data from api
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     // fetch from session
     let { _id } = useParams();
@@ -31,6 +32,11 @@ const ProfileScreen = () => {
     const [ready, setReady] = useState(false);
 
     useEffect(async () => {
+        // hide profile page from user until they log in
+        if (user._id === undefined) {
+            navigate('/');
+            return;
+        }
         await getProfileAction(dispatch, _id)
         setReady(true);
     }, [_id]);
