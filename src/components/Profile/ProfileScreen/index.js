@@ -33,8 +33,9 @@ const ProfileScreen = () => {
 
     useEffect(async () => {
         // hide profile page from user until they log in
-        if (user._id === undefined) {
-            navigate('/');
+        if (_id === undefined) {
+            setReady(true);
+            setTimeout(() => navigate('/'), 1500)
             return;
         }
         await getProfileAction(dispatch, _id)
@@ -282,7 +283,7 @@ const ProfileScreen = () => {
     return(
         <>
             {!ready && <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>}
-            {ready &&
+            {ready && _id !== undefined ?
                 <div className="row justify-content-center pt-3">
                     <div className="wd-profile-content-width">
                         {renderFollow()}
@@ -365,6 +366,14 @@ const ProfileScreen = () => {
                     <div className={`${content === "comments" ? "wd-profile-content-width" : ""}`}>
                         {renderContent(content)}
                     </div>
+                </div>
+                :
+                <div className="wd-full-width wd-center-text wd-going-home-text pt-3">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div>Must be logged in to view profile</div>
+                    <div>Going home...</div>
                 </div>
             }
         </>
