@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
 import '../profile-main.css';
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import {getProfileAction} from "../../../actions/profile-actions";
 import PostList from "../../NewsFeed/PostList";
 import {addFollowAction, removeFollowAction} from "../../../actions/follow-actions";
@@ -17,6 +17,7 @@ const ProfileScreen = () => {
     // get data from api
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
 
     // fetch from session
     let { _id } = useParams();
@@ -30,17 +31,26 @@ const ProfileScreen = () => {
     }
 
     const [ready, setReady] = useState(false);
+    let timerId = -1;
 
     useEffect(async () => {
         // hide profile page from user until they log in
         if (_id === undefined) {
             setReady(true);
-            setTimeout(() => navigate('/'), 1500)
-            return;
+            const timer = () => { return setTimeout(() => navigate('/'), 5000); }
+            timerId = timer();
+
         }
         await getProfileAction(dispatch, _id)
         setReady(true);
     }, [_id]);
+
+    useEffect(() => {
+        return () => {
+            console.log("clearing timeout")
+            clearTimeout(timerId);
+        }
+    }, [])
 
     const profileData = useSelector((state) => state.profile);
 
@@ -372,8 +382,9 @@ const ProfileScreen = () => {
                     <br/>
                     <br/>
                     <br/>
+                    <i className="fa fa-2x wd-fg-color-white fa-exclamation-triangle"/>
                     <div>Must be logged in to view profile</div>
-                    <div>Going home...</div>
+                    <div>Going home in 5 seconds...</div>
                 </div>
             }
         </>
