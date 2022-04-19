@@ -56,7 +56,7 @@ const ProfileScreen = () => {
     const [isFollowing, setIsFollowing] = useState(false);
     const [content, setContent] = useState('comments');
     const [showFollow, setShowFollow] = useState(false);
-    const [followTitle, setFollowTitle] = useState("followers")
+    const [followTitle, setFollowTitle] = useState("followers");
 
     const [music, setMusic] = useState([]);
 
