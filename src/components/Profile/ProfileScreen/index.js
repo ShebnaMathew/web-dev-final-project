@@ -39,7 +39,7 @@ const ProfileScreen = () => {
             setReady(true);
             const timer = () => { return setTimeout(() => navigate('/'), 5000); }
             timerId = timer();
-
+            return;
         }
         await getProfileAction(dispatch, _id)
         setReady(true);
@@ -47,7 +47,6 @@ const ProfileScreen = () => {
 
     useEffect(() => {
         return () => {
-            console.log("clearing timeout")
             clearTimeout(timerId);
         }
     }, [])
