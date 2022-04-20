@@ -10,10 +10,10 @@ const backendHost = process.env.BACKEND_URL || "http://localhost:4000";
 const getContent = async (user_id) => {
     if (user_id === undefined) {
         const response = await api.get(backendHost + '/content');
-        return response.body.posts;
+        return response.data.posts;
     } else {
         const response = await api.get(backendHost + '/content/' + user_id);
-        return response.body.posts;
+        return response.data.posts;
     }
 }
 
