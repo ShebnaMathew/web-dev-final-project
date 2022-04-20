@@ -15,7 +15,7 @@ const getPost = async (post_data) => {
     const type = post_data.type;
     const id = post_data._id;
     const response = await api.get(backendHost + '/post/' + type + '/' + id);
-    return response.body;
+    return response.data;
 }
 
 export {
