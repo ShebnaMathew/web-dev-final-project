@@ -79,6 +79,17 @@
     color: lightgrey;
 }
 
+.wd-center-text {
+    text-align: center;
+}
+
+.wd-going-home-text > div {
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 24px;
+}
+
 @media (min-width: 1200px) {
     .wd-support-info-dims {
         width: 375px;
