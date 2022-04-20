@@ -41,7 +41,18 @@ export const searchAction = async (dispatch, searchString) => {
 }
 
 export const getArtistAction = async (dispatch, artistId) => {
-    const results = await getArtist(artistId);
+
+    let results = await getPost({type: "artist", _id: artistId});
+
+    if (results.status && results.status === "fail") {
+        results = await getArtist(artistId);
+        results = prepareData(results, "artist")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
+
     dispatch({
         type: GET_ARTIST,
         results: results

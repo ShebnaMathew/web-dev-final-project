@@ -71,7 +71,7 @@ const Artist = () => {
                     </div>
                     <div class="col col-lg-6 wd-background-banner-artist wd-details-container-children">
                         <div class="row justify-content-md-center my-5">
-                            <img src={artist.images[0].url} class="m-3 wd-detail-box-shadow wd-detail-img-height-artist"
+                            <img src={artist.image_url} class="m-3 wd-detail-box-shadow wd-detail-img-height-artist"
                                  alt="..."/>
                         </div>
                     </div>
@@ -80,23 +80,15 @@ const Artist = () => {
                             class="row justify-content-md-center wd-background-banner-artist-reverse wd-parent-height pt-2">
                             <div className="row justify-content-center mt-5">Artist</div>
                             <p className="row justify-content-center text-center mt-1"><a
-                                href={artist.external_urls.spotify} target="_blank"
+                                href={artist.spotify_url} target="_blank"
                                 className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{artist.name}</a>
                             </p>
-                            {/* if they have a profile, we go to it */}
-                            {(artistPresent) &&
-                            <div className="text-center justify-content-center mt-1 wd-detail-sub-bold-font" onClick={
-                                () => navigate(`/profile/${artist.id}`, {state: {back: location.state.back}})}>
-                                <b className="text-center">Artist Profile</b><br/><a
-                                className="wd-detail-text-deco-none"
-                                onClick={() => navigate(`/profile/${artist.id}`, {state: {back: location.state.back}})}>{artist.name}</a>
-                            </div>}
                             {(artist.genres.length > 0) &&
                             <div className="text-center justify-content-center mt-1">
-                                <b className="text-center">Genres</b><br/>{artist.genres.join(", ")}
+                                <b className="text-center">Genres</b><br/>{artist.genres}
                             </div>}
                             <div className="text-center justify-content-center mt-1">
-                                <b className="text-center">Followers</b><br/>{artist.followers.total}
+                                <b className="text-center">Followers</b><br/>{artist.followers_total}
                             </div>
                             <div className="text-center justify-content-center mt-1">
                                 <b className="text-center">Popularity Score</b><br/>{artist.popularity}

@@ -49,8 +49,7 @@ export const prepareData = (data, type) => {
                 spotify_url: data.external_urls.spotify,
                 genres: getGenres(data),
                 followers_total: data.followers.total,
-                popularity: data.popularity//,
-                // artist_present: null // maybe this can be added on the backend
+                popularity: data.popularity
             })
         case 'show':
             return({

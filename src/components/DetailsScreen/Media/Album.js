@@ -90,7 +90,7 @@ const Album = () => {
                                     className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{album.name}</a>
                             </p>
                             <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                               onClick={() => navigate(`/artist/${artist.id}`, {state: {back: location.state.back}})}>{album.artist_name}</a>
+                               onClick={() => navigate(`/artist/${album.artist_id}`, {state: {back: location.state.back}})}>{album.artist_name}</a>
                             <div className="row justify-content-center mt-1">Release date: {album.release_date}</div>
                             <div className="row justify-content-center mt-1">Total tracks: {album.total_tracks}</div>
                         </div>
