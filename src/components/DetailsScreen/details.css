@@ -33,6 +33,10 @@
     background-color: inherit;
 }
 
+.wd-liked-color {
+    color: red;
+}
+
 .wd-background-banner {
     background-image: linear-gradient(to left, rgb(71, 83, 79), #060606);
 }
@@ -115,6 +119,7 @@
 .wd-detail-comment {
     border-top: 1px solid grey;
     background-color: inherit;
+    color: white;
 }
 
 .wd-detail-comment::placeholder {
@@ -125,6 +130,7 @@
     background-color: inherit;
     border: 0px solid transparent;
     border-color: transparent;
+    color: white;
 }
 
 .wd-detail-button-action {
@@ -174,5 +180,17 @@
 
 .wd-parent-height {
     height: 100%;
+}
+
+.wd-detail-float-left {
+    float: left
+}
+
+.wd-detail-float-right {
+    float: right
+}
+
+.wd-detail-float-done {
+    clear: both;
 }
 

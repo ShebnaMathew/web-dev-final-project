@@ -19,7 +19,6 @@ const Artist = () => {
     console.log(artist);
 
     const [pageReady, setPageReady] = useState(false);
-
     useEffect(async () => {
         if (!pageReady) {
             await getArtistAction(dispatch, id);
