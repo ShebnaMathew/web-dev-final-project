@@ -6,6 +6,7 @@ import CommentsTabList from "../Lists/CommentsTabList";
 import EpisodeList from "../Lists/EpisodeList";
 import {createPost, getPost} from "../../../services/backend/post-service";
 import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
+import {likeAction, unlikeAction} from "../../../actions/like-action";
 
 const Show = () => {
     
@@ -18,14 +19,24 @@ const Show = () => {
 
     const [showEpisodes, setShowEpisodes] = useState(true);
     const [showComments, setShowComments] = useState(false);
-    const episodes = useSelector((state) => state.searchResults.current_show_episodes);
     const show = useSelector((state) => state.searchResults.current_show);
+    const user = useSelector((state) => state.user);
 
     const [showReady, setShowReady] = useState(false);
     const [pageReady, setPageReady] = useState(false);
-    const [likes, setLikes] = useState(0);
-    const [liked, setLiked] = useState("");
-    const [style, setStyle] = useState("far"); // get current user like stat
+
+
+    let thisLike = null;
+    let isLiked = false;
+    if (show.likes && user._id) {
+        for (const l of show.likes) {
+            if (l.liker_id === user._id) {
+                isLiked = true;
+                thisLike = l;
+                break;
+            }
+        }
+    }
 
     useEffect(async () => {
         if (!showReady) {
@@ -36,7 +47,7 @@ const Show = () => {
 
     useEffect(async () => {
         if (!pageReady && showReady) {
-            await getEpisodes(dispatch, id, show.episodes.total);
+            await getEpisodes(dispatch, id, show.total_episodes);
             setPageReady(true);
         }
         // takes a little bit to run
@@ -62,11 +73,11 @@ const Show = () => {
                     </div>
                     <div class="col col-lg-7 wd-background-banner-show wd-details-container-children">
                         <div class="row justify-content-md-center mt-5">
-                            <img src={show.images[0].url} class="m-3 wd-detail-box-shadow wd-detail-img-height"
+                            <img src={show.image_url} class="m-3 wd-detail-box-shadow wd-detail-img-height"
                                  alt="..."/>
                         </div>
                         <div class="row justify-content-md-center mb-5">
-                            <p className="row text-center mt-1"><a href={show.external_urls.spotify} target="_blank"
+                            <p className="row text-center mt-1"><a href={show.spotify_url} target="_blank"
                                                                    className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{show.name}</a>
                             </p>
                             <p className="row justify-content-center mt-1 wd-detail-sub-bold-font">by {show.publisher}</p>
@@ -81,13 +92,17 @@ const Show = () => {
                         <p className="mt-4">
                         <span>
                             {/* get likes from db */}
-                            <i className={`${style} fa-heart me-2 ${liked}`} onClick={() => {
-                                if (liked === "") {setLiked("wd-liked-color"); setStyle("fas")} else {setLiked(""); setStyle("far")}
+                            <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
+
+                                if (isLiked) {
+                                    await unlikeAction(dispatch, thisLike._id, "show", show)
+
+                                } else {
+                                    await likeAction(dispatch, user._id, show.post_id, "show", show)
+                                }
+
                             }}/>
-                            <b>324234</b>
-                            {/* when the db is ready, uncomment below */}
-                            {/* <b>{likes}</b> */}
-                            <span> likes</span>
+                            <b>{show.likes.length}</b>
                         </span>
                         </p>
                         <ul class="nav nav-tabs nav-fill">
@@ -107,7 +122,7 @@ const Show = () => {
                             </li>
                         </ul>
                         {showEpisodes && <EpisodeList back={location.state.back}/>}
-                        {showComments && <CommentsTabList/>}
+                        {showComments && <CommentsTabList comments={show.comments} type={"show"} body={show}/>}
                     </div>
                 </div>
             </div>

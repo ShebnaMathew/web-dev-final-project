@@ -1,4 +1,4 @@
-import {GET_ALBUM, GET_PLAYLIST, GET_SINGLE_EPISODE} from "./search-actions";
+import {GET_ALBUM, GET_PLAYLIST, GET_SHOW, GET_SINGLE_EPISODE} from "./search-actions";
 import {addComment, deleteComment} from "../services/backend/comment-service";
 
 export const addCommentAction = async (dispatch,
@@ -37,6 +37,9 @@ export const addCommentAction = async (dispatch,
         case "playlist":
             dispatch_type = GET_PLAYLIST;
             break;
+        case "show":
+            dispatch_type = GET_SHOW;
+            break
         default:
             dispatch_type = "";
     }
@@ -67,6 +70,9 @@ export const deleteCommentAction = async (dispatch, comment_id, type, body) => {
         case "playlist":
             dispatch_type = GET_PLAYLIST;
             break;
+        case "show":
+            dispatch_type = GET_SHOW;
+            break
         default:
             dispatch_type = "";
     }

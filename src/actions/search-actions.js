@@ -192,7 +192,17 @@ export const getSingleEpisode = async (dispatch, episodeId) => {
 }
 
 export const getShowAction = async (dispatch, showId) => {
-    const results = await getShow(showId);
+    let results = await getPost({type: "show", _id: showId});
+
+    if (results.status && results.status === "fail") {
+        results = await getShow(showId);
+        results = prepareData(results, "show")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
+
     dispatch({
         type: GET_SHOW,
         results: results

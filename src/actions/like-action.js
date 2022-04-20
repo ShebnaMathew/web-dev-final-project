@@ -1,4 +1,4 @@
-import {GET_ALBUM, GET_PLAYLIST, GET_SINGLE_EPISODE} from "./search-actions";
+import {GET_ALBUM, GET_PLAYLIST, GET_SHOW, GET_SINGLE_EPISODE} from "./search-actions";
 import {likeContent, unlikeContent} from "../services/backend/like-service";
 
 export const likeAction = async (dispatch, liker_id, post_id, type, body) => {
@@ -25,6 +25,9 @@ export const likeAction = async (dispatch, liker_id, post_id, type, body) => {
         case "playlist":
             dispatch_type = GET_PLAYLIST;
             break;
+        case "show":
+            dispatch_type = GET_SHOW;
+            break
         default:
             dispatch_type = "";
     }
@@ -55,6 +58,9 @@ export const unlikeAction = async (dispatch, like_id, type, body) => {
         case "playlist":
             dispatch_type = GET_PLAYLIST;
             break;
+        case "show":
+            dispatch_type = GET_SHOW;
+            break
         default:
             dispatch_type = "";
     }
