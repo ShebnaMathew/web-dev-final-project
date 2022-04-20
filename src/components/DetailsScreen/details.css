@@ -37,6 +37,14 @@
     color: red;
 }
 
+.wd-cursor-pointer {
+    cursor: pointer;
+}
+
+.wd-cursor-pointer:hover {
+    color: lightgrey;
+}
+
 .wd-background-banner {
     background-image: linear-gradient(to left, rgb(71, 83, 79), #060606);
 }

@@ -31,8 +31,8 @@ const RegisterArtistPopUp = ({ _id, setIsArtist }) => {
         if (result.name === artistName) {
             await saveProfileDataAction(dispatch, {
                 isArtist: true,
-                artistId: id,
-                artistName: artistName
+                artistId: result.id,
+                artistName: result.name
             }, _id);
             setIsArtist(true);
             setSuccessMessage("Success!")

@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import {addComment, deleteComment, getComments} from "../../../services/backend/comment-service";
-import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
+import { useNavigate } from "react-router-dom";
 import {addCommentAction, deleteCommentAction} from "../../../actions/comment-action";
 
 const CommentsTabList = ({comments, type, body}) => {
@@ -19,7 +17,8 @@ const CommentsTabList = ({comments, type, body}) => {
                     <div class="list-group list-group-flush my-3 pe-0">
                         {comments.map((c) => 
                             <p className="list-group-item my-0 wd-detail-bg-black wd-list-no-border">
-                                <span className="wd-newsfeed-bold-text me-2 wd-detail-float-left" onClick={() => navigate(`/profile/${c.commentor_id}`)}>
+                                <span className="wd-cursor-pointer wd-newsfeed-bold-text me-2 wd-detail-float-left"
+                                      onClick={() => (user && user._id) ? navigate('/profile') : navigate(`/profile/${c.commentor_id}`)}>
                                     {c.commentor_name}
                                 </span>
                                 <span className="wd-detail-float-left">{c.comment}</span>

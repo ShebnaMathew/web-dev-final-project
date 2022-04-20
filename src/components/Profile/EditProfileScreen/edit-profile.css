@@ -105,7 +105,7 @@
 @media (min-width: 768px) {
     .wd-edit-profile-button-position {
         position: relative;
-        top: calc(50% - 35px);
+        top: calc(50% - 12px);
         left: calc(50% - 170px);
     }
 
@@ -122,7 +122,7 @@
 @media (max-width: 767px) {
     .wd-edit-profile-button-position {
         position: relative;
-        top: 20px;
+        top: 35px;
         left: 0;
     }
 
