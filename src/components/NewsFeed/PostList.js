@@ -13,9 +13,9 @@ const PostList = ({music}) => {
 
     let posts = useSelector((state) => state.searchResults.posts_to_render);
     const allPosts = useSelector((state) => state.searchResults.all_posts);
-    const morePosts = allPosts.sort(() => .5 - Math.random()).slice(0, 3);
-     
-    if (location.pathname.startsWith('/profile')) {
+    const morePosts = allPosts.length ? allPosts.sort(() => .5 - Math.random()).slice(0, 3) : [];
+
+    if (location.pathname.startsWith('/profile') || location.pathname.startsWith('/artist')) {
         posts = music;
     }
 
@@ -33,7 +33,7 @@ const PostList = ({music}) => {
                             if (location.pathname.startsWith('/post')) {
                                 setPostsToRender(dispatch, morePosts);
                                 navigate(`/post/${post.id}`,{state: {post: post, back: '/'}});
-                            } else if (location.pathname.startsWith('/profile')) {
+                            } else if (location.pathname.startsWith('/profile') || location.pathname.startsWith('/artist')) {
                                 navigate(`/album/${post.id}`, {state: {back: location.pathname, post: post}});
                             }
                         }}>
