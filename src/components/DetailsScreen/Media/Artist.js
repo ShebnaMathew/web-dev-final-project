@@ -20,7 +20,6 @@ const Artist = () => {
 
     const [pageReady, setPageReady] = useState(false);
     const [music, setMusic] = useState([])
-
     useEffect(async () => {
         if (!pageReady) {
             await getArtistAction(dispatch, id);

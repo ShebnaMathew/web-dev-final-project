@@ -21,6 +21,9 @@ const Track = () => {
 
     const [trackReady, setTrackReady] = useState(false);
     const [pageReady, setPageReady] = useState(false);
+    const [likes, setLikes] = useState(0);
+    const [liked, setLiked] = useState("");
+    const [style, setStyle] = useState("far"); // get current user like stat
 
     console.log(track)
 
@@ -87,9 +90,16 @@ const Track = () => {
                     <div
                         className="col col-lg-4 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
-                    <span className="">
-                        <i class="far fa-heart me-2"/><b>324234</b><span> likes</span>
-                    </span>
+                        <span>
+                            {/* get likes from db */}
+                            <i className={`${style} fa-heart me-2 ${liked}`} onClick={() => {
+                                if (liked === "") {setLiked("wd-liked-color"); setStyle("fas")} else {setLiked(""); setStyle("far")}
+                            }}/>
+                            <b>324234</b>
+                            {/* when the db is ready, uncomment below */}
+                            {/* <b>{likes}</b> */}
+                            <span> likes</span>
+                        </span>
                         </p>
                         Comments
                         <hr className="mt-0"/>

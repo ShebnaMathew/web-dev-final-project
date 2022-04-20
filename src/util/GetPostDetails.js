@@ -56,3 +56,14 @@ export const getNumberOfTracksOrEpisodes = (post) => {
         return null;
     }
 }
+
+export const getTrackDuration = (post) => {
+    const minutes = Math.floor(post.duration_ms / 60000)
+    const seconds = Math.floor(post.duration_ms / 1000 - (Math.floor(post.duration_ms / 60000)) * 60)
+
+    return minutes + 'm ' + seconds + 's'
+}
+
+export const getGenres = (post) => {
+    return (post.genres.length > 0) ? post.genres.join(", "): "";
+}
