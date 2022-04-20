@@ -3,13 +3,16 @@ import {likeContent, unlikeContent} from "../services/backend/like-service";
 
 export const likeAction = async (dispatch, liker_id, post_id, type, body) => {
 
-    const likeBody = {
+    let likeBody = {
         liker_id,
         post_id,
         type
     }
     const result = await likeContent(likeBody);
-    likeBody.id = result;
+    likeBody = {
+        ...likeBody,
+        _id: result
+    }
 
     let dispatch_type;
     switch (type) {
@@ -48,7 +51,7 @@ export const unlikeAction = async (dispatch, like_id, type, body) => {
         type: dispatch_type,
         results: {
             ...body,
-            likes: body.likes.filter(l => l.id !== like_id)
+            likes: body.likes.filter(l => l._id !== like_id)
         }
     })
 }

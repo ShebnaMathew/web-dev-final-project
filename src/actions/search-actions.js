@@ -79,8 +79,6 @@ export const getSingleTrackAction = async (dispatch, trackId) => {
 export const getAlbumAction = async (dispatch, albumId) => {
     let results = await getPost({type: "album", _id: albumId});
 
-    console.log(results)
-
     if (results.status && results.status === "fail") {
         results = await getAlbum(albumId);
         console.log(results);

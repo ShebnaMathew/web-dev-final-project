@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {likeAction, unlikeAction} from "../../../actions/like-action";
 import {
     getAlbumAction,
     getArtistAction,
@@ -30,11 +31,14 @@ const Album = () => {
     const artist = useSelector((state) => state.searchResults.current_artist);
     const user = useSelector((state) => state.user);
 
+    let thisLike = null;
     let isLiked = false;
     if (album.likes && user._id) {
         for (const l of album.likes) {
             if (l.liker_id === user._id) {
+                console.log("FOUND LIKE")
                 isLiked = true;
+                thisLike = l;
                 break;
             }
         }
@@ -42,8 +46,6 @@ const Album = () => {
 
     const [albumReady, setAlbumReady] = useState(false);
     const [pageReady, setPageReady] = useState(false);
-    const [liked, setLiked] = useState(isLiked);
-    const [style, setStyle] = useState("far"); // get current user like stat
 
     useEffect(async () => {
         if (!albumReady) {
@@ -55,7 +57,6 @@ const Album = () => {
 
     useEffect(async () => {
         if (!pageReady && albumReady) {
-            console.log(album.artist_id)
             await getTracks(dispatch, album.post_id);
             await getArtistAction(dispatch, album.artist_id);
             setPageReady(true);
@@ -63,8 +64,6 @@ const Album = () => {
     }, [albumReady])
 
     // _MONGO: get likes and comments for this album
-
-    console.log(album)
 
     return(
         <>
@@ -106,8 +105,15 @@ const Album = () => {
                         <p className="mt-4">
                         <span>
                             {/* get likes from db */}
-                            <i className={`${style} fa-heart me-2 ${liked}`} onClick={() => {
-                                if (liked === "") {setLiked("wd-liked-color"); setStyle("fas")} else {setLiked(""); setStyle("far")}
+                            <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
+
+                                if (isLiked) {
+                                    await unlikeAction(dispatch, thisLike._id, "album", album)
+
+                                } else {
+                                    await likeAction(dispatch, user._id, album.post_id, "album", album)
+                                }
+
                             }}/>
                             <b>{album.likes.length}</b>
                             {/* when the db is ready, uncomment below */}
