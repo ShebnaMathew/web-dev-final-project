@@ -29,7 +29,6 @@ const Album = () => {
     const [showTracks, setShowTracks] = useState(true);
     const [showComments, setShowComments] = useState(false);
     const album = useSelector((state) => state.searchResults.current_album);
-    const tracks = useSelector((state) => state.searchResults.current_album_tracks);
     const artist = useSelector((state) => state.searchResults.current_artist);
 
     const [albumReady, setAlbumReady] = useState(false);
@@ -41,8 +40,8 @@ const Album = () => {
     useEffect(async () => {
         if (!albumReady) {
             await getAlbumAction(dispatch, id);
-            setAlbumReady(true);
             setLikes(getLikes(id));
+            setAlbumReady(true);
         }
     }, [])
 

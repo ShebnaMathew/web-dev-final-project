@@ -51,12 +51,18 @@ const Header = () => {
                 </div>
                 {!user || !user._id &&
                     <div className="d-flex ms-auto">
+                        <div className="me-2 text-white" title="Privacy Policy" disabled={blur ? 'disabled': ''} onClick={() => navigate('/privacyPolicy')}>
+                            <i className="fa fa-shield" aria-hidden="true"></i>
+                        </div>
                         <button className="btn btn-success me-2" disabled={blur ? 'disabled': ''} type="submit" onClick={() => navigate('/login')}>Login</button>
                         <button className="btn btn-secondary" disabled={blur ? 'disabled': ''} type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
                     </div>
                 }
                 {(user && user._id) &&
                     <div className="d-flex ms-auto">
+                        <div className="me-2 text-white" title="Privacy Policy" disabled={blur ? 'disabled': ''} onClick={() => navigate('/privacyPolicy')}>
+                                <i className="fa fa-shield" aria-hidden="true"></i>
+                        </div>
                         <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/profile')}>Profile</button>
                         <button className="btn btn-secondary" type="submit" onClick={() => logout()}>Log Out</button>
                     </div>

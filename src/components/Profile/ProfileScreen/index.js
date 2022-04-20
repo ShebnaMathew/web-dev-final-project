@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
 import '../profile-main.css';
-import {Link, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import {getProfileAction} from "../../../actions/profile-actions";
 import PostList from "../../NewsFeed/PostList";
 import {addFollowAction, removeFollowAction} from "../../../actions/follow-actions";
@@ -16,6 +16,8 @@ const ProfileScreen = () => {
 
     // get data from api
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     // fetch from session
     let { _id } = useParams();
@@ -29,18 +31,32 @@ const ProfileScreen = () => {
     }
 
     const [ready, setReady] = useState(false);
+    let timerId = -1;
 
     useEffect(async () => {
+        // hide profile page from user until they log in
+        if (_id === undefined) {
+            setReady(true);
+            const timer = () => { return setTimeout(() => navigate('/'), 5000); }
+            timerId = timer();
+            return;
+        }
         await getProfileAction(dispatch, _id)
         setReady(true);
     }, [_id]);
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(timerId);
+        }
+    }, [])
 
     const profileData = useSelector((state) => state.profile);
 
     const [isFollowing, setIsFollowing] = useState(false);
     const [content, setContent] = useState('comments');
     const [showFollow, setShowFollow] = useState(false);
-    const [followTitle, setFollowTitle] = useState("followers")
+    const [followTitle, setFollowTitle] = useState("followers");
 
     const [music, setMusic] = useState([]);
 
@@ -86,7 +102,7 @@ const ProfileScreen = () => {
                 }
             case 'music':
                 if (music.length > 0) {
-                    return <PostList posts={music}/>
+                    return <PostList music={music}/>
                 } else {
                     getArtist(profileData.artistId).then(async (artist) => {
                         const results = await search(artist.name);
@@ -276,7 +292,7 @@ const ProfileScreen = () => {
     return(
         <>
             {!ready && <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>}
-            {ready &&
+            {ready && _id !== undefined ?
                 <div className="row justify-content-center pt-3">
                     <div className="wd-profile-content-width">
                         {renderFollow()}
@@ -359,6 +375,15 @@ const ProfileScreen = () => {
                     <div className={`${content === "comments" ? "wd-profile-content-width" : ""}`}>
                         {renderContent(content)}
                     </div>
+                </div>
+                :
+                <div className="wd-full-width wd-center-text wd-going-home-text pt-3">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <i className="fa fa-2x wd-fg-color-white fa-exclamation-triangle"/>
+                    <div>Must be logged in to view profile</div>
+                    <div>Going home in 5 seconds...</div>
                 </div>
             }
         </>
