@@ -12,6 +12,7 @@ import CommentsTabList from "../Lists/CommentsTabList";
 import TrackList from "../Lists/TrackList";
 import {createPost, getPost} from "../../../services/backend/post-service";
 import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
+import { prepareData } from "../../../util/PrepareDataUtil";
 
 
 const Album = () => {
@@ -22,6 +23,8 @@ const Album = () => {
 
     const params = useParams();
     const id = params.postId;
+    //const [data, setData] = useState(getPost(id)); // once getPost is setup
+    const [data, setData] = useState(null);
 
     const [showTracks, setShowTracks] = useState(true);
     const [showComments, setShowComments] = useState(false);
@@ -31,14 +34,15 @@ const Album = () => {
 
     const [albumReady, setAlbumReady] = useState(false);
     const [pageReady, setPageReady] = useState(false);
-
-    console.log(album)
+    const [likes, setLikes] = useState(0);
+    const [liked, setLiked] = useState("");
+    const [style, setStyle] = useState("far"); // get current user like stat
 
     useEffect(async () => {
         if (!albumReady) {
             await getAlbumAction(dispatch, id);
             setAlbumReady(true);
-            console.log('set album ready')
+            setLikes(getLikes(id));
         }
     }, [])
 
@@ -47,18 +51,27 @@ const Album = () => {
             await getTracks(dispatch, album.id);
             await getArtistAction(dispatch, album.artists[0].id);
             setPageReady(true);
-            console.log('set page ready')
         }
     }, [albumReady])
+
+    useEffect(() => {
+        if(pageReady && albumReady && data === null) {
+            const check = prepareData(album, 'album');
+            console.log("check data: ", check)
+            setData(check);
+            console.log("data: ", data)
+            createPost(data); 
+        }
+    }, [pageReady, albumReady])
 
     // _MONGO: get likes and comments for this album
 
     return(
         <>
-        {!pageReady &&
+        {!data &&
             <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>
         }
-        {pageReady &&
+        {data &&
             <div class="container wd-details-container wd-detail-max-width">
                 <div class="row justify-content-center m-0 wd-details-container-children">
 
@@ -71,28 +84,35 @@ const Album = () => {
                     </div>
                     <div class="col col-lg-6 wd-background-banner wd-details-container-children">
                         <div class="row justify-content-md-center mt-5">
-                            <img src={album.images[0].url} class="m-3 wd-detail-box-shadow wd-detail-img-height"
+                            <img src={data.image_url} class="m-3 wd-detail-box-shadow wd-detail-img-height"
                                  alt="..."/>
                         </div>
                         <div class="row justify-content-md-center mb-5">
                             <div
                                 className="row justify-content-center mt-3">{album.album_type.charAt(0).toUpperCase() + album.album_type.substring(1)}</div>
-                            <p className="row justify-content-center mt-1"><a href={album.external_urls.spotify}
-                                                                              target="_blank"
-                                                                              className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{album.name}</a>
+                            <p className="row justify-content-center mt-1">
+                                <a href={data.spotify_url}
+                                    target="_blank"
+                                    className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{data.name}</a>
                             </p>
                             <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                               onClick={() => navigate(`/artist/${artist.id}`, {state: {back: location.state.back}})}>{artist.name}</a>
-                            <div className="row justify-content-center mt-1">Release date: {album.release_date}</div>
-                            <div className="row justify-content-center mt-1">Total tracks: {album.total_tracks}</div>
+                               onClick={() => navigate(`/artist/${artist.id}`, {state: {back: location.state.back}})}>{data.artist_name}</a>
+                            <div className="row justify-content-center mt-1">Release date: {data.release_date}</div>
+                            <div className="row justify-content-center mt-1">Total tracks: {data.total_tracks}</div>
                         </div>
                     </div>
                     <div
                         className="col col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
-                        <span className="">
+                        <span>
                             {/* get likes from db */}
-                            <i class="far fa-heart me-2"/><b>324234</b><span> likes</span>
+                            <i className={`${style} fa-heart me-2 ${liked}`} onClick={() => {
+                                if (liked === "") {setLiked("wd-liked-color"); setStyle("fas")} else {setLiked(""); setStyle("far")}
+                            }}/>
+                            <b>324234</b>
+                            {/* when the db is ready, uncomment below */}
+                            {/* <b>{likes}</b> */}
+                            <span> likes</span>
                         </span>
                         </p>
                         <ul class="nav nav-tabs nav-fill">
