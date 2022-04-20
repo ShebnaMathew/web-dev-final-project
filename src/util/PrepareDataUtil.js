@@ -22,6 +22,9 @@ export const prepareData = (data, type) => {
                 spotify_url: data.external_urls.spotify, // change key name to stay consistent
                 name: data.name,
                 album_name: data.album.name,
+                album_id: data.album.id,
+                artist_name: data.artists[0].name,
+                artist_id: data.artists[0].id,
                 release_date: getReleaseDate(data),
                 track_duration: getTrackDuration(data),
                 popularity: data.popularity

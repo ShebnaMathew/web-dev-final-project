@@ -69,10 +69,21 @@ export const getTrackAction = async (dispatch, tracks) => {
 }
 
 export const getSingleTrackAction = async (dispatch, trackId) => {
-    const result = await getTrack(trackId);
+
+    let results = await getPost({type: "track", _id: trackId});
+
+    if (results.status && results.status === "fail") {
+        results = await getTrack(trackId);
+        results = prepareData(results, "track")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
+
     dispatch({
         type: GET_SINGLE_TRACK,
-        results: result
+        results: results
     })
 }
 
