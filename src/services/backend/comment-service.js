@@ -9,7 +9,7 @@ const backendHost = process.env.BACKEND_URL || "http://localhost:4000";
 
 const addComment = async (comment_data) => {
     const response = await api.post(backendHost + '/comment', comment_data);
-    return response.body.comment_id;
+    return response.data.comment_id;
 }
 
 const deleteComment = async (comment_id) => {

@@ -36,7 +36,6 @@ const Album = () => {
     if (album.likes && user._id) {
         for (const l of album.likes) {
             if (l.liker_id === user._id) {
-                console.log("FOUND LIKE")
                 isLiked = true;
                 thisLike = l;
                 break;
@@ -139,7 +138,7 @@ const Album = () => {
                         </ul>
                         {showTracks && <TrackList back={location.state.back}/>}
                         {/* dummy album -> todo go to profile for each user once we have the data */}
-                        {showComments && <CommentsTabList/>}
+                        {showComments && <CommentsTabList comments={album.comments} type={"album"} body={album}/>}
                     </div>
                 </div>
             </div>
