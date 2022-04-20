@@ -8,7 +8,9 @@ export const prepareData = (data, type, extra = '') => {
                 image_url: getImage(data),
                 spotify_url: data.external_urls.spotify,
                 name: data.name,
+                album_type: data.album_type,
                 artist_name: getArtistName(data),
+                artist_id: data.artists[0].id,
                 release_date: getReleaseDate(data),
                 total_tracks: getNumberOfTracksOrEpisodes(data)
             })

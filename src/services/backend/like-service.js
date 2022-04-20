@@ -16,13 +16,7 @@ const unlikeContent = async (like_id) => {
     await api.delete(backendHost + '/content/like/' + like_id);
 }
 
-const getLikes = async (post_id) => {
-    const response = await api.get(backendHost + '/content/like/' + post_id);
-    return response.data.likes;
-}
-
 export {
     likeContent,
-    unlikeContent,
-    getLikes
+    unlikeContent
 }

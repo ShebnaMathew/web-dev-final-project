@@ -1,6 +1,10 @@
 import {getNewMusic, search, getAlbumTracks, getTrack, getAlbum, getShowEpisodes, getEpisode, 
     getShow, getPlaylist, getPlaylistTracks, getArtist} from "../services/spotify/spotify-service";
 
+import {getPost} from "../services/backend/post-service.js";
+import {createPost} from "../services/backend/post-service";
+import {prepareData} from "../util/PrepareDataUtil";
+
 export const UPDATE_NEWS = "update-news";
 export const UPDATE_SEARCH = "update-search";
 export const GET_ALBUM_TRACKS = "get-album-tracks";
@@ -73,7 +77,20 @@ export const getSingleTrackAction = async (dispatch, trackId) => {
 }
 
 export const getAlbumAction = async (dispatch, albumId) => {
-    const results = await getAlbum(albumId);
+    let results = await getPost({type: "album", _id: albumId});
+
+    console.log(results)
+
+    if (results.status && results.status === "fail") {
+        results = await getAlbum(albumId);
+        console.log(results);
+        results = prepareData(results, "album")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
+
     dispatch({
         type: GET_ALBUM,
         results: results
