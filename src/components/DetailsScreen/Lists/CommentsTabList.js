@@ -38,7 +38,7 @@ const CommentsTabList = ({comments, type, body}) => {
                                     type="button"
                                     id="button-addon2"
                                     onClick={async () => {
-                                        await addCommentAction(dispatch, user._id, user.username, body.post_id, type, currentComment, body);
+                                        await addCommentAction(dispatch, user._id, user.username, body.post_id, body.name, body.image_url, type, currentComment, body);
                                         setCurrentComment("");
                                     }}>Comment</button>
                         </div>

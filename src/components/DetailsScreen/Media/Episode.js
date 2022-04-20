@@ -5,6 +5,7 @@ import {createPost, getPost} from "../../../services/backend/post-service";
 import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
 import {getEpisodeAction, getShowAction, getSingleEpisode} from "../../../actions/search-actions";
 import React, { useEffect, useState } from "react";
+import {likeAction, unlikeAction} from "../../../actions/like-action";
 
 const Episode = () => {
 
@@ -18,15 +19,22 @@ const Episode = () => {
     // going to episode directly -> post doesn't have a 'show' key - so this component won't render for post.show
     // the current show reducer state will hold the last show that was visited, which may not be the show for an episode that's selected directly from the search
     const episode = useSelector((state) => state.searchResults.current_episode);
-    const show = useSelector((state) => state.searchResults.current_show);
-    const [showReady, setShowReady] = useState(false);
+    const user = useSelector((state) => state.user);
     const [episodeReady, setEpisodeReady] = useState(false);
-    const [likes, setLikes] = useState(0);
-    const [liked, setLiked] = useState("");
-    const [style, setStyle] = useState("far"); // get current user like stat
+
+    let thisLike = null;
+    let isLiked = false;
+    if (episode.likes && user._id) {
+        for (const l of episode.likes) {
+            if (l.liker_id === user._id) {
+                isLiked = true;
+                thisLike = l;
+                break;
+            }
+        }
+    }
 
     console.log('new render')
-    console.log(show)
     console.log(episode)
     console.log(id)
     // console.log(show)
@@ -40,20 +48,13 @@ const Episode = () => {
         }
     }, [id])
 
-    useEffect(async () => {
-        if(!showReady && episodeReady) {
-            await getShowAction(dispatch, episode.show.id);
-            setShowReady(true);
-        }
-    }, [episodeReady])
-
     return(
         <>
-        {!showReady &&
+        {!episodeReady &&
             <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>
         }
 
-        {showReady &&
+        {episodeReady &&
             <div className="container wd-details-container wd-detail-max-width">
                 <div className="row justify-content-center m-0 wd-details-container-children">
                     <div className="col col-lg-1 justify-content-center mt-3">
@@ -65,23 +66,23 @@ const Episode = () => {
                     </div>
                     <div className="col col-lg-7 wd-background-banner-episode wd-details-container-children">
                         <div className="row justify-content-md-center mt-5">
-                            <img src={episode.images[0].url} className="m-3 wd-detail-box-shadow wd-detail-img-height"
+                            <img src={episode.image_url} className="m-3 wd-detail-box-shadow wd-detail-img-height"
                                  alt="..."/>
                         </div>
                         <div className="row justify-content-md-center mb-5">
                             <div className="row justify-content-center mt-3">Episode</div>
-                            <p className="row text-center mt-1"><a href={episode.external_urls.spotify} target="_blank"
+                            <p className="row text-center mt-1"><a href={episode.spotify_url} target="_blank"
                                                                    className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{episode.name}</a>
                             </p>
                             <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
                                onClick={
-                                   () => navigate(`/show/${show.id}`, {
+                                   () => navigate(`/show/${episode.show_id}`, {
                                        state: {
-                                           episode: show,
+                                           episode: episode,
                                            back: location.state.back
                                        }
                                    })}>
-                                Show: {show.name}</a>
+                                Show: {episode.show_name}</a>
                             <div className="row justify-content-center mt-1">Release date: {episode.release_date}</div>
                             <p className="row justify-content-center mt-1">{episode.description}</p>
                         </div>
@@ -91,10 +92,16 @@ const Episode = () => {
                         <p className="mt-4">
                         <span>
                             {/* get likes from db */}
-                            <i className={`${style} fa-heart me-2 ${liked}`} onClick={() => {
-                                if (liked === "") {setLiked("wd-liked-color"); setStyle("fas")} else {setLiked(""); setStyle("far")}
+                            <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
+
+                                if (isLiked) {
+                                    await unlikeAction(dispatch, thisLike._id, "episode", episode)
+
+                                } else {
+                                    await likeAction(dispatch, user._id, episode.post_id, "episode", episode)
+                                }
                             }}/>
-                            <b>324234</b>
+                            <b>{episode.likes.length}</b>
                             {/* when the db is ready, uncomment below */}
                             {/* <b>{likes}</b> */}
                             <span> likes</span>
@@ -102,7 +109,7 @@ const Episode = () => {
                         </p>
                         Comments
                         <hr className="mt-0"/>
-                        <CommentsTabList/>
+                        <CommentsTabList comments={episode.comments} type={"episode"} body={episode}/>
                     </div>
                 </div>
             </div>

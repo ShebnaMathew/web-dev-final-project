@@ -1,5 +1,5 @@
 import {getArtistId, getArtistName,getGenres,getImage,getNumberOfTracksOrEpisodes,getReleaseDate, getTrackDuration} from './GetPostDetails';
-export const prepareData = (data, type, extra = '') => {
+export const prepareData = (data, type) => {
     switch(type){
         case 'album':
             return({
@@ -67,7 +67,8 @@ export const prepareData = (data, type, extra = '') => {
                 image_url: getImage(data),
                 spotify_url: data.external_urls.spotify,
                 name: data.name,
-                show_name: extra,
+                show_name: data.show.name,
+                show_id: data.show.id,
                 release_date: getReleaseDate(data),
                 description: data.description
             })

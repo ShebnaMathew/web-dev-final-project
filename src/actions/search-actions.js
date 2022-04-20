@@ -81,7 +81,6 @@ export const getAlbumAction = async (dispatch, albumId) => {
 
     if (results.status && results.status === "fail") {
         results = await getAlbum(albumId);
-        console.log(results);
         results = prepareData(results, "album")
         createPost(results)
 
@@ -167,7 +166,16 @@ export const getEpisodeAction = async (dispatch, episodes) => {
 }
 
 export const getSingleEpisode = async (dispatch, episodeId) => {
-    const results = await getEpisode(episodeId);
+    let results = await getPost({type: "episode", _id: episodeId});
+
+    if (results.status && results.status === "fail") {
+        results = await getEpisode(episodeId);
+        results = prepareData(results, "episode")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
     dispatch({
         type: GET_SINGLE_EPISODE,
         results
