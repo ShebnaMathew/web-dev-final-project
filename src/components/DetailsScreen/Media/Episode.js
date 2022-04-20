@@ -34,13 +34,6 @@ const Episode = () => {
         }
     }
 
-    console.log('new render')
-    console.log(episode)
-    console.log(id)
-    // console.log(show)
-
-    const post = {}
-
     useEffect(async () => {
         if (!episodeReady) {
             await getSingleEpisode(dispatch,id);

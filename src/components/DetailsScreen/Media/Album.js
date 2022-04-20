@@ -5,14 +5,10 @@ import {likeAction, unlikeAction} from "../../../actions/like-action";
 import {
     getAlbumAction,
     getArtistAction,
-    getTrackAction,
     getTracks,
-    setCurrentAlbum
 } from "../../../actions/search-actions";
 import CommentsTabList from "../Lists/CommentsTabList";
 import TrackList from "../Lists/TrackList";
-import {createPost, getPost} from "../../../services/backend/post-service";
-import {likeContent, unlikeContent} from "../../../services/backend/like-service";
 
 
 

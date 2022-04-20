@@ -131,7 +131,16 @@ export const getPlaylistTrackAction = async (dispatch, tracks) => {
 }
 
 export const getPlaylistAction = async (dispatch, playlistId) => {
-    const results = await getPlaylist(playlistId);
+    let results = await getPost({type: "playlist", _id: playlistId});
+
+    if (results.status && results.status === "fail") {
+        results = await getPlaylist(playlistId);
+        results = prepareData(results, "playlist")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
     dispatch({
         type: GET_PLAYLIST,
         results: results
