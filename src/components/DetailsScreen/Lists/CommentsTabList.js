@@ -23,7 +23,7 @@ const CommentsTabList = ({comments, type, body}) => {
                                 </span>
                                 <span className="wd-detail-float-left">{c.comment}</span>
                                 {(user._id && (user._id === c.commentor_id || user._isAdmin)) &&
-                                    <i class="fa-solid fa-xmark wd-detail-float-right" onClick={() => deleteCommentAction(dispatch, c._id, type, body)}/>
+                                    <i class="fa-solid fa-xmark wd-detail-float-right wd-cursor-pointer" onClick={() => deleteCommentAction(dispatch, c._id, type, body)}/>
                                 }
                                 <div className="wd-detail-float-done"/>
                             </p>

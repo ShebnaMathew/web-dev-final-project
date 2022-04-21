@@ -100,17 +100,17 @@ const Album = () => {
                         <p className="mt-4">
                         <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
                             {/* get likes from db */}
-                            <button disabled={!(user && user._id)} className="btn">
-                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
+                            <button disabled={!(user && user._id)} className="btn"  onClick={async () => {
 
-                                    if (isLiked) {
-                                        await unlikeAction(dispatch, thisLike._id, "album", album)
+                                if (isLiked) {
+                                    await unlikeAction(dispatch, thisLike._id, "album", album)
 
-                                    } else {
-                                        await likeAction(dispatch, user._id, album.post_id, "album", album)
-                                    }
+                                } else {
+                                    await likeAction(dispatch, user._id, album.post_id, "album", album)
+                                }
 
-                                }}/>
+                            }}>
+                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`}/>
                                 <b>{album.likes.length}</b>
                                 {/* when the db is ready, uncomment below */}
                                 {/* <b>{likes}</b> */}

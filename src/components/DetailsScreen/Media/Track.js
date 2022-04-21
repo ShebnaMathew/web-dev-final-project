@@ -82,7 +82,7 @@ const Track = () => {
                             <div className="row justify-content-center mt-1">Release
                                 date: {track.release_date}</div>
                             <div
-                                className="row justify-content-center mt-1">Duration: {Math.floor(track.duration_ms / 60000)}m {Math.floor(track.duration_ms / 1000 - (Math.floor(track.duration_ms / 60000)) * 60)}s
+                                className="row justify-content-center mt-1">Duration: {track.track_duration}
                             </div>
                             <div className="row justify-content-center mt-1">Popularity Score: {track.popularity}</div>
                         </div>
@@ -92,18 +92,18 @@ const Track = () => {
                         <p className="mt-4">
                         <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
                             {/* get likes from db */}
-                            <button disabled={!(user && user._id)} className="btn">
+                            <button disabled={!(user && user._id)} className="btn" onClick={async () => {
+
+                                if (isLiked) {
+                                    await unlikeAction(dispatch, thisLike._id, "track", track)
+
+                                } else {
+                                    await likeAction(dispatch, user._id, track.post_id, "track", track)
+                                }
+
+                            }}>
                                 {/* get likes from db */}
-                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
-
-                                    if (isLiked) {
-                                        await unlikeAction(dispatch, thisLike._id, "track", track)
-
-                                    } else {
-                                        await likeAction(dispatch, user._id, track.post_id, "track", track)
-                                    }
-
-                                }}/>
+                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`}/>
                                 <b>{track.likes.length}</b>
                                 {/* when the db is ready, uncomment below */}
                                 {/* <b>{likes}</b> */}
