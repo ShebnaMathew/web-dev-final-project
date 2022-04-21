@@ -59,8 +59,8 @@ export const search = async (searchString) => {
     return response.data;
 }
 
-export const getNewMusic = async () => {
-    const fullUrl = searchEndpoint + "?type=artist,album,playlist,track,show,episode&market=US&limit=48&q=tag:new";
+export const getNewMusic = async (limit) => {
+    const fullUrl = searchEndpoint + `?type=artist,album,playlist,track,show,episode&market=US&limit=${limit}&q=tag:new`;
 
     let config = {
         headers: {

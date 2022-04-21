@@ -1,6 +1,10 @@
 import {getNewMusic, search, getAlbumTracks, getTrack, getAlbum, getShowEpisodes, getEpisode, 
     getShow, getPlaylist, getPlaylistTracks, getArtist} from "../services/spotify/spotify-service";
 
+import {getPost} from "../services/backend/post-service.js";
+import {createPost} from "../services/backend/post-service";
+import {prepareData} from "../util/PrepareDataUtil";
+
 export const UPDATE_NEWS = "update-news";
 export const UPDATE_SEARCH = "update-search";
 export const GET_ALBUM_TRACKS = "get-album-tracks";
@@ -37,7 +41,18 @@ export const searchAction = async (dispatch, searchString) => {
 }
 
 export const getArtistAction = async (dispatch, artistId) => {
-    const results = await getArtist(artistId);
+
+    let results = await getPost({type: "artist", _id: artistId});
+
+    if (results.status && results.status === "fail") {
+        results = await getArtist(artistId);
+        results = prepareData(results, "artist")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
+
     dispatch({
         type: GET_ARTIST,
         results: results
@@ -65,15 +80,36 @@ export const getTrackAction = async (dispatch, tracks) => {
 }
 
 export const getSingleTrackAction = async (dispatch, trackId) => {
-    const result = await getTrack(trackId);
+
+    let results = await getPost({type: "track", _id: trackId});
+
+    if (results.status && results.status === "fail") {
+        results = await getTrack(trackId);
+        results = prepareData(results, "track")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
+
     dispatch({
         type: GET_SINGLE_TRACK,
-        results: result
+        results: results
     })
 }
 
 export const getAlbumAction = async (dispatch, albumId) => {
-    const results = await getAlbum(albumId);
+    let results = await getPost({type: "album", _id: albumId});
+
+    if (results.status && results.status === "fail") {
+        results = await getAlbum(albumId);
+        results = prepareData(results, "album")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
+
     dispatch({
         type: GET_ALBUM,
         results: results
@@ -117,7 +153,16 @@ export const getPlaylistTrackAction = async (dispatch, tracks) => {
 }
 
 export const getPlaylistAction = async (dispatch, playlistId) => {
-    const results = await getPlaylist(playlistId);
+    let results = await getPost({type: "playlist", _id: playlistId});
+
+    if (results.status && results.status === "fail") {
+        results = await getPlaylist(playlistId);
+        results = prepareData(results, "playlist")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
     dispatch({
         type: GET_PLAYLIST,
         results: results
@@ -152,7 +197,16 @@ export const getEpisodeAction = async (dispatch, episodes) => {
 }
 
 export const getSingleEpisode = async (dispatch, episodeId) => {
-    const results = await getEpisode(episodeId);
+    let results = await getPost({type: "episode", _id: episodeId});
+
+    if (results.status && results.status === "fail") {
+        results = await getEpisode(episodeId);
+        results = prepareData(results, "episode")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
     dispatch({
         type: GET_SINGLE_EPISODE,
         results
@@ -160,7 +214,17 @@ export const getSingleEpisode = async (dispatch, episodeId) => {
 }
 
 export const getShowAction = async (dispatch, showId) => {
-    const results = await getShow(showId);
+    let results = await getPost({type: "show", _id: showId});
+
+    if (results.status && results.status === "fail") {
+        results = await getShow(showId);
+        results = prepareData(results, "show")
+        createPost(results)
+
+        results.comments = [];
+        results.likes = [];
+    }
+
     dispatch({
         type: GET_SHOW,
         results: results
