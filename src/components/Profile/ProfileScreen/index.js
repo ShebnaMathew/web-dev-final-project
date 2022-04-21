@@ -11,6 +11,7 @@ import PostList from "../../NewsFeed/PostList";
 import {addFollowAction, removeFollowAction} from "../../../actions/follow-actions";
 import {getProfile} from "../../../services/backend/profile-service";
 import {getArtist, search} from "../../../services/spotify/spotify-service";
+import {prepareData} from "../../../util/PrepareDataUtil";
 
 const ProfileScreen = () => {
 
@@ -93,21 +94,27 @@ const ProfileScreen = () => {
             case 'likes':
                 if (profileData.likes && profileData.likes.length > 0) {
                     return (
-                        <div className="wd-content-section wd-center-content wd-fg-color-white ps-3 pe-3">
-                            <PostList posts={profileData.likes}/>
-                        </div>
+                        <PostList posts={profileData.likes}/>
                     )
                 } else {
                     return renderNothingHere();
                 }
             case 'music':
                 if (music.length > 0) {
-                    return <PostList music={music}/>
+                    return <PostList posts={music}/>
                 } else {
                     getArtist(profileData.artistId).then(async (artist) => {
                         const results = await search(artist.name);
                         const albums = results.albums.items;
-                        setMusic(albums)
+                        const adjustedAlbums = [];
+                        for (const a of albums) {
+                            const preparedData = prepareData(a, "album");
+                            adjustedAlbums.push({
+                                ...preparedData,
+                                dynamic: true
+                            })
+                        }
+                        setMusic(adjustedAlbums)
                     })
                     return <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>
                 }

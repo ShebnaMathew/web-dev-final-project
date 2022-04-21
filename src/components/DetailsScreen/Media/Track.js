@@ -5,6 +5,7 @@ import {createPost, getPost} from "../../../services/backend/post-service";
 import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
 import React, {useEffect, useState} from "react";
 import {getAlbumAction, getArtistAction, getSingleTrackAction} from "../../../actions/search-actions";
+import {likeAction, unlikeAction} from "../../../actions/like-action";
 
 const Track = () => {
     
@@ -15,35 +16,34 @@ const Track = () => {
     const params = useParams();
     const id = params.postId;
 
-    const album = useSelector((state) => state.searchResults.current_album);
-    const artist = useSelector((state) => state.searchResults.current_artist);
+    // const album = useSelector((state) => state.searchResults.current_album);
     const track = useSelector((state) => state.searchResults.current_track);
 
-    const [trackReady, setTrackReady] = useState(false);
     const [pageReady, setPageReady] = useState(false);
-    const [likes, setLikes] = useState(0);
-    const [liked, setLiked] = useState("");
-    const [style, setStyle] = useState("far"); // get current user like stat
+    const user = useSelector((state) => state.user);
 
     console.log(track)
 
+    let thisLike = null;
+    let isLiked = false;
+    if (track && track.likes && user._id) {
+        for (const l of track.likes) {
+            if (l.liker_id === user._id) {
+                isLiked = true;
+                thisLike = l;
+                break;
+            }
+        }
+    }
+
     useEffect(async () => {
-        if (!trackReady) {
+        if (!pageReady) {
             await getSingleTrackAction(dispatch, id);
-            setTrackReady(true);
+            setPageReady(true);
         }
     }, [])
 
-    useEffect(async () => {
-         if (!pageReady && trackReady) {
-             await getArtistAction(dispatch, track.artists[0].id);
-             await getAlbumAction(dispatch, track.album.id);
-             setPageReady(true);
-         }
-     },[trackReady])
-
     console.log(track);
-
 
     // _MONGO: get likes and comments for this album
 
@@ -65,22 +65,22 @@ const Track = () => {
                     </div>
                     <div class="col col-lg-7 wd-background-banner-track wd-details-container-children">
                         <div class="row justify-content-md-center mt-5">
-                            <img src={track.album.images[0].url} class="m-3 wd-detail-box-shadow wd-detail-img-height"
+                            <img src={track.image_url} class="m-3 wd-detail-box-shadow wd-detail-img-height"
                                  alt="..."/>
                         </div>
                         <div class="row justify-content-md-center mb-5">
                             <div className="row justify-content-center mt-3">Track</div>
-                            <p className="row text-center mt-1"><a href={track.external_urls.spotify} target="_blank"
+                            <p className="row text-center mt-1"><a href={track.spotify_url} target="_blank"
                                                                    className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{track.name}</a>
                             </p>
                             <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
                                onClick={
-                                   () => navigate(`/album/${track.album.id}`, {state: {back: location.state.back}})}>
-                                Album: {track.album.name}</a>
+                                   () => navigate(`/album/${track.album_id}`, {state: {back: location.state.back}})}>
+                                Album: {track.album_name}</a>
                             <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                               onClick={() => navigate(`/artist/${track.artists[0].id}`, {state: {back: location.state.back}})}>{track.artists[0].name}</a>
+                               onClick={() => navigate(`/artist/${track.artist_id}`, {state: {back: location.state.back}})}>{track.artist_name}</a>
                             <div className="row justify-content-center mt-1">Release
-                                date: {track.album.release_date}</div>
+                                date: {track.release_date}</div>
                             <div
                                 className="row justify-content-center mt-1">Duration: {Math.floor(track.duration_ms / 60000)}m {Math.floor(track.duration_ms / 1000 - (Math.floor(track.duration_ms / 60000)) * 60)}s
                             </div>
@@ -92,10 +92,17 @@ const Track = () => {
                         <p className="mt-4">
                         <span>
                             {/* get likes from db */}
-                            <i className={`${style} fa-heart me-2 ${liked}`} onClick={() => {
-                                if (liked === "") {setLiked("wd-liked-color"); setStyle("fas")} else {setLiked(""); setStyle("far")}
+                            <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
+
+                                if (isLiked) {
+                                    await unlikeAction(dispatch, thisLike._id, "track", track)
+
+                                } else {
+                                    await likeAction(dispatch, user._id, track.post_id, "track", track)
+                                }
+
                             }}/>
-                            <b>324234</b>
+                            <b>{track.likes.length}</b>
                             {/* when the db is ready, uncomment below */}
                             {/* <b>{likes}</b> */}
                             <span> likes</span>
@@ -103,7 +110,7 @@ const Track = () => {
                         </p>
                         Comments
                         <hr className="mt-0"/>
-                        <CommentsTabList/>
+                        <CommentsTabList comments={track.comments} type={"track"} body={track}/>
                     </div>
                 </div>
             </div>
