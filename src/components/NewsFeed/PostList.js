@@ -42,10 +42,14 @@ const PostList = ({posts}) => {
                                 <h6 className="mb-0">{post.name}</h6>
                                 <span className="wd-italic-text">{post.type}</span>
                                 <p className="mt-3">
-                                    <span className="me-2"><i className="far fa-heart"/></span>
-                                    <span className="me-4">{post.reacts && post.reacts.like ? post.reacts.like : 0}</span>
-                                    <span className="me-2"><i className="far fa-comment"/></span>
-                                    <span className="me-4">{post.reacts && post.reacts.comment ? post.reacts.comment : 0}</span>
+                                    {!post.dynamic &&
+                                        <>
+                                            <span className="me-2"><i className="far fa-heart"/></span>
+                                            <span className="me-4">{post.likes}</span>
+                                            <span className="me-2"><i className="far fa-comment"/></span>
+                                            <span className="me-4">{post.comments}</span>
+                                        </>
+                                    }
                                 </p>
                             </div>
                         </div>

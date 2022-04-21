@@ -12,9 +12,18 @@ export const getContentAction = async (dispatch, user_id) => {
 
         const newsPosts = []
         if (newsResults.albums.items) {
+            const existingIds = results.map(r => r.post_id)
+            console.log(existingIds)
             for (const album of newsResults.albums.items) {
                 const parsedData = prepareData(album, "album");
-                newsPosts.push(parsedData);
+                if (existingIds.indexOf(parsedData.post_id) < 0) {
+                    newsPosts.push({
+                        ...parsedData,
+                        likes: 0,
+                        comments: 0
+                    });
+                }
+
             }
         }
 

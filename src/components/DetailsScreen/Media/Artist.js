@@ -6,6 +6,7 @@ import React, {useEffect, useState} from "react";
 import {getArtistAction} from "../../../actions/search-actions";
 import PostList from "../../NewsFeed/PostList";
 import {getArtist, search} from "../../../services/spotify/spotify-service";
+import {prepareData} from "../../../util/PrepareDataUtil";
 
 
 const Artist = () => {
@@ -37,7 +38,7 @@ const Artist = () => {
             return(
                 <div>
                     <h4 className="pt-4 ps-5">Albums from {artist.name}</h4>
-                    <PostList music={music}/>
+                    <PostList posts={music}/>
                 </div>
             )
         } else {
@@ -47,7 +48,15 @@ const Artist = () => {
                 if (albums.length > 3) {
                     albums = albums.slice(0, 3);
                 }
-                setMusic(albums)
+                const adjustedAlbums = [];
+                for (const a of albums) {
+                    const preparedData = prepareData(a, "album");
+                    adjustedAlbums.push({
+                        ...preparedData,
+                        dynamic: true
+                    })
+                }
+                setMusic(adjustedAlbums)
             })
             return <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>
         }

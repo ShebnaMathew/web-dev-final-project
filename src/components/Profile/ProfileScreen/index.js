@@ -108,7 +108,11 @@ const ProfileScreen = () => {
                         const albums = results.albums.items;
                         const adjustedAlbums = [];
                         for (const a of albums) {
-                            adjustedAlbums.push(prepareData(a, "album"))
+                            const preparedData = prepareData(a, "album");
+                            adjustedAlbums.push({
+                                ...preparedData,
+                                dynamic: true
+                            })
                         }
                         setMusic(adjustedAlbums)
                     })
