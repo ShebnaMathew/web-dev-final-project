@@ -1,4 +1,4 @@
-import {GET_ALBUM} from "./search-actions";
+import {GET_ALBUM, GET_PLAYLIST, GET_SHOW, GET_SINGLE_EPISODE, GET_SINGLE_TRACK} from "./search-actions";
 import {likeContent, unlikeContent} from "../services/backend/like-service";
 
 export const likeAction = async (dispatch, liker_id, post_id, type, body) => {
@@ -18,6 +18,18 @@ export const likeAction = async (dispatch, liker_id, post_id, type, body) => {
     switch (type) {
         case "album":
             dispatch_type = GET_ALBUM
+            break;
+        case "episode":
+            dispatch_type = GET_SINGLE_EPISODE;
+            break;
+        case "playlist":
+            dispatch_type = GET_PLAYLIST;
+            break;
+        case "show":
+            dispatch_type = GET_SHOW;
+            break
+        case "track":
+            dispatch_type = GET_SINGLE_TRACK;
             break;
         default:
             dispatch_type = "";
@@ -42,6 +54,18 @@ export const unlikeAction = async (dispatch, like_id, type, body) => {
     switch (type) {
         case "album":
             dispatch_type = GET_ALBUM
+            break;
+        case "episode":
+            dispatch_type = GET_SINGLE_EPISODE;
+            break;
+        case "playlist":
+            dispatch_type = GET_PLAYLIST;
+            break;
+        case "show":
+            dispatch_type = GET_SHOW;
+            break
+        case "track":
+            dispatch_type = GET_SINGLE_TRACK;
             break;
         default:
             dispatch_type = "";

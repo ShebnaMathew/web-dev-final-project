@@ -5,14 +5,10 @@ import {likeAction, unlikeAction} from "../../../actions/like-action";
 import {
     getAlbumAction,
     getArtistAction,
-    getTrackAction,
     getTracks,
-    setCurrentAlbum
 } from "../../../actions/search-actions";
 import CommentsTabList from "../Lists/CommentsTabList";
 import TrackList from "../Lists/TrackList";
-import {createPost, getPost} from "../../../services/backend/post-service";
-import {likeContent, unlikeContent} from "../../../services/backend/like-service";
 
 
 
@@ -94,7 +90,7 @@ const Album = () => {
                                     className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{album.name}</a>
                             </p>
                             <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                               onClick={() => navigate(`/artist/${artist.id}`, {state: {back: location.state.back}})}>{album.artist_name}</a>
+                               onClick={() => navigate(`/artist/${album.artist_id}`, {state: {back: location.state.back}})}>{album.artist_name}</a>
                             <div className="row justify-content-center mt-1">Release date: {album.release_date}</div>
                             <div className="row justify-content-center mt-1">Total tracks: {album.total_tracks}</div>
                         </div>
@@ -102,22 +98,24 @@ const Album = () => {
                     <div
                         className="col col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
-                        <span>
+                        <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
                             {/* get likes from db */}
-                            <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
+                            <button disabled={!(user && user._id)} className="btn">
+                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
 
-                                if (isLiked) {
-                                    await unlikeAction(dispatch, thisLike._id, "album", album)
+                                    if (isLiked) {
+                                        await unlikeAction(dispatch, thisLike._id, "album", album)
 
-                                } else {
-                                    await likeAction(dispatch, user._id, album.post_id, "album", album)
-                                }
+                                    } else {
+                                        await likeAction(dispatch, user._id, album.post_id, "album", album)
+                                    }
 
-                            }}/>
-                            <b>{album.likes.length}</b>
-                            {/* when the db is ready, uncomment below */}
-                            {/* <b>{likes}</b> */}
-                            <span> likes</span>
+                                }}/>
+                                <b>{album.likes.length}</b>
+                                {/* when the db is ready, uncomment below */}
+                                {/* <b>{likes}</b> */}
+                                <span> likes</span>
+                            </button>
                         </span>
                         </p>
                         <ul class="nav nav-tabs nav-fill">

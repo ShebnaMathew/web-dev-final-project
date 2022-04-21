@@ -1,5 +1,5 @@
 import {getArtistId, getArtistName,getGenres,getImage,getNumberOfTracksOrEpisodes,getReleaseDate, getTrackDuration} from './GetPostDetails';
-export const prepareData = (data, type, extra = '') => {
+export const prepareData = (data, type) => {
     switch(type){
         case 'album':
             return({
@@ -22,6 +22,9 @@ export const prepareData = (data, type, extra = '') => {
                 spotify_url: data.external_urls.spotify, // change key name to stay consistent
                 name: data.name,
                 album_name: data.album.name,
+                album_id: data.album.id,
+                artist_name: data.artists[0].name,
+                artist_id: data.artists[0].id,
                 release_date: getReleaseDate(data),
                 track_duration: getTrackDuration(data),
                 popularity: data.popularity
@@ -46,8 +49,7 @@ export const prepareData = (data, type, extra = '') => {
                 spotify_url: data.external_urls.spotify,
                 genres: getGenres(data),
                 followers_total: data.followers.total,
-                popularity: data.popularity//,
-                // artist_present: null // maybe this can be added on the backend
+                popularity: data.popularity
             })
         case 'show':
             return({
@@ -67,7 +69,8 @@ export const prepareData = (data, type, extra = '') => {
                 image_url: getImage(data),
                 spotify_url: data.external_urls.spotify,
                 name: data.name,
-                show_name: extra,
+                show_name: data.show.name,
+                show_id: data.show.id,
                 release_date: getReleaseDate(data),
                 description: data.description
             })

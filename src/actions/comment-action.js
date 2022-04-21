@@ -1,12 +1,22 @@
-import {GET_ALBUM} from "./search-actions";
+import {GET_ALBUM, GET_PLAYLIST, GET_SHOW, GET_SINGLE_EPISODE, GET_SINGLE_TRACK} from "./search-actions";
 import {addComment, deleteComment} from "../services/backend/comment-service";
 
-export const addCommentAction = async (dispatch, commentor_id, commentor_name, post_id, type, comment, body) => {
+export const addCommentAction = async (dispatch,
+                                       commentor_id,
+                                       commentor_name,
+                                       post_id,
+                                       post_name,
+                                       image_url,
+                                       type,
+                                       comment,
+                                       body) => {
 
     let commentBody = {
         commentor_id,
         commentor_name,
         post_id,
+        post_name,
+        image_url,
         comment,
         type
     }
@@ -20,6 +30,18 @@ export const addCommentAction = async (dispatch, commentor_id, commentor_name, p
     switch (type) {
         case "album":
             dispatch_type = GET_ALBUM
+            break;
+        case "episode":
+            dispatch_type = GET_SINGLE_EPISODE;
+            break;
+        case "playlist":
+            dispatch_type = GET_PLAYLIST;
+            break;
+        case "show":
+            dispatch_type = GET_SHOW;
+            break
+        case "track":
+            dispatch_type = GET_SINGLE_TRACK;
             break;
         default:
             dispatch_type = "";
@@ -44,6 +66,18 @@ export const deleteCommentAction = async (dispatch, comment_id, type, body) => {
     switch (type) {
         case "album":
             dispatch_type = GET_ALBUM
+            break;
+        case "episode":
+            dispatch_type = GET_SINGLE_EPISODE;
+            break;
+        case "playlist":
+            dispatch_type = GET_PLAYLIST;
+            break;
+        case "show":
+            dispatch_type = GET_SHOW;
+            break
+        case "track":
+            dispatch_type = GET_SINGLE_TRACK;
             break;
         default:
             dispatch_type = "";
