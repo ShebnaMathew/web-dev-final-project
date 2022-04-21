@@ -3,6 +3,7 @@ import CommentItem from "../PostItems/ListCommentItem";
 import './list.css';
 
 const CommentList = ({comments = []}) => {
+    console.log("printing comments")
     console.log(comments)
     return (
         <>
