@@ -84,22 +84,25 @@ const Playlist = () => {
                     <div
                         className="col col-lg-4 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
-                        <span>
+                            <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
                             {/* get likes from db */}
-                            <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
+                            <button disabled={!(user && user._id)} className="btn">
+                                {/* get likes from db */}
+                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
 
-                                if (isLiked) {
-                                    await unlikeAction(dispatch, thisLike._id, "playlist", playlist)
+                                    if (isLiked) {
+                                        await unlikeAction(dispatch, thisLike._id, "playlist", playlist)
 
-                                } else {
-                                    await likeAction(dispatch, user._id, playlist.post_id, "playlist", playlist)
-                                }
+                                    } else {
+                                        await likeAction(dispatch, user._id, playlist.post_id, "playlist", playlist)
+                                    }
 
-                            }}/>
-                            <b>{playlist.likes.length}</b>
-                            {/* when the db is ready, uncomment below */}
-                            {/* <b>{likes}</b> */}
-                            <span> likes</span>
+                                }}/>
+                                <b>{playlist.likes.length}</b>
+                                {/* when the db is ready, uncomment below */}
+                                {/* <b>{likes}</b> */}
+                                <span> likes</span>
+                            </button>
                         </span>
                         </p>
                         <ul class="nav nav-tabs nav-fill">

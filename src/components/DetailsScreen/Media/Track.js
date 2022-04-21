@@ -90,22 +90,25 @@ const Track = () => {
                     <div
                         className="col col-lg-4 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
-                        <span>
+                        <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
                             {/* get likes from db */}
-                            <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
+                            <button disabled={!(user && user._id)} className="btn">
+                                {/* get likes from db */}
+                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
 
-                                if (isLiked) {
-                                    await unlikeAction(dispatch, thisLike._id, "track", track)
+                                    if (isLiked) {
+                                        await unlikeAction(dispatch, thisLike._id, "track", track)
 
-                                } else {
-                                    await likeAction(dispatch, user._id, track.post_id, "track", track)
-                                }
+                                    } else {
+                                        await likeAction(dispatch, user._id, track.post_id, "track", track)
+                                    }
 
-                            }}/>
-                            <b>{track.likes.length}</b>
-                            {/* when the db is ready, uncomment below */}
-                            {/* <b>{likes}</b> */}
-                            <span> likes</span>
+                                }}/>
+                                <b>{track.likes.length}</b>
+                                {/* when the db is ready, uncomment below */}
+                                {/* <b>{likes}</b> */}
+                                <span> likes</span>
+                            </button>
                         </span>
                         </p>
                         Comments
