@@ -1,3 +1,7 @@
+.wd-max-width {
+    max-width: 100%;
+}
+
 .wd-newsfeed-bold-text {
     font-weight: 900;
 }

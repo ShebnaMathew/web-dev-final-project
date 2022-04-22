@@ -15,7 +15,7 @@ const Header = () => {
     const location = useLocation();
     const dispatch = useDispatch();
 
-    useEffect(() => (location.pathname === '/login' || location.pathname === '/signup') ? 
+    useEffect(() => (location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/privacyPolicy') ? 
         setBlur('wd-blur'): 
         setBlur('')
     , [location.pathname])
@@ -33,11 +33,15 @@ const Header = () => {
     }
 
     return(
-        <nav className={`navbar navbar-dark bg-dark fixed-top ${blur}`}>
+        <nav className={`navbar navbar-dark bg-dark fixed-top ${blur} wd-header`}>
             <div className="container-fluid">
-                <a href='#' className={`navbar-brand wd-bold wd-font-family wd-font-size ${(blur) ? 'wd-pointer-events-none': ''}`} onClick={() => navigate('/')}>
+                <a href='#' className={`navbar-brand wd-bold wd-font-family wd-font-size d-none d-lg-block ${(blur) ? 'wd-pointer-events-none': ''}`} onClick={() => navigate('/')}>
                 <img src="/images/headphones2.png" alt="" width="30" height="30" className="d-inline-block align-text-top"/>
                     ommentify</a>
+
+                <a href='#' className={`navbar-brand wd-bold wd-font-family wd-font-size d-lg-none ${(blur) ? 'wd-pointer-events-none': ''}`} onClick={() => navigate('/')}>
+                <img src="/images/headphones2.png" alt="" width="30" height="30" className="d-inline-block align-text-top"/>
+                </a>
                 <div className="d-flex wd-header-center">
                     <input onChange={(event) => setSearchString(event.target.value)}
                            onKeyPress={(e) => handleKeypress(e)}
@@ -50,16 +54,18 @@ const Header = () => {
                     />
                 </div>
                 {!user || !user._id &&
-                    <div className="d-flex ms-auto">
-                        <div className="me-2 text-white" title="Privacy Policy" disabled={blur ? 'disabled': ''} onClick={() => navigate('/privacyPolicy')}>
-                            <i className="fa fa-shield" aria-hidden="true"></i>
+                    <div className="d-flex ms-auto wd-header-media">
+                        <div className="me-2 text-white my-1 fa-stack wd-header-cursor-pointer" title="Privacy Policy" disabled={blur ? 'disabled': ''} onClick={() => navigate('/privacyPolicy')}>
+                            <i class="fa-regular fa-circle fa-stack-2x wd-header-fg-grey"></i>
+                            <i className="fa fa-shield fa-stack-1x wd-header-fg-light-grey" aria-hidden="true"></i>
                         </div>
+                        
                         <button className="btn btn-success me-2" disabled={blur ? 'disabled': ''} type="submit" onClick={() => navigate('/login')}>Login</button>
                         <button className="btn btn-secondary" disabled={blur ? 'disabled': ''} type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
                     </div>
                 }
                 {(user && user._id) &&
-                    <div className="d-flex ms-auto">
+                    <div className="d-flex ms-auto wd-header-media">
                         <div className="me-2 text-white" title="Privacy Policy" disabled={blur ? 'disabled': ''} onClick={() => navigate('/privacyPolicy')}>
                                 <i className="fa fa-shield" aria-hidden="true"></i>
                         </div>

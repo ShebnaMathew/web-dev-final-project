@@ -28,8 +28,8 @@ const Login = (props) => {
     }
 
     return (
-        <div className="row justify-content-md-center mt-4 ms-5">
-            <div className="col-4 bg-dark text-black fontFamily p-5 pt-2 pb-3 wd-round-corners">
+        <div className="row justify-content-md-center mt-4 mx-5">
+            <div className="col-lg-4 col-md-6 bg-dark text-black fontFamily p-5 pt-2 pb-3 wd-round-corners wd-z-index">
                 <div>
                     <div className="d-flex justify-content-center">
                         <img width="150px" height="150px" src="/images/headphones-logo.png"/>

@@ -1,12 +1,17 @@
 import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import "./privacypolicy.css";
 
 const PrivacyPolicy = () => {
+    const navigate = useNavigate();
+    
     return (
         <div>
             <div className="row justify-content-md-center text-black mt-4 ms-2">
                 <div className="col-8 bg-dark text-black fontFamily pt-2 pb-3 wd-round-corners wd-background wd-z-index">
-                    <h1 className="d-flex text-black wd-privacy-font">Commentify Privacy Policy</h1>
+                    <h2 className="d-flex text-black wd-privacy-font wd-privacy-float-left">Commentify Privacy Policy</h2>
+                    <i class="fa-solid fa-xmark wd-privacy-float-right wd-privacy-cursor" onClick={() => navigate('/')}></i>
+                    <div className="wd-privacy-float-done"></div>
                     <div className="justify-content-start">
                         <div>Effective as of 12 April 2022</div>
 

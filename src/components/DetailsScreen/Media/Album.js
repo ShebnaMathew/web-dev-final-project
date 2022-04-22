@@ -20,6 +20,7 @@ const Album = () => {
 
     const params = useParams();
     const id = params.postId;
+    console.log("id: ", id);
 
     const [showTracks, setShowTracks] = useState(true);
     const [showComments, setShowComments] = useState(false);
@@ -29,6 +30,7 @@ const Album = () => {
 
     let thisLike = null;
     let isLiked = false;
+    
     if (album.likes && user._id) {
         for (const l of album.likes) {
             if (l.liker_id === user._id) {

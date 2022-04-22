@@ -2,12 +2,6 @@
     backdrop-filter: blur(2px) !important;
 }
 
-/* h5, h1 {
-    color: black;
-    font-weight: bold;
-} */
-
-/* refactored the above to the one below */
 .wd-privacy-font {
     color: black;
     font-weight: bold;
@@ -26,10 +20,22 @@ tbody {
     background-color: white;
 }
 
-/* p {
-    padding-bottom: 2px;
-} */
-
 .wd-padding-bottom {
     padding-bottom: 2px;
+}
+
+.wd-privacy-float-left {
+    float: left;
+}
+
+.wd-privacy-float-right {
+    float: right;
+}
+
+.wd-privacy-float-done {
+    clear: both;
+}
+
+.wd-privacy-cursor {
+    cursor: pointer;
 }

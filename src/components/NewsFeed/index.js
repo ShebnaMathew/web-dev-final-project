@@ -13,7 +13,6 @@ import PostList from "./PostList";
 const NewsFeed = () => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const [ready, setReady] = useState(false);
     
