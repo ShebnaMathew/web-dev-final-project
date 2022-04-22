@@ -151,7 +151,7 @@ const EditProfileScreen = () => {
     return(
         <>
         {!pageReady && <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>}
-        {pageReady &&
+        {(pageReady && user._id !== undefined) &&
             <div className="row justify-content-center pt-3">
                 <div className="wd-edit-profile-max-width wd-center-edit-profile">
                     {renderRegisterArtistPopUp()}

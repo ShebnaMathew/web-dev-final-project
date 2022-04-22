@@ -304,7 +304,7 @@ const ProfileScreen = () => {
     return(
         <>
             {!ready && <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>}
-            {ready &&
+            {(ready && _id !== undefined) &&
             <div className="row justify-content-center pt-3">
                 <div className="wd-profile-content-width">
                     {renderFollow()}
