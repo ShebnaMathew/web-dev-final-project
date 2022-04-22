@@ -24,7 +24,6 @@ const Album = () => {
     const [showTracks, setShowTracks] = useState(true);
     const [showComments, setShowComments] = useState(false);
     const album = useSelector((state) => state.searchResults.current_album);
-    const artist = useSelector((state) => state.searchResults.current_artist);
     const user = useSelector((state) => state.user);
 
     let thisLike = null;

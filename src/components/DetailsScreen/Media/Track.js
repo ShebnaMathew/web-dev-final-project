@@ -93,14 +93,12 @@ const Track = () => {
                         <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
                             {/* get likes from db */}
                             <button disabled={!(user && user._id)} className="btn" onClick={async () => {
-
                                 if (isLiked) {
                                     await unlikeAction(dispatch, thisLike._id, "track", track)
 
                                 } else {
                                     await likeAction(dispatch, user._id, track.post_id, "track", track)
                                 }
-
                             }}>
                                 {/* get likes from db */}
                                 <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`}/>
