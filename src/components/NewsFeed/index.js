@@ -13,7 +13,6 @@ import PostList from "./PostList";
 const NewsFeed = () => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const [ready, setReady] = useState(false);
     
@@ -21,9 +20,10 @@ const NewsFeed = () => {
     const user = useSelector((state) => state.user);
 
     useEffect(async () => {
+        setReady(false);
         await getContentAction(dispatch, user._id)
         setReady(true)
-    }, [])
+    }, [user])
 
     return(
         <>
