@@ -56,9 +56,7 @@ const EditProfileScreen = () => {
                 bio: profileData.bio,
                 dob: profileData.dob,
                 email: profileData.email,
-                website: profileData.website,
-                isArtist: profileData.isArtist,
-                isAdmin: profileData.isAdmin
+                website: profileData.website
             });
             setIsArtist(profileData.isArtist);
             setIsAdmin(profileData.isAdmin);
@@ -77,7 +75,6 @@ const EditProfileScreen = () => {
     }
 
     const setIsArtistWithBool = (boolVal) => {
-        profile.isArtist = boolVal;
         setIsArtist(boolVal);
     }
 
@@ -104,7 +101,6 @@ const EditProfileScreen = () => {
     }
 
     const setIsAdminWithBool = (boolVal) => {
-        profile.isAdmin = boolVal;
         setIsAdmin(boolVal);
     }
 
@@ -155,7 +151,7 @@ const EditProfileScreen = () => {
     return(
         <>
         {!pageReady && <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>}
-        {pageReady && user._id !== undefined ?
+        {(pageReady && user._id !== undefined) &&
             <div className="row justify-content-center pt-3">
                 <div className="wd-edit-profile-max-width wd-center-edit-profile">
                     {renderRegisterArtistPopUp()}
@@ -281,14 +277,15 @@ const EditProfileScreen = () => {
                     {renderRegisterAdminButton()}
                 </div>
             </div>
-            :
+        }
+        {(pageReady && user._id === undefined) &&
             <div className="wd-full-width wd-center-text wd-going-home-text pt-3">
-            <br/>
-            <br/>
-            <br/>
-            <i className="fa fa-2x wd-fg-color-white fa-exclamation-triangle"/>
-            <div>Must be logged in to view profile</div>
-            <div>Going home in 5 seconds...</div>
+                <br/>
+                <br/>
+                <br/>
+                <i className="fa fa-2x wd-fg-color-white fa-exclamation-triangle"/>
+                <div>Must be logged in to view profile</div>
+                <div>Going home in 5 seconds...</div>
             </div>
         }
         </>

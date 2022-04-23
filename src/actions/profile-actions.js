@@ -6,6 +6,13 @@ export const SET_PROFILE_DATA = "set-profile-data";
 export const SAVE_PROFILE_DATA = "save-profile-data";
 export const RESET_USER = "reset-user";
 
+export const updateCurrentUserAction = (dispatch, newData) => {
+    dispatch({
+        type: SET_USER,
+        data: newData
+    })
+}
+
 export const getCurrentUserAction = async (dispatch) => {
     const userData = await getUser();
     dispatch({

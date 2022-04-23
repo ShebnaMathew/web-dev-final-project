@@ -10,6 +10,8 @@ const CommentsTabList = ({comments, type, body}) => {
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
+    console.log(user)
+
     // dummy list - get actual comments from db and render with map
 
     return(
@@ -18,12 +20,12 @@ const CommentsTabList = ({comments, type, body}) => {
                         {comments.map((c) => 
                             <p className="list-group-item my-0 wd-detail-bg-black wd-list-no-border">
                                 <span className="wd-cursor-pointer wd-newsfeed-bold-text me-2 wd-detail-float-left"
-                                      onClick={() => (user && user._id) ? navigate('/profile') : navigate(`/profile/${c.commentor_id}`)}>
+                                      onClick={() => (user && user._id === c.commentor_id) ? navigate('/profile') : navigate(`/profile/${c.commentor_id}`)}>
                                     {c.commentor_name}
                                 </span>
                                 <span className="wd-detail-float-left">{c.comment}</span>
-                                {(user._id && (user._id === c.commentor_id || user._isAdmin)) &&
-                                    <i class="fa-solid fa-xmark wd-detail-float-right" onClick={() => deleteCommentAction(dispatch, c._id, type, body)}/>
+                                {(user._id && (user._id === c.commentor_id || user.isAdmin)) &&
+                                    <i class="fa-solid fa-xmark wd-detail-float-right wd-cursor-pointer" onClick={() => deleteCommentAction(dispatch, c._id, type, body)}/>
                                 }
                                 <div className="wd-detail-float-done"/>
                             </p>
