@@ -1,10 +1,7 @@
 import './details.css';
 
 const DetailsScreen = () => {
-
-    return(
-        <></>
-    )
+    return(<></>)
 }
 
 export default DetailsScreen;

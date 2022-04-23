@@ -10,7 +10,7 @@ const PrivacyPolicy = () => {
             <div className="row justify-content-md-center text-black mt-4 ms-2">
                 <div className="col-8 bg-dark text-black fontFamily pt-2 pb-3 wd-round-corners wd-background wd-z-index">
                     <h2 className="d-flex text-black wd-privacy-font wd-privacy-float-left">Commentify Privacy Policy</h2>
-                    <i class="fa-solid fa-xmark wd-privacy-float-right wd-privacy-cursor" onClick={() => navigate('/')}></i>
+                    <i className="fa-solid fa-xmark wd-privacy-float-right wd-privacy-cursor" onClick={() => navigate('/')}></i>
                     <div className="wd-privacy-float-done"></div>
                     <div className="justify-content-start">
                         <div>Effective as of 12 April 2022</div>
@@ -32,7 +32,7 @@ const PrivacyPolicy = () => {
                     </div>
 
                     <a name="embedding-about-policy"></a>
-                    <h5 class="wd-privacy-font">1. About this Policy</h5>
+                    <h5 className="wd-privacy-font">1. About this Policy</h5>
                     <div>
                         <p className="wd-padding-bottom">This Policy describes how we process your personal data at Commentify Inc.</p>
                         <p className="wd-padding-bottom">It applies to your use of:</p>
@@ -42,7 +42,7 @@ const PrivacyPolicy = () => {
                     </div>
 
                     <a name="embedding-personal-data-rights"></a>
-                    <h5 class="wd-privacy-font">2. Your personal data rights and controls</h5>
+                    <h5 className="wd-privacy-font">2. Your personal data rights and controls</h5>
                     <div>
                         <p className="wd-padding-bottom">Privacy laws, including the General Data Protection Regulation ("GDPR"), give rights to individuals over their personal data.
 

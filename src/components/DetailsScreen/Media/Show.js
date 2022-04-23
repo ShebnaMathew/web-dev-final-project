@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {getEpisodeAction, getEpisodes, getShowAction, setCurrentShow} from "../../../actions/search-actions";
+import {getEpisodes, getShowAction} from "../../../actions/search-actions";
 import CommentsTabList from "../Lists/CommentsTabList";
 import EpisodeList from "../Lists/EpisodeList";
-import {createPost, getPost} from "../../../services/backend/post-service";
-import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
 import {likeAction, unlikeAction} from "../../../actions/like-action";
 
 const Show = () => {
@@ -50,7 +48,6 @@ const Show = () => {
             await getEpisodes(dispatch, id, show.total_episodes);
             setPageReady(true);
         }
-        // takes a little bit to run
     }, [showReady])
 
     console.log(show);
@@ -60,61 +57,61 @@ const Show = () => {
         {!pageReady &&
             <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>
         }
-
         {pageReady &&
-            <div class="container wd-details-container wd-detail-max-width">
-                <div class="row justify-content-center m-0 wd-details-container-children">
-                    <div className="col col-lg-1 justify-content-center mt-3">
-                        <button
-                            className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                            onClick={() => navigate(location.state.back)}>
-                            <i class="fas fa-angle-left"/>
-                        </button>
-                    </div>
-                    <div class="col col-lg-7 wd-background-banner-show wd-details-container-children">
-                        <div class="row justify-content-md-center mt-5">
-                            <img src={show.image_url} class="m-3 wd-detail-box-shadow wd-detail-img-height"
-                                 alt="..."/>
+            <div className="container wd-details-container wd-detail-max-width">
+                <div className="row justify-content-center m-0 wd-details-container-children">
+                    <div className="col-lg-7 wd-background-banner-show wd-details-container-children">
+                        <div className="row mt-5 justify-content-center text-center pb-3">
+                            <div className="col-md-2 mt-3 justify-content-center text-center">
+                                <button
+                                    className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
+                                    onClick={() => navigate(location.state.back)}>
+                                    <i className="fas fa-angle-left"/>
+                                </button>
+                            </div>
+                            <div className="col-md-10 mt-3 justify-content-center text-center">
+                                <img src={show.image_url} className="col-md-10 m-3 wd-detail-box-shadow wd-detail-img-height"
+                                        alt="..."/>
+                                <div className="justify-content-center text-center mt-3">Show</div>
+                                <p className="justify-content-center text-center mt-1">
+                                    <a href={show.spotify_url}target="_blank"
+                                        className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">
+                                        {show.name}
+                                    </a>
+                                </p>
+                                <p className="justify-content-center text-center mt-1 wd-detail-sub-bold-font">by {show.publisher}</p>
+                                <div className="justify-content-center text-center mt-1">Total episodes: {show.total_episodes}</div>
+                                <hr/>
+                                <div className="justify-content-center text-center mt-1">{show.description}</div>
+                            </div>
                         </div>
-                        <div class="row justify-content-md-center mb-5">
-                            <p className="row text-center mt-1"><a href={show.spotify_url} target="_blank"
-                                                                   className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{show.name}</a>
-                            </p>
-                            <p className="row justify-content-center mt-1 wd-detail-sub-bold-font">by {show.publisher}</p>
-                            <div className="row justify-content-center my-2">Total episodes: {show.total_episodes}</div>
-                            <hr/>
-                            <div className="row text-center mt-1">{show.description}</div>
-
-                        </div>
                     </div>
-                    <div
-                        className="col col-lg-4 wd-detail-right-max wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
+                    <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
-                        <span>
-                            {/* get likes from db */}
-                            <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
+                            <span>
+                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
 
-                                if (isLiked) {
-                                    await unlikeAction(dispatch, thisLike._id, "show", show)
+                                    if (isLiked) {
+                                        await unlikeAction(dispatch, thisLike._id, "show", show)
 
-                                } else {
-                                    await likeAction(dispatch, user._id, show.post_id, "show", show)
-                                }
+                                    } else {
+                                        await likeAction(dispatch, user._id, show.post_id, "show", show)
+                                    }
 
-                            }}/>
-                            <b>{show.likes.length}</b>
-                        </span>
+                                }}/>
+                                <b>{show.likes.length}</b>
+                            </span>
                         </p>
-                        <ul class="nav nav-tabs nav-fill">
-                            <li class="nav-item">
-                                <button class="nav-link" onClick={() => {
+                        <ul className="nav nav-tabs nav-fill">
+                            <li className="nav-item">
+                                <button className="nav-link" onClick={() => {
                                     setShowEpisodes(true);
                                     setShowComments(false);
                                 }}>Episodes
                                 </button>
                             </li>
-                            <li class="nav-item">
-                                <button class="nav-link" onClick={() => {
+                            <li className="nav-item">
+                                <button className="nav-link" onClick={() => {
                                     setShowEpisodes(false);
                                     setShowComments(true);
                                 }}>Comments

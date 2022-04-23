@@ -7,7 +7,7 @@ import './header.css'
 const Header = () => {
 
     const [searchString, setSearchString] = useState('');
-    const [blur, setBlur] = useState(''); // lol
+    const [blur, setBlur] = useState('');
 
     const user = useSelector((state) => state.user)
 
@@ -53,27 +53,24 @@ const Header = () => {
                            disabled={blur ? 'disabled': ''}
                     />
                 </div>
-                {!user || !user._id &&
-                    <div className="d-flex ms-auto wd-header-media">
-                        <div className="me-2 text-white my-1 fa-stack wd-header-cursor-pointer" title="Privacy Policy" disabled={blur ? 'disabled': ''} onClick={() => navigate('/privacyPolicy')}>
-                            <i class="fa-regular fa-circle fa-stack-2x wd-header-fg-grey"></i>
-                            <i className="fa fa-shield fa-stack-1x wd-header-fg-light-grey" aria-hidden="true"></i>
-                        </div>
-                        
-                        <button className="btn btn-success me-2" disabled={blur ? 'disabled': ''} type="submit" onClick={() => navigate('/login')}>Login</button>
-                        <button className="btn btn-secondary" disabled={blur ? 'disabled': ''} type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
+                <div className="d-flex ms-auto wd-header-media">
+                    <div className="me-2 text-white my-1 fa-stack wd-header-cursor-pointer" title="Privacy Policy" disabled={blur ? 'disabled': ''} onClick={() => navigate('/privacyPolicy')}>
+                        <i className="fa-regular fa-circle fa-stack-2x wd-header-fg-grey"></i>
+                        <i className="fa fa-shield fa-stack-1x wd-header-fg-light-grey" aria-hidden="true"></i>
                     </div>
-                }
-                {(user && user._id) &&
-                    <div className="d-flex ms-auto wd-header-media">
-                        <div className="me-2 text-white" title="Privacy Policy" disabled={blur ? 'disabled': ''} onClick={() => navigate('/privacyPolicy')}>
-                                <i className="fa fa-shield" aria-hidden="true"></i>
-                        </div>
-                        <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/profile')}>Profile</button>
-                        <button className="btn btn-secondary" type="submit" onClick={() => logout()}>Log Out</button>
-                    </div>
-                }
-
+                    {!user || !user._id &&
+                        <>
+                            <button className="btn btn-success me-2" disabled={blur ? 'disabled': ''} type="submit" onClick={() => navigate('/login')}>Login</button>
+                            <button className="btn btn-secondary" disabled={blur ? 'disabled': ''} type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
+                        </>
+                    }
+                    {(user && user._id) &&
+                        <>
+                            <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/profile')}>Profile</button>
+                            <button className="btn btn-secondary" type="submit" onClick={() => logout()}>Log Out</button>
+                        </>
+                    }
+                </div>
             </div>
         </nav>
     )
