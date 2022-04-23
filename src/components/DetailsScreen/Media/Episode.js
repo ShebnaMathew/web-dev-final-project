@@ -50,10 +50,10 @@ const Episode = () => {
         {episodeReady &&
             <div className="container wd-details-container wd-detail-max-width">
                 <div className="row justify-content-center m-0 wd-details-container-children">
-                    <div className="col col-lg-1 justify-content-center mt-3">
+                    <div className="col col-lg-1 justify-content-center mt-3" title={episode.show_name}>
                         <button
                             className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                            onClick={() => navigate(location.state.back)}>
+                            onClick={() => navigate("/show/" + episode.show_id)}>
                             <i className="fas fa-angle-left"/>
                         </button>
                     </div>
@@ -69,12 +69,7 @@ const Episode = () => {
                             </p>
                             <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
                                onClick={
-                                   () => navigate(`/show/${episode.show_id}`, {
-                                       state: {
-                                           episode: episode,
-                                           back: location.state.back
-                                       }
-                                   })}>
+                                   () => navigate(`/show/${episode.show_id}`)}>
                                 Show: {episode.show_name}</a>
                             <div className="row justify-content-center mt-1">Release date: {episode.release_date}</div>
                             <p className="row justify-content-center mt-1">{episode.description}</p>

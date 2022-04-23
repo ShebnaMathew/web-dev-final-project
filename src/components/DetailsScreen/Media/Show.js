@@ -65,11 +65,6 @@ const Show = () => {
             <div class="container wd-details-container wd-detail-max-width">
                 <div class="row justify-content-center m-0 wd-details-container-children">
                     <div className="col col-lg-1 justify-content-center mt-3">
-                        <button
-                            className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                            onClick={() => navigate(location.state.back)}>
-                            <i class="fas fa-angle-left"/>
-                        </button>
                     </div>
                     <div class="col col-lg-7 wd-background-banner-show wd-details-container-children">
                         <div class="row justify-content-md-center mt-5">
@@ -125,7 +120,7 @@ const Show = () => {
                                 </button>
                             </li>
                         </ul>
-                        {showEpisodes && <EpisodeList back={location.state.back}/>}
+                        {showEpisodes && <EpisodeList/>}
                         {showComments && <CommentsTabList comments={show.comments} type={"show"} body={show}/>}
                     </div>
                 </div>

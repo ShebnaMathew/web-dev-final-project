@@ -68,10 +68,10 @@ const Album = () => {
             <div class="container wd-details-container wd-detail-max-width">
                 <div class="row justify-content-center m-0 wd-details-container-children">
 
-                    <div className="col col-lg-1 justify-content-center mt-3">
+                    <div className="col col-lg-1 justify-content-center mt-3" title={album.artist_name}>
                         <button
                             className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                            onClick={() => navigate(location.state.back)}>
+                            onClick={() => navigate(`/artist/${album.artist_id}`)}>
                             <i class="fas fa-angle-left"/>
                         </button>
                     </div>
@@ -89,7 +89,7 @@ const Album = () => {
                                     className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{album.name}</a>
                             </p>
                             <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                               onClick={() => navigate(`/artist/${album.artist_id}`, {state: {back: location.state.back}})}>{album.artist_name}</a>
+                               onClick={() => navigate(`/artist/${album.artist_id}`)}>{album.artist_name}</a>
                             <div className="row justify-content-center mt-1">Release date: {album.release_date}</div>
                             <div className="row justify-content-center mt-1">Total tracks: {album.total_tracks}</div>
                         </div>
@@ -133,7 +133,7 @@ const Album = () => {
                                 </button>
                             </li>
                         </ul>
-                        {showTracks && <TrackList back={location.state.back}/>}
+                        {showTracks && <TrackList/>}
                         {/* dummy album -> todo go to profile for each user once we have the data */}
                         {showComments && <CommentsTabList comments={album.comments} type={"album"} body={album}/>}
                     </div>
