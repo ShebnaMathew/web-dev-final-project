@@ -45,6 +45,16 @@ const Track = () => {
 
     console.log(track);
 
+    const renderToolTip = () => {
+        if (!location.state) {
+            return track.album_name;
+        } else if (!location.state.playlistName) {
+            return track.album_name;
+        } else {
+            return location.state.playlistName;
+        }
+    }
+
     // _MONGO: get likes and comments for this album
 
     return(
@@ -56,10 +66,16 @@ const Track = () => {
         {pageReady &&
             <div class="container wd-details-container wd-detail-max-width">
                 <div class="row justify-content-center m-0 wd-details-container-children">
-                    <div className="col col-lg-1 justify-content-center mt-3">
+                    <div className="col col-lg-1 justify-content-center mt-3" title={renderToolTip()}>
                         <button
                             className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                            onClick={() => navigate(location.state.back)}>
+                            onClick={() => {
+                                if (location.state === undefined || location.state.playlistId === undefined) {
+                                    navigate("/album/" + track.album_id);
+                                } else {
+                                    navigate("/playlist/" + location.state.playlistId)
+                                }
+                            }}>
                             <i class="fas fa-angle-left"/>
                         </button>
                     </div>
