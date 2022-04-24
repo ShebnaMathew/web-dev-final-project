@@ -87,7 +87,7 @@ const Album = () => {
                                     </a>
                                 </p>
                                 <a className="justify-content-center text-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                                    onClick={() => navigate(`/artist/${album.artist_id}`)}>{album.artist_name}>
+                                    onClick={() => navigate(`/artist/${album.artist_id}`)}>
                                     {album.artist_name}
                                 </a>
                                 <div className="justify-content-center text-center mt-1">Release date: {album.release_date}</div>

@@ -50,7 +50,7 @@ const Episode = () => {
                             <div className="col-md-2 mt-3 justify-content-center text-center">
                                 <button
                                     className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                                    onClick={() => navigate("/show/" + episode.show_id)}>>
+                                    onClick={() => navigate("/show/" + episode.show_id)}>
                                     <i className="fas fa-angle-left"/>
                                 </button>
                             </div>

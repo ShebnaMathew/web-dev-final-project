@@ -33,7 +33,7 @@ const Header = () => {
     }
 
     return(
-        <nav className={`navbar navbar-dark bg-dark fixed-top ${blur} wd-header`}>
+        <nav className={`navbar navbar-dark bg-dark fixed-top ${blur} wd-header wd-min-body-width`}>
             <div className="container-fluid">
                 <a href='#' className={`navbar-brand wd-bold wd-font-family wd-font-size d-none d-lg-block ${(blur) ? 'wd-pointer-events-none': ''}`} onClick={() => navigate('/')}>
                 <img src="/images/headphones2.png" alt="" width="30" height="30" className="d-inline-block align-text-top"/>
