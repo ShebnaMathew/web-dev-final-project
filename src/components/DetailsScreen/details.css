@@ -97,8 +97,10 @@
 }
 
 .wd-detail-max-width {
-    width: 100%;
+    max-width: 100%;
     margin-right: 0%;
+    margin-left: 0%;
+    padding-left: 0%;
     padding-right: 0%;
 }
 
@@ -117,6 +119,28 @@
 
 .wd-list-no-border {
     border-width: 0 0 0px !important;
+}
+
+.wd-position-relative {
+    position: relative;
+}
+
+.wd-detail-max-height {
+    height: 80%;
+}
+
+.wd-detail-height-95 {
+    height: 85%;
+}
+
+.wd-detail-artist-grid {
+    grid-gap: 0px;
+}
+
+.wd-comment-sticky {
+    position: sticky;
+    bottom: 0;
+    right: 0;
 }
 
 .wd-details-width-height {
@@ -172,7 +196,6 @@
   grid-template-columns:none;
   grid-gap:10px;
   border: none;
-  padding: 10px;
   box-sizing: border-box;
 }
 

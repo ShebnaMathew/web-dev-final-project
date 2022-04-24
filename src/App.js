@@ -18,7 +18,6 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import {authorize} from "./services/spotify/spotify-service";
 import newsReducer from "./reducers/newsReducer";
 import userReducer from "./reducers/userReducer";
-import Post from "./components/NewsFeed/Post";
 import DetailsScreen from "./components/DetailsScreen";
 import Album from "./components/DetailsScreen/Media/Album";
 import Show from "./components/DetailsScreen/Media/Show";
@@ -49,8 +48,6 @@ function App() {
                 <Routes>
                     <Route path="/" element={<MainScreen/>}>
                         <Route index element={<NewsFeed/>}/>
-                        <Route path="/post" element={<Post/>}/>
-                        <Route path="/post/:postId" element={<Post/>}/>
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/profile/:_id" element={<Profile/>}/>
                         <Route path="/editProfile" element={<EditProfile/>}/>

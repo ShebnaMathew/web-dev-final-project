@@ -11,16 +11,16 @@ const SearchList = (props) => {
     const dispatch = useDispatch();
 
     return(
-        <div class="container-fluid py-2 mt-3 mb-0">
-            <h5 class="wd-font-family">{props.media} <i class="fa-solid fa-chevron-right"></i></h5>
-            <div class="d-flex flex-row flex-nowrap wd-search-horizontal-overflow">
+        <div className="container-fluid py-2 mt-3 mb-0">
+            <h5 className="wd-font-family">{props.media} <i className="fa-solid fa-chevron-right"></i></h5>
+            <div className="d-flex flex-row flex-nowrap wd-search-horizontal-overflow">
                 {props.posts.map((post) => {
 
                     let artistName = getArtistName(post);
                     let image = getImage(post);
 
                     return (
-                            <div class="card mb-3 wd-cursor mt-2 wd-search-min-width me-3" onClick={() => {
+                            <div className="card mb-3 wd-cursor mt-2 wd-search-min-width me-3" onClick={() => {
                                 (post.type === "artist") && navigate(`/artist/${post.id}`, {state: {back: location.pathname}});
                                 (post.type === "album") && navigate(`/album/${post.id}`, {state: {back: location.pathname}});
                                 (post.type === "track") && navigate(`/track/${post.id}`, {state: {back: location.pathname}});

@@ -10,7 +10,7 @@ const PostList = ({posts}) => {
     console.log(posts)
 
     return(
-        <div className="container">
+        <div className="container wd-max-width">
             <StackGrid columnWidth={350}>
                 {posts.map((post) => {
                     return (
@@ -40,7 +40,7 @@ const PostList = ({posts}) => {
                             <img src={post.image_url ? post.image_url : "/images/unavailable-image.jpg"} className="card-img-top wd-image-size" alt="..."/>
                             <div className="card-body">
                                 <h6 className="mb-0">{post.name}</h6>
-                                <span className="wd-italic-text">{post.type}</span>
+                                <span className="text-muted">{post.type.charAt(0).toUpperCase() + post.type.substring(1)}</span>
                                 <p className="mt-3">
                                     {!post.dynamic &&
                                         <>

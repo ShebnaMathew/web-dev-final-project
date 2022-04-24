@@ -7,6 +7,7 @@ import React, {useEffect, useState} from "react";
 import {getAlbumAction, getArtistAction, getSingleTrackAction} from "../../../actions/search-actions";
 import {likeAction, unlikeAction} from "../../../actions/like-action";
 
+
 const Track = () => {
     
     const navigate = useNavigate();
@@ -16,16 +17,14 @@ const Track = () => {
     const params = useParams();
     const id = params.postId;
 
-    // const album = useSelector((state) => state.searchResults.current_album);
     const track = useSelector((state) => state.searchResults.current_track);
 
     const [pageReady, setPageReady] = useState(false);
     const user = useSelector((state) => state.user);
 
-    console.log(track)
-
     let thisLike = null;
     let isLiked = false;
+
     if (track && track.likes && user._id) {
         for (const l of track.likes) {
             if (l.liker_id === user._id) {
@@ -54,9 +53,7 @@ const Track = () => {
             return location.state.playlistName;
         }
     }
-
-    // _MONGO: get likes and comments for this album
-
+    
     return(
         <>
         {!pageReady &&
@@ -64,50 +61,50 @@ const Track = () => {
         }
 
         {pageReady &&
-            <div class="container wd-details-container wd-detail-max-width">
-                <div class="row justify-content-center m-0 wd-details-container-children">
-                    <div className="col col-lg-1 justify-content-center mt-3" title={renderToolTip()}>
-                        <button
-                            className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                            onClick={() => {
-                                if (location.state === undefined || location.state.playlistId === undefined) {
-                                    navigate("/album/" + track.album_id);
-                                } else {
-                                    navigate("/playlist/" + location.state.playlistId)
-                                }
-                            }}>
-                            <i class="fas fa-angle-left"/>
-                        </button>
-                    </div>
-                    <div class="col col-lg-7 wd-background-banner-track wd-details-container-children">
-                        <div class="row justify-content-md-center mt-5">
-                            <img src={track.image_url} class="m-3 wd-detail-box-shadow wd-detail-img-height"
-                                 alt="..."/>
-                        </div>
-                        <div class="row justify-content-md-center mb-5">
-                            <div className="row justify-content-center mt-3">Track</div>
-                            <p className="row text-center mt-1"><a href={track.spotify_url} target="_blank"
-                                                                   className="row justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{track.name}</a>
-                            </p>
-                            <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                               onClick={
-                                   () => navigate(`/album/${track.album_id}`, {state: {back: location.state.back}})}>
-                                Album: {track.album_name}</a>
-                            <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                               onClick={() => navigate(`/artist/${track.artist_id}`, {state: {back: location.state.back}})}>{track.artist_name}</a>
-                            <div className="row justify-content-center mt-1">Release
-                                date: {track.release_date}</div>
-                            <div
-                                className="row justify-content-center mt-1">Duration: {track.track_duration}
+            <div className="container wd-details-container wd-detail-max-width">
+                <div className="row justify-content-center m-0 wd-details-container-children">
+                    <div className="col-lg-7 wd-background-banner-track wd-details-container-children">
+                        <div className="row mt-5 justify-content-center text-center pb-3">
+                            <div className="col-md-2 mt-3 justify-content-center text-center">
+                                <button
+                                    className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
+                                    onClick={() => {
+                                      if (location.state === undefined || location.state.playlistId === undefined) {
+                                          navigate("/album/" + track.album_id);
+                                      } else {
+                                          navigate("/playlist/" + location.state.playlistId)
+                                      }
+                                  }}>
+                                    <i className="fas fa-angle-left"/>
+                                </button>
                             </div>
-                            <div className="row justify-content-center mt-1">Popularity Score: {track.popularity}</div>
+                            <div className="col-md-10 mt-3 justify-content-center text-center">
+                                <img src={track.image_url} className="col-md-10 m-3 wd-detail-box-shadow wd-detail-img-height"
+                                        alt="..."/>
+                                <div className="justify-content-center text-center mt-3">Track</div>
+                                <p className="justify-content-center text-center mt-1">
+                                    <a href={track.spotify_url} target="_blank"
+                                        className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">
+                                        {track.name}
+                                    </a>
+                                </p>
+                                <div>
+                                    <a className="justify-content-center text-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
+                                        onClick={() => navigate(`/artist/${track.artist_id}`)}>{track.artist_name}</a>
+                               </div>
+                                <a className="justify-content-center text-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
+                                    onClick={() => navigate(`/album/${track.album_id}`)}>
+                                    Album: {track.album_name}
+                                </a>
+                                <div className="justify-content-center text-center mt-1">Release date: {track.release_date}</div>
+                                <div className="justify-content-center text-center mt-1">Duration: {track.track_duration}</div>
+                                <div className="justify-content-center text-center mt-1">Popularity Score: {track.popularity}</div>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        className="col col-lg-4 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
+                    <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
                         <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
-                            {/* get likes from db */}
                             <button disabled={!(user && user._id)} className="btn" onClick={async () => {
                                 if (isLiked) {
                                     await unlikeAction(dispatch, thisLike._id, "track", track)
@@ -116,11 +113,8 @@ const Track = () => {
                                     await likeAction(dispatch, user._id, track.post_id, "track", track)
                                 }
                             }}>
-                                {/* get likes from db */}
                                 <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`}/>
                                 <b>{track.likes.length}</b>
-                                {/* when the db is ready, uncomment below */}
-                                {/* <b>{likes}</b> */}
                                 <span> likes</span>
                             </button>
                         </span>

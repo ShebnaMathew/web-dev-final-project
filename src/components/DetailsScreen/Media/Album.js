@@ -10,8 +10,6 @@ import {
 import CommentsTabList from "../Lists/CommentsTabList";
 import TrackList from "../Lists/TrackList";
 
-
-
 const Album = () => {
 
     const navigate = useNavigate();
@@ -28,6 +26,7 @@ const Album = () => {
 
     let thisLike = null;
     let isLiked = false;
+
     if (album.likes && user._id) {
         for (const l of album.likes) {
             if (l.liker_id === user._id) {
@@ -65,80 +64,78 @@ const Album = () => {
             <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>
         }
         {pageReady &&
-            <div class="container wd-details-container wd-detail-max-width">
-                <div class="row justify-content-center m-0 wd-details-container-children">
-
-                    <div className="col col-lg-1 justify-content-center mt-3" title={album.artist_name}>
-                        <button
-                            className="row justify-content-center mt-5 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                            onClick={() => navigate(`/artist/${album.artist_id}`)}>
-                            <i class="fas fa-angle-left"/>
-                        </button>
-                    </div>
-                    <div class="col col-lg-6 wd-background-banner wd-details-container-children">
-                        <div class="row justify-content-md-center mt-5">
-                            <img src={album.image_url} class="m-3 wd-detail-box-shadow wd-detail-img-height"
-                                 alt="..."/>
+            <div className="container wd-details-container wd-detail-max-width">
+                <div className="row justify-content-center m-0 wd-details-container-children">
+                    <div className="col-lg-7 wd-background-banner wd-details-container-children">
+                        <div className="row mt-5 justify-content-center text-center pb-3">
+                            <div className="col-md-2 mt-3 justify-content-center text-center">
+                                <button
+                                    className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
+                                    onClick={() => navigate(`/artist/${album.artist_id}`)}>
+                                    <i className="fas fa-angle-left"/>
+                                </button>
+                            </div>
+                            <div className="col-md-10 mt-3 justify-content-center text-center">
+                                <img src={album.image_url} className="col-md-10 m-3 wd-detail-box-shadow wd-detail-img-height"
+                                    alt="..."/>
+                                <div className="justify-content-center text-center mt-3">{album.album_type.charAt(0).toUpperCase() + album.album_type.substring(1)}</div>
+                                <p className="justify-content-center text-center mt-1">
+                                    <a href={album.spotify_url}
+                                        target="_blank"
+                                        className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">
+                                        {album.name}
+                                    </a>
+                                </p>
+                                <a className="justify-content-center text-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
+                                    onClick={() => navigate(`/artist/${album.artist_id}`)}>{album.artist_name}>
+                                    {album.artist_name}
+                                </a>
+                                <div className="justify-content-center text-center mt-1">Release date: {album.release_date}</div>
+                                <div className="justify-content-center text-center mt-1">Total tracks: {album.total_tracks}</div>
+                            </div>
                         </div>
-                        <div class="row justify-content-md-center mb-5">
-                            <div
-                                className="row justify-content-center mt-3">{album.album_type.charAt(0).toUpperCase() + album.album_type.substring(1)}</div>
-                            <p className="row justify-content-center mt-1">
-                                <a href={album.spotify_url}
-                                    target="_blank"
-                                    className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">{album.name}</a>
-                            </p>
-                            <a className="row justify-content-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                               onClick={() => navigate(`/artist/${album.artist_id}`)}>{album.artist_name}</a>
-                            <div className="row justify-content-center mt-1">Release date: {album.release_date}</div>
-                            <div className="row justify-content-center mt-1">Total tracks: {album.total_tracks}</div>
-                        </div>
                     </div>
-                    <div
-                        className="col col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
+                    <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
-                        <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
-                            {/* get likes from db */}
-                            <button disabled={!(user && user._id)} className="btn"  onClick={async () => {
+                            <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
+                                <button disabled={!(user && user._id)} className="btn" onClick={async () => {
 
-                                if (isLiked) {
-                                    await unlikeAction(dispatch, thisLike._id, "album", album)
+                                        if (isLiked) {
+                                            await unlikeAction(dispatch, thisLike._id, "album", album)
 
-                                } else {
-                                    await likeAction(dispatch, user._id, album.post_id, "album", album)
-                                }
-
-                            }}>
-                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`}/>
-                                <b>{album.likes.length}</b>
-                                {/* when the db is ready, uncomment below */}
-                                {/* <b>{likes}</b> */}
-                                <span> likes</span>
-                            </button>
-                        </span>
+                                        } else {
+                                            await likeAction(dispatch, user._id, album.post_id, "album", album)
+                                        }
+                                    }}>
+                                    <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`}/>
+                                    <b>{album.likes.length}</b>
+                                    <span> likes</span>
+                                </button>
+                            </span>
                         </p>
-                        <ul class="nav nav-tabs nav-fill">
-                            <li class="nav-item">
-                                <button class="nav-link" onClick={() => {
+                        <ul className="nav nav-tabs nav-fill">
+                            <li className="nav-item">
+                                <button className="nav-link" onClick={() => {
                                     setShowTracks(true);
                                     setShowComments(false);
                                 }}>Tracks
                                 </button>
                             </li>
-                            <li class="nav-item">
-                                <button class="nav-link" onClick={() => {
+                            <li className="nav-item">
+                                <button className="nav-link" onClick={() => {
                                     setShowComments(true);
                                     setShowTracks(false);
                                 }}>Comments
                                 </button>
                             </li>
                         </ul>
+
                         {showTracks && <TrackList/>}
-                        {/* dummy album -> todo go to profile for each user once we have the data */}
                         {showComments && <CommentsTabList comments={album.comments} type={"album"} body={album}/>}
                     </div>
                 </div>
             </div>
+                
         }
         </>
     )
