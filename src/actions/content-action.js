@@ -30,6 +30,8 @@ export const getContentAction = async (dispatch, user_id) => {
         results = [...results, ...newsPosts]
     }
 
+    console.log(results);
+
     dispatch({
         type: UPDATE_NEWS,
         results: results

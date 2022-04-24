@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import './register-pop-up.css';
 import {useDispatch} from "react-redux";
-import {saveProfileDataAction} from "../../../actions/profile-actions";
+import {saveProfileDataAction, updateCurrentUserAction} from "../../../actions/profile-actions";
 import {registerAdmin} from "../../../services/backend/profile-service";
 
 const RegisterAdminPopUp = ({ _id, setIsAdmin }) => {
@@ -16,6 +16,7 @@ const RegisterAdminPopUp = ({ _id, setIsAdmin }) => {
         const result = await registerAdmin(key)
         if (result) {
             await saveProfileDataAction(dispatch, { isAdmin: true }, _id);
+            updateCurrentUserAction(dispatch, { isAdmin: true });
             setIsAdmin(true);
             setSuccessMessage('Success!');
         } else {

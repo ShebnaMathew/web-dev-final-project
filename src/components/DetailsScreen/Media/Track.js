@@ -42,6 +42,18 @@ const Track = () => {
         }
     }, [])
 
+    console.log(track);
+
+    const renderToolTip = () => {
+        if (!location.state) {
+            return track.album_name;
+        } else if (!location.state.playlistName) {
+            return track.album_name;
+        } else {
+            return location.state.playlistName;
+        }
+    }
+    
     return(
         <>
         {!pageReady &&
@@ -56,7 +68,13 @@ const Track = () => {
                             <div className="col-md-2 mt-3 justify-content-center text-center">
                                 <button
                                     className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                                    onClick={() => navigate(location.state.back)}>
+                                    onClick={() => {
+                                      if (location.state === undefined || location.state.playlistId === undefined) {
+                                          navigate("/album/" + track.album_id);
+                                      } else {
+                                          navigate("/playlist/" + location.state.playlistId)
+                                      }
+                                  }}>
                                     <i className="fas fa-angle-left"/>
                                 </button>
                             </div>
@@ -72,10 +90,10 @@ const Track = () => {
                                 </p>
                                 <div>
                                     <a className="justify-content-center text-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                                        onClick={() => navigate(`/artist/${track.artist_id}`, {state: {back: location.state.back}})}>{track.artist_name}</a>
+                                        onClick={() => navigate(`/artist/${track.artist_id}`)}>{track.artist_name}</a>
                                </div>
                                 <a className="justify-content-center text-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                                    onClick={() => navigate(`/album/${track.album_id}`, {state: {back: location.state.back}})}>
+                                    onClick={() => navigate(`/album/${track.album_id}`)}>
                                     Album: {track.album_name}
                                 </a>
                                 <div className="justify-content-center text-center mt-1">Release date: {track.release_date}</div>
@@ -86,19 +104,20 @@ const Track = () => {
                     </div>
                     <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
-                            <span>
-                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
-                                    if (isLiked) {
-                                        await unlikeAction(dispatch, thisLike._id, "track", track)
+                        <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
+                            <button disabled={!(user && user._id)} className="btn" onClick={async () => {
+                                if (isLiked) {
+                                    await unlikeAction(dispatch, thisLike._id, "track", track)
 
-                                    } else {
-                                        await likeAction(dispatch, user._id, track.post_id, "track", track)
-                                    }
-
-                                }}/>
+                                } else {
+                                    await likeAction(dispatch, user._id, track.post_id, "track", track)
+                                }
+                            }}>
+                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`}/>
                                 <b>{track.likes.length}</b>
                                 <span> likes</span>
-                            </span>
+                            </button>
+                        </span>
                         </p>
                         Comments
                         <hr className="mt-0"/>

@@ -14,9 +14,10 @@ const NewsFeed = () => {
     const user = useSelector((state) => state.user);
 
     useEffect(async () => {
+        setReady(false);
         await getContentAction(dispatch, user._id)
         setReady(true)
-    }, [])
+    }, [user])
 
     return(
         <>

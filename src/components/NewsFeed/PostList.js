@@ -18,22 +18,22 @@ const PostList = ({posts}) => {
 
                             switch(post.type) {
                                 case "track":
-                                    navigate(`/track/${post.post_id}`, {state: {back: location.pathname, post: post}});
+                                    navigate(`/track/${post.post_id}`);
                                     break;
                                 case "album":
-                                    navigate(`/album/${post.post_id}`, {state: {back: location.pathname, post: post}});
+                                    navigate(`/album/${post.post_id}`);
                                     break;
                                 case "artist":
-                                    navigate(`/artist/${post.post_id}`, {state: {back: location.pathname, post: post}});
+                                    navigate(`/artist/${post.post_id}`);
                                     break;
                                 case "show":
-                                    navigate(`/show/${post.post_id}`, {state: {back: location.pathname, post: post}});
+                                    navigate(`/show/${post.post_id}`);
                                     break
                                 case "episode":
-                                    navigate(`/episode/${post.post_id}`, {state: {back: location.pathname, post: post}});
+                                    navigate(`/episode/${post.post_id}`);
                                     break;
                                 case "playlist":
-                                    navigate(`/playlist/${post.post_id}`, {state: {back: location.pathname, post: post}});
+                                    navigate(`/playlist/${post.post_id}`);
                                     break;
                             }
                         }}>

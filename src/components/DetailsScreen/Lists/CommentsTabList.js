@@ -9,7 +9,6 @@ const CommentsTabList = ({comments, type, body}) => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
-
     return(
         <div className="row justify-content-md-center wd-position-relative wd-detail-max-height"> 
                     <div className="list-group list-group-flush my-3 pe-0 wd-detail-height-95 wd-detail-comment-overflow">
@@ -20,8 +19,8 @@ const CommentsTabList = ({comments, type, body}) => {
                                     {c.commentor_name}
                                 </span>
                                 <span className="wd-detail-float-left">{c.comment}</span>
-                                {(user._id && (user._id === c.commentor_id || user._isAdmin)) &&
-                                    <i className="fa-solid fa-xmark wd-detail-float-right" onClick={() => deleteCommentAction(dispatch, c._id, type, body)}/>
+                                {(user._id && (user._id === c.commentor_id || user.isAdmin)) &&
+                                    <i className="fa-solid fa-xmark wd-detail-float-right wd-cursor-pointer" onClick={() => deleteCommentAction(dispatch, c._id, type, body)}/>
                                 }
                                 <div className="wd-detail-float-done"/>
                             </p>

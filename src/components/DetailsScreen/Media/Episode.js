@@ -50,7 +50,7 @@ const Episode = () => {
                             <div className="col-md-2 mt-3 justify-content-center text-center">
                                 <button
                                     className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                                    onClick={() => navigate(location.state.back)}>
+                                    onClick={() => navigate("/show/" + episode.show_id)}>>
                                     <i className="fas fa-angle-left"/>
                                 </button>
                             </div>
@@ -65,34 +65,30 @@ const Episode = () => {
                                     </a>
                                 </p>
                                 <a className="justify-content-center text-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                                    onClick={() => navigate(`/show/${episode.show_id}`, {
-                                        state: {
-                                        episode: episode,
-                                        back: location.state.back
-                                        }
-                                    })}>
+                                    onClick={() => navigate(`/show/${episode.show_id}`)}>
                                     Show: {episode.show_name}
                                 </a>
                                 <div className="justify-content-center text-center mt-1">Release date: {episode.release_date}</div>
                                 <div className="justify-content-center text-center mt-1">{episode.description}</div>
                             </div>
+
                         </div>
                     </div>
                     <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
-                            <span>
-                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
-
-                                    if (isLiked) {
-                                        await unlikeAction(dispatch, thisLike._id, "episode", episode)
-
-                                    } else {
-                                        await likeAction(dispatch, user._id, episode.post_id, "episode", episode)
-                                    }
-                                }}/>
+                        <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
+                            <button disabled={!(user && user._id)} className="btn" onClick={async () => {
+                                if (isLiked) {
+                                    await unlikeAction(dispatch, thisLike._id, "episode", episode)
+                                } else {
+                                    await likeAction(dispatch, user._id, episode.post_id, "episode", episode)
+                                }
+                            }}>
+                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`}/>
                                 <b>{episode.likes.length}</b>
                                 <span> likes</span>
-                            </span>
+                            </button>
+                        </span>
                         </p>
                         Comments
                         <hr className="mt-0"/>

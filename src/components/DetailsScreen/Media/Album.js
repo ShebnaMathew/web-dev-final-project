@@ -71,7 +71,7 @@ const Album = () => {
                             <div className="col-md-2 mt-3 justify-content-center text-center">
                                 <button
                                     className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                                    onClick={() => navigate(location.state.back)}>
+                                    onClick={() => navigate(`/artist/${album.artist_id}`)}>
                                     <i className="fas fa-angle-left"/>
                                 </button>
                             </div>
@@ -87,7 +87,7 @@ const Album = () => {
                                     </a>
                                 </p>
                                 <a className="justify-content-center text-center mt-1 wd-detail-text-deco-none wd-detail-sub-bold-font"
-                                    onClick={() => navigate(`/artist/${album.artist_id}`, {state: {back: location.state.back}})}>
+                                    onClick={() => navigate(`/artist/${album.artist_id}`)}>{album.artist_name}>
                                     {album.artist_name}
                                 </a>
                                 <div className="justify-content-center text-center mt-1">Release date: {album.release_date}</div>
@@ -98,8 +98,7 @@ const Album = () => {
                     <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
                             <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
-                                <button disabled={!(user && user._id)} className="btn">
-                                    <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
+                                <button disabled={!(user && user._id)} className="btn" onClick={async () => {
 
                                         if (isLiked) {
                                             await unlikeAction(dispatch, thisLike._id, "album", album)
@@ -107,7 +106,8 @@ const Album = () => {
                                         } else {
                                             await likeAction(dispatch, user._id, album.post_id, "album", album)
                                         }
-                                    }}/>
+                                    }}>
+                                    <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`}/>
                                     <b>{album.likes.length}</b>
                                     <span> likes</span>
                                 </button>
@@ -129,7 +129,8 @@ const Album = () => {
                                 </button>
                             </li>
                         </ul>
-                        {showTracks && <TrackList back={location.state.back}/>}
+
+                        {showTracks && <TrackList/>}
                         {showComments && <CommentsTabList comments={album.comments} type={"album"} body={album}/>}
                     </div>
                 </div>

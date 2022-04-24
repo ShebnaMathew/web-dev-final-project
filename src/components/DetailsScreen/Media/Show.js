@@ -62,19 +62,12 @@ const Show = () => {
                 <div className="row justify-content-center m-0 wd-details-container-children">
                     <div className="col-lg-7 wd-background-banner-show wd-details-container-children">
                         <div className="row mt-5 justify-content-center text-center pb-3">
-                            <div className="col-md-2 mt-3 justify-content-center text-center">
-                                <button
-                                    className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                                    onClick={() => navigate(location.state.back)}>
-                                    <i className="fas fa-angle-left"/>
-                                </button>
-                            </div>
                             <div className="col-md-10 mt-3 justify-content-center text-center">
                                 <img src={show.image_url} className="col-md-10 m-3 wd-detail-box-shadow wd-detail-img-height"
                                         alt="..."/>
                                 <div className="justify-content-center text-center mt-3">Show</div>
                                 <p className="justify-content-center text-center mt-1">
-                                    <a href={show.spotify_url}target="_blank"
+                                    <a href={show.spotify_url} target="_blank"
                                         className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">
                                         {show.name}
                                     </a>
@@ -88,8 +81,8 @@ const Show = () => {
                     </div>
                     <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
-                            <span>
-                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`} onClick={async () => {
+                        <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
+                            <button disabled={!(user && user._id)} className="btn" onClick={async () => {
 
                                     if (isLiked) {
                                         await unlikeAction(dispatch, thisLike._id, "show", show)
@@ -97,10 +90,12 @@ const Show = () => {
                                     } else {
                                         await likeAction(dispatch, user._id, show.post_id, "show", show)
                                     }
-
-                                }}/>
+                            }}>
+                                <i className={`${isLiked ? "wd-liked-color" : ""} ${isLiked ? "fa" : "far"} fa-heart me-2`}/>
                                 <b>{show.likes.length}</b>
-                            </span>
+                                <span> likes</span>
+                            </button>
+                        </span>
                         </p>
                         <ul className="nav nav-tabs nav-fill">
                             <li className="nav-item">
@@ -118,7 +113,7 @@ const Show = () => {
                                 </button>
                             </li>
                         </ul>
-                        {showEpisodes && <EpisodeList back={location.state.back}/>}
+                        {showEpisodes && <EpisodeList/>}
                         {showComments && <CommentsTabList comments={show.comments} type={"show"} body={show}/>}
                     </div>
                 </div>
