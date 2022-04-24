@@ -159,9 +159,10 @@ const SignUp = () => {
                     </div>
                 </div>
                 <div>
-                    <span className="d-flex justify-content-center">By clicking on sign-up, you agree to our Terms and Conditions of Use.</span>
-                    <span className="d-flex justify-content-center">To learn more about how we collect, use, share and protect your personal data, </span>
-                    <span className="d-flex justify-content-center">please see our <a className="ps-1" href="/privacyPolicy"> Privacy Policy</a>.</span>
+                    <span className="justify-content-center">By clicking on sign-up, you agree to our Terms and Conditions of Use.
+                        To learn more about how we collect, use, share and protect your personal data,
+                        please see our <a className="ps-1" href="/privacyPolicy"> Privacy Policy</a>.
+                    </span>
                 </div>
                 <button onClick={() => registerUser()} className="btn w-100 btn-success btn-lg mt-2">Sign up</button>
                 <span className="d-flex justify-content-center mt-3">

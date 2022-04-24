@@ -47,8 +47,8 @@ const Artist = () => {
             getArtist(id).then(async (artist) => {
                 const results = await search(artist.name);
                 let albums = results.albums.items;
-                if (albums.length > 3) {
-                    albums = albums.slice(0, 3);
+                if (albums.length > 5) {
+                    albums = albums.slice(0, 5);
                 }
                 const adjustedAlbums = [];
                 for (const a of albums) {
@@ -74,13 +74,6 @@ const Artist = () => {
                 <div className="row justify-content-center m-0 wd-details-container-children mb-0 pb-0">
                     <div className="col-lg-7 wd-background-banner-artist wd-details-container-children">
                         <div className="row mt-5 justify-content-center text-center pb-3">
-                            <div className="col-md-2 mt-3 justify-content-center text-center">
-                                <button
-                                    className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
-                                    onClick={() => navigate(location.state.back)}>
-                                    <i className="fas fa-angle-left"/>
-                                </button>
-                            </div>
                             <div className="col-md-10 mt-3 justify-content-center text-center">
                                 <img src={artist.image_url} className="col-md-10 m-3 wd-detail-box-shadow wd-detail-img-height"
                                         alt="..."/>
@@ -88,7 +81,7 @@ const Artist = () => {
                                     <div className="justify-content-md-center wd-parent-height pt-2">
                                         <div className="justify-content-center text-center mt-3">Artist</div>
                                         <p className="justify-content-center text-center mt-1">
-                                            <a href={artist.spotify_url}target="_blank"
+                                            <a href={artist.spotify_url} target="_blank"
                                                 className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">
                                                 {artist.name}
                                             </a>
@@ -112,7 +105,7 @@ const Artist = () => {
                         <div className="row justify-content-md-center wd-background-banner-artist-reverse wd-parent-height pt-2">
                             <div className="justify-content-center text-center mt-3">Artist</div>
                             <p className="justify-content-center text-center mt-1">
-                                <a href={artist.spotify_url}target="_blank"
+                                <a href={artist.spotify_url} target="_blank"
                                     className="row text-center justify-content-center mt-3 wd-detail-text-deco-none wd-detail-bold-font">
                                     {artist.name}
                                 </a>
