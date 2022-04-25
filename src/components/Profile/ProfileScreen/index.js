@@ -59,11 +59,7 @@ const ProfileScreen = () => {
     }, [_id]);
 
     useEffect(async () => {
-        console.log("firing")
-        console.log(ready);
-        console.log(profileReady)
         if (!ready && profileReady) {
-            console.log('in evaluation')
             if(!isCurrentUser && profileData.followers.length > 0) {
                 for(const f of profileData.followers) {
                     if (f._id === user._id) {

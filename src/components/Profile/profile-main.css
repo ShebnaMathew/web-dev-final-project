@@ -8,7 +8,21 @@
     height: 150px;
 }
 
+#website::-webkit-input-placeholder {
+    text-align: left;
+}
 
+#bio::-webkit-input-placeholder {
+    text-align: left;
+}
+
+#email::-webkit-input-placeholder {
+    text-align: left;
+}
+
+#name::-webkit-input-placeholder {
+    text-align: left;
+}
 
 @media (min-width: 1200px) {
 

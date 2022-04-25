@@ -42,8 +42,6 @@ const Track = () => {
         }
     }, [])
 
-    console.log(track);
-
     const renderToolTip = () => {
         if (!location.state) {
             return track.album_name;

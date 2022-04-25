@@ -139,19 +139,6 @@ export const getTracksForPlaylist = async (dispatch, playlistId) => {
     })
 }
 
-export const getPlaylistTrackAction = async (dispatch, tracks) => {
-    let trackList = {}
-    for (const t of tracks) {
-        const results = await getTrack(t.track.id);
-        trackList[t.track.id] = results;
-    }
-    console.log("mil raha hai ya nahi: ", trackList)
-    dispatch({
-        type: GET_TRACK,
-        results: trackList
-    })
-}
-
 export const getPlaylistAction = async (dispatch, playlistId) => {
     let results = await getPost({type: "playlist", _id: playlistId});
 
@@ -180,19 +167,6 @@ export const getEpisodes = async (dispatch, showId, total) => {
     dispatch({
         type: GET_SHOW_EPISODES,
         results: results
-    })
-}
-
-export const getEpisodeAction = async (dispatch, episodes) => {
-    let episodeList = {}
-    for (const e of episodes) {
-        const results = await getEpisode(e.id);
-        episodeList[e.id] = results;
-    }
-    console.log("episodeList in action: ",episodeList)
-    dispatch({
-        type: GET_EPISODE,
-        results: episodeList
     })
 }
 

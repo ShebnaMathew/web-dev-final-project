@@ -2,7 +2,7 @@ import React from "react";
 import './popup.css';
 
 const PopUp = ({
-    setShow = () => console.log("setShow is undefined"),
+    setShow = () => <></>,
     Content = () => <></>,
     title = "Popup",
     contentParams = {}

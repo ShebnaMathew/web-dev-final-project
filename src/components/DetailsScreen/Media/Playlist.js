@@ -45,8 +45,6 @@ const Playlist = () => {
         }
     },[])
 
-    console.log(playlist)
-
     return(
         <>
         {!pageReady &&

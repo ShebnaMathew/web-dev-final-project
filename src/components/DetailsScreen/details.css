@@ -82,7 +82,7 @@
 }
 
 .wd-comment-height {
-    height: calc(100% - 116px);
+    height: calc(100% - 100px);
 }
 
 .wd-details-comment-block {
@@ -150,6 +150,10 @@
 
 .wd-inner-comment-height {
     height: calc(100% - 95px);
+}
+
+.wd-inner-comment-height-full {
+    height: calc(100% - 19px);
 }
 
 .wd-comment-missing-margin {

@@ -8,9 +8,7 @@ import {likeAction, unlikeAction} from "../../../actions/like-action";
 
 const Show = () => {
     
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const location = useLocation();
     const params = useParams();
 
     const id = params.postId;
@@ -49,8 +47,6 @@ const Show = () => {
             setPageReady(true);
         }
     }, [showReady])
-
-    console.log(show);
 
     return(
         <>

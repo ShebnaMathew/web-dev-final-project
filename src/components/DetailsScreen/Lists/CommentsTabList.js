@@ -11,9 +11,9 @@ const CommentsTabList = ({comments, type, body}) => {
     const dispatch = useDispatch();
     return(
         <div className="row justify-content-md-center wd-position-relative wd-comment-height">
-                    <div className="list-group list-group-flush my-3 pe-0 wd-inner-comment-height wd-detail-comment-overflow">
+                    <div className={`list-group list-group-flush mb-0 pb-0 pe-0 ${(user && user._id) ? "wd-inner-comment-height" : "wd-inner-comment-height-full"} wd-detail-comment-overflow`}>
                         {comments.map((c) => 
-                            <p className="list-group-item my-0 wd-detail-bg-black wd-list-no-border">
+                            <div className="list-group-item my-0 wd-detail-bg-black wd-list-no-border" key={c._id}>
                                 <span className="wd-cursor-pointer wd-newsfeed-bold-text me-2 wd-detail-float-left"
                                       onClick={() => (user && user._id === c.commentor_id) ? navigate('/profile') : navigate(`/profile/${c.commentor_id}`)}>
                                     {c.commentor_name}
@@ -23,7 +23,7 @@ const CommentsTabList = ({comments, type, body}) => {
                                     <i className="fa-solid fa-xmark wd-detail-float-right wd-cursor-pointer" onClick={() => deleteCommentAction(dispatch, c._id, type, body)}/>
                                 }
                                 <div className="wd-detail-float-done"/>
-                            </p>
+                            </div>
                         )}
                     </div>
                     {(user && user._id) &&
