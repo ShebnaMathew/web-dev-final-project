@@ -13,17 +13,19 @@ const CommentsTabList = ({comments, type, body}) => {
         <div className="row justify-content-md-center wd-position-relative wd-detail-max-height"> 
                     <div className="list-group list-group-flush my-3 pe-0 wd-detail-height-95 wd-detail-comment-overflow">
                         {comments.map((c) => 
-                            <p className="list-group-item my-0 wd-detail-bg-black wd-list-no-border">
-                                <span className="wd-cursor-pointer wd-newsfeed-bold-text me-2 wd-detail-float-left"
+                        <div className="row my-1">
+                            
+                            <p className="col-11 list-group-item my-0 wd-detail-bg-black wd-list-no-border ps-4 pe-2 pt-0">
+                                <span className="wd-cursor-pointer wd-newsfeed-bold-text me-2"
                                       onClick={() => (user && user._id === c.commentor_id) ? navigate('/profile') : navigate(`/profile/${c.commentor_id}`)}>
                                     {c.commentor_name}
                                 </span>
-                                <span className="wd-detail-float-left">{c.comment}</span>
-                                {(user._id && (user._id === c.commentor_id || user.isAdmin)) &&
-                                    <i className="fa-solid fa-xmark wd-detail-float-right wd-cursor-pointer" onClick={() => deleteCommentAction(dispatch, c._id, type, body)}/>
-                                }
-                                <div className="wd-detail-float-done"/>
+                                <span className="wd-comment-width-inherit">{c.comment}</span>
                             </p>
+                            {(user._id && (user._id === c.commentor_id || user.isAdmin)) &&
+                                <i className="col-1 fa-solid fa-xmark wd-cursor-pointer my-0 ps-0 pt-1" onClick={() => deleteCommentAction(dispatch, c._id, type, body)}/>
+                            }
+                        </div>
                         )}
                     </div>
                     {(user && user._id) &&
