@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import CommentsTabList from "../Lists/CommentsTabList";
-import {createPost, getPost} from "../../../services/backend/post-service";
-import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
 import React, {useEffect, useState} from "react";
-import {getAlbumAction, getArtistAction, getSingleTrackAction} from "../../../actions/search-actions";
+import {getSingleTrackAction} from "../../../actions/search-actions";
 import {likeAction, unlikeAction} from "../../../actions/like-action";
-
+import "../details.css";
 
 const Track = () => {
     

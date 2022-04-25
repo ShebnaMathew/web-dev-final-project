@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {
     getTracksForPlaylist,
     getPlaylistAction
@@ -8,12 +8,11 @@ import {
 import CommentsTabList from "../Lists/CommentsTabList";
 import PlaylistTrackList from "../Lists/PlaylistTrackList";
 import {likeAction, unlikeAction} from "../../../actions/like-action";
+import "../details.css";
 
 
 const Playlist = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const location = useLocation();
     const params = useParams();
 
     const id = params.postId;

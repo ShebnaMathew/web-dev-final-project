@@ -1,15 +1,13 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {getArtistAction} from "../../../actions/search-actions";
 import PostList from "../../NewsFeed/PostList";
 import {getArtist, search} from "../../../services/spotify/spotify-service";
 import {prepareData} from "../../../util/PrepareDataUtil";
-
+import "../details.css";
 
 const Artist = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
     const dispatch = useDispatch();
 
     const params = useParams();

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {likeAction, unlikeAction} from "../../../actions/like-action";
 import {
     getAlbumAction,
@@ -9,12 +9,12 @@ import {
 } from "../../../actions/search-actions";
 import CommentsTabList from "../Lists/CommentsTabList";
 import TrackList from "../Lists/TrackList";
+import "../details.css";
 
 const Album = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const location = useLocation();
 
     const params = useParams();
     const id = params.postId;

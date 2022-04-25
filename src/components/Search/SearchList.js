@@ -1,7 +1,5 @@
 import React from "react"; 
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { getSingleEpisode } from "../../actions/search-actions";
+import { useNavigate } from "react-router-dom";
 import { getArtistName, getImage } from "../../util/GetPostDetails";
 
 const SearchList = (props) => {

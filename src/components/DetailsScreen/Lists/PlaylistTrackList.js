@@ -1,6 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getAlbumAction } from "../../../actions/search-actions";
 import React from "react";
 
 const PlaylistTrackList = ({playlistId, playlistName}) => {

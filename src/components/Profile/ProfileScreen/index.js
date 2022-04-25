@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
 import '../profile-main.css';
-import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {getProfileAction} from "../../../actions/profile-actions";
 import PostList from "../../NewsFeed/PostList";
 import {addFollowAction, removeFollowAction} from "../../../actions/follow-actions";

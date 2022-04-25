@@ -2,8 +2,7 @@ import React, {useState} from "react";
 import './register-pop-up.css';
 import {useDispatch} from "react-redux";
 import {saveProfileDataAction} from "../../../actions/profile-actions";
-import {getAlbum, getArtist, search} from "../../../services/spotify/spotify-service";
-import {createPost} from "../../../services/backend/post-service";
+import {getArtist} from "../../../services/spotify/spotify-service";
 
 const RegisterArtistPopUp = ({ _id, setIsArtist }) => {
 
