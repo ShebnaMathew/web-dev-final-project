@@ -95,7 +95,7 @@ const Album = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
+                    <div className="col-lg-5 wd-detail-right-max wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
                             <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
                                 <button disabled={!(user && user._id)} className="btn" onClick={async () => {

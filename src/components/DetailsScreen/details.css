@@ -78,7 +78,11 @@
 }
 
 .wd-detail-comment-overflow {
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+.wd-comment-height {
+    height: calc(100% - 116px);
 }
 
 .wd-details-comment-block {
@@ -130,17 +134,31 @@
 }
 
 .wd-detail-height-95 {
-    height: 85%;
+    height: 86%;
 }
 
 .wd-detail-artist-grid {
     grid-gap: 0px;
 }
 
-.wd-comment-sticky {
-    position: sticky;
-    bottom: 0;
+.wd-comment-relative {
+    position: relative;
+    bottom: 3px;
     right: 0;
+    height: 60px;
+}
+
+.wd-inner-comment-height {
+    height: calc(100% - 95px);
+}
+
+.wd-comment-missing-margin {
+    margin-top: 1px;
+}
+
+.wd-comment-border {
+    border-bottom: 1px solid #282828;
+    border-top: 1px solid #282828;
 }
 
 .wd-details-width-height {
@@ -204,7 +222,6 @@
 }
 
 .wd-details-container-children-overflow {
-    overflow:auto;
   height:0;
   min-height:100%;
 }

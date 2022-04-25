@@ -91,7 +91,7 @@ const Episode = () => {
                         </span>
                         </p>
                         Comments
-                        <hr className="mt-0"/>
+                        <hr className="wd-comment-missing-margin"/>
                         <CommentsTabList comments={episode.comments} type={"episode"} body={episode}/>
                     </div>
                 </div>

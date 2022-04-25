@@ -120,7 +120,7 @@ const Track = () => {
                         </span>
                         </p>
                         Comments
-                        <hr className="mt-0"/>
+                        <hr className="wd-comment-missing-margin"/>
                         <CommentsTabList comments={track.comments} type={"track"} body={track}/>
                     </div>
                 </div>

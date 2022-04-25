@@ -10,7 +10,7 @@ const EpisodeList = (props) => {
 
     return(
         <div className="row justify-content-md-center wd-details-container-children-overflow">
-            <div className="list-group list-group-flush my-3 pe-0"> 
+            <div className="list-group list-group-flush my-3 pe-0 wd-detail-height-95 wd-detail-comment-overflow">
                 {show_episodes.map((e) => <a onClick={() => {
                     navigate(`/episode/${e.id}`,{state: {post: results[e.id]}})
                 }} className="list-group-item list-group-item-action wd-detail-bg-black wd-list-no-border">{e.name}</a>)}
