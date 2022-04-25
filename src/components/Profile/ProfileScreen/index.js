@@ -99,14 +99,20 @@ const ProfileScreen = () => {
             case 'likes':
                 if (profileData.likes && profileData.likes.length > 0) {
                     return (
-                        <PostList posts={profileData.likes}/>
+                        <div className="wd-profile-content-width row">
+                            <PostList posts={profileData.likes}/>
+                        </div>
                     )
                 } else {
                     return renderNothingHere();
                 }
             case 'music':
                 if (music.length > 0) {
-                    return <PostList posts={music}/>
+                    return (
+                        <div className="wd-profile-content-width row">
+                            <PostList posts={music}/>
+                        </div>
+                    )
                 } else {
                     getArtist(profileData.artistId).then(async (artist) => {
                         const results = await search(artist.name);
@@ -385,7 +391,7 @@ const ProfileScreen = () => {
                     </div>
 
                 </div>
-                <div className={`${content === "comments" ? "wd-profile-content-width" : ""}`}>
+                <div className="wd-profile-content-width">
                     {renderContent(content)}
                 </div>
             </div>
