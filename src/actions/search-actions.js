@@ -24,14 +24,6 @@ export const GET_ARTIST = "get-artist";
 export const GET_SINGLE_EPISODE = "get-single-episode";
 export const GET_SINGLE_TRACK = "get-single-track";
 
-export const searchNewMusicAction = async (dispatch) => {
-    const results = await getNewMusic();
-    dispatch({
-        type: UPDATE_NEWS,
-        results: results
-    })
-}
-
 export const searchAction = async (dispatch, searchString) => {
     const results = await search(searchString)
     dispatch({
@@ -64,18 +56,6 @@ export const getTracks = async (dispatch, albumId) => {
     dispatch({
         type: GET_ALBUM_TRACKS,
         results: results
-    })
-}
-
-export const getTrackAction = async (dispatch, tracks) => {
-    let trackList = {}
-    for (const t of tracks) {
-        const results = await getTrack(t.id);
-        trackList[t.id] = results;
-    }
-    dispatch({
-        type: GET_TRACK,
-        results: trackList
     })
 }
 
@@ -112,21 +92,6 @@ export const getAlbumAction = async (dispatch, albumId) => {
 
     dispatch({
         type: GET_ALBUM,
-        results: results
-    })
-}
-
-export const setCurrentAlbum = (dispatch, album) => {
-    dispatch({
-        type: SET_ALBUM,
-        results: album
-    })
-}
-
-export const getCurrentPlaylist = async (dispatch, playlist_id) => {
-    const results = await getPlaylist(playlist_id)
-    dispatch({
-        type: SET_PLAYLIST,
         results: results
     })
 }
@@ -202,26 +167,5 @@ export const getShowAction = async (dispatch, showId) => {
     dispatch({
         type: GET_SHOW,
         results: results
-    })
-}
-
-export const setCurrentShow = (dispatch, show) => {
-    dispatch({
-        type: SET_SHOW,
-        results: show
-    })
-}
-
-export const setPostsToRender = (dispatch, posts) => {
-    dispatch({
-        type: GET_POSTS_TO_RENDER,
-        results: posts
-    })
-}
-
-export const setAllPosts = (dispatch, posts) => {
-    dispatch({
-        type: GET_ALL_POSTS,
-        results: posts
     })
 }

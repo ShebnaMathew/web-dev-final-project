@@ -65,7 +65,7 @@ const Track = () => {
                                 <button
                                     className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
                                     onClick={() => {
-                                      if (location.state === undefined || location.state.playlistId === undefined) {
+                                      if (!location.state || !location.state.playlistId) {
                                           navigate("/album/" + track.album_id);
                                       } else {
                                           navigate("/playlist/" + location.state.playlistId)
