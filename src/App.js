@@ -37,6 +37,19 @@ const reducer = combineReducers(
 })
 const store = createStore(reducer);
 
+// handles specific problem with dependency: https://github.com/wadackel/react-stack-grid/issues/46
+// not updated by user, but thread on the github page indicates the warning is harmless
+
+const backup = console.warn;
+
+console.error = function filterWarnings(msg) {
+    const supressedWarnings = ['`Infinity` is an invalid value for the `height` css style property'];
+
+    if (!supressedWarnings.some(entry => msg.includes(entry))) {
+        backup.apply(console, arguments);
+    }
+};
+
 function App() {
   return (
     <BrowserRouter>

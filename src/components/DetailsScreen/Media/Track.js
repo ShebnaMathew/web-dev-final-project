@@ -49,7 +49,7 @@ const Track = () => {
             return location.state.playlistName;
         }
     }
-    
+
     return(
         <>
         {!pageReady &&

@@ -4,6 +4,7 @@ import StackGrid from "react-stack-grid";
 
 const PostList = ({posts}) => {
 
+
     const navigate = useNavigate();
 
     return(
