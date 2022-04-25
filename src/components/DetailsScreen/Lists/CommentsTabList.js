@@ -14,7 +14,6 @@ const CommentsTabList = ({comments, type, body}) => {
                     <div className="list-group list-group-flush my-3 pe-0 wd-detail-height-95 wd-detail-comment-overflow">
                         {comments.map((c) => 
                         <div className="row my-1">
-                            
                             <p className="col-11 list-group-item my-0 wd-detail-bg-black wd-list-no-border ps-4 pe-2 pt-0">
                                 <span className="wd-cursor-pointer wd-newsfeed-bold-text me-2"
                                       onClick={() => (user && user._id === c.commentor_id) ? navigate('/profile') : navigate(`/profile/${c.commentor_id}`)}>

@@ -204,7 +204,8 @@
   grid-template-columns:none;
   grid-gap:10px;
   border: none;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
+  height: 100vh;
 }
 
 .wd-details-container-children {
