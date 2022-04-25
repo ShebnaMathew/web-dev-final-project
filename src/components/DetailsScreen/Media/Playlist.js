@@ -23,7 +23,8 @@ const Playlist = () => {
     const playlist = useSelector((state) => state.searchResults.current_playlist);
     const user = useSelector((state) => state.user);
     const [pageReady, setPageReady] = useState(false);
-
+    const [commentActive, setCommentActive] = useState('');
+    const [otherActive, setOtherActive] = useState('active');
 
     let thisLike = null;
     let isLiked = false;
@@ -76,7 +77,7 @@ const Playlist = () => {
                     <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
                             <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
-                            <button disabled={!(user && user._id)} className="btn" onClick={async () => {
+                            <button disabled={!(user && user._id)} className="btn ps-0" onClick={async () => {
                                     if (isLiked) {
                                         await unlikeAction(dispatch, thisLike._id, "playlist", playlist)
 
@@ -91,17 +92,21 @@ const Playlist = () => {
                         </span>
                         </p>
                         <ul className="nav nav-tabs nav-fill">
-                            <li className="nav-item">
-                                <button className="nav-link" onClick={() => {
+                            <li className="nav-item wd-detail-tab-underline">
+                                <button className={`nav-link ${otherActive}`} onClick={() => {
                                     setShowTracks(true);
                                     setShowComments(false);
+                                    setOtherActive('active')
+                                    setCommentActive('');
                                 }}>Tracks
                                 </button>
                             </li>
-                            <li className="nav-item">
-                                <button className="nav-link" onClick={() => {
+                            <li className="nav-item wd-detail-tab-underline">
+                                <button className={`nav-link ${commentActive}`} onClick={() => {
                                     setShowComments(true);
                                     setShowTracks(false);
+                                    setOtherActive('')
+                                    setCommentActive('active');
                                 }}>Comments
                                 </button>
                             </li>
