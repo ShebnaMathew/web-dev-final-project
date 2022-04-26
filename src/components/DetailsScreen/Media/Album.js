@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {likeAction, unlikeAction} from "../../../actions/like-action";
 import {
     getAlbumAction,
@@ -9,12 +9,12 @@ import {
 } from "../../../actions/search-actions";
 import CommentsTabList from "../Lists/CommentsTabList";
 import TrackList from "../Lists/TrackList";
+import "../details.css";
 
 const Album = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const location = useLocation();
 
     const params = useParams();
     const id = params.postId;
@@ -98,7 +98,7 @@ const Album = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
+                    <div className="col-lg-5 wd-detail-right-max wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
                             <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
                                 <button disabled={!(user && user._id)} className="btn ps-0" onClick={async () => {

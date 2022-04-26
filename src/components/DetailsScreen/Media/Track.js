@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import CommentsTabList from "../Lists/CommentsTabList";
-import {createPost, getPost} from "../../../services/backend/post-service";
-import {likeContent, unlikeContent, getLikes} from "../../../services/backend/like-service";
 import React, {useEffect, useState} from "react";
-import {getAlbumAction, getArtistAction, getSingleTrackAction} from "../../../actions/search-actions";
+import {getSingleTrackAction} from "../../../actions/search-actions";
 import {likeAction, unlikeAction} from "../../../actions/like-action";
-
+import "../details.css";
 
 const Track = () => {
     
@@ -42,8 +40,6 @@ const Track = () => {
         }
     }, [])
 
-    console.log(track);
-
     const renderToolTip = () => {
         if (!location.state) {
             return track.album_name;
@@ -53,7 +49,7 @@ const Track = () => {
             return location.state.playlistName;
         }
     }
-    
+
     return(
         <>
         {!pageReady &&
@@ -69,7 +65,7 @@ const Track = () => {
                                 <button
                                     className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
                                     onClick={() => {
-                                      if (location.state === undefined || location.state.playlistId === undefined) {
+                                      if (!location.state || !location.state.playlistId) {
                                           navigate("/album/" + track.album_id);
                                       } else {
                                           navigate("/playlist/" + location.state.playlistId)
@@ -120,7 +116,7 @@ const Track = () => {
                         </span>
                         </p>
                         Comments
-                        <hr className="mt-0"/>
+                        <hr className="wd-comment-missing-margin"/>
                         <CommentsTabList comments={track.comments} type={"track"} body={track}/>
                     </div>
                 </div>

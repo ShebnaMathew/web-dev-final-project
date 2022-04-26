@@ -6,14 +6,12 @@ export const UPDATE_NEWS = "update-news";
 
 export const getContentAction = async (dispatch, user_id) => {
     let results = await getContent(user_id);
-    console.log('here!')
     if (results.length < 20) {
         const newsResults = await getNewMusic(20 - results.length);
 
         const newsPosts = []
         if (newsResults.albums.items) {
             const existingIds = results.map(r => r.post_id)
-            console.log(existingIds)
             for (const album of newsResults.albums.items) {
                 const parsedData = prepareData(album, "album");
                 if (existingIds.indexOf(parsedData.post_id) < 0) {
@@ -29,8 +27,6 @@ export const getContentAction = async (dispatch, user_id) => {
 
         results = [...results, ...newsPosts]
     }
-
-    console.log(results);
 
     dispatch({
         type: UPDATE_NEWS,

@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {getEpisodes, getShowAction} from "../../../actions/search-actions";
 import CommentsTabList from "../Lists/CommentsTabList";
 import EpisodeList from "../Lists/EpisodeList";
 import {likeAction, unlikeAction} from "../../../actions/like-action";
+import "../details.css";
 
 const Show = () => {
     
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const location = useLocation();
     const params = useParams();
 
     const id = params.postId;
@@ -50,8 +49,6 @@ const Show = () => {
             setPageReady(true);
         }
     }, [showReady])
-
-    console.log(show);
 
     return(
         <>
