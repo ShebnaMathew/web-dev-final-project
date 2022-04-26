@@ -122,7 +122,15 @@
 }
 
 .wd-list-no-border {
-    border-width: 0 0 0px !important;
+    border-width: 0px 0px 0px !important;
+}
+
+.wd-comment-width-inherit {
+    width: inherit;
+}
+
+.wd-detail-tab-underline > .active {
+    background-color: inherit !important;
 }
 
 .wd-position-relative {
@@ -218,7 +226,8 @@
   grid-template-columns:none;
   grid-gap:10px;
   border: none;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
+  height: 100vh;
 }
 
 .wd-details-container-children {

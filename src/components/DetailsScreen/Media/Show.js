@@ -21,7 +21,8 @@ const Show = () => {
 
     const [showReady, setShowReady] = useState(false);
     const [pageReady, setPageReady] = useState(false);
-
+    const [commentActive, setCommentActive] = useState('');
+    const [otherActive, setOtherActive] = useState('active');
 
     let thisLike = null;
     let isLiked = false;
@@ -79,7 +80,7 @@ const Show = () => {
                     <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
                         <p className="mt-4">
                         <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
-                            <button disabled={!(user && user._id)} className="btn" onClick={async () => {
+                            <button disabled={!(user && user._id)} className="btn ps-0" onClick={async () => {
 
                                     if (isLiked) {
                                         await unlikeAction(dispatch, thisLike._id, "show", show)
@@ -95,17 +96,21 @@ const Show = () => {
                         </span>
                         </p>
                         <ul className="nav nav-tabs nav-fill">
-                            <li className="nav-item">
-                                <button className="nav-link" onClick={() => {
+                            <li className="nav-item wd-detail-tab-underline">
+                                <button className={`nav-link ${otherActive}`} onClick={() => {
                                     setShowEpisodes(true);
                                     setShowComments(false);
+                                    setOtherActive('active')
+                                    setCommentActive('');
                                 }}>Episodes
                                 </button>
                             </li>
-                            <li className="nav-item">
-                                <button className="nav-link" onClick={() => {
+                            <li className="nav-item wd-detail-tab-underline">
+                                <button className={`nav-link ${commentActive}`} onClick={() => {
                                     setShowEpisodes(false);
                                     setShowComments(true);
+                                    setOtherActive('')
+                                    setCommentActive('active');
                                 }}>Comments
                                 </button>
                             </li>
