@@ -73,7 +73,7 @@ const Show = () => {
                                 <p className="justify-content-center text-center mt-1 wd-detail-sub-bold-font">by {show.publisher}</p>
                                 <div className="justify-content-center text-center mt-1">Total episodes: {show.total_episodes}</div>
                                 <hr/>
-                                <div className="justify-content-center text-center mt-1">{show.description}</div>
+                                <div className="justify-content-center wd-show-episode-description-view-height text-center mt-1">{show.description}</div>
                             </div>
                         </div>
                     </div>

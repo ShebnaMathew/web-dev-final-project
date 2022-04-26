@@ -82,7 +82,11 @@
 }
 
 .wd-comment-height {
-    height: calc(100% - 177px);
+    height: calc(100% - 193px);
+}
+
+.wd-comment-height-no-user {
+    height: calc(100% - 136px);
 }
 
 .wd-details-comment-block {
@@ -113,9 +117,23 @@
     padding-right: 0px !important;
 }
 
+.wd-show-episode-description-view-height {
+    height: 15vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    display: -webkit-box!important;
+}
+
 @media (min-width: 992px) {
     .wd-nav-tab-padding {
         margin-left: 12px;
+    }
+
+    .wd-comment-width-outer {
+        width: calc(100% + 12px);
     }
 }
 
@@ -126,8 +144,10 @@
         min-width: 475px;
     }
 
+    .wd-track-list-conditional-padding {
+        padding-right: 12px!important;
+    }
 }
-
 
 .wd-detail-parent {
     max-height: 590px;
@@ -173,15 +193,19 @@
 }
 
 .wd-inner-comment-height {
-    height: calc(100% - 4px);
+    height: 100%;
 }
 
 .wd-inner-comment-height-full {
-    height: calc(100% - 19px);
+    height: calc(100% - 3px);
 }
 
 .wd-comment-overflow-break-word {
     overflow-wrap: break-word;
+}
+
+.wd-margin-top-1-rem {
+    margin-top: 1rem!important;
 }
 
 .wd-comment-width {
@@ -193,7 +217,7 @@
 }
 
 .wd-comment-missing-margin {
-    margin-top: 1px;
+    margin-top: 17px;
 }
 
 .wd-comment-border {
