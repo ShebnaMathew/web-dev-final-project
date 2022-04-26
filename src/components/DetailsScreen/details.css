@@ -227,7 +227,7 @@
   grid-gap:10px;
   border: none;
   /* box-sizing: border-box; */
-  height: 100vh;
+  height: calc(100vh - 67px);
 }
 
 .wd-details-container-children {
