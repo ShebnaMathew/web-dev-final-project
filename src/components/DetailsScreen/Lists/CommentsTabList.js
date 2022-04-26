@@ -11,7 +11,7 @@ const CommentsTabList = ({comments, type, body}) => {
     const dispatch = useDispatch();
     return(
         <>
-        <div className="row justify-content-md-center wd-position-relative wd-comment-height container ps-2 pe-2 pt-2 pb-2 ms-0">
+        <div className="row justify-content-md-center wd-position-relative wd-comment-height container wd-768-override ps-2 pe-2 pt-2 pb-2 ms-0 me-0">
             <div className={`list-group list-group-flush mb-0 pb-0 pe-0 ${(user && user._id) ? "wd-inner-comment-height" : "wd-inner-comment-height-full"} wd-detail-comment-overflow`}>
                 {comments.map((c) =>
                 <div className="row my-1 wd-full-width">

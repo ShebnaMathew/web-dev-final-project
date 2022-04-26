@@ -8,7 +8,7 @@ const EpisodeList = () => {
     const show_episodes = useSelector((state) => state.searchResults.current_show_episodes);
 
     return(
-        <div className="row justify-content-md-center wd-details-container-children-overflow">
+        <div className="row justify-content-md-center wd-details-container-children-overflow ms-0">
             <div className="list-group list-group-flush my-3 pe-0 wd-detail-height-95 wd-detail-comment-overflow">
                 {show_episodes.map((e) => <div key={e.id} onClick={() => {
                     navigate(`/episode/${e.id}`)

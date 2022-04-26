@@ -113,6 +113,22 @@
     padding-right: 0px !important;
 }
 
+@media (min-width: 992px) {
+    .wd-nav-tab-padding {
+        margin-left: 12px;
+    }
+}
+
+@media (max-width: 991px) {
+
+    .container.wd-768-override {
+        max-width: calc(100vw - 41px);
+        min-width: 475px;
+    }
+
+}
+
+
 .wd-detail-parent {
     max-height: 590px;
 }
@@ -169,11 +185,11 @@
 }
 
 .wd-comment-width {
-    width: 95%;
+    width: 97%;
 }
 
 .wd-comment-icon-width {
-    width: 5%;
+    width: 3%;
 }
 
 .wd-comment-missing-margin {

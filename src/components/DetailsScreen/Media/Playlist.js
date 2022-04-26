@@ -71,8 +71,8 @@ const Playlist = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-5 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
-                        <p className="mt-4">
+                    <div className="col-lg-5 ps-0 wd-detail-right-max wd-detail-parent wd-zero-margin wd-details-container-children wd-details-container-children-overflow">
+                        <p className="mt-4 ps-3">
                             <span title={!(user && user._id) ? "Log in or Sign up to like posts" : ""}>
                             <button disabled={!(user && user._id)} className="btn ps-0" onClick={async () => {
                                     if (isLiked) {
@@ -88,7 +88,7 @@ const Playlist = () => {
                             </button>
                         </span>
                         </p>
-                        <ul className="nav nav-tabs nav-fill">
+                        <ul className="nav nav-tabs nav-fill wd-nav-tab-padding">
                             <li className="nav-item wd-detail-tab-underline">
                                 <button className={`nav-link ${otherActive}`} onClick={() => {
                                     setShowTracks(true);
