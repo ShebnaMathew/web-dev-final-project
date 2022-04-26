@@ -1,11 +1,12 @@
 import React from "react";
 import './post-items.css';
+import {useNavigate} from "react-router-dom";
 
 const ListCommentItem = (comment) => {
-    console.log(comment)
+
+    const navigate = useNavigate();
+
     const commentContent = comment.comment;
-    const route = commentContent.type + '/' + commentContent.post_id;
-    console.log(commentContent);
 
     return(
         <div className="pt-2 pb-2 wd-display-flex">
@@ -14,7 +15,9 @@ const ListCommentItem = (comment) => {
             </div>
             <div className="wd-post-data-dims ps-3">
                 <div>
-                    <a href={route} className="wd-post-href">View Comment</a>
+                    <span className="wd-post-href wd-cursor-pointer" onClick={() => {
+                        navigate("/" + commentContent.type + "/" + commentContent.post_id);
+                    }}>View Comment</span>
                     <span> on {commentContent.post_name}</span>
                 </div>
                 <p className="mb-0">

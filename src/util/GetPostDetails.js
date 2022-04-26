@@ -15,16 +15,6 @@ export const getArtistName = (post) => {
     }
 }
 
-export const getArtistId = (post) => {
-    if (post.type === "album" || post.type === "track") {
-        return post.artists[0].id;
-    } else if (post.type === "artist") {
-        return post.id;
-    } else {
-        return null;
-    }
-}
-
 export const getImage = (post) => {
     if (post.images && post.images.length > 0) {
         return post.images[0].url;

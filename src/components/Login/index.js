@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {loginAction} from "../../actions/profile-actions";
 
-const Login = (props) => {
+const Login = () => {
 
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -18,7 +18,6 @@ const Login = (props) => {
 
     const login = async () => {
         const response = await loginAction(dispatch, username, password)
-        console.log(response)
         if (response !== 200) {
             setErrorMessage("Incorrect email/password")
             setError(true);

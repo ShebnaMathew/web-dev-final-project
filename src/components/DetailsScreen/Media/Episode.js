@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import CommentsTabList from "../Lists/CommentsTabList";
 import {getSingleEpisode} from "../../../actions/search-actions";
 import React, { useEffect, useState } from "react";
 import {likeAction, unlikeAction} from "../../../actions/like-action";
+import "../details.css";
 
 const Episode = () => {
 
     const navigate = useNavigate();
-    const location = useLocation();
     const dispatch = useDispatch();
 
     const params = useParams();
@@ -47,7 +47,7 @@ const Episode = () => {
                 <div className="row justify-content-center m-0 wd-details-container-children">
                     <div className="col-lg-7 wd-background-banner-episode wd-details-container-children">
                         <div className="row mt-5 justify-content-center text-center pb-3">
-                            <div className="col-md-2 mt-3 justify-content-center text-center">
+                            <div className="col-md-2 mt-3 justify-content-center text-center" title={episode.show_name}>
                                 <button
                                     className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
                                     onClick={() => navigate("/show/" + episode.show_id)}>
@@ -91,7 +91,7 @@ const Episode = () => {
                         </span>
                         </p>
                         Comments
-                        <hr className="mt-0"/>
+                        <hr className="wd-comment-missing-margin"/>
                         <CommentsTabList comments={episode.comments} type={"episode"} body={episode}/>
                     </div>
                 </div>
