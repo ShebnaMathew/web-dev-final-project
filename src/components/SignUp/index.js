@@ -106,7 +106,7 @@ const SignUp = () => {
     }
 
     return (
-        <div className="row justify-content-md-center mt-4 mx-5">
+        <div className="row justify-content-center mt-4 mx-5">
         <div className="wd-signup-width bg-dark text-black fontFamily p-5 pt-2 pb-3 wd-round-corners wd-background wd-z-index">
             <div>
                 <div className="d-flex justify-content-center">
