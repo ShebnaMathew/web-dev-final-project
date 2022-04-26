@@ -82,7 +82,7 @@
 }
 
 .wd-comment-height {
-    height: calc(100% - 100px);
+    height: calc(100% - 177px);
 }
 
 .wd-details-comment-block {
@@ -157,11 +157,23 @@
 }
 
 .wd-inner-comment-height {
-    height: calc(100% - 95px);
+    height: calc(100% - 4px);
 }
 
 .wd-inner-comment-height-full {
     height: calc(100% - 19px);
+}
+
+.wd-comment-overflow-break-word {
+    overflow-wrap: break-word;
+}
+
+.wd-comment-width {
+    width: 95%;
+}
+
+.wd-comment-icon-width {
+    width: 5%;
 }
 
 .wd-comment-missing-margin {
@@ -227,7 +239,7 @@
   grid-gap:10px;
   border: none;
   /* box-sizing: border-box; */
-  height: calc(100vh - 67px);
+  height: calc(100vh - 74px);
 }
 
 .wd-details-container-children {
