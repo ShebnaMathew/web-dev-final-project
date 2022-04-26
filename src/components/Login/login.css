@@ -12,3 +12,7 @@
 .wd-z-index {
     z-index: 1031 !important;
 }
+
+.wd-login-width {
+    width: 520px;
+}
