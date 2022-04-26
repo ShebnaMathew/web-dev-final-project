@@ -16,3 +16,7 @@
 .wd-post-href:hover {
     color: lightgrey;
 }
+
+.wd-comment-list-item-overflow-break-word {
+    overflow-wrap: break-word;
+}

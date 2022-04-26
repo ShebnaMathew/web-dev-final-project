@@ -20,7 +20,7 @@ const ListCommentItem = (comment) => {
                     }}>View Comment</span>
                     <span> on {commentContent.post_name}</span>
                 </div>
-                <p className="mb-0">
+                <p className="mb-0 wd-comment-list-item-overflow-break-word">
                     {commentContent.comment}
                 </p>
             </div>
