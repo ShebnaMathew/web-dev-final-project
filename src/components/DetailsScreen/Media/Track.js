@@ -65,11 +65,11 @@ const Track = () => {
                 <div className="row justify-content-center m-0 wd-details-container-children">
                     <div className="col-lg-7 wd-background-banner-track wd-details-container-children">
                         <div className="row mt-5 justify-content-center text-center pb-3">
-                            <div className="col-md-2 mt-3 justify-content-center text-center">
+                            <div className="col-md-2 mt-3 justify-content-center text-center" title={renderToolTip()}>
                                 <button
                                     className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
                                     onClick={() => {
-                                      if (location.state === undefined || location.state.playlistId === undefined) {
+                                      if (location.state === null || location.state.playlistId === undefined) {
                                           navigate("/album/" + track.album_id);
                                       } else {
                                           navigate("/playlist/" + location.state.playlistId)
