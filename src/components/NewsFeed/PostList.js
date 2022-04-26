@@ -1,13 +1,11 @@
 import React from "react"; 
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import StackGrid from "react-stack-grid";
 
 const PostList = ({posts}) => {
 
-    const navigate = useNavigate();
-    const location = useLocation();
 
-    console.log(posts)
+    const navigate = useNavigate();
 
     return(
         <div className="container wd-max-width">
@@ -36,7 +34,7 @@ const PostList = ({posts}) => {
                                     navigate(`/playlist/${post.post_id}`);
                                     break;
                             }
-                        }}>
+                        }} key={post.post_id}>
                             <img src={post.image_url ? post.image_url : "/images/unavailable-image.jpg"} className="card-img-top wd-image-size" alt="..."/>
                             <div className="card-body">
                                 <h6 className="mb-0">{post.name}</h6>

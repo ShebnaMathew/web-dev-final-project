@@ -15,10 +15,8 @@ import searchReducer from "./reducers/searchReducer";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import PrivacyPolicy from "./components/PrivacyPolicy";
-import {authorize} from "./services/spotify/spotify-service";
 import newsReducer from "./reducers/newsReducer";
 import userReducer from "./reducers/userReducer";
-import DetailsScreen from "./components/DetailsScreen";
 import Album from "./components/DetailsScreen/Media/Album";
 import Show from "./components/DetailsScreen/Media/Show";
 import Episode from "./components/DetailsScreen/Media/Episode";
@@ -38,6 +36,19 @@ const reducer = combineReducers(
     newsResults: newsReducer
 })
 const store = createStore(reducer);
+
+// handles specific problem with dependency: https://github.com/wadackel/react-stack-grid/issues/46
+// not updated by user, but thread on the github page indicates the warning is harmless
+
+const backup = console.warn;
+
+console.error = function filterWarnings(msg) {
+    const supressedWarnings = ['`Infinity` is an invalid value for the `height` css style property'];
+
+    if (!supressedWarnings.some(entry => msg.includes(entry))) {
+        backup.apply(console, arguments);
+    }
+};
 
 function App() {
   return (

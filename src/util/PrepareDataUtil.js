@@ -1,4 +1,4 @@
-import {getArtistId, getArtistName,getGenres,getImage,getNumberOfTracksOrEpisodes,getReleaseDate, getTrackDuration} from './GetPostDetails';
+import {getArtistName,getGenres,getImage,getNumberOfTracksOrEpisodes,getReleaseDate, getTrackDuration} from './GetPostDetails';
 export const prepareData = (data, type) => {
     switch(type){
         case 'album':

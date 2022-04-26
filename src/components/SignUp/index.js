@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 const uppercaseBank = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lowercaseBank = "abcdefghijklmnopqrstuvwxyz";
 const numberBank = "1234567890";
-const punctuationBank = "!?.,:;\'\"@#$%^&*()[]{}\\|";
+const punctuationBank = "!?.,:;'\"@#$%^&*()[]{}\\|";
 
 const SignUp = () => {
 
@@ -110,7 +110,7 @@ const SignUp = () => {
         <div className="col-lg-5 col-md-8 bg-dark text-black fontFamily p-5 pt-2 pb-3 wd-round-corners wd-background wd-z-index">
             <div>
                 <div className="d-flex justify-content-center">
-                    <img width="150px" height="150px" src="/images/headphones-logo.png"/>
+                    <img width="150px" height="150px" src="/images/headphones-logo.png" alt=""/>
                 </div>
                 <h1 className="d-flex justify-content-center text-black">Sign up</h1>
             </div>
@@ -124,9 +124,9 @@ const SignUp = () => {
                 </div>
             }
             <div className="justify-content-center mt-3 form-inline" role="form">
-                <label className="fw-bold" htmlFor="email">Email Address</label>
+                <label className="fw-bold" htmlFor="signin-email">Email Address</label>
                 <div className="input-group mb-3">
-                    <input type="email" onChange={(event) => setEmail(event.target.value)} value={email} className="form-control" placeholder="Enter your email" id="email" required={true}/>
+                    <input type="email" onChange={(event) => setEmail(event.target.value)} value={email} className="form-control" placeholder="Enter your email" id="signin-email" required={true}/>
                 </div>
 
                 <label className="fw-bold" htmlFor="emailConfirm">Confirm Email Address</label>
@@ -146,10 +146,10 @@ const SignUp = () => {
                         <input type="text" onChange={(event) => setUsername(event.target.value)} value={username} className="form-control" placeholder="Enter a username" id="profileName" required={true}/>
                     </div>
                 </div>
-                <label className="fw-bold" htmlFor="name">Name</label>
+                <label className="fw-bold" htmlFor="signin-name">Name</label>
                 <div className="input-group mb-3">
                     <div className="input-group">
-                        <input type="text" onChange={(event) => setName(event.target.value)} value={name} className="form-control" placeholder="Enter your name" id="name" required={true}/>
+                        <input type="text" onChange={(event) => setName(event.target.value)} value={name} className="form-control" placeholder="Enter your name" id="signin-name" required={true}/>
                     </div>
                 </div>
                 <label className="fw-bold" htmlFor="dob">Date of Birth</label>

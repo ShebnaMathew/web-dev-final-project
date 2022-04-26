@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import FollowPopUpList from "../../PopUp/FollowPopUp";
 import './profile.css';
 import '../profile-main.css';
-import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {getProfileAction} from "../../../actions/profile-actions";
 import PostList from "../../NewsFeed/PostList";
 import {addFollowAction, removeFollowAction} from "../../../actions/follow-actions";
@@ -59,11 +59,7 @@ const ProfileScreen = () => {
     }, [_id]);
 
     useEffect(async () => {
-        console.log("firing")
-        console.log(ready);
-        console.log(profileReady)
         if (!ready && profileReady) {
-            console.log('in evaluation')
             if(!isCurrentUser && profileData.followers.length > 0) {
                 for(const f of profileData.followers) {
                     if (f._id === user._id) {
@@ -99,14 +95,20 @@ const ProfileScreen = () => {
             case 'likes':
                 if (profileData.likes && profileData.likes.length > 0) {
                     return (
-                        <PostList posts={profileData.likes}/>
+                        <div className="wd-profile-content-width row">
+                            <PostList posts={profileData.likes}/>
+                        </div>
                     )
                 } else {
                     return renderNothingHere();
                 }
             case 'music':
                 if (music.length > 0) {
-                    return <PostList posts={music}/>
+                    return (
+                        <div className="wd-profile-content-width row">
+                            <PostList posts={music}/>
+                        </div>
+                    )
                 } else {
                     getArtist(profileData.artistId).then(async (artist) => {
                         const results = await search(artist.name);
@@ -385,7 +387,7 @@ const ProfileScreen = () => {
                     </div>
 
                 </div>
-                <div className={`${content === "comments" ? "wd-profile-content-width" : ""}`}>
+                <div className="wd-profile-content-width">
                     {renderContent(content)}
                 </div>
             </div>

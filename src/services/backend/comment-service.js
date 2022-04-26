@@ -16,13 +16,7 @@ const deleteComment = async (comment_id) => {
     await api.delete(backendHost + '/comment/' + comment_id);
 }
 
-const getComments = async (post_id) => {
-    const response = await api.get(backendHost + '/comment/' + post_id);
-    return response.data.comments;
-}
-
 export {
     addComment,
-    deleteComment,
-    getComments
+    deleteComment
 }

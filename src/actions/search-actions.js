@@ -24,14 +24,6 @@ export const GET_ARTIST = "get-artist";
 export const GET_SINGLE_EPISODE = "get-single-episode";
 export const GET_SINGLE_TRACK = "get-single-track";
 
-export const searchNewMusicAction = async (dispatch) => {
-    const results = await getNewMusic();
-    dispatch({
-        type: UPDATE_NEWS,
-        results: results
-    })
-}
-
 export const searchAction = async (dispatch, searchString) => {
     const results = await search(searchString)
     dispatch({
@@ -64,18 +56,6 @@ export const getTracks = async (dispatch, albumId) => {
     dispatch({
         type: GET_ALBUM_TRACKS,
         results: results
-    })
-}
-
-export const getTrackAction = async (dispatch, tracks) => {
-    let trackList = {}
-    for (const t of tracks) {
-        const results = await getTrack(t.id);
-        trackList[t.id] = results;
-    }
-    dispatch({
-        type: GET_TRACK,
-        results: trackList
     })
 }
 
@@ -116,39 +96,11 @@ export const getAlbumAction = async (dispatch, albumId) => {
     })
 }
 
-export const setCurrentAlbum = (dispatch, album) => {
-    dispatch({
-        type: SET_ALBUM,
-        results: album
-    })
-}
-
-export const getCurrentPlaylist = async (dispatch, playlist_id) => {
-    const results = await getPlaylist(playlist_id)
-    dispatch({
-        type: SET_PLAYLIST,
-        results: results
-    })
-}
-
 export const getTracksForPlaylist = async (dispatch, playlistId) => {
     const results = await getPlaylistTracks(playlistId);
     dispatch({
         type: GET_PLAYLIST_TRACKS,
         results: results
-    })
-}
-
-export const getPlaylistTrackAction = async (dispatch, tracks) => {
-    let trackList = {}
-    for (const t of tracks) {
-        const results = await getTrack(t.track.id);
-        trackList[t.track.id] = results;
-    }
-    console.log("mil raha hai ya nahi: ", trackList)
-    dispatch({
-        type: GET_TRACK,
-        results: trackList
     })
 }
 
@@ -180,19 +132,6 @@ export const getEpisodes = async (dispatch, showId, total) => {
     dispatch({
         type: GET_SHOW_EPISODES,
         results: results
-    })
-}
-
-export const getEpisodeAction = async (dispatch, episodes) => {
-    let episodeList = {}
-    for (const e of episodes) {
-        const results = await getEpisode(e.id);
-        episodeList[e.id] = results;
-    }
-    console.log("episodeList in action: ",episodeList)
-    dispatch({
-        type: GET_EPISODE,
-        results: episodeList
     })
 }
 
@@ -228,26 +167,5 @@ export const getShowAction = async (dispatch, showId) => {
     dispatch({
         type: GET_SHOW,
         results: results
-    })
-}
-
-export const setCurrentShow = (dispatch, show) => {
-    dispatch({
-        type: SET_SHOW,
-        results: show
-    })
-}
-
-export const setPostsToRender = (dispatch, posts) => {
-    dispatch({
-        type: GET_POSTS_TO_RENDER,
-        results: posts
-    })
-}
-
-export const setAllPosts = (dispatch, posts) => {
-    dispatch({
-        type: GET_ALL_POSTS,
-        results: posts
     })
 }

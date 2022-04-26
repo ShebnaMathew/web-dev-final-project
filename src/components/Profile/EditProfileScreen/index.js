@@ -232,6 +232,7 @@ const EditProfileScreen = () => {
                             <textarea id="name"
                                       onChange={(event) => setProfile({...profile, name: event.target.value})}
                                       rows={1}
+                                      placeholder="Name"
                                       defaultValue={profile.name ? profile.name : ""}
                             />
                         </div>
@@ -242,6 +243,7 @@ const EditProfileScreen = () => {
                                       onChange={(event) => setProfile({...profile, bio: event.target.value})}
                                       rows={3}
                                       defaultValue={profile.bio ? profile.bio : ""}
+                                      placeholder="Bio"
                             />
                         </div>
                         <br/>
@@ -251,6 +253,7 @@ const EditProfileScreen = () => {
                                       onChange={(event) => setProfile({...profile, website: event.target.value})}
                                       rows={1}
                                       defaultValue={profile.website ? profile.website : ""}
+                                      placeholder={"Website"}
                             />
                         </div>
                         <br/>
@@ -260,6 +263,7 @@ const EditProfileScreen = () => {
                                       onChange={(event) => setProfile({...profile, email: event.target.value})}
                                       rows={1}
                                       defaultValue={profile.email ? profile.email : ""}
+                                      placeholder="Email"
                             />
                         </div>
                         <br/>
