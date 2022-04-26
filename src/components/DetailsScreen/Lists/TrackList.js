@@ -8,8 +8,8 @@ const TrackList = (props) => {
     const album_tracks = useSelector((state) => state.searchResults.current_album_tracks);
     
     return(
-        <div className="row justify-content-md-center ms-0">
-            <div className="list-group list-group-flush my-3 wd-comment-height wd-detail-comment-overflow pe-0">
+        <div className="row wd-track-height justify-content-md-center ms-0">
+            <div className="list-group wd-playlist-inner-track-height wd-track-episode-detail-height list-group-flush my-3 wd-comment-height wd-detail-comment-overflow pe-0">
                 {album_tracks.map((t) => <div key={t.id} onClick={() =>
                         navigate(`/track/${t.id}`)
                 } className="list-group-item list-group-item-action wd-detail-bg-black wd-list-no-border">{t.name}</div>)}

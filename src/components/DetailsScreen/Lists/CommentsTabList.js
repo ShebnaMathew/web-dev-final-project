@@ -33,7 +33,7 @@ const CommentsTabList = ({comments, type, body}) => {
         {(user && user._id) &&
         <>
             <div className="input-group mb-0 wd-comment-relative wd-comment-border pt-2 pb-2">
-                <input type="text" className="form-control wd-detail-comment-btn wd-detail-comment" placeholder="Add a comment" onChange={(e) => setCurrentComment(e.target.value)} value={currentComment} aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                <input type="text" className="form-control wd-detail-comment-btn wd-detail-comment me-1" placeholder="Add a comment" onChange={(e) => setCurrentComment(e.target.value)} value={currentComment} aria-label="Recipient's username" aria-describedby="button-addon2"/>
                 <button className="btn btn-outline-secondary wd-detail-button-action"
                         type="button"
                         id="button-addon2"

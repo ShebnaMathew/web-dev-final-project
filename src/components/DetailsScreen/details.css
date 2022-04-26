@@ -157,8 +157,8 @@
     height: 80%;
 }
 
-.wd-detail-height-95 {
-    height: 86%;
+.wd-track-episode-detail-height {
+    height: calc(100% - 136px);
 }
 
 .wd-detail-artist-grid {
@@ -256,6 +256,14 @@
   border: none;
   /* box-sizing: border-box; */
   height: calc(100vh - 74px);
+}
+
+.wd-track-height {
+    height: calc(100vh - 194px);
+}
+
+.wd-playlist-inner-track-height {
+    height: calc(100% - 16px);
 }
 
 .wd-details-container-children {
