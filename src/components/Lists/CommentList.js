@@ -6,7 +6,7 @@ const CommentList = ({comments = []}) => {
     return (
         <>
             {
-                comments.map(comment => <CommentItem key={comment.id} comment={comment}/>)
+                comments.map(comment => <CommentItem key={comment._id} comment={comment}/>)
             }
         </>
     )

@@ -1,14 +1,13 @@
 import {BrowserRouter,Routes,Route} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 import './vendors/bootstrap/css/bootstrap.min.css';
 import './vendors/bootstrap/bootstrap.min.css';
 import './vendors/fontawesome/css/all.css';
 import './App.css';
-// import './components/Header/header.css';
 import Profile from "./components/Profile/ProfileScreen";
 import EditProfile from "./components/Profile/EditProfileScreen";
-import {Provider, useSelector} from 'react-redux';
+import {Provider} from 'react-redux';
 import {createStore, combineReducers} from "redux";
 import profileReducer from "./reducers/profileReducer";
 import searchReducer from "./reducers/searchReducer";
