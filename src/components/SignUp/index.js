@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 const uppercaseBank = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lowercaseBank = "abcdefghijklmnopqrstuvwxyz";
 const numberBank = "1234567890";
-const punctuationBank = "!?.,:;\'\"@#$%^&*()[]{}\\|";
+const punctuationBank = "!?.,:;'\"@#$%^&*()[]{}\\|";
 
 const SignUp = () => {
 
@@ -110,7 +110,7 @@ const SignUp = () => {
         <div className="col-lg-5 col-md-8 bg-dark text-black fontFamily p-5 pt-2 pb-3 wd-round-corners wd-background wd-z-index">
             <div>
                 <div className="d-flex justify-content-center">
-                    <img width="150px" height="150px" src="/images/headphones-logo.png"/>
+                    <img width="150px" height="150px" src="/images/headphones-logo.png" alt=""/>
                 </div>
                 <h1 className="d-flex justify-content-center text-black">Sign up</h1>
             </div>
