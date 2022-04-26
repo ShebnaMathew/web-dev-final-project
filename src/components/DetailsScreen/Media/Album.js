@@ -71,7 +71,7 @@ const Album = () => {
                 <div className="row justify-content-center m-0 wd-details-container-children">
                     <div className="col-lg-7 wd-background-banner wd-details-container-children">
                         <div className="row mt-5 justify-content-center text-center pb-3">
-                            <div className="col-md-2 mt-3 justify-content-center text-center">
+                            <div className="col-md-2 mt-3 justify-content-center text-center" title={album.artist_name}>
                                 <button
                                     className="row mt-0 btn btn-dark wd-round-btn wd-details-width-height px-0"
                                     onClick={() => navigate(`/artist/${album.artist_id}`)}>
