@@ -16,3 +16,7 @@ input {
 .wd-background {
     backdrop-filter: blur(2px) !important;
 }
+
+.wd-signup-width {
+    width: 600px;
+}

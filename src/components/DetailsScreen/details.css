@@ -82,7 +82,11 @@
 }
 
 .wd-comment-height {
-    height: calc(100% - 100px);
+    height: calc(100% - 193px);
+}
+
+.wd-comment-height-no-user {
+    height: calc(100% - 136px);
 }
 
 .wd-details-comment-block {
@@ -113,6 +117,38 @@
     padding-right: 0px !important;
 }
 
+.wd-show-episode-description-view-height {
+    height: 15vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    display: -webkit-box!important;
+}
+
+@media (min-width: 992px) {
+    .wd-nav-tab-padding {
+        margin-left: 12px;
+    }
+
+    .wd-comment-width-outer {
+        width: calc(100% + 12px);
+    }
+}
+
+@media (max-width: 991px) {
+
+    .container.wd-768-override {
+        max-width: calc(100vw - 41px);
+        min-width: 475px;
+    }
+
+    .wd-track-list-conditional-padding {
+        padding-right: 12px!important;
+    }
+}
+
 .wd-detail-parent {
     max-height: 590px;
 }
@@ -141,8 +177,8 @@
     height: 80%;
 }
 
-.wd-detail-height-95 {
-    height: 86%;
+.wd-track-episode-detail-height {
+    height: calc(100% - 136px);
 }
 
 .wd-detail-artist-grid {
@@ -157,15 +193,31 @@
 }
 
 .wd-inner-comment-height {
-    height: calc(100% - 95px);
+    height: 100%;
 }
 
 .wd-inner-comment-height-full {
-    height: calc(100% - 19px);
+    height: calc(100% - 3px);
+}
+
+.wd-comment-overflow-break-word {
+    overflow-wrap: break-word;
+}
+
+.wd-margin-top-1-rem {
+    margin-top: 1rem!important;
+}
+
+.wd-comment-width {
+    width: 97%;
+}
+
+.wd-comment-icon-width {
+    width: 3%;
 }
 
 .wd-comment-missing-margin {
-    margin-top: 1px;
+    margin-top: 17px;
 }
 
 .wd-comment-border {
@@ -227,7 +279,15 @@
   grid-gap:10px;
   border: none;
   /* box-sizing: border-box; */
-  height: 100vh;
+  height: calc(100vh - 74px);
+}
+
+.wd-track-height {
+    height: calc(100vh - 194px);
+}
+
+.wd-playlist-inner-track-height {
+    height: calc(100% - 16px);
 }
 
 .wd-details-container-children {
