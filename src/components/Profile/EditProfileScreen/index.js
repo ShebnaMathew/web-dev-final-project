@@ -126,7 +126,7 @@ const EditProfileScreen = () => {
         const file = event.target.files[0];
 
         if (file.size > 95000) {
-            setError("Image cannot be larger than 100KB");
+            setError("Image cannot be larger than 95KB");
             return;
         }
 
