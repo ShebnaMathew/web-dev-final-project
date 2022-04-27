@@ -69,9 +69,9 @@ const SignUp = () => {
             setErrorMessage('Username cannot be blank')
             return;
         }
-        if (username.length > 16) {
+        if (username.length > 14) {
             setError(true)
-            setErrorMessage('Username cannot be more than 16 characters')
+            setErrorMessage('Username cannot be more than 14 characters')
             return;
         }
         if (name === '') {
