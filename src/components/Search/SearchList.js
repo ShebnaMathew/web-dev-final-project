@@ -1,7 +1,7 @@
 import React from "react"; 
 import { useNavigate } from "react-router-dom";
 import { getArtistName, getImage } from "../../util/GetPostDetails";
-
+import "../NewsFeed/newsfeed.css";
 const SearchList = (props) => {
 
     const navigate = useNavigate();

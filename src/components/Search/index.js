@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 import {searchAction} from "../../actions/search-actions";
 import {useDispatch, useSelector} from "react-redux";
 import SearchList from "./SearchList";
+import '../NewsFeed/newsfeed.css';
 
 const SearchScreen = () => {
 

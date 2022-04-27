@@ -43,8 +43,8 @@
 }
 
 .wd-image-size {
-    width: 332px;
-    height: 332px;
+    width: 332px !important;
+    height: 332px !important;
 }
 
 .wd-post-text-decoration {
