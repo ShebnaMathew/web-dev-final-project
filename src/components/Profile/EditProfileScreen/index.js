@@ -125,6 +125,11 @@ const EditProfileScreen = () => {
     const convertImageToString = async (event) => {
         const file = event.target.files[0];
 
+        if (file.size > 100000) {
+            setError("Image cannot be larger than 100KB");
+            return;
+        }
+
         const image = new Image();
         image.src = URL.createObjectURL(file);
         image.onload = () => {
