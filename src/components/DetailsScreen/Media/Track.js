@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import {getSingleTrackAction} from "../../../actions/search-actions";
 import {likeAction, unlikeAction} from "../../../actions/like-action";
 import "../details.css";
+import {formatDOB} from "../../../util/FormatDateUtil";
 
 const Track = () => {
     
@@ -92,7 +93,7 @@ const Track = () => {
                                     onClick={() => navigate(`/album/${track.album_id}`)}>
                                     Album: {track.album_name}
                                 </a>
-                                <div className="justify-content-center text-center mt-1">Release date: {track.release_date}</div>
+                                <div className="justify-content-center text-center mt-1">Release date: {formatDOB(track.release_date)}</div>
                                 <div className="justify-content-center text-center mt-1">Duration: {track.track_duration}</div>
                                 <div className="justify-content-center text-center mt-1">Popularity Score: {track.popularity}</div>
                             </div>

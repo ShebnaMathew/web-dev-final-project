@@ -10,6 +10,7 @@ import {
 import CommentsTabList from "../Lists/CommentsTabList";
 import TrackList from "../Lists/TrackList";
 import "../details.css";
+import {formatDOB} from "../../../util/FormatDateUtil";
 
 const Album = () => {
 
@@ -93,7 +94,7 @@ const Album = () => {
                                     onClick={() => navigate(`/artist/${album.artist_id}`)}>
                                     {album.artist_name}
                                 </a>
-                                <div className="justify-content-center text-center mt-1">Release date: {album.release_date}</div>
+                                <div className="justify-content-center text-center mt-1">Release date: {formatDOB(album.release_date)}</div>
                                 <div className="justify-content-center text-center mt-1">Total tracks: {album.total_tracks}</div>
                             </div>
                         </div>

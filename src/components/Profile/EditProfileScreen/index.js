@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import PopUp from "../../PopUp/PopUp";
 import RegisterArtistPopUp from "../../PopUp/RegisterPopUp/RegisterArtistPopUp";
 import {Link, useNavigate} from "react-router-dom";
-import {getProfileAction, saveProfileDataAction} from "../../../actions/profile-actions";
+import {getProfileAction, saveProfileDataAction, updateProfilePictureAction} from "../../../actions/profile-actions";
 import RegisterAdminPopUp from "../../PopUp/RegisterPopUp/RegisterAdminPopUp";
 import {getProfile} from "../../../services/backend/profile-service";
 
@@ -206,6 +206,7 @@ const EditProfileScreen = () => {
                                     if (response.data && response.data.status === "fail") {
                                         setError(response.data.message);
                                     } else {
+                                        await updateProfilePictureAction(dispatch, user._id)
                                         navigate('/profile');
                                     }
                                 }}

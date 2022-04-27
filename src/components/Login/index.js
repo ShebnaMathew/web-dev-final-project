@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./login.css";
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {loginAction} from "../../actions/profile-actions";
+import {loginAction, updateProfilePictureAction} from "../../actions/profile-actions";
 
 const Login = () => {
 

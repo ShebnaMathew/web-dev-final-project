@@ -1,10 +1,19 @@
 // get profile of logged in user
-import {createUser, getProfile, login, updateUserProfile, getUser, logout} from "../services/backend/profile-service";
+import {
+    createUser,
+    getProfile,
+    login,
+    updateUserProfile,
+    getUser,
+    logout,
+    getProfilePicture
+} from "../services/backend/profile-service";
 
 export const SET_USER = "set-user";
 export const SET_PROFILE_DATA = "set-profile-data";
 export const SAVE_PROFILE_DATA = "save-profile-data";
 export const RESET_USER = "reset-user";
+export const SET_PROFILE_PICTURE = "set-profile-picture";
 
 export const updateCurrentUserAction = (dispatch, newData) => {
     dispatch({
@@ -64,4 +73,12 @@ export const saveProfileDataAction = async (dispatch, newProfileData, id) => {
         data: newProfileData
     })
     return response;
+}
+
+export const updateProfilePictureAction = async(dispatch, id) => {
+    const profilePic = await getProfilePicture(id);
+    dispatch({
+        type: SET_PROFILE_PICTURE,
+        results: profilePic
+    })
 }

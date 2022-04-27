@@ -38,6 +38,11 @@
     text-align: center;
 }
 
+.wd-thumbnail-image-size {
+    height: 40px;
+    width: 40px;
+}
+
 .wd-bold {
     font-weight: bold;
 }

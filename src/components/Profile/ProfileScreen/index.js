@@ -12,6 +12,7 @@ import {addFollowAction, removeFollowAction} from "../../../actions/follow-actio
 import {getProfile} from "../../../services/backend/profile-service";
 import {getArtist, search} from "../../../services/spotify/spotify-service";
 import {prepareData} from "../../../util/PrepareDataUtil";
+import {formatJoinedDate, formatDOB} from "../../../util/FormatDateUtil";
 
 const ProfileScreen = () => {
 
@@ -39,14 +40,11 @@ const ProfileScreen = () => {
 
     const [ready, setReady] = useState(false);
     const [profileReady, setProfileReady] = useState(false);
-    let timerId = -1;
 
     useEffect(async () => {
         // hide profile page from user until they log in
         if (_id === undefined) {
             setReady(true);
-            const timer = () => { return setTimeout(() => navigate('/'), 5000); }
-            timerId = timer();
             return;
         }
         setReady(false);
@@ -71,12 +69,6 @@ const ProfileScreen = () => {
             setReady(true);
         }
     }, [_id, profileReady])
-
-    useEffect(() => {
-        return () => {
-            clearTimeout(timerId);
-        }
-    }, [])
 
 
     const renderNothingHere = () => {
@@ -253,56 +245,6 @@ const ProfileScreen = () => {
         );
     }
 
-    const determineMonth = (month) => {
-        const numericMonth = parseInt(month);
-        switch (numericMonth) {
-            case 1:
-                return "January";
-            case 2:
-                return "February";
-            case 3:
-                return "March";
-            case 4:
-                return "April";
-            case 5:
-                return "May";
-            case 6:
-                return "June";
-            case 7:
-                return "July";
-            case 8:
-                return "August";
-            case 9:
-                return "September";
-            case 10:
-                return "October";
-            case 11:
-                return "November";
-            case 12:
-                return "December";
-            default:
-                return "";
-        }
-    }
-
-    const formatDOB = (date) => {
-        if (date === undefined) {
-            return '';
-        }
-        const dateVals = date.split("-");
-        const month = determineMonth(dateVals[1]);
-        return `${month} ${dateVals[2]}, ${dateVals[0]}`
-    }
-
-    const formatJoinedDate = (date) => {
-        if (date === undefined) {
-            return '';
-        }
-        const dateVals = date.split("-");
-        const month = determineMonth(dateVals[1]);
-        return `${month} ${dateVals[0]}`
-    }
-
     return(
         <>
             {!ready && <i className="fa wd-spinner-pos fa-3x fa-spinner fa-spin"/>}
@@ -399,7 +341,7 @@ const ProfileScreen = () => {
                     <br/>
                     <i className="fa fa-2x wd-fg-color-white fa-exclamation-triangle"/>
                     <div>Must be logged in to view profile</div>
-                    <div>Going home in 5 seconds...</div>
+                    <div>Please navigate to an available page</div>
                 </div>
             }
         </>

@@ -42,6 +42,11 @@ const registerAdmin = async (key) => {
     return !error;
 }
 
+const getProfilePicture = async (id) => {
+    const response = await api.get(backendHost + '/profile/picture/' + id);
+    return response.data.profilePicture;
+}
+
 export {
     getUser,
     createUser,
@@ -49,6 +54,7 @@ export {
     logout,
     getProfile,
     updateUserProfile,
-    registerAdmin
+    registerAdmin,
+    getProfilePicture
 };
 

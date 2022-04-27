@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {logoutAction} from "../../actions/profile-actions";
+import {logoutAction, updateProfilePictureAction} from "../../actions/profile-actions";
 import './header.css'
 
 const Header = () => {
 
     const [searchString, setSearchString] = useState('');
     const [blur, setBlur] = useState('');
+    const [profilePictureReady, setProfilePictureReady] = useState(false);
 
     const user = useSelector((state) => state.user)
 
@@ -29,8 +30,16 @@ const Header = () => {
 
     const logout = async () => {
         await logoutAction(dispatch);
+        setProfilePictureReady(false);
         navigate('/');
     }
+
+    useEffect(async () => {
+        if (user && user._id) {
+            await updateProfilePictureAction(dispatch, user._id)
+            setProfilePictureReady(true);
+        }
+    }, [user._id])
 
     return(
         <nav className={`navbar navbar-dark bg-dark fixed-top ${blur} wd-header wd-min-body-width`}>
@@ -64,9 +73,15 @@ const Header = () => {
                             <button className="btn btn-secondary" disabled={blur ? 'disabled': ''} type="submit" onClick={() => navigate('/signup')}>Sign Up</button>
                         </>
                     }
-                    {(user && user._id) &&
+                    {(user && user._id && profilePictureReady) &&
                         <>
-                            <button className="btn btn-success me-2" type="submit" onClick={() => navigate('/profile')}>Profile</button>
+                            <img className="wd-thumbnail-image-size wd-circle-image wd-cursor-pointer me-2"
+                                 src={user.profilePicture ? user.profilePicture : "/images/blank-profile-picture.png"}
+                                 alt=""
+                                 title={user.username}
+                            onClick={() => {
+                                navigate('/profile')
+                            }}/>
                             <button className="btn btn-secondary" type="submit" onClick={() => logout()}>Log Out</button>
                         </>
                     }

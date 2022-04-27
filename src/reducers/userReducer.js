@@ -1,4 +1,4 @@
-import {RESET_USER, SET_USER} from "../actions/profile-actions";
+import {RESET_USER, SET_PROFILE_PICTURE, SET_USER} from "../actions/profile-actions";
 
 const userReducer = (state = {}, action) => {
     switch(action.type) {
@@ -8,6 +8,11 @@ const userReducer = (state = {}, action) => {
             return {
                 ...state,
                 ...action.data
+            }
+        case SET_PROFILE_PICTURE:
+            return {
+                ...state,
+                profilePicture: action.results
             }
         default:
             return (state);

@@ -5,6 +5,7 @@ import {getSingleEpisode} from "../../../actions/search-actions";
 import React, { useEffect, useState } from "react";
 import {likeAction, unlikeAction} from "../../../actions/like-action";
 import "../details.css";
+import {formatDOB} from "../../../util/FormatDateUtil";
 
 const Episode = () => {
 
@@ -68,7 +69,7 @@ const Episode = () => {
                                     onClick={() => navigate(`/show/${episode.show_id}`)}>
                                     Show: {episode.show_name}
                                 </a>
-                                <div className="justify-content-center text-center mt-1">Release date: {episode.release_date}</div>
+                                <div className="justify-content-center text-center mt-1">Release date: {formatDOB(episode.release_date)}</div>
                                 <div className="justify-content-center wd-show-episode-description-view-height text-center mt-1">{episode.description}</div>
                             </div>
 
