@@ -17,7 +17,7 @@ const NewsFeed = () => {
         setReady(false);
         await getContentAction(dispatch, user._id)
         setReady(true)
-    }, [user])
+    }, [user._id])
 
     return(
         <>
