@@ -283,7 +283,7 @@
 }
 
 .wd-track-height {
-    height: calc(100vh - 194px);
+    height: calc(100% - 120px);
 }
 
 .wd-playlist-inner-track-height {
