@@ -75,7 +75,7 @@ const Header = () => {
                     }
                     {(user && user._id && profilePictureReady) &&
                         <>
-                            <img className="wd-thumbnail-image-size wd-circle-image wd-cursor-pointer me-2"
+                            <img className="wd-thumbnail-image-size wd-circle-image wd-green-border wd-cursor-pointer me-2"
                                  src={user.profilePicture ? user.profilePicture : "/images/blank-profile-picture.png"}
                                  alt=""
                                  title={user.username}

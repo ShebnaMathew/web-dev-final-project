@@ -29,6 +29,12 @@
     color: white;
 }
 
+.wd-green-border {
+    border-color: #77b300;
+    border-width: 2px;
+    border-style: solid;
+}
+
 .wd-header-color:focus {
     color: white;
     background-color: inherit;

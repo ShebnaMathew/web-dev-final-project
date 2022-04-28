@@ -36,6 +36,11 @@ export const formatDOB = (date) => {
     }
     const dateVals = date.split("-");
     const month = determineMonth(dateVals[1]);
+
+    if (!month) {
+        return `${dateVals[0]}`
+    }
+
     return `${month} ${dateVals[2]}, ${dateVals[0]}`
 }
 
