@@ -266,7 +266,7 @@ const ProfileScreen = () => {
                             }
                             <div className="wd-position-relative">
                                 <div
-                                    className="wd-display-conditional-block wd-username-field-dims wd-fg-color-white wd-font-size-26 wd-bold-font">{profileData.username}</div>
+                                    className="wd-display-conditional-block wd-name-overflow wd-username-field-dims wd-fg-color-white wd-font-size-26 wd-bold-font">{profileData.username}</div>
                                 <div title={user._id === undefined ? "Login or Sign Up to follow this user" : ""}
                                      className="wd-display-conditional-block wd-username-button-position">
                                     {renderMainInfoButton()}
@@ -292,10 +292,10 @@ const ProfileScreen = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div>
+                            <div className="wd-website-text-overflow">
                                 {profileData.website &&
-                                <a href={"https://" + profileData.website} rel="noreferrer" target="_blank"
-                                   className="wd-fg-color-white wd-font-size-20 wd-hide wd-website-link">
+                                <a href={profileData.website} rel="noreferrer" target="_blank"
+                                   className="wd-fg-color-white wd-font-size-20 wd-hide  wd-website-link">
                                     <i className="fa fa-link me-2"/>
                                     {profileData.website}
                                 </a>

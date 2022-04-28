@@ -30,6 +30,23 @@
     font-weight: bold;
 }
 
+.wd-website-text-overflow {
+    width: calc(100% - 20px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 1.7;
+}
+
+.wd-name-overflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 1.1;
+    position: relative;
+    top: 6px;
+}
+
 .wd-bottom-border-grey {
     border-bottom: lightgrey solid 1px;
 }
