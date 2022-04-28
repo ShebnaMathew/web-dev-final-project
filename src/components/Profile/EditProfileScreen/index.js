@@ -26,27 +26,10 @@ const EditProfileScreen = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
 
-    let timerId = -1;
 
     useEffect(async () => {
-        // hide profile page from user until they log in
-        if (user._id === undefined) {
+        if (!pageReady && user._id === undefined) {
             setPageReady(true);
-            const timer = () => { return setTimeout(() => navigate('/'), 5000); }
-            timerId = timer();
-            return;
-        }
-        await getProfileAction(dispatch, user._id)
-        setPageReady(true);
-    }, [user._id]);
-
-
-
-    useEffect(async () => {
-        if (user._id === undefined) {
-            setPageReady(true);
-            const timer = () => { return setTimeout(() => navigate('/'), 5000); }
-            timerId = timer();
         } else if (!pageReady) {
             let profileData = await getProfile(user._id);
             setProfile({
@@ -61,12 +44,6 @@ const EditProfileScreen = () => {
             setIsArtist(profileData.isArtist);
             setIsAdmin(profileData.isAdmin);
             setPageReady(true);
-        }
-    }, [])
-
-    useEffect(() => {
-        return () => {
-            clearTimeout(timerId);
         }
     }, [])
 
@@ -294,8 +271,8 @@ const EditProfileScreen = () => {
                 <br/>
                 <br/>
                 <i className="fa fa-2x wd-fg-color-white fa-exclamation-triangle"/>
-                <div>Must be logged in to view profile</div>
-                <div>Going home in 5 seconds...</div>
+                <div>Must be logged in to edit profile</div>
+                <div>Please navigate to an available page</div>
             </div>
         }
         </>
