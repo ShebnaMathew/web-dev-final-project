@@ -255,7 +255,7 @@ const ProfileScreen = () => {
                     <div
                         className="wd-profile-header-info-dims wd-profile-header-info-max-width wd-position-relative wd-display-flex wd-main-outer-padding pt-2">
                         <div className=" wd-display-inline-block pe-2">
-                            <img className="img wd-profile-picture-dims wd-circle-image"
+                            <img className="img wd-profile-picture-dims wd-green-border wd-circle-image"
                                  src={profileData.profilePicture ? profileData.profilePicture : "/images/blank-profile-picture.png"}
                                  alt=""/>
                         </div>
