@@ -30,7 +30,6 @@ const ProfileScreen = () => {
     const [showFollow, setShowFollow] = useState(false);
     const [followTitle, setFollowTitle] = useState("followers");
     const [music, setMusic] = useState([]);
-    const [followerCount, setFollowerCount] = useState(0);
 
     // if _id is undefined, is root profile
     let isCurrentUser = false;
@@ -66,9 +65,6 @@ const ProfileScreen = () => {
                         break;
                     }
                 }
-            }
-            if (profileData.followers) {
-                setFollowerCount(profileData.followers.length);
             }
             setReady(true);
         }
@@ -197,16 +193,13 @@ const ProfileScreen = () => {
     }
 
     const addFollow = async () => {
+        await addFollowAction(dispatch, user._id, profileData._id, user.username, user.profilePicture);
         setIsFollowing(true);
-        setFollowerCount(followerCount + 1);
-        const userData = await getProfile(user._id);
-        await addFollowAction(dispatch, user._id, profileData._id, userData.username, userData.profilePicture);
     }
 
     const removeFollow = async () => {
-        setIsFollowing(false);
-        setFollowerCount(followerCount - 1);
         await removeFollowAction(dispatch, user._id, profileData._id);
+        setIsFollowing(false);
     }
 
     const renderMainInfoButton = () => {
@@ -284,7 +277,7 @@ const ProfileScreen = () => {
                                     <button onClick={() => setFollowPopupVals('followers')}
                                             className="wd-follower-button ps-0 pe-0">
                                             <span
-                                                className="wd-bold-font pe-2">{followerCount}</span>
+                                                className="wd-bold-font pe-2">{profileData.followers ? profileData.followers.length : 0}</span>
                                         <span>Followers</span>
                                     </button>
                                 </div>
