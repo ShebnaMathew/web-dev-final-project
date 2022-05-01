@@ -81,6 +81,11 @@
     cursor: pointer;
 }
 
+.form-control.wd-search-disabled-override:disabled {
+    background-color: black;
+    border: 1px solid #adafae;
+}
+
 @media (min-width: 1400px) {
     .wd-header-center {
         position: absolute;

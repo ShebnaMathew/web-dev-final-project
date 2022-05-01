@@ -54,7 +54,7 @@ const Header = () => {
                 <div className="d-flex wd-header-center">
                     <input onChange={(event) => setSearchString(event.target.value)}
                            onKeyPress={(e) => handleKeypress(e)}
-                           className="form-control wd-header-bg-dark wd-header-search-border wd-header-color wd-header-fontAwesome"
+                           className="form-control wd-search-disabled-override wd-header-bg-dark wd-header-search-border wd-header-color wd-header-fontAwesome"
                            type="search"
                            placeholder="&#xf002; Search Music"
                            aria-label="Search"
