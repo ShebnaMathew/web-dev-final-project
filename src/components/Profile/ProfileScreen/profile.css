@@ -38,15 +38,6 @@
     line-height: 1.7;
 }
 
-.wd-name-overflow {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    line-height: 1.1;
-    position: relative;
-    top: 6px;
-}
-
 .wd-bottom-border-grey {
     border-bottom: lightgrey solid 1px;
 }
@@ -186,6 +177,15 @@
     .wd-missing-website-margin {
         margin-top: 1rem;
     }
+
+    .wd-name-overflow {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        line-height: 1.1;
+        position: relative;
+        top: 6px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -193,6 +193,14 @@
     .wd-main-info-position {
         position: relative;
         top: calc(50% - 65px);
+    }
+
+    .wd-name-overflow {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        position: relative;
+        top: -2px;
     }
 }
 
