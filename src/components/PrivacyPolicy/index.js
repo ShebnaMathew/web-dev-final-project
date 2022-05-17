@@ -7,10 +7,10 @@ const PrivacyPolicy = () => {
     
     return (
         <div>
-            <div className="row justify-content-md-center text-black mt-4 ms-2">
+            <div className="row justify-content-center text-black mt-4 ms-2">
                 <div className="col-8 bg-dark text-black fontFamily pt-2 pb-3 wd-round-corners wd-background wd-z-index">
-                    <h2 className="d-flex text-black wd-privacy-font wd-privacy-float-left">Commentify Privacy Policy</h2>
-                    <i className="fa-solid fa-xmark wd-privacy-float-right wd-privacy-cursor" onClick={() => navigate('/')}/>
+                    <i className="fa-solid fa-xmark wd-privacy-position wd-privacy-cursor" onClick={() => navigate('/')}/>
+                    <h2 className="d-flex text-black wd-privacy-font wd-privacy-float-left pe-3 wd-full-width">Commentify Privacy Policy</h2>
                     <div className="wd-privacy-float-done"/>
                     <div className="justify-content-start">
                         <div>Effective as of 12 April 2022</div>

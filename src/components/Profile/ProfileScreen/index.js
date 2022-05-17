@@ -193,8 +193,7 @@ const ProfileScreen = () => {
     }
 
     const addFollow = async () => {
-        const userData = await getProfile(user._id);
-        await addFollowAction(dispatch, user._id, profileData._id, userData.username, userData.profilePicture);
+        await addFollowAction(dispatch, user._id, profileData._id, user.username, user.profilePicture);
         setIsFollowing(true);
     }
 

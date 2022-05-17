@@ -118,7 +118,6 @@
 }
 
 .wd-show-episode-description-view-height {
-    /* height: 15vh; */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;

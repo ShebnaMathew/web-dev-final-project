@@ -2,6 +2,12 @@
     backdrop-filter: blur(2px) !important;
 }
 
+.wd-privacy-position {
+    position: relative;
+    top: 0px;
+    left: calc(100% - 16px);
+}
+
 .wd-privacy-font {
     color: black;
     font-weight: bold;
